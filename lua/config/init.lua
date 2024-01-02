@@ -14,7 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 require("config.globals")
 require("config.options")
 require("config.keymaps")
-require("config.autocmds")
 
 local plugins = "plugins"
 
@@ -23,7 +22,7 @@ local opts = {
 		theme = "catppuccin",
 	},
 	change_detection = {
-		notify = true,
+		notify = false,
 	},
 	performance = {
 		rtp = {
