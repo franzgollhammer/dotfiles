@@ -14,15 +14,15 @@ vim.g.maplocalleader = " "
 --  term_mode = "t",
 --  command_mode = "c",
 
-keymap("n", "<leader>Q", ":q<cr>", opts)
-keymap("n", "<leader>W", ":w<cr>", opts)
+keymap("n", "<leader>qq", ":q<cr>", opts)
+keymap("n", "<leader>ww", ":w<cr>", opts)
 -- keymap("n", "<leader><leader>q", ":bd<cr>", opts)
 
 -- Navigation
-keymap("n", "<leader>hh", "<C-w>h", opts)
-keymap("n", "<leader>jj", "<C-w>j", opts)
-keymap("n", "<leader>kk", "<C-w>k", opts)
-keymap("n", "<leader>ll", "<C-w>l", opts)
+keymap("n", "<leader>wh", "<C-w>h", opts)
+keymap("n", "<leader>wj", "<C-w>j", opts)
+keymap("n", "<leader>wk", "<C-w>k", opts)
+keymap("n", "<leader>wl", "<C-w>l", opts)
 
 -- tabs
 keymap("n", "<leader>to", "<cmd>tabedit %<cr>", opts)
@@ -66,16 +66,3 @@ keymap("v", "<s-tab>", "<gv", opts)
 keymap("v", "J", ":m '>+1<cr>gv=gv", opts)
 keymap("v", "K", ":m '<-2<cr>gv=gv", opts)
 
--- Quick source with uncaching modules
-function _G.ReloadConfig()
-	for name, _ in pairs(package.loaded) do
-		if name:match("^fgxhammer") then
-			package.loaded[name] = nil
-		end
-	end
-	-- Set $MYVIMRC
-	dofile(vim.env.MYVIMRC)
-end
-
--- keymap("n", "<Leader><leader>,", "<cmd>lua ReloadConfig()<cr>", opts)
--- vim.cmd('command! ReloadConfig lua ReloadConfig()')
