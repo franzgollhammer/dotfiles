@@ -55,8 +55,8 @@ keymap("i", "jj", "<esc>", opts)
 keymap("n", "<leader>nh", ":nohls<cr>", opts)
 
 -- insert newline stay in nromal mode
-keymap("n", "<leader>o", 'o<esc>0"_d', opts)
-keymap("n", "<leader>o", 'o<esc>0"_d', opts)
+keymap("n", "<leader>o", "o<ESC>", opts)
+keymap("n", "<leader>O", "O<ESC>", opts)
 
 -- stay in indent mode
 keymap("v", "<tab>", ">gv", opts)
@@ -65,4 +65,3 @@ keymap("v", "<s-tab>", "<gv", opts)
 -- move text up down
 keymap("v", "J", ":m '>+1<cr>gv=gv", opts)
 keymap("v", "K", ":m '<-2<cr>gv=gv", opts)
-
