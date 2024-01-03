@@ -14,7 +14,7 @@ local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "<leader>qq", ":q<cr>", opts)
 keymap("n", "<leader>ww", ":w<cr>", opts)
--- keymap("n", "<leader><leader>q", ":bd<cr>", opts)
+keymap("n", "<leader>e", ":Ex<cr>", opts)
 
 -- Navigation
 keymap("n", "<leader>wh", "<C-w>h", opts)

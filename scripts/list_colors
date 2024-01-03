@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+echo "Displaying terminal colors..."
+
+colors=("black" "red" "green" "yellow" "blue" "magenta" "cyan" "white")
+light_colors=("light_black" "light_red" "light_green" "light_yellow" "light_blue" "light_magenta" "light_cyan" "light_white")
+
+for i in {0..7}; do
+    echo -e "$(tput setaf $i)${colors[$i]}$(tput sgr0)"
+    echo -e "$(tput setaf $((i+8)))${light_colors[$i]}$(tput sgr0)"
+done

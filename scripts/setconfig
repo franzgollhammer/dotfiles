@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+echo "👉  Syncing local configs TO $CONFIG_DIR..."
+
+rsync -av $HOME/.zshrc $CONFIG_DIR/dotfiles/.zshrc
+
+rsync -av $HOME/Library/Application\ Support/Code/User/ $CONFIG_DIR/vscode/user/
+
+rsync -av $HOME/Library/Application\ Support/Code\ -\ Insiders/User/ $CONFIG_DIR/vscode-insiders/user/

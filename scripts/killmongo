@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+printf "Cleanup mongo processes 💣 💥 🌱 🌱 \n"
+
+killall -u "$(whoami)" mongo
+

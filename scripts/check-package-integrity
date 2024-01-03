@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+# clear cache completly
+npm cache clear --force
+# verify cache is cleared (Index entries: 0)
+npm cache verify
+# install in each working directory
+npm i
+# check if sha1 is present in each working directory
+grep -o 'sha1' package-lock.json | wc -l
