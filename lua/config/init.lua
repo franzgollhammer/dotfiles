@@ -19,7 +19,7 @@ local plugins = "plugins"
 
 local opts = {
 	install = {
-		theme = "catppuccin",
+		colorscheme = { "catppuccin"},
 	},
 	change_detection = {
 		notify = false,
