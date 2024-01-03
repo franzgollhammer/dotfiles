@@ -26,6 +26,18 @@ return {
 				enable = true,
 				disable = {},
 			},
+      rainbow = {
+        enable = true,
+        extended_mode = true,
+        max_file_lines = nil,
+        colors = {
+          "#ffff00",
+          "#00ff00",
+          "#00ffff",
+          "#0000ff",
+          "#ff00ff",
+        },
+      },
 		})
 	end,
 }
