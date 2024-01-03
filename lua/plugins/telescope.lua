@@ -5,16 +5,17 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    opts = {
-      defaults = {
-        mappings = {
-          i = {
-            ["<C-q>"] = require("telescope.actions").smart_send_to_qflist
-          }
-        }
-      }
-    },
     config = function()
+      require("telescope").setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-q>"] = require("telescope.actions").smart_add_to_qflist + require("telescope.actions").open_qflist,
+
+            }
+          }
+        },
+      })
       vim.keymap.set(
         "n",
         "<leader>?",
