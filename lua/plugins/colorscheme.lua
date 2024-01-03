@@ -1,9 +1,10 @@
 return {
-	"catppuccin/nvim",
-		name = "catppuccin",
-		lazy = false,
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
     priotity = 1000,
-		opts = {
+    opts = {
     },
     config = function()
       require("catppuccin").setup({
@@ -31,7 +32,15 @@ return {
         },
       })
 
-      vim.cmd.colorscheme("catppuccin")
+      -- vim.cmd.colorscheme("catppuccin")
     end
+
+  },
+  {
+    "rose-pine/neovim",
+    config = function()
+      vim.cmd.colorscheme("rose-pine")
+    end
+  }
 
 }
