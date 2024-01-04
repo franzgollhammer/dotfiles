@@ -14,8 +14,12 @@ local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "<leader>qq", ":q<cr>", opts)
 keymap("n", "<leader>ww", ":w<cr>", opts)
+
+-- Netrw
 keymap("n", "<leader>e", ":Ex<cr>", opts)
 
+-- find and replace word under cursor
+keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
 -- Navigation
 keymap("n", "<leader>wh", "<C-w>h", opts)
 keymap("n", "<leader>wj", "<C-w>j", opts)
