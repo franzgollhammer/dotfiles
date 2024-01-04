@@ -34,9 +34,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # ---- aliases ----
 alias v='nvim'
 alias vv='nvim .'
-# alias c='code-insiders'
-# alias ci='code-insiders'
 alias cl='clear'
+alias neo='neofetch'
 alias pn='pnpm'
 alias pnx='pnpm dlx'
 alias nii="npm i -g @antfu/ni"
