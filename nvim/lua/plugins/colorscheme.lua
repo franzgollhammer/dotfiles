@@ -4,8 +4,7 @@ return {
     name = "catppuccin",
     lazy = false,
     priotity = 1000,
-    opts = {
-    },
+    opts = {},
     config = function()
       require("catppuccin").setup({
         term_colors = true,
@@ -33,8 +32,7 @@ return {
       })
 
       -- vim.cmd.colorscheme("catppuccin")
-    end
-
+    end,
   },
   {
     "rose-pine/neovim",
@@ -43,7 +41,10 @@ return {
         disable_background = true,
       })
       vim.cmd.colorscheme("rose-pine")
-    end
-  }
-
+      vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none"})
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
+      vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+    end,
+  },
 }
