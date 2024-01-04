@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+echo "👉  Syncing local configs FROM $DOTFILES..."
+
+cp -av $DOTFILES/.zshrc $HOME/.zshrc
+cp -av $DOTFILES/.tmux.conf $HOME/.tmux.conf
+cp -av $DOTFILES/nvim $HOME/.config/nvim
+
