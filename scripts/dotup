@@ -4,5 +4,6 @@ echo "👉  Syncing local configs TO $DOTFILES..."
 
 cp -av $HOME/.zshrc $DOTFILES/.zshrc
 cp -av $HOME/.tmux.conf $DOTFILES/.tmux.conf
+cp -av $HOME/.config/starship.toml $DOTFILES/starship.toml
 cp -av $HOME/.config/nvim $DOTFILES/
 
