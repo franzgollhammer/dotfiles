@@ -43,9 +43,17 @@ alias sim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulato
 alias soz='source ~/.zshrc'
 alias sov='source ~/.vimrc'
 alias sot='tmux source ~/.tmux.conf'
-alias zsh_startup="time zsh -i -c exit"
+alias zsh-startup="time zsh -i -c exit"
 # GROOT
 alias grt='cd "$(git rev-parse --show-toplevel)"'
+
+# yabai and skhd
+alias yabai-start='yabai --start-service'
+alias yabai-stop='yabai --stop-service'
+alias yabai-restart='yabai --restart-service'
+alias skhd-start='skhd --start-service'
+alias skhd-stop='skhd --stop-service'
+alias skhd-restart='skhd --restart-service'
 
 # git aliases
 alias s='git status -sb'
