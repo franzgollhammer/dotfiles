@@ -1,4 +1,7 @@
 return {
+  {
+    "j-hui/fidget.nvim"
+  },
 	{
 		"williamboman/mason.nvim",
 		lazf = false,
