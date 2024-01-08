@@ -167,7 +167,7 @@ function killpid() {
 }
 
 function fzf-search-history() {
-    BUFFER=$(history | sed "s/^ *[^ ]* *//" | fzf)
+    BUFFER=$(history | sort -rn | sed "s/^ *[^ ]* *//" | fzf)
     CURSOR=$#BUFFER
     zle reset-prompt
 }
