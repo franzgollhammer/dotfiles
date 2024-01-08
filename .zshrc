@@ -59,14 +59,14 @@ plugins=(
 eval "$(zoxide init zsh)"
 
 # ---- Oh-My-Zsh ----
-export ZSH_THEME="robbyrussell"
+# export ZSH_THEME="robbyrussell"
 source $ZSH/oh-my-zsh.sh
 
 # ---- Starship ----
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"
 
 # Tmux sessionizer
-bindkey -s ^f "tt\n"
+bindkey -s ^f "tmux-sessionizer\n"
 
 # ---- aliases ----
 # ls -F --color=auto
