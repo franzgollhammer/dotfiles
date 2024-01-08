@@ -1,4 +1,0 @@
-#!/bin/zsh
-
-history | sed "s/^ *[^ ]* *//" | fzf
-# zle -N fzf-history-search

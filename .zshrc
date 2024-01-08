@@ -69,7 +69,7 @@ eval "$(starship init zsh)"
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Search history with fzf
-bindkey  -s ^r " fzf-search-history\n"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ---- aliases ----
 # ls -F --color=auto
@@ -165,12 +165,4 @@ function pid() {
 function killpid() {
   kill -9 $1
 }
-
-function fzf-search-history() {
-    BUFFER=$(history | sort -rn | sed "s/^ *[^ ]* *//" | fzf)
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
-
-zle -N fzf-history-search
 
