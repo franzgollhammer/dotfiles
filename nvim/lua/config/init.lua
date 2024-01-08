@@ -42,3 +42,6 @@ vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+
+-- highlight on yank
+vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank()]])

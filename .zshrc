@@ -166,10 +166,11 @@ function killpid() {
   kill -9 $1
 }
 
-function fzf-history-search() {
-    BUFFER=$(history | sed "s/^ *[^ ]* *//" | fzf)
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
+# function fzf-history-search() {
+#     BUFFER=$(history | sed "s/^ *[^ ]* *//" | fzf)
+#     CURSOR=$#BUFFER
+#     zle reset-prompt
+# }
+#
+# zle -N fzf-history-search
 
-zle -N fzf-history-search
