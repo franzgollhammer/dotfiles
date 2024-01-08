@@ -13,13 +13,16 @@ local keymap = vim.api.nvim_set_keymap
 --  command_mode = "c",
 
 keymap("n", "<leader>qq", ":q<cr>", opts)
+keymap("n", "<leader>wq", ":wq<cr>", opts)
 keymap("n", "<leader>ww", ":w<cr>", opts)
 
 -- Netrw
 keymap("n", "<leader>e", ":Ex<cr>", opts)
 
 -- Tmux sessionizer
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tt<CR>")
+
 -- find and replace word under cursor
 keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
 

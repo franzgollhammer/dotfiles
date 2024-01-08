@@ -10,10 +10,10 @@ return {
         defaults = {
           mappings = {
             i = {
-              ["<C-q>"] = require("telescope.actions").smart_add_to_qflist + require("telescope.actions").open_qflist,
-
-            }
-          }
+              ["<C-q>"] = require("telescope.actions").smart_add_to_qflist
+                  + require("telescope.actions").open_qflist,
+            },
+          },
         },
       })
       vim.keymap.set(
@@ -43,12 +43,6 @@ return {
         })
       end
       vim.keymap.set("n", "<leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
-      vim.keymap.set(
-        "n",
-        "<leader>ss",
-        require("telescope.builtin").builtin,
-        { desc = "[S]earch [S]elect Telescope" }
-      )
       vim.keymap.set("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Search [G]it [F]iles" })
       vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
       vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
@@ -67,37 +61,6 @@ return {
         { desc = "[S]earch [D]iagnostics" }
       )
       vim.keymap.set("n", "<leader>sr", require("telescope.builtin").resume, { desc = "[S]earch [R]esume" })
-    end,
-  },
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    config = function()
-      require("telescope").setup({
-        extensions = {
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown({
-              -- even more opts
-            }),
-
-            -- pseudo code / specification for writing custom displays, like the one
-            -- for "codeactions"
-            -- specific_opts = {
-            --   [kind] = {
-            --     make_indexed = function(items) -> indexed_items, width,
-            --     make_displayer = function(widths) -> displayer
-            --     make_display = function(displayer) -> function(e)
-            --     make_ordinal = function(e) -> string
-            --   },
-            --   -- for example to disable the custom builtin "codeactions" display
-            --      do the following
-            --   codeactions = false,
-            -- }
-          },
-        },
-      })
-      -- To get ui-select loaded and working with telescope, you need to call
-      -- load_extension, somewhere after setup function:
-      require("telescope").load_extension("ui-select")
     end,
   },
 }

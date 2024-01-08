@@ -66,7 +66,7 @@ source $ZSH/oh-my-zsh.sh
 # eval "$(starship init zsh)"
 
 # Tmux sessionizer
-bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^f "tt\n"
 
 # ---- aliases ----
 # ls -F --color=auto
