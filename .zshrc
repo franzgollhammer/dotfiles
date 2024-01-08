@@ -31,10 +31,51 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
+# bun completions
+[ -s "/Users/fg/.bun/_bun" ] && source "/Users/fg/.bun/_bun"
+
+# ---- nvm ----
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# ---- pnpm ----
+# export PNPM_HOME="/Users/fg/Library/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+
+# ---- pyenv ----
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# ---- zsh plugins ----
+plugins=(
+  zsh-autosuggestions
+)
+
+# ---- zoxide ----
+eval "$(zoxide init zsh)"
+
+# ---- Oh-My-Zsh ----
+export ZSH_THEME="robbyrussell"
+source $ZSH/oh-my-zsh.sh
+
+# ---- Starship ----
+# eval "$(starship init zsh)"
+
+# Tmux sessionizer
+bindkey -s ^f "tmux-sessionizer\n"
+
 # ---- aliases ----
+# ls -F --color=auto
 alias v='nvim'
 alias vv='nvim .'
+alias c='code-insiders'
+alias code='code-insiders'
 alias cl='clear'
+alias ls='ls -F --color=auto'
 alias neo='neofetch'
 alias pn='pnpm'
 alias pnx='pnpm dlx'
@@ -84,40 +125,6 @@ alias stashls='git stash list'
 alias save='git stash save -u'
 alias ghrepo="gh repo view --web"
 alias ghpr="gh pr view --web"
-
-# bun completions
-[ -s "/Users/fg/.bun/_bun" ] && source "/Users/fg/.bun/_bun"
-
-# ---- nvm ----
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-# ---- pnpm ----
-# export PNPM_HOME="/Users/fg/Library/pnpm"
-# case ":$PATH:" in
-#   *":$PNPM_HOME:"*) ;;
-#   *) export PATH="$PNPM_HOME:$PATH" ;;
-# esac
-
-# ---- pyenv ----
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-# ---- zsh plugins ----
-plugins=(
-  zsh-autosuggestions
-)
-
-# ---- zoxide ----
-eval "$(zoxide init zsh)"
-
-# ---- Oh-My-Zsh ----
-# export ZSH_THEME="robbyrussell"
-source $ZSH/oh-my-zsh.sh
-
-# ---- Starship ----
-eval "$(starship init zsh)"
 
 # ---- Functions ----
 function d() {

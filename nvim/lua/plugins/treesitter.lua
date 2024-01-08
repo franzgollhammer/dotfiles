@@ -1,43 +1,42 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	opts = {},
-	config = function()
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = {
-				"c",
-				"lua",
-				"vim",
-				"vimdoc",
-				"query",
-				"vue",
-				"javascript",
-				"typescript",
-				"css",
-				"scss",
-				"html",
-			},
-			auto_install = true,
-			highlight = {
-				enable = true,
-				disable = {},
-			},
-			indent = {
-				enable = true,
-				disable = {},
-			},
-      rainbow = {
+  "nvim-treesitter/nvim-treesitter",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
+  build = ":TSUpdate",
+  opts = {},
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = {
+        "c",
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "vue",
+        "javascript",
+        "typescript",
+        "css",
+        "scss",
+        "html",
+      },
+      highlight = {
         enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
-        colors = {
-          "#ffff00",
-          "#00ff00",
-          "#00ffff",
-          "#0000ff",
-          "#ff00ff",
+        disable = {},
+      },
+      indent = {
+        enable = true,
+        disable = {},
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<c-space>",
+          node_incremental = "<c-space>",
+          scope_incremental = "<c-s>",
+          node_decremental = "<M-space>",
         },
       },
-		})
-	end,
+    })
+  end,
 }

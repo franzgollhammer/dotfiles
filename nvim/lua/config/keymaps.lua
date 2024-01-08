@@ -18,8 +18,11 @@ keymap("n", "<leader>ww", ":w<cr>", opts)
 -- Netrw
 keymap("n", "<leader>e", ":Ex<cr>", opts)
 
+-- Tmux sessionizer
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- find and replace word under cursor
 keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
+
 -- Navigation
 keymap("n", "<leader>wh", "<C-w>h", opts)
 keymap("n", "<leader>wj", "<C-w>j", opts)
