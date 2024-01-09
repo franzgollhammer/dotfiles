@@ -6,7 +6,7 @@ line_break = { disabled = true }
 # disabled = true
 
 [package]
-disabled = true
+# disabled = true
 
 [nodejs]
 # format = "[$symbol($version )]($style)"
@@ -35,3 +35,4 @@ disabled = false
 # disabled = false
 # style = "bold white"
 # format = "[$time]($style)"
+
