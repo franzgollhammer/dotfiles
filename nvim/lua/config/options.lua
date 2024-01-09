@@ -1,6 +1,6 @@
 local opt = vim.opt
 
--- Tab / Indentation
+-- tab / indentation
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.softtabstop = 2
@@ -8,14 +8,13 @@ opt.expandtab = true
 opt.smartindent = true
 opt.wrap = false
 
--- Search
+-- search
 opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
 -- opt.hlsearch = false
 
--- Appearance
-
+-- appearance
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
@@ -25,7 +24,7 @@ opt.cmdheight = 1
 opt.scrolloff = 10
 -- opt.completeopt = "menuone,noinsert,noselect"
 
--- Behaviour
+-- behaviour
 opt.hidden = true
 opt.errorbells = false
 opt.swapfile = false

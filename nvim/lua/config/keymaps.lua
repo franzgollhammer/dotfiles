@@ -1,10 +1,10 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
--- Remove default
+-- remove default
 -- keymap("", "<Space>", "<Nop>", opts)
 
--- Modes
+-- modes
 --  normal_mode = "n",
 --  insert_mode = "i",
 --  visual_mode = "v",
@@ -16,27 +16,24 @@ keymap("n", "<leader>qq", ":q<cr>", opts)
 keymap("n", "<leader>wq", ":wq<cr>", opts)
 keymap("n", "<leader>ww", ":w<cr>", opts)
 
--- Netrw
+-- netrw
 keymap("n", "<leader>e", ":Ex<cr>", opts)
 
--- Tmux sessionizer
+-- tmux sessionizer
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- find and replace word under cursor
 keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
 
--- Navigation
+-- yank word under cursor
+keymap("n", "<leader>y", "yiw", opts)
+
+-- navigation
 keymap("n", "<leader>wh", "<C-w>h", opts)
 keymap("n", "<leader>wj", "<C-w>j", opts)
 keymap("n", "<leader>wk", "<C-w>k", opts)
 keymap("n", "<leader>wl", "<C-w>l", opts)
-
--- tabs
-keymap("n", "<leader>to", "<cmd>tabedit %<cr>", opts)
-keymap("n", "<leader>tc", "<cmd>tabclose<cr>", opts)
-keymap("n", "<leader>tn", "<cmd>tabnext<cr>", opts)
-keymap("n", "<leader>tp", "<cmd>tabprevious<cr>", opts)
 
 -- qf list
 keymap("n", "<leader>co", "<cmd>copen<cr>", opts)
@@ -44,6 +41,12 @@ keymap("n", "<leader>cc", "<cmd>cclose<cr>", opts)
 keymap("n", "<leader>cn", "<cmd>cnext<cr>", opts)
 keymap("n", "<leader>cp", "<cmd>cprev<cr>", opts)
 keymap("n", "<leader>ch", "<cmd>chistory<cr>", opts)
+
+-- tabs
+keymap("n", "<leader>to", "<cmd>tabedit %<cr>", opts)
+keymap("n", "<leader>tc", "<cmd>tabclose<cr>", opts)
+keymap("n", "<leader>tn", "<cmd>tabnext<cr>", opts)
+keymap("n", "<leader>tp", "<cmd>tabprevious<cr>", opts)
 
 -- resize
 keymap("n", "<c-j>", ":resize +2<cr>", opts)
@@ -58,6 +61,7 @@ keymap("n", "<s-h>", ":bprevious<cr>", opts)
 -- crazy esc
 keymap("i", "jk", "<esc>", opts)
 keymap("i", "jj", "<esc>", opts)
+keymap("i", "kk", "<esc>", opts)
 
 -- no hls
 keymap("n", "<leader>nh", ":nohls<cr>", opts)
