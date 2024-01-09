@@ -62,6 +62,7 @@ return {
         html = { filetypes = { "html", "twig", "hbs" } },
         volar = {},
         cssls = {},
+        bashls = {},
 
         lua_ls = {
           Lua = {
