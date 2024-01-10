@@ -5,17 +5,30 @@ return {
 
     -- format on save
     local on_attach = function()
-      -- vim.api.nvim_create_autocmd("BufWritePost", {
-      -- 	callback = function()
-      -- 		vim.lsp.buf.format()
-      -- 	end,
-      -- })
+      local lang = vim.api.nvim_buf_get_option(0, "filetype")
+
+      -- set up format on save for lua files only
+      if lang == "lua" then
+        vim.api.nvim_create_autocmd("BufWritePost", {
+          callback = function()
+            vim.lsp.buf.format()
+          end,
+        })
+      end
+
+      -- set up format on save for js/ts/vue ...
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = { "*.tsx", "*.ts", "*.jsx", "*.js", "*.vue" },
+        command = "silent! EslintFixAll",
+        group = vim.api.nvim_create_augroup("EsLint", {}),
+      })
     end
 
     null_ls.setup({
       sources = {
         -- Lua
         null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.stylua,
 
         -- JS / TS
         -- null_ls.builtins.formatting.prettierd,
