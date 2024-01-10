@@ -17,7 +17,7 @@ keymap("n", "<leader>wq", ":wq<cr>", opts)
 keymap("n", "<leader>ww", ":w<cr>", opts)
 
 -- netrw
-keymap("n", "<leader>e", ":Ex<cr>", opts)
+-- keymap("n", "<leader>e", ":Ex<cr>", opts)
 
 -- tmux sessionizer
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
@@ -29,11 +29,18 @@ keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
 -- yank word under cursor
 keymap("n", "<leader>y", "yiw", opts)
 
--- navigation
+-- alternate file
+keymap("n", "<leader>^af", "<C-^>", opts)
+
+-- pane navigation
 keymap("n", "<leader>wh", "<C-w>h", opts)
 keymap("n", "<leader>wj", "<C-w>j", opts)
 keymap("n", "<leader>wk", "<C-w>k", opts)
 keymap("n", "<leader>wl", "<C-w>l", opts)
+
+-- vertical
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
 
 -- qf list
 keymap("n", "<leader>co", "<cmd>copen<cr>", opts)

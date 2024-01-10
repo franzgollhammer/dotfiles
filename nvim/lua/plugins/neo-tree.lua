@@ -126,8 +126,8 @@ return {
         -- see `:h neo-tree-custom-commands-global`
         commands = {},
         window = {
-          position = "left",
-          width = 40,
+          position = "current",
+          -- width = 40,
           mapping_options = {
             noremap = true,
             nowait = true,
@@ -190,9 +190,9 @@ return {
         filesystem = {
           filtered_items = {
             visible = false, -- when true, they will just be displayed differently than normal items
-            hide_dotfiles = true,
-            hide_gitignored = true,
-            hide_hidden = true, -- only works on Windows for hidden files/directories
+            hide_dotfiles = false,
+            hide_gitignored = false,
+            hide_hidden = false, -- only works on Windows for hidden files/directories
             hide_by_name = {
               --"node_modules"
             },
@@ -302,7 +302,8 @@ return {
         },
       })
 
-      vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
+      -- vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
+      vim.cmd([[nnoremap <leader>e :Neotree reveal left<cr>]])
     end,
   },
 }

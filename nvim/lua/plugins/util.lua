@@ -1,9 +1,9 @@
 return {
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {},
-  },
+  -- {
+  --   "windwp/nvim-autopairs",
+  --   event = "InsertEnter",
+  --   opts = {},
+  -- },
   {
     "j-hui/fidget.nvim",
     opts = {},
@@ -11,6 +11,9 @@ return {
   {
     "norcalli/nvim-colorizer.lua",
     opts = {},
+    config = function()
+      require("colorizer").setup()
+    end,
   },
   {
     "numToStr/Comment.nvim",

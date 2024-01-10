@@ -10,6 +10,9 @@ return {
       options = {
         theme = custom_auto,
       },
+      sections = {
+        lualine_c = { { "filename", file_status = true, path = 1 } },
+      },
     })
   end,
 }

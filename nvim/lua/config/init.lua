@@ -25,10 +25,10 @@ local opts = {
 	performance = {
 		rtp = {
 			disabled_plugins = {
-				-- "netrw",
-				-- "netrwPlugin",
-				-- "netrwSettings",
-				-- "netrwFileHandlers",
+				"netrw",
+				"netrwPlugin",
+				"netrwSettings",
+				"netrwFileHandlers",
 			},
 		},
 	},
