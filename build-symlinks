@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# remove old config files
+rm -rf ~/.zshrc ~/.tmux.conf ~/.config/nvim
+ln -s ~/d/dotfiles/.zshrc ~/.zshrc
+ln -s ~/d/dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/d/dotfiles/nvim ~/.config/nvim
