@@ -1,7 +1,8 @@
 #!/bin/zsh
 
 # remove old config files
-rm -rf ~/.zshrc ~/.tmux.conf ~/.config/nvim
+rm -rf ~/.zshrc ~/.tmux.conf ~/.config/nvim ~/.config/starship.toml
 ln -s ~/d/dotfiles/.zshrc ~/.zshrc
 ln -s ~/d/dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/d/dotfiles/nvim ~/.config/nvim
+ln -s ~/d/dotfiles/starship.toml ~/.config/starship.toml
