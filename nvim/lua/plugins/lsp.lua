@@ -41,6 +41,7 @@ return {
 
       local servers = {
         tsserver = {},
+        -- eslint = {},
         html = { filetypes = { "html", "hbs" } },
         volar = {},
         cssls = {},
