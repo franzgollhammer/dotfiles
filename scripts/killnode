@@ -1,6 +1,4 @@
 #!/bin/zsh
-
-printf "Cleanup zombie node processes 🧟‍♂️ 🧟 💣 💥 \n"
-
+printf "Cleanup node processes ...\n"
 killall -u "$(whoami)" node
 
