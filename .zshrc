@@ -1,4 +1,6 @@
 # ---- franzgollhammer zsh conf ----
+export EDITOR=nvim
+export VISUAL="$EDITOR"
 
 # ---- var ----
 export CONFIG_DIR="$HOME/d/config-files"
@@ -10,17 +12,15 @@ export PYENV_DIR="$HOME/.pyenv/shims"
 export ZSH="$HOME/.oh-my-zsh"
 export VM_DEV="$HOME/Virtual Machines.localized/dev.vmwarevm/dev.vmx"
 export MYVIMRC="$HOME/.config/nvim/init.lua"
-# export DENO_INSTALL="$HOME/.deno/bin"
-# export BUN_INSTALL="$HOME/.bun/bin"
+export BUN_INSTALL="$HOME/.bun/bin"
 
 # ---- path ----
 export PATH="$SCRIPTS:"\
 "$NVM_DIR:"\
 "$RUBY_DIR:"\
 "$PYENV_DIR:"\
+"$BUN_INSTALL:"\
 "$PATH"
-# "$DENO_INSTALL:"\
-# "$BUN_INSTALL:"\
 
 # bun completions
 [ -s "/Users/fg/.bun/_bun" ] && source "/Users/fg/.bun/_bun"
@@ -56,16 +56,16 @@ source $ZSH/oh-my-zsh.sh
 # ---- starship ----
 eval "$(starship init zsh)"
 
-# tmux sessionizer
-bindkey -s ^f "tmux-sessionizer\n"
-
 # search history with fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# tmux find session
+bindkey -s ^f "tmux-session-find\n"
+
 # ---- aliases ----
+alias t='tmux-session'
 alias v='nvim'
 alias vv='nvim .'
-alias c='code-insiders'
 alias code='code-insiders'
 alias cl='clear'
 alias ls='ls -F --color=auto'
@@ -75,7 +75,6 @@ alias pnx='pnpm dlx'
 alias nii="npm i -g @antfu/ni"
 alias sim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
 alias soz='source ~/.zshrc'
-alias sov='source ~/.vimrc'
 alias sot='tmux source ~/.tmux.conf'
 alias zsh-startup="time zsh -i -c exit"
 # GROOT
