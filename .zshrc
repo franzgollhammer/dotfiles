@@ -64,6 +64,7 @@ bindkey -s ^f "tmux-session-find\n"
 
 # ---- aliases ----
 alias t='tmux-session'
+alias tf='tmux-session-find'
 alias v='nvim'
 alias vv='nvim .'
 alias code='code-insiders'
