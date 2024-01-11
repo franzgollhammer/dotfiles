@@ -22,15 +22,6 @@ export PATH="$SCRIPTS:"\
 # "$DENO_INSTALL:"\
 # "$BUN_INSTALL:"\
 
-# ---- colorize less command ----
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
-
 # bun completions
 [ -s "/Users/fg/.bun/_bun" ] && source "/Users/fg/.bun/_bun"
 
@@ -62,17 +53,16 @@ eval "$(zoxide init zsh)"
 # export ZSH_THEME="robbyrussell"
 source $ZSH/oh-my-zsh.sh
 
-# ---- Starship ----
+# ---- starship ----
 eval "$(starship init zsh)"
 
-# Tmux sessionizer
+# tmux sessionizer
 bindkey -s ^f "tmux-sessionizer\n"
 
-# Search history with fzf
+# search history with fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ---- aliases ----
-# ls -F --color=auto
 alias v='nvim'
 alias vv='nvim .'
 alias c='code-insiders'
@@ -91,19 +81,10 @@ alias zsh-startup="time zsh -i -c exit"
 # GROOT
 alias grt='cd "$(git rev-parse --show-toplevel)"'
 
-# yabai and skhd
-alias yabai-start='yabai --start-service'
-alias yabai-stop='yabai --stop-service'
-alias yabai-restart='yabai --restart-service'
-alias skhd-start='skhd --start-service'
-alias skhd-stop='skhd --stop-service'
-alias skhd-restart='skhd --restart-service'
-
 # git aliases
 alias s='git status -sb'
 alias ga='git add'
 alias gaa='git add .'
-alias gd='git diff'
 alias gss='git status'
 alias gse='git rev-list --all | xargs git grep -F'
 alias gc='git commit'
@@ -116,20 +97,15 @@ alias gp='git pull'
 alias psh='git push'
 alias gco='git checkout'
 alias gcob='git checkout -b'
-alias main='git checkout main'
-alias gmm='git merge main'
-alias gb='git branch'
-alias gbd='git branch -d'
-alias sls='git stash list'
 alias stash='git stash -u'
 alias pop='git stash pop'
 alias apply='git stash apply'
 alias stashls='git stash list'
 alias save='git stash save -u'
-alias ghrepo="gh repo view --web"
-alias ghpr="gh pr view --web"
+alias repo="gh repo view --web"
+alias pr="gh pr view --web"
 
-# ---- Functions ----
+# ---- functions ----
 function d() {
   cd ~/d/$1
 }
