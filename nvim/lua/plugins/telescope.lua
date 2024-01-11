@@ -32,14 +32,12 @@ return {
 
       keymap("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
       keymap("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-
-      keymap("n", "<leader>/", function()
-        builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-          winblend = 10,
-          previewer = false,
-        }))
-      end, { desc = "[/] Fuzzily search in current buffer" })
-
+      keymap(
+        "n",
+        "<leader>/",
+        builtin.current_buffer_fuzzy_find,
+        { desc = "[/] Fuzzily search in current buffer" }
+      )
       keymap("n", "<leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
       keymap("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
       keymap("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })

@@ -2,7 +2,8 @@ return {
 	{
 		"tpope/vim-fugitive",
 		opts = {},
-		config = function() end,
+		config = function() 
+    end
 	},
 	{
 		"lewis6991/gitsigns.nvim",

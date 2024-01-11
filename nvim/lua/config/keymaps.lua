@@ -2,7 +2,7 @@ local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
 -- remove default
--- keymap("", "<Space>", "<Nop>", opts)
+keymap("", "<Space>", "<Nop>", opts)
 
 -- modes
 --  normal_mode = "n",
@@ -18,15 +18,27 @@ keymap("n", "<leader>ww", ":w<cr>", opts)
 -- netrw
 -- keymap("n", "<leader>e", ":Ex<cr>", opts)
 
--- tmux sessionizer
--- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- git
+keymap("n", "<leader>gg", ":G<cr>", opts)
+
+-- tmux session
+keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-session-find<CR>")
 
 -- find and replace word under cursor
 keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
 
 -- yank word under cursor
 keymap("n", "<leader>y", "yiw", opts)
+
+-- yank in quotes
+keymap("n", "<leader>'", "yi'", opts)
+keymap("n", '<leader>"', 'yi"', opts)
+keymap("n", "<leader>`", "yi`", opts)
+
+-- paste in quotes
+keymap("n", "<leader>p'", "vi'p", opts)
+keymap("n", '<leader>p"', 'vi"p', opts)
+keymap("n", "<leader>p`", "vi`p", opts)
 
 -- alternate file
 keymap("n", "<leader>a", "<C-^>", opts)
@@ -84,4 +96,3 @@ keymap("v", "<s-tab>", "<gv", opts)
 -- move text up down
 keymap("v", "J", ":m '>+1<cr>gv=gv", opts)
 keymap("v", "K", ":m '<-2<cr>gv=gv", opts)
-
