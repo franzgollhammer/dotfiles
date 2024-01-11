@@ -1,5 +1,5 @@
 local opts = { noremap = true, silent = true }
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 -- remove default
 -- keymap("", "<Space>", "<Nop>", opts)
@@ -13,7 +13,6 @@ local keymap = vim.api.nvim_set_keymap
 --  command_mode = "c",
 
 keymap("n", "<leader>qq", ":q<cr>", opts)
-keymap("n", "<leader>wq", ":wq<cr>", opts)
 keymap("n", "<leader>ww", ":w<cr>", opts)
 
 -- netrw
@@ -30,13 +29,14 @@ keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
 keymap("n", "<leader>y", "yiw", opts)
 
 -- alternate file
-keymap("n", "<leader>^af", "<C-^>", opts)
+keymap("n", "<leader>a", "<C-^>", opts)
 
 -- pane navigation
 keymap("n", "<leader>wh", "<C-w>h", opts)
 keymap("n", "<leader>wj", "<C-w>j", opts)
 keymap("n", "<leader>wk", "<C-w>k", opts)
 keymap("n", "<leader>wl", "<C-w>l", opts)
+keymap("n", "<leader>wq", "<C-w>q", opts)
 
 -- vertical
 keymap("n", "<C-d>", "<C-d>zz", opts)
@@ -84,3 +84,4 @@ keymap("v", "<s-tab>", "<gv", opts)
 -- move text up down
 keymap("v", "J", ":m '>+1<cr>gv=gv", opts)
 keymap("v", "K", ":m '<-2<cr>gv=gv", opts)
+

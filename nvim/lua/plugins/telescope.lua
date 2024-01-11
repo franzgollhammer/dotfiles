@@ -6,6 +6,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
+      local keymap = vim.keymap.set
       local actions = require("telescope.actions")
       local builtin = require("telescope.builtin")
 
@@ -29,24 +30,24 @@ return {
         })
       end
 
-      vim.keymap.set("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-      vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+      keymap("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+      keymap("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
-      vim.keymap.set("n", "<leader>/", function()
+      keymap("n", "<leader>/", function()
         builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
           winblend = 10,
           previewer = false,
         }))
       end, { desc = "[/] Fuzzily search in current buffer" })
 
-      vim.keymap.set("n", "<leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
-      vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
-      vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-      vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-      vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-      vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-      vim.keymap.set("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
-      vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+      keymap("n", "<leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
+      keymap("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
+      keymap("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+      keymap("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+      keymap("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+      keymap("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+      keymap("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
+      keymap("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
     end,
   },
 }
