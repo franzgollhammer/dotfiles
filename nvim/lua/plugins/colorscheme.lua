@@ -1,18 +1,16 @@
 return {
   {
-    "rose-pine/neovim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function() end,
-  },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
+    "ellisonleao/gruvbox.nvim",
     priority = 1000,
     config = function()
-      require("tokyonight").setup({
-        transparent = true,
+      require("gruvbox").setup({
+        overrides = {
+          SignColumn = { bg = "none" },
+          GruvboxRedSign = { bg = "none" },
+          GruvboxYellowSign = { bg = "none" },
+          GruvboxBlueSign = { bg = "none" },
+          GruvboxAquaSign = { bg = "none" },
+        },
       })
     end,
   },
@@ -20,5 +18,5 @@ return {
     "sainnhe/gruvbox-material",
     lazy = false,
     priority = 1000,
-  }
+  },
 }

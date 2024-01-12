@@ -16,6 +16,7 @@ return {
         "vue",
         "javascript",
         "typescript",
+        "json",
         "css",
         "scss",
         "html",
