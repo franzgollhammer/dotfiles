@@ -18,7 +18,7 @@ return {
 
       -- set up format on save for js/ts/vue ...
       vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = { "*.tsx", "*.ts", "*.jsx", "*.js", "*.vue" },
+        pattern = { "*.tsx", "*.ts", "*.jsx", "*.js", "*.vue", "*.cjs", "*.mjs" },
         command = "silent! EslintFixAll",
         group = vim.api.nvim_create_augroup("EsLint", {}),
       })
@@ -36,7 +36,5 @@ return {
       },
       on_attach = on_attach,
     })
-
-    vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, {})
   end,
 }
