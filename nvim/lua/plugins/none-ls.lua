@@ -15,13 +15,6 @@ return {
           end,
         })
       end
-
-      -- set up format on save for js/ts/vue ...
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = { "*.tsx", "*.ts", "*.jsx", "*.js", "*.vue", "*.cjs", "*.mjs" },
-        command = "silent! EslintFixAll",
-        group = vim.api.nvim_create_augroup("EsLint", {}),
-      })
     end
 
     null_ls.setup({
@@ -31,8 +24,8 @@ return {
 
         -- JS / TS
         -- null_ls.builtins.formatting.prettierd,
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.formatting.eslint,
+        -- null_ls.builtins.diagnostics.eslint,
+        -- null_ls.builtins.formatting.eslint,
       },
       on_attach = on_attach,
     })
