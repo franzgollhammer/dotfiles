@@ -92,6 +92,7 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias grh='git reset HEAD'
 alias grh1='git reset HEAD~1'
+alias grhu='git reset --hard @{u}' #reset hard to upstream branch
 alias gl="git log"
 alias gll="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset\'"
 alias gp='git pull'
