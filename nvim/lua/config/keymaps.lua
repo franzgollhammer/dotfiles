@@ -12,8 +12,12 @@ keymap("", "<Space>", "<Nop>", opts)
 --  term_mode = "t",
 --  command_mode = "c",
 
-keymap("n", "<leader>qq", ":q<cr>", opts)
-keymap("n", "<leader>ww", ":w<cr>", opts)
+-- crazy save
+keymap("n", "Q", ":q<cr>", opts)
+keymap("n", "zz", "zz :update<cr>", opts)
+
+-- clear highlight and errors
+keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 
 -- netrw
 -- keymap("n", "<leader>e", ":Ex<cr>", opts)
@@ -27,6 +31,9 @@ keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-session-find<CR>")
 -- find and replace word under cursor
 keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
 
+-- dont overwrite paste register
+keymap("v", "p", '"_dP', opts)
+
 -- yank word under cursor
 keymap("n", "<leader>y", "yiw", opts)
 
@@ -34,11 +41,13 @@ keymap("n", "<leader>y", "yiw", opts)
 keymap("n", "<leader>'", "yi'", opts)
 keymap("n", '<leader>"', 'yi"', opts)
 keymap("n", "<leader>`", "yi`", opts)
+keymap("n", "<leader><", "yi<", opts)
 
 -- paste in quotes
 keymap("n", "<leader>p'", "vi'p", opts)
 keymap("n", '<leader>p"', 'vi"p', opts)
 keymap("n", "<leader>p`", "vi`p", opts)
+keymap("n", "<leader>p<", "vi<p", opts)
 
 -- alternate file
 keymap("n", "<leader>a", "<C-^>", opts)
@@ -79,11 +88,6 @@ keymap("n", "<s-h>", ":bprevious<cr>", opts)
 
 -- crazy esc
 keymap("i", "jk", "<esc>", opts)
-keymap("i", "jj", "<esc>", opts)
-keymap("i", "kk", "<esc>", opts)
-
--- no hls
-keymap("n", "<leader>nh", ":nohls<cr>", opts)
 
 -- insert newline stay in nromal mode
 keymap("n", "<leader>o", "o<ESC>", opts)
