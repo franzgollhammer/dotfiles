@@ -136,11 +136,3 @@ function pr() {
   fi
 }
 
-function pid() {
-  lsof -i :$1
-}
-
-function killpid() {
-  kill -9 $1
-}
-

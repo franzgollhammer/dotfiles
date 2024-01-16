@@ -12,7 +12,7 @@ keymap("", "<Space>", "<Nop>", opts)
 --  term_mode = "t",
 --  command_mode = "c",
 
--- crazy save
+-- crazy save and quit
 keymap("n", "Q", ":q<cr>", opts)
 keymap("n", "zz", "zz :update<cr>", opts)
 
@@ -52,6 +52,10 @@ keymap("n", "<leader>p<", "vi<p", opts)
 -- alternate file
 keymap("n", "<leader>a", "<C-^>", opts)
 
+-- split panes
+keymap("n", "<leader>%", "<cmd>vs<cr>", opts)
+keymap("n", '<leader>"', "<cmd>sp<cr>", opts)
+
 -- pane navigation
 keymap("n", "<leader>wh", "<C-w>h", opts)
 keymap("n", "<leader>wj", "<C-w>j", opts)
@@ -59,7 +63,7 @@ keymap("n", "<leader>wk", "<C-w>k", opts)
 keymap("n", "<leader>wl", "<C-w>l", opts)
 keymap("n", "<leader>wq", "<C-w>q", opts)
 
--- vertical
+-- vertical navigation
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
 
@@ -77,12 +81,12 @@ keymap("n", "<leader>tn", "<cmd>tabnext<cr>", opts)
 keymap("n", "<leader>tp", "<cmd>tabprevious<cr>", opts)
 
 -- resize
-keymap("n", "<c-j>", ":resize +2<cr>", opts)
-keymap("n", "<c-k>", ":resize -2<cr>", opts)
+keymap("n", "<c-j>", ":resize -2<cr>", opts)
+keymap("n", "<c-k>", ":resize +2<cr>", opts)
 keymap("n", "<c-l>", ":vertical resize -2<cr>", opts)
 keymap("n", "<c-h>", ":vertical resize +2<cr>", opts)
 
--- buffer nav
+-- buffer navigation
 keymap("n", "<s-l>", ":bnext<cr>", opts)
 keymap("n", "<s-h>", ":bprevious<cr>", opts)
 

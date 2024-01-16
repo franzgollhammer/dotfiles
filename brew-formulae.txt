@@ -114,7 +114,6 @@ ruby
 screenfetch
 screenresolution
 shellcheck
-skhd
 sqlite
 starship
 tidy-html5
@@ -130,7 +129,6 @@ webp
 woff2
 xorgproto
 xz
-yabai
 zoxide
 zsh-autosuggestions
 zstd
