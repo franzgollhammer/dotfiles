@@ -30,7 +30,7 @@ return {
         })
       end
 
-      keymap("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+      keymap("n", "<leader>pp", builtin.oldfiles, { desc = "[p] Find recently opened files" })
       keymap("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
       keymap(
         "n",

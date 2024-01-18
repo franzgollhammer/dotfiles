@@ -14,7 +14,7 @@ keymap("", "<Space>", "<Nop>", opts)
 
 -- crazy save and quit
 keymap("n", "Q", ":q<cr>", opts)
-keymap("n", "zz", "zz :update<cr>", opts)
+keymap("n", "zz", ":update<cr>", opts)
 
 -- clear highlight and errors
 keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
@@ -53,8 +53,8 @@ keymap("n", "<leader>p<", "vi<p", opts)
 keymap("n", "<leader>a", "<C-^>", opts)
 
 -- split panes
-keymap("n", "<leader>%", "<cmd>vs<cr>", opts)
-keymap("n", '<leader>"', "<cmd>sp<cr>", opts)
+keymap("n", "<leader>w%", "<cmd>vs<cr>", opts)
+keymap("n", '<leader>w"', "<cmd>sp<cr>", opts)
 
 -- pane navigation
 keymap("n", "<leader>wh", "<C-w>h", opts)
