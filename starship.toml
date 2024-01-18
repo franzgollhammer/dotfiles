@@ -1,39 +1,12 @@
-right_format = """$time"""
-
-line_break = { disabled = true }
-
-[character]
-# disabled = true
+# line_break = { disabled = true }
+# right_format = """$time"""
 
 [package]
-# disabled = true
-
-[nodejs]
-# format = "[$symbol($version )]($style)"
-
-[directory]
-# style = "bold purple"
-# truncation_length = 4
-# truncate_to_repo = false
-
-[git_branch]
-# format = "[$symbol$branch]($style) "
-# style = "bold green"
-
-[git_status]
-# format = '([\[$all_status$ahead_behind\]]($style) )'
-# style = "bold black"
-
-[git_state]
-# format = '\([$state( $progress_current/$progress_total)]($style)\) '
-# style = "purple"
+display_private = true
 
 [git_metrics]
 disabled = false
 
-[time]
+# [time]
 # disabled = false
-# style = "bold white"
-# format = "[$time]($style)"
-
 

@@ -17,7 +17,7 @@ keymap("n", "Q", ":q<cr>", opts)
 keymap("n", "zz", ":update<cr>", opts)
 
 -- clear highlight and errors
-keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
+-- keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 
 -- netrw
 -- keymap("n", "<leader>e", ":Ex<cr>", opts)
