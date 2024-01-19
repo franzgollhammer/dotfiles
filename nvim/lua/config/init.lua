@@ -38,6 +38,6 @@ require("lazy").setup(plugins, opts)
 
 -- colors
 vim.cmd([[colorscheme gruvbox]])
-vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#3C3836" })
-vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#3C3836" })
-vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#3C3836" })
+vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#504944" })
+vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#504944" })
+vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#504944" })

@@ -15,10 +15,10 @@ return {
 				defaults = {
 					mappings = {
 						i = {
-							["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+							["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 						},
 						n = {
-							["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+							["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 						},
 					},
 				},
@@ -31,7 +31,7 @@ return {
 				})
 			end
 
-			keymap("n", "<leader>k", builtin.oldfiles, { desc = "[k] Find recently opened files" })
+			keymap("n", "<leader>?", builtin.oldfiles, { desc = "[k] Find recently opened files" })
 			keymap("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
 			keymap(
 				"n",
@@ -45,7 +45,6 @@ return {
 			keymap("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
 			keymap("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
 			keymap("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
-			keymap("n", "<leader>fG", ":LiveGrepGitRoot<cr>", { desc = "[F]ind by [G]rep on Git Root" })
 			keymap("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
 		end,
 	},

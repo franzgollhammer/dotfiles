@@ -13,11 +13,12 @@ keymap("", "<Space>", "<Nop>", opts)
 --  command_mode = "c",
 
 -- crazy save and quit
-keymap("n", "Q", ":q<cr>", opts)
-keymap("n", "zz", ":update<cr>", opts)
+keymap("n", "<leader>q", ":q<cr>", opts)
+keymap("n", "<leader>s", ":update<cr>", opts)
+keymap("n", "<leader>ww", ":w<cr>", opts)
 
 -- clear highlight and errors
--- keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
+keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 
 -- netrw
 -- keymap("n", "<leader>e", ":Ex<cr>", opts)
@@ -26,10 +27,10 @@ keymap("n", "zz", ":update<cr>", opts)
 keymap("n", "<leader>gg", ":G<cr>", opts)
 
 -- tmux session
-keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-session-find<CR>")
+keymap("n", "<c-f>", "<cmd>silent !tmux neww tmux-session-find<cr>")
 
 -- find and replace word under cursor
-keymap("n", "<leader>*", ":%s/<C-r><C-w>/", opts)
+keymap("n", "<leader>*", ":%s/<c-r><c-w>/", opts)
 
 -- dont overwrite paste register
 keymap("v", "p", '"_dP', opts)
@@ -50,22 +51,23 @@ keymap("n", "<leader>p`", "vi`p", opts)
 keymap("n", "<leader>p<", "vi<p", opts)
 
 -- alternate file
-keymap("n", "<leader>a", "<C-^>", opts)
+keymap("n", "<leader>a", "<c-^>", opts)
 
 -- split panes
 keymap("n", "<leader>w%", "<cmd>vs<cr>", opts)
 keymap("n", '<leader>w"', "<cmd>sp<cr>", opts)
 
 -- pane navigation
-keymap("n", "<leader>wh", "<C-w>h", opts)
-keymap("n", "<leader>wj", "<C-w>j", opts)
-keymap("n", "<leader>wk", "<C-w>k", opts)
-keymap("n", "<leader>wl", "<C-w>l", opts)
-keymap("n", "<leader>wq", "<C-w>q", opts)
+keymap("n", "<leader>wh", "<c-w>h", opts)
+keymap("n", "<leader>wj", "<c-w>j", opts)
+keymap("n", "<leader>wk", "<c-w>k", opts)
+keymap("n", "<leader>wl", "<c-w>l", opts)
+keymap("n", "<leader>wq", "<c-w>q", opts)
+keymap("n", "<leader>wo", "<c-w>o", opts)
 
 -- vertical navigation
-keymap("n", "<C-d>", "<C-d>zz", opts)
-keymap("n", "<C-u>", "<C-u>zz", opts)
+keymap("n", "<c-d>", "<c-d>zz", opts)
+keymap("n", "<c-u>", "<c-u>zz", opts)
 
 -- qf list
 keymap("n", "<leader>co", "<cmd>copen<cr>", opts)
@@ -94,8 +96,8 @@ keymap("n", "<s-h>", ":bprevious<cr>", opts)
 keymap("i", "jk", "<esc>", opts)
 
 -- insert newline stay in nromal mode
-keymap("n", "<leader>o", "o<ESC>", opts)
-keymap("n", "<leader>O", "O<ESC>", opts)
+keymap("n", "<leader>o", "o<esc>", opts)
+keymap("n", "<leader>O", "O<esc>", opts)
 
 -- stay in indent mode
 keymap("v", "<tab>", ">gv", opts)
