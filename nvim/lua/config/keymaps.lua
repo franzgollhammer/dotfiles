@@ -13,9 +13,8 @@ keymap("", "<Space>", "<Nop>", opts)
 --  command_mode = "c",
 
 -- crazy save and quit
-keymap("n", "<leader>q", ":q<cr>", opts)
-keymap("n", "<leader>s", ":update<cr>", opts)
-keymap("n", "<leader>ww", ":w<cr>", opts)
+keymap("n", "<leader>ww", ":update<cr>", opts)
+-- keymap("n", "<leader>ww", ":w<cr>", opts)
 
 -- clear highlight and errors
 keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
