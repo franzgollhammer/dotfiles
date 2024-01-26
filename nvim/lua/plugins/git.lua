@@ -74,9 +74,9 @@ return {
         -- text object
         keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select git hunk" })
 
-        -- vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none" })
-        -- vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none" })
-        -- vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none" })
+        vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none" })
+        vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none" })
+        vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none" })
       end,
     },
   },
