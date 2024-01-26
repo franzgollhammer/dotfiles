@@ -31,21 +31,21 @@ return {
 				})
 			end
 
-			keymap("n", "<leader>?", builtin.oldfiles, { desc = "[k] Find recently opened files" })
-			keymap("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
+			keymap("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+			keymap("n", "<leader>sb", builtin.buffers, { desc = "[S]earch existing [B]uffers" })
 			keymap(
 				"n",
 				"<leader>/",
 				builtin.current_buffer_fuzzy_find,
 				{ desc = "[/] Fuzzily search in current buffer" }
 			)
-			keymap("n", "<leader>f/", telescope_live_grep_open_files, { desc = "[F]ind [/] in Open Files" })
-			keymap("n", "<leader>gf", builtin.git_files, { desc = "[F]ind [G]it Files" })
-			keymap("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
-			keymap("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
-			keymap("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
-			keymap("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
-			keymap("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+			keymap("n", "<leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
+			keymap("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
+			keymap("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+			keymap("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+			keymap("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+			keymap("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+			keymap("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		end,
 	},
 }
