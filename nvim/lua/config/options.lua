@@ -26,6 +26,7 @@ opt.scrolloff = 10
 -- opt.completeopt = "menuone,noinsert,noselect"
 
 -- behaviour
+opt.mouse = "a"
 opt.hidden = true
 opt.errorbells = false
 opt.swapfile = false
