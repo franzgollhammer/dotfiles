@@ -31,10 +31,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-# ---- zsh plugins ----
-plugins=(
-  zsh-autosuggestions
-)
+# zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # ---- zoxide ----
 eval "$(zoxide init zsh)"
@@ -46,7 +44,7 @@ eval "$(starship init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # tmux find session
-bindkey -s ^t "tmux-session-find\n"
+bindkey -s ^f "tmux-session-find\n"
 
 # ---- aliases ----
 alias t='tmux-session'
