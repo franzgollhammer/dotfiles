@@ -29,7 +29,7 @@ return {
         keymap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
         keymap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
         keymap("K", vim.lsp.buf.hover, "Hover Documentation")
-        keymap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+        -- keymap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
         keymap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
         vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)

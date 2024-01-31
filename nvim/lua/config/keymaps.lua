@@ -18,6 +18,9 @@ keymap("n", "<leader>ww", ":w<cr>", opts)
 -- clear highlight and errors
 keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 
+-- restart lsp
+keymap("n", "<leader>lsr", ":LspRestart<cr>", opts)
+
 -- netrw
 -- keymap("n", "<leader>e", ":Ex<cr>", opts)
 

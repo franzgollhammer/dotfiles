@@ -1,5 +1,12 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # ---- franzgollhammer zsh conf ----
-export EDITOR=nvim
+export EDITOR=code
 export VISUAL="$EDITOR"
 
 # ---- var ----
@@ -51,6 +58,7 @@ alias t='tmux-session'
 alias tf='tmux-session-find'
 alias v='nvim'
 alias vim='nvim'
+alias c='code'
 alias ci='code-insiders'
 alias cl='clear'
 alias l='ls -l -F --color=auto'
@@ -68,7 +76,7 @@ alias zsh-startup="time zsh -i -c exit"
 alias s='git status -sb'
 alias ga='git add'
 alias gaa='git add .'
-alias gss='git status'
+alias gs='git status'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias grh='git reset HEAD'
@@ -96,4 +104,3 @@ function d() {
 function dir() {
   mkdir $1 && cd $1
 }
-

@@ -2,10 +2,10 @@
 # right_format = """$time"""
 
 [package]
-display_private = true
+disabled = true
 
-[git_metrics]
-disabled = false
+# [git_metrics]
+# disabled = false
 
 # [time]
 # disabled = false
