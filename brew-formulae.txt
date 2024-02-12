@@ -16,9 +16,11 @@ cairo
 cocoapods
 cowsay
 curl
+dprint
 entr
 exa
 fd
+fish
 fontconfig
 fontforge
 fortune
@@ -31,12 +33,14 @@ gdbm
 gettext
 gh
 giflib
+git-lfs
 glib
 gmp
 go
 gotop
 graphite2
 harfbuzz
+helix
 highway
 htop
 httpie
@@ -85,6 +89,7 @@ mongodb-database-tools
 mongosh
 mpdecimal
 msgpack
+n
 ncurses
 neofetch
 neovim
@@ -129,6 +134,7 @@ webp
 woff2
 xorgproto
 xz
+zellij
 zoxide
 zsh-autosuggestions
 zstd
