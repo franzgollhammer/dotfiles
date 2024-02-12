@@ -1,12 +1,5 @@
-# line_break = { disabled = true }
-# right_format = """$time"""
+[line_break]
+disabled = true
 
 [package]
 disabled = true
-
-# [git_metrics]
-# disabled = false
-
-# [time]
-# disabled = false
-

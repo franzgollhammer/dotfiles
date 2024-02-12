@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # ---- franzgollhammer zsh conf ----
 export EDITOR=code
 export VISUAL="$EDITOR"
@@ -43,6 +36,10 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # ---- zoxide ----
 eval "$(zoxide init zsh)"
+
+# ---- Oh-My-Zsh ----
+export ZSH_THEME="robbyrussell"
+source $ZSH/oh-my-zsh.sh
 
 # ---- starship ----
 eval "$(starship init zsh)"
