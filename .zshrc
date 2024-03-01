@@ -1,7 +1,7 @@
-# ---- franzgollhammer zsh conf ----
+# ---- fg zsh conf ----
 export EDITOR=code
 export VISUAL="$EDITOR"
-
+ 
 # ---- var ----
 export DOTFILES="$HOME/d/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
@@ -34,12 +34,12 @@ fi
 # zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# ---- zoxide ----
-eval "$(zoxide init zsh)"
-
 # ---- Oh-My-Zsh ----
 export ZSH_THEME="robbyrussell"
 source $ZSH/oh-my-zsh.sh
+
+# ---- zoxide ----
+eval "$(zoxide init zsh)"
 
 # ---- starship ----
 eval "$(starship init zsh)"
