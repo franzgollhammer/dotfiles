@@ -41,9 +41,6 @@ source $ZSH/oh-my-zsh.sh
 # ---- zoxide ----
 eval "$(zoxide init zsh)"
 
-# ---- starship ----
-eval "$(starship init zsh)"
-
 # search history with fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -95,7 +92,7 @@ alias pr="gh pr view --web"
 
 # ---- functions ----
 function d() {
-  cd ~/d/$1
+  cd ~/dev/$1
 }
 
 function dir() {
