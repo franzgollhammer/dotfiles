@@ -4,5 +4,6 @@ disabled = true
 [package]
 disabled = true
 
-[nodejs]
+[character]
+disabled = true
 # symbol ="⬢ "

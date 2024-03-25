@@ -34,12 +34,11 @@ fi
 # zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# ---- Oh-My-Zsh ----
-export ZSH_THEME="robbyrussell"
-source $ZSH/oh-my-zsh.sh
-
 # ---- zoxide ----
 eval "$(zoxide init zsh)"
+
+# # ---- starship ----
+eval "$(starship init zsh)"
 
 # search history with fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -55,10 +54,8 @@ alias vim='nvim'
 alias c='code'
 alias ci='code-insiders'
 alias cl='clear'
-alias l='ls -l -F --color=auto'
-alias ll='ls -la -F --color=auto'
-alias ls='ls -F --color=auto'
-alias la='ls -a -F --color=auto'
+alias ls='ls -FG'
+alias l='ls -lah'
 alias neo='neofetch'
 alias nii="npm i -g @antfu/ni"
 alias sim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
