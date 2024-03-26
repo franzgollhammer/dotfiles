@@ -1,5 +1,5 @@
 # ---- fg zsh conf ----
-export EDITOR=code
+export EDITOR="code-insiders"
 export VISUAL="$EDITOR"
  
 # ---- var ----
