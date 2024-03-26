@@ -6,4 +6,4 @@ disabled = true
 
 [nodejs]
 # disabled = true
-symbol ="🐢 "
+symbol = "⬢ "
