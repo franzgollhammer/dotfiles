@@ -37,7 +37,7 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # ---- zoxide ----
 eval "$(zoxide init zsh)"
 
-# # ---- starship ----
+# ---- starship ----
 eval "$(starship init zsh)"
 
 # search history with fzf
@@ -51,13 +51,11 @@ alias t='tmux-session'
 alias tf='tmux-session-find'
 alias v='nvim'
 alias vim='nvim'
-alias c='code'
-alias ci='code-insiders'
+alias c='code-insiders'
 alias cl='clear'
 alias ls='ls -FG'
 alias l='ls -lah'
 alias neo='neofetch'
-alias nii="npm i -g @antfu/ni"
 alias sim='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
 alias soz='source ~/.zshrc'
 alias sot='tmux source ~/.tmux.conf'
@@ -84,6 +82,8 @@ alias pop='git stash pop'
 alias apply='git stash apply'
 alias stashls='git stash list'
 alias save='git stash save -u'
+
+# ---- github ----
 alias repo="gh repo view --web"
 alias pr="gh pr view --web"
 
