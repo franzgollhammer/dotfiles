@@ -3,7 +3,7 @@ export EDITOR="code-insiders"
 export VISUAL="$EDITOR"
  
 # ---- var ----
-export DOTFILES="$HOME/d/dotfiles"
+export DOTFILES="$HOME/dev/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export NVM_DIR="$HOME/.nvm"
 export RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
@@ -62,7 +62,7 @@ alias sot='tmux source ~/.tmux.conf'
 alias zsh-startup="time zsh -i -c exit"
 
 # git aliases
-alias s='git status -sb'
+alias s='git status'
 alias ga='git add'
 alias gaa='git add .'
 alias gs='git status'
@@ -71,8 +71,7 @@ alias gcm='git commit -m'
 alias grh='git reset HEAD'
 alias grh1='git reset HEAD~1'
 alias grhu='git reset --hard @{u}' #reset hard to upstream branch
-alias gl="git log"
-alias gll="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset\'"
+alias gl="git log --graph --oneline"
 alias gp='git pull'
 alias psh='git push'
 alias gco='git checkout'
@@ -83,7 +82,7 @@ alias apply='git stash apply'
 alias stashls='git stash list'
 alias save='git stash save -u'
 
-# ---- github ----
+# github
 alias repo="gh repo view --web"
 alias pr="gh pr view --web"
 
