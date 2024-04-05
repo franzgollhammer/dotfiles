@@ -81,7 +81,7 @@ alias pop='git stash pop'
 alias apply='git stash apply'
 alias stashls='git stash list'
 alias save='git stash save -u'
-alias yolo='git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")"; git push'
+alias yolo='git add .; git commit -m "Yolo $(date "+%Y-%m-%d-%H:%M:%S")"; git push'
 
 # github
 alias repo="gh repo view --web"
