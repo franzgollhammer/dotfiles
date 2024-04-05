@@ -44,11 +44,11 @@ eval "$(starship init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # tmux find session
-bindkey -s ^f "tmux-session-find\n"
+bindkey -s ^f "tmux_session_find\n"
 
 # ---- aliases ----
-alias t='tmux-session'
-alias tf='tmux-session-find'
+alias t='tmux_session'
+alias tf='tmux_session_find'
 alias v='nvim'
 alias vim='nvim'
 alias c='code-insiders'
