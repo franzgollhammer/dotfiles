@@ -39,16 +39,31 @@ return {
 
       require("mason").setup()
       require("mason-lspconfig").setup()
+
       local mason_lspconfig = require("mason-lspconfig")
+      local mason_registry = require('mason-registry')
+      local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() ..
+          '/node_modules/@vue/language-server'
 
       local servers = {
-        tsserver = {},
+        tsserver = {
+          init_options = {
+            plugins = {
+              {
+                name = '@vue/typescript-plugin',
+                location = vue_language_server_path,
+                languages = { 'javascript', 'typescript', 'vue' },
+              },
+            },
+          },
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+        },
+        volar = {},
         jsonls = {},
         eslint = {
           filetypes = { "vue", "javascript", "javascriptreact", "typescript", "typescriptreact" },
         },
         html = {},
-        volar = {},
         cssls = {},
         lua_ls = {
           Lua = {
@@ -75,6 +90,7 @@ return {
             on_attach = on_attach,
             settings = servers[server_name],
             filetypes = (servers[server_name] or {}).filetypes,
+            init_options = (servers[server_name] or {}).init_options,
           })
         end,
       })

@@ -28,7 +28,7 @@ keymap("n", "<leader>lsr", ":LspRestart<cr>", opts)
 keymap("n", "<leader>gg", ":G<cr>", opts)
 
 -- tmux session
-keymap("n", "<c-f>", "<cmd>silent !tmux neww tmux-session-find<cr>")
+keymap("n", "<c-f>", "<cmd>silent !tmux neww tmux_session_find<cr>")
 
 -- find and replace word under cursor
 keymap("n", "<leader>*", ":%s/<c-r><c-w>/", opts)

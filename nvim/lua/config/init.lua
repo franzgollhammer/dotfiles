@@ -37,7 +37,7 @@ local opts = {
 require("lazy").setup(plugins, opts)
 
 -- colors
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme catppuccin-mocha]])
 vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#504944" })
 vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#504944" })
 vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#504944" })
