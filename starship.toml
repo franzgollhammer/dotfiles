@@ -1,4 +1,3 @@
-add_newline = false
 format = """$os$username$hostname$kubernetes$directory$git_branch$git_status$nodejs$battery"""
 
 [line_break]
@@ -10,7 +9,7 @@ error_symbol = ''
 
 [os]
 format = '[$symbol](bold white) '   
-disabled = false
+disabled = true
 
 [os.symbols]
 Windows = ' '
@@ -18,15 +17,15 @@ Ubuntu = ''
 Macos = '󰀵'
 
 [username]
-style_user = 'white bold'
+style_user = 'green bold'
 style_root = 'black bold'
-format = '[$user]($style) '
+format = '[$user]($style)'
 disabled = false
 show_always = true
 
 [hostname]
 ssh_only = false
-format = 'on [$hostname](bold black) '
+format = '@[$hostname](bold green)'
 disabled = false
 
 [directory]
@@ -34,7 +33,15 @@ truncation_length = 1
 truncation_symbol = '…/'
 read_only_style = '196'
 read_only = '  '
-format = 'at [$path]($style)[$read_only]($read_only_style) '
+format = ' [$path](bold blue)[$read_only]($read_only_style) '
+
+[git_branch]
+format = '[$symbol]($style)[$branch]($style) '
+# truncation_length = 4
+truncation_symbol = '…/'
+
+# [git_status]
+# format = '([ \($all_status$ahead_behind\)]($style) )'
 
 [battery]
 full_symbol = "• "
@@ -45,3 +52,4 @@ empty_symbol = "❗ "
 
 [nodejs]
 symbol = "[⬢](bold green) "
+format = '[$symbol]($style)[$version]($style) '
