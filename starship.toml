@@ -1,8 +1,40 @@
-[line_break]
-# disabled = true
+add_newline = false
+format = """$os$username$hostname$kubernetes$directory$git_branch$git_status$nodejs$battery"""
 
-[package]
-# disabled = true
+[line_break]
+disabled = true
+
+[character]
+success_symbol = ''
+error_symbol = ''
+
+[os]
+format = '[$symbol](bold white) '   
+disabled = false
+
+[os.symbols]
+Windows = ' '
+Ubuntu = ''
+Macos = '󰀵'
+
+[username]
+style_user = 'white bold'
+style_root = 'black bold'
+format = '[$user]($style) '
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = 'on [$hostname](bold black) '
+disabled = false
+
+[directory]
+truncation_length = 1
+truncation_symbol = '…/'
+read_only_style = '196'
+read_only = '  '
+format = 'at [$path]($style)[$read_only]($read_only_style) '
 
 [battery]
 full_symbol = "• "
@@ -11,14 +43,5 @@ discharging_symbol = "⇣ "
 unknown_symbol = "❓ "
 empty_symbol = "❗ "
 
-[erlang]
-symbol = "ⓔ "
-
 [nodejs]
 symbol = "[⬢](bold green) "
-
-[pulumi]
-symbol = "🧊 "
-
-[typst]
-symbol = "t "

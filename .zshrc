@@ -82,7 +82,7 @@ alias pop='git stash pop'
 alias apply='git stash apply'
 alias stashls='git stash list'
 alias save='git stash save -u'
-alias yolo='git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push'
+alias com='git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push'
 
 # github
 alias repo="gh repo view --web"
@@ -96,4 +96,3 @@ function d() {
 function dir() {
   mkdir $1 && cd $1
 }
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
