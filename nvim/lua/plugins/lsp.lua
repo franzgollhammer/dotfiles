@@ -13,7 +13,7 @@ return {
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
       -- vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
-      local on_attach = function(_, bufnr)
+      local on_attach = function(event, bufnr)
         local keymap = function(keys, func, desc)
           if desc then
             desc = "LSP: " .. desc

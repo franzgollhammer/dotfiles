@@ -16,7 +16,7 @@ keymap("", "<Space>", "<Nop>", opts)
 keymap("n", "<leader>ww", ":w<cr>", opts)
 
 -- clear highlight and errors
-keymap("n", "<CR>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
+keymap("n", "<Esc>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 
 -- restart lsp
 keymap("n", "<leader>lsr", ":LspRestart<cr>", opts)
@@ -46,10 +46,10 @@ keymap("n", "<leader>`", "yi`", opts)
 keymap("n", "<leader><", "yi<", opts)
 
 -- paste in quotes
-keymap("n", "<leader>p'", "vi'p", opts)
-keymap("n", '<leader>p"', 'vi"p', opts)
-keymap("n", "<leader>p`", "vi`p", opts)
-keymap("n", "<leader>p<", "vi<p", opts)
+keymap("n", "<leader>i'", "vi'p", opts)
+keymap("n", '<leader>i"', 'vi"p', opts)
+keymap("n", "<leader>i`", "vi`p", opts)
+keymap("n", "<leader>i<", "vi<p", opts)
 
 -- alternate file
 keymap("n", "<leader>a", "<c-^>", opts)

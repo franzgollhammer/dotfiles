@@ -15,3 +15,4 @@ end, {})
 vim.api.nvim_create_user_command("Prettier", function()
   vim.cmd([[!prettier --write %]])
 end, {})
+

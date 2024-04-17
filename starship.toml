@@ -1,8 +1,8 @@
 [line_break]
-disabled = true
+# disabled = true
 
 [package]
-disabled = true
+# disabled = true
 
 [battery]
 full_symbol = "• "

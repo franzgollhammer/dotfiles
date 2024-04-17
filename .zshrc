@@ -1,5 +1,5 @@
 # ---- fg zsh conf ----
-export EDITOR="code-insiders"
+export EDITOR="code"
 export VISUAL="$EDITOR"
  
 # ---- var ----
@@ -51,7 +51,8 @@ alias t='tmux_session'
 alias tf='tmux_session_find'
 alias v='nvim'
 alias vim='nvim'
-alias c='code-insiders'
+alias c='code'
+alias ci='code-insiders'
 alias cl='clear'
 alias ls='ls -FG'
 alias l='ls -lah'
@@ -81,7 +82,7 @@ alias pop='git stash pop'
 alias apply='git stash apply'
 alias stashls='git stash list'
 alias save='git stash save -u'
-alias yolo='git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")"; git push'
+alias yolo='git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push'
 
 # github
 alias repo="gh repo view --web"
@@ -95,3 +96,4 @@ function d() {
 function dir() {
   mkdir $1 && cd $1
 }
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

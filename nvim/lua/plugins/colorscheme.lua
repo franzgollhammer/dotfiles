@@ -1,5 +1,15 @@
 return {
   {
+    "onedarkpro.nvim",
+    config = function()
+      require("onedarkpro").setup({
+        colors = {
+          dark = { bg = "#181818" },
+        }
+      })
+    end
+  },
+  {
     "catppuccin/nvim",
     config = function()
       require("catppuccin").setup({

@@ -8,31 +8,63 @@ opt.expandtab = true
 opt.smartindent = true
 opt.autoindent = true
 opt.wrap = false
+-- Enable break indent
+vim.opt.breakindent = true
+
+-- Decrease update time
+opt.updatetime = 250
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+-- opt.timeoutlen = 300
+
+-- Enable mouse mode, can be useful for resizing splits for example!
+opt.mouse = 'a'
+
+-- Don't show the mode, since it's already in the status line
+opt.showmode = false
 
 -- search
 opt.incsearch = true
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 opt.ignorecase = true
 opt.smartcase = true
--- opt.hlsearch = false
+opt.hlsearch = true
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
 
 -- appearance
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
 -- opt.colorcolumn = "100"
+--
+-- Keep signcolumn on by default
 opt.signcolumn = "yes"
 opt.cmdheight = 1
-opt.scrolloff = 10
+opt.scrolloff = 5
 -- opt.completeopt = "menuone,noinsert,noselect"
 
--- behaviour
-opt.mouse = "a"
+opt.cursorline = true
 opt.hidden = true
 opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
-opt.undodir = vim.fn.expand("~/.vim/undodir")
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '↲' }
+
+
+-- Configure how new splits should be opened
+opt.splitright = true
+opt.splitbelow = true
+
+-- Save undo history
 opt.undofile = true
+opt.undodir = vim.fn.expand("~/.vim/undodir")
 opt.backspace = "indent,eol,start"
 opt.splitright = true
 opt.splitbelow = true
