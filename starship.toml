@@ -1,4 +1,4 @@
-format = """$os$username$hostname$kubernetes$directory$git_branch$git_status$nodejs$battery"""
+format = """$os$username$hostname$kubernetes$directory$git_branch$git_status"""
 
 [line_break]
 disabled = true
@@ -29,7 +29,6 @@ format = '@[$hostname](bold green)'
 disabled = false
 
 [directory]
-truncation_length = 1
 truncation_symbol = '…/'
 read_only_style = '196'
 read_only = '  '
@@ -37,11 +36,7 @@ format = ' [$path](bold blue)[$read_only]($read_only_style) '
 
 [git_branch]
 format = '[$symbol]($style)[$branch]($style) '
-# truncation_length = 4
 truncation_symbol = '…/'
-
-# [git_status]
-# format = '([ \($all_status$ahead_behind\)]($style) )'
 
 [battery]
 full_symbol = "• "
