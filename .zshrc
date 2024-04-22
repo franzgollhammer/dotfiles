@@ -96,3 +96,5 @@ function d() {
 function dir() {
   mkdir $1 && cd $1
 }
+
+
