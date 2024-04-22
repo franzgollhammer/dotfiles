@@ -13,12 +13,13 @@ brotli
 c-ares
 ca-certificates
 cairo
+certifi
 cocoapods
 cowsay
 curl
 dprint
 entr
-exa
+eza
 fd
 fish
 fontconfig
@@ -27,6 +28,7 @@ fortune
 freetds
 freetype
 fribidi
+fx
 fzf
 gd
 gdbm
@@ -45,6 +47,7 @@ highway
 htop
 httpie
 icu4c
+imap-uw
 imath
 jpeg-turbo
 jpeg-xl
@@ -131,6 +134,7 @@ unixodbc
 unzip
 utf8proc
 webp
+wget
 woff2
 xorgproto
 xz
