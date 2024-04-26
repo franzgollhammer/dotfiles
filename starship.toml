@@ -1,4 +1,4 @@
-format = """$os$username$hostname$kubernetes$directory$git_branch$git_status"""
+format = """$os$username$hostname$kubernetes$directory$git_branch$git_status$nodejs"""
 
 [line_break]
 disabled = true
