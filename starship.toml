@@ -1,4 +1,22 @@
-format = """$os$username$hostname$kubernetes$directory$git_branch$git_status$nodejs$python$lua$docker_context$golang$deno$bun$zig$conda$shell"""
+format = """
+$username\
+$hostname\
+$kubernetes\
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$python\
+$lua\
+$docker_context\
+$golang\
+$deno\
+$bun\
+$zig\
+$conda\
+$shell\
+$battery
+"""
 
 [line_break]
 disabled = true
@@ -6,15 +24,6 @@ disabled = true
 [character]
 success_symbol = ''
 error_symbol = ''
-
-[os]
-format = '[$symbol](bold white) '   
-disabled = true
-
-[os.symbols]
-Windows = ' '
-Ubuntu = ''
-Macos = '󰀵'
 
 [username]
 style_user = 'green bold'
@@ -50,8 +59,5 @@ symbol = "[⬢](bold green) "
 format = '[$symbol]($style)[$version]($style) '
 
 [shell]
-fish_indicator = '󰈺 '
-powershell_indicator = '_'
-unknown_indicator = 'mystery shell'
-style = 'cyan bold'
+zsh_indicator = '%'
 disabled = false
