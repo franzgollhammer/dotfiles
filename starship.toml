@@ -1,4 +1,4 @@
-format = """$os$username$hostname$kubernetes$directory$git_branch$git_status$nodejs"""
+format = """$os$username$hostname$kubernetes$directory$git_branch$git_status$nodejs$python$lua$docker_context$golang$deno$bun$zig$conda$shell"""
 
 [line_break]
 disabled = true
@@ -48,3 +48,10 @@ empty_symbol = "❗ "
 [nodejs]
 symbol = "[⬢](bold green) "
 format = '[$symbol]($style)[$version]($style) '
+
+[shell]
+fish_indicator = '󰈺 '
+powershell_indicator = '_'
+unknown_indicator = 'mystery shell'
+style = 'cyan bold'
+disabled = false
