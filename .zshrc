@@ -43,6 +43,9 @@ eval "$(starship init zsh)"
 # tmux find session
 bindkey -s ^f "tmux_session_find\n"
 
+# zsh autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # ---- aliases ----
 alias t='tmux_session'
 alias tf='tmux_session_find'
