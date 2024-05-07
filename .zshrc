@@ -69,6 +69,7 @@ alias gaa='git add .'
 alias gs='git status'
 alias gc='git commit'
 alias gcm='git commit -m'
+alias gm='git merge'
 alias grh='git reset HEAD'
 alias grh1='git reset HEAD~1'
 alias grhu='git reset --hard @{u}' #reset hard to upstream branch
@@ -96,5 +97,3 @@ function d() {
 function dir() {
   mkdir $1 && cd $1
 }
-
-

@@ -5,6 +5,7 @@ $kubernetes\
 $directory\
 $git_branch\
 $git_status\
+$package\
 $nodejs\
 $python\
 $lua\
@@ -56,6 +57,9 @@ empty_symbol = "❗ "
 
 [nodejs]
 symbol = "[⬢](bold green) "
+format = '[$symbol]($style)[$version]($style) '
+
+[package]
 format = '[$symbol]($style)[$version]($style) '
 
 [shell]
