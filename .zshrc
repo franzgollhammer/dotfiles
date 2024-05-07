@@ -8,7 +8,6 @@ export SCRIPTS="$DOTFILES/scripts"
 export NVM_DIR="$HOME/.nvm"
 export RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
 export PYENV_DIR="$HOME/.pyenv/shims"
-export ZSH="$HOME/.oh-my-zsh"
 export BUN_INSTALL="$HOME/.bun/bin"
 
 # ---- path ----
