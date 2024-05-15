@@ -1,7 +1,8 @@
 # ---- fg zsh conf ----
 export EDITOR="code"
 export VISUAL="$EDITOR"
- 
+export VUE_EDITOR="$EDITOR"
+
 # ---- var ----
 export DOTFILES="$HOME/dev/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
@@ -36,8 +37,8 @@ eval "$(zoxide init zsh)"
 # ---- starship ----
 eval "$(starship init zsh)"
 
-# search history with fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# ---- fzf ----
+eval "$(fzf --zsh)"
 
 # tmux find session
 bindkey -s ^f "tmux_session_find\n"
