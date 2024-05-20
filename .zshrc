@@ -1,9 +1,9 @@
 # ---- fg zsh conf ----
+
+# ---- var ----
 export EDITOR="code"
 export VISUAL="$EDITOR"
 export VUE_EDITOR="$EDITOR"
-
-# ---- var ----
 export DOTFILES="$HOME/dev/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export NVM_DIR="$HOME/.nvm"
