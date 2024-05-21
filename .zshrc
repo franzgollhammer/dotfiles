@@ -1,7 +1,7 @@
 # ---- fg zsh conf ----
 
 # ---- var ----
-export EDITOR="code"
+export EDITOR="code-insiders"
 export VISUAL="$EDITOR"
 export VUE_EDITOR="$EDITOR"
 export DOTFILES="$HOME/dev/dotfiles"
@@ -51,8 +51,7 @@ alias t='tmux_session'
 alias tf='tmux_session_find'
 alias v='nvim'
 alias vim='nvim'
-alias c='code'
-alias ci='code-insiders'
+alias c='code-insiders'
 alias cl='clear'
 alias ls='eza -F'
 alias l='ls -lah'
