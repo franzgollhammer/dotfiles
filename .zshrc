@@ -46,6 +46,9 @@ bindkey -s ^f "tmux_session_find\n"
 # zsh autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# iterm shell integration
+source iterm2_shell_integration.zsh
+
 # ---- aliases ----
 alias t='tmux_session'
 alias tf='tmux_session_find'

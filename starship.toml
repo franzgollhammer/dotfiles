@@ -16,7 +16,7 @@ $bun\
 $zig\
 $conda\
 $shell\
-$battery
+$battery\
 """
 
 [line_break]
