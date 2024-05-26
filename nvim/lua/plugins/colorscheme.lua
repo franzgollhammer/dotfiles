@@ -1,15 +1,5 @@
 return {
   {
-    "onedarkpro.nvim",
-    config = function()
-      require("onedarkpro").setup({
-        colors = {
-          dark = { bg = "#181818" },
-        }
-      })
-    end
-  },
-  {
     "ellisonleao/gruvbox.nvim",
     priority = 1000,
     config = function()

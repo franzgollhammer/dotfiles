@@ -56,8 +56,8 @@ local opts = {
 require("lazy").setup(plugins, opts)
 
 -- colors
--- vim.cmd([[colorscheme gruvbox]])
-vim.cmd([[colorscheme onedark_dark]])
+vim.cmd([[colorscheme gruvbox]])
+-- vim.cmd([[colorscheme onedark_dark]])
 
 -- vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#504944" })
 -- vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#504944" })
