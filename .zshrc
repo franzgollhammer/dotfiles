@@ -1,5 +1,4 @@
 # ---- fg zsh conf ----
-
 # ---- var ----
 export EDITOR="code"
 export VISUAL="$EDITOR"
