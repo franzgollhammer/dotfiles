@@ -1,4 +1,9 @@
 [
+  // Go to matching tag
+  {
+    "key": "ctrl+m",
+    "command": "editor.emmet.action.matchTag"
+  },
   // Balance in / out
   {
     "key": "ctrl+shift+up",
@@ -9,6 +14,12 @@
     "key": "ctrl+shift+down",
     "command": "editor.emmet.action.balanceIn",
     "when": "editorTextFocus && editorLangId == html || editorLangId == vue"
+  },
+  // Disable copilot inline chat
+  {
+    "key": "cmd+i",
+    "command": "-inlineChat.start",
+    "when": "editorFocus && inlineChatHasProvider && !editorReadonly"
   },
   // Terminal
   {
@@ -25,18 +36,9 @@
     "when": "terminal.active"
   },
   {
-    "key": "ctrl+shift+[Equal]",
-    "command": "-workbench.action.terminal.toggleTerminal",
-    "when": "terminal.active"
-  },
-  {
-    "key": "cmd+i",
-    "command": "-inlineChat.start",
-    "when": "editorFocus && inlineChatHasProvider && !editorReadonly"
-  },
-  {
-    "key": "ctrl+m",
-    "command": "editor.emmet.action.matchTag"
+    "key": "cmd+d",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
   },
   // Filetree
   {
@@ -68,10 +70,5 @@
   {
     "key": "shift+cmd+i",
     "command": "pr:github.focus"
-  },
-  {
-    "key": "cmd+d",
-    "command": "workbench.action.terminal.split",
-    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
-  },
+  }
 ]
