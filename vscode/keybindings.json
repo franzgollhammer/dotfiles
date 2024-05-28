@@ -1,0 +1,77 @@
+[
+  // Balance in / out
+  {
+    "key": "ctrl+shift+up",
+    "command": "editor.emmet.action.balanceOut",
+    "when": "editorTextFocus && editorLangId == html || editorLangId == vue",
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "editor.emmet.action.balanceIn",
+    "when": "editorTextFocus && editorLangId == html || editorLangId == vue"
+  },
+  // Terminal
+  {
+    "key": "cmd+[BracketRight]",
+    "command": "workbench.action.terminal.new"
+  },
+  {
+    "key": "cmd+-",
+    "command": "workbench.action.terminal.kill"
+  },
+  {
+    "key": "cmd+j",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+  },
+  {
+    "key": "ctrl+shift+[Equal]",
+    "command": "-workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+  },
+  {
+    "key": "cmd+i",
+    "command": "-inlineChat.start",
+    "when": "editorFocus && inlineChatHasProvider && !editorReadonly"
+  },
+  {
+    "key": "ctrl+m",
+    "command": "editor.emmet.action.matchTag"
+  },
+  // Filetree
+  {
+    "key": "a",
+    "command": "explorer.newFile",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "renameFile",
+    "key": "r",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "deleteFile",
+    "key": "d",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  // Workbench
+  {
+    "key": "shift+cmd+s",
+    "command": "workbench.view.scm",
+    "when": "workbench.scm.active"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "-workbench.view.scm",
+    "when": "workbench.scm.active"
+  },
+  {
+    "key": "shift+cmd+i",
+    "command": "pr:github.focus"
+  },
+  {
+    "key": "cmd+d",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+]

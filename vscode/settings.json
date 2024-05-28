@@ -1,0 +1,19 @@
+{
+  "debug.console.fontSize": 13,
+  "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontFamily": "ComicShannsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 13,
+  "editor.tabSize": 2,
+  "editor.linkedEditing": true,
+  "githubPullRequests.pullBranch": "never",
+  "terminal.integrated.fontSize": 13,
+  "workbench.colorTheme": "Gruv Cat",
+  "editor.guides.bracketPairs": "active",
+  "workbench.activityBar.location": "top",
+  "github.copilot.editor.enableAutoCompletions": true,
+  "workbench.startupEditor": "none",
+}

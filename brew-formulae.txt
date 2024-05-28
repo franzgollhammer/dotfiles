@@ -47,7 +47,6 @@ highway
 htop
 httpie
 icu4c
-imap-uw
 imath
 jpeg-turbo
 jpeg-xl
@@ -64,7 +63,6 @@ libpq
 libsodium
 libspiro
 libssh2
-libtermkey
 libtiff
 libtool
 libuninameslist
@@ -82,6 +80,7 @@ libyaml
 libzip
 little-cms2
 lolcat
+lpeg
 lua
 luajit
 luv
@@ -104,14 +103,12 @@ openexr
 openldap
 openssl@3
 pango
-pcre
 pcre2
 perl
 php
 pixman
 pkg-config
 pyenv
-pygments
 python-certifi
 python@3.11
 python@3.12
@@ -126,6 +123,7 @@ sqlite
 starship
 tidy-html5
 tig
+tldr
 tmux
 tree
 tree-sitter
