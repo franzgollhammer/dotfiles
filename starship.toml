@@ -1,43 +1,42 @@
-[character]
-success_symbol = ''
-error_symbol = ''
-
+format = """
+$username\
+$hostname\
+$kubernetes\
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$python\
+$lua\
+$docker_context\
+$golang\
+$deno\
+$bun\
+$zig\
+$conda\
+$shell\
+$character\
+"""
 [username]
+disabled = false
+show_always = true
 style_user = 'green bold'
 style_root = 'black bold'
 format = '[$user]($style)'
-disabled = false
-show_always = true
 
 [hostname]
 ssh_only = false
-format = '@[$hostname](bold green)'
 disabled = false
+format = '@[$hostname](bold green)'
 
 [directory]
 truncation_symbol = '…/'
-read_only_style = '196'
-read_only = '  '
-format = ' [$path](bold blue)[$read_only]($read_only_style) '
+format = ' [$path]($style)[$read_only]($read_only_style) '
 
 [git_branch]
 format = '[$symbol]($style)[$branch]($style) '
 truncation_symbol = '…/'
 
-[battery]
-full_symbol = "• "
-charging_symbol = "⇡ "
-discharging_symbol = "⇣ "
-unknown_symbol = "❓ "
-empty_symbol = "❗ "
-
 [nodejs]
 symbol = "[⬢](bold green) "
 format = '[$symbol]($style)[$version]($style) '
-
-[package]
-format = '[$symbol]($style)[$version]($style) '
-
-[shell]
-zsh_indicator = '%'
-disabled = false
