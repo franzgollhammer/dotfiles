@@ -1,12 +1,11 @@
 #!/bin/zsh
 
 # remove old config files
-rm -rf ~/.zshrc ~/.tmux.conf ~/.config/nvim ~/.config/starship.toml ~/.warp ~/.iterm
+rm -rf ~/.zshrc ~/.tmux.conf ~/.config/nvim ~/.config/starship.toml ~/.warp
 
 # link new config files
 ln -s ~/dev/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dev/dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/dev/dotfiles/.warp ~/.warp
-ln -s ~/dev/dotfiles/.iterm ~/.iterm
 ln -s ~/dev/dotfiles/nvim ~/.config/nvim
 ln -s ~/dev/dotfiles/starship.toml ~/.config/starship.toml
