@@ -1,49 +1,43 @@
 [
   // Go to matching tag
   {
-    "key": "ctrl+m",
-    "command": "editor.emmet.action.matchTag"
+    "command": "editor.emmet.action.matchTag",
+    "key": "ctrl+m"
   },
   // Balance in / out
   {
-    "key": "ctrl+shift+up",
     "command": "editor.emmet.action.balanceOut",
-    "when": "editorTextFocus && editorLangId == html || editorLangId == vue",
-  },
-  {
-    "key": "ctrl+shift+down",
-    "command": "editor.emmet.action.balanceIn",
+    "key": "ctrl+shift+up",
     "when": "editorTextFocus && editorLangId == html || editorLangId == vue"
   },
-  // Disable copilot inline chat
   {
-    "key": "cmd+i",
-    "command": "-inlineChat.start",
-    "when": "editorFocus && inlineChatHasProvider && !editorReadonly"
+    "command": "editor.emmet.action.balanceIn",
+    "key": "ctrl+shift+down",
+    "when": "editorTextFocus && editorLangId == html || editorLangId == vue"
   },
   // Terminal
   {
-    "key": "cmd+[BracketRight]",
-    "command": "workbench.action.terminal.new"
+    "command": "workbench.action.terminal.new",
+    "key": "cmd+[BracketRight]"
   },
   {
-    "key": "cmd+-",
-    "command": "workbench.action.terminal.kill"
+    "command": "workbench.action.terminal.kill",
+    "key": "cmd+-"
   },
   {
-    "key": "cmd+j",
     "command": "workbench.action.terminal.toggleTerminal",
+    "key": "cmd+j",
     "when": "terminal.active"
   },
   {
-    "key": "cmd+d",
     "command": "workbench.action.terminal.split",
+    "key": "cmd+d",
     "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
   },
   // Filetree
   {
-    "key": "a",
     "command": "explorer.newFile",
+    "key": "a",
     "when": "filesExplorerFocus && !inputFocus"
   },
   {
@@ -58,17 +52,23 @@
   },
   // Workbench
   {
-    "key": "shift+cmd+s",
     "command": "workbench.view.scm",
+    "key": "shift+cmd+s",
     "when": "workbench.scm.active"
   },
   {
-    "key": "ctrl+shift+g",
     "command": "-workbench.view.scm",
+    "key": "ctrl+shift+g",
     "when": "workbench.scm.active"
   },
   {
-    "key": "shift+cmd+i",
-    "command": "pr:github.focus"
+    "command": "pr:github.focus",
+    "key": "shift+cmd+i"
+  },
+  // Disable copilot inline chat
+  {
+    "command": "-inlineChat.start",
+    "key": "cmd+i",
+    "when": "editorFocus && inlineChatHasProvider && !editorReadonly"
   }
 ]
