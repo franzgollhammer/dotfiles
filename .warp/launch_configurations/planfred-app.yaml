@@ -39,16 +39,16 @@ windows:
             - exec: npm run c
         color: magenta
 
-      # - title: ionic
-      #   layout:
-      #     cwd: /Users/fg/dev/planfred/planfred-app
-      #     commands:
-      #       - exec: npm run i
-      #   color: white
+      - title: ionic
+        layout:
+          cwd: /Users/fg/dev/planfred-app
+          commands:
+            - exec: npm run i
+        color: white
 
       # - title: cypress
       #   layout:
-      #     cwd: /Users/fg/dev/planfred/planfred-app
+      #     cwd: /Users/fg/dev/planfred-app
       #     commands:
       #       - exec: npm run cy
       #   color: cyan
