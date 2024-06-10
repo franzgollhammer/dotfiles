@@ -1,34 +1,17 @@
 # ---- fg zsh conf ----
+# zmodload zsh/zprof # uncomment to measure startup time
 # ---- var ----
 export EDITOR="code"
 export VISUAL="$EDITOR"
 export VUE_EDITOR="$EDITOR"
 export DOTFILES="$HOME/dev/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
-export NVM_DIR="$HOME/.nvm"
 export RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
-export PYENV_DIR="$HOME/.pyenv/shims"
-export BUN_INSTALL="$HOME/.bun/bin"
 
 # ---- path ----
 export PATH="$SCRIPTS:"\
-"$NVM_DIR:"\
 "$RUBY_DIR:"\
-"$PYENV_DIR:"\
-"$BUN_INSTALL:"\
 "$PATH"
-
-# bun completions
-[ -s "/Users/fg/.bun/_bun" ] && source "/Users/fg/.bun/_bun"
-
-# ---- nvm ----
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-# ---- pyenv ----
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
 
 # ---- zoxide ----
 eval "$(zoxide init zsh)"
@@ -39,14 +22,11 @@ eval "$(starship init zsh)"
 # ---- fzf ----
 eval "$(fzf --zsh)"
 
-# tmux find session
-bindkey -s ^f "tmux_session_find\n"
+# ---- zsh autosuggestions ----
+source zsh_autosuggestions.sh
 
-# zsh autosuggestions
-source zsh-autosuggestions.zsh
-
-# iterm shell integration
-source iterm2_shell_integration.zsh
+# ---- lazy load nvm ----
+source lazy_nvm.sh
 
 # ---- aliases ----
 alias t='tmux_session'
@@ -55,6 +35,7 @@ alias v='nvim'
 alias vim='nvim'
 alias c='code'
 alias ci='code-insiders'
+alias z='zellij'
 alias cl='clear'
 alias ls='eza -F'
 alias l='ls -lah'
@@ -99,3 +80,5 @@ function d() {
 function dir() {
   mkdir $1 && cd $1
 }
+
+# zprof # uncomment measure startup time
