@@ -47,6 +47,7 @@ alias sot='tmux source ~/.tmux.conf'
 alias zsh-startup="time zsh -i -c exit"
 
 # git aliases
+alias g='git'
 alias s='git status'
 alias ga='git add'
 alias gaa='git add .'
