@@ -50,6 +50,7 @@ alias zsh-startup="time zsh -i -c exit"
 alias g='git'
 alias s='git status'
 alias ga='git add'
+alias gd='git diff'
 alias gaa='git add .'
 alias gs='git status'
 alias gc='git commit'
