@@ -25,27 +25,18 @@
 name: ucsl-app
 windows:
   - tabs:
-      # - title: mongodb
-      #   layout:
-      #     cwd: /Users/fg/dev/ucsl-app
-      #     commands:
-      #       - exec: npm run m
-      #   color: green
-
-      - title: server
+      - title: server | client
         layout:
-          cwd: /Users/fg/dev/ucsl-app
-          commands:
-            - exec: npm run s
-        color: red
-
-      - title: client
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          commands:
-            - exec: npm run c
+          split_direction: horizontal
+          panes:
+            - cwd: /Users/fg/dev/ucsl-app
+              commands:
+                - exec: npm run s
+            - cwd: /Users/fg/dev/ucsl-app
+              commands:
+                - exec: npm run c
         color: green
-        
+
       # - title: cypress
       #   layout:
       #     cwd: /Users/fg/dev/ucsl-app
