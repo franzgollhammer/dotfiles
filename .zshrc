@@ -2,9 +2,9 @@
 # zmodload zsh/zprof # uncomment to measure startup time
 
 # ---- var ----
-export EDITOR="code --wait"
-export VISUAL="$EDITOR"
-export VUE_EDITOR="$EDITOR"
+export EDITOR="code"
+export VISUAL="code"
+export VUE_EDITOR="code"
 export DOTFILES="$HOME/dev/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
@@ -33,7 +33,6 @@ source lazy_nvm.sh
 alias t="tmux_session"
 alias tf="tmux_session_find"
 alias v="nvim"
-alias vim="nvim"
 alias c="code"
 alias ci="code-insiders"
 alias zj="zellij"
