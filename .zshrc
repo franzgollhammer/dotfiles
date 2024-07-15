@@ -2,7 +2,7 @@
 # zmodload zsh/zprof # uncomment to measure startup time
 
 # ---- var ----
-export EDITOR="code"
+export EDITOR="code --wait"
 export VISUAL="$EDITOR"
 export VUE_EDITOR="$EDITOR"
 export DOTFILES="$HOME/dev/dotfiles"
