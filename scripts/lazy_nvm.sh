@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function lazy_nvm {
   unset -f nvm
   unset -f npm
@@ -7,7 +9,7 @@ function lazy_nvm {
   if [ -d "${HOME}/.nvm" ]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # linux
-    [ -s "$(brew --prefix nvm)/nvm.sh" ] && source $(brew --prefix nvm)/nvm.sh # osx
+    [ -s "$(brew --prefix nvm)/nvm.sh" ] && source "$(brew --prefix nvm)/nvm.sh" # osx
   fi
 }
 
