@@ -71,6 +71,7 @@ alias psh="git push"
 alias gco="git checkout"
 alias gcob="git checkout -b"
 alias com="git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
+alias yolo="git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
 
 # github
 alias repo="gh repo view --web"
