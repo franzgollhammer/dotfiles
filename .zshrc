@@ -27,7 +27,13 @@ eval "$(fzf --zsh)"
 source zsh_autosuggestions.sh
 
 # ---- lazy load nvm ----
-source lazy_nvm.sh
+# source lazy_nvm.sh
+
+if [ -d "${HOME}/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # linux
+  [ -s "$(brew --prefix nvm)/nvm.sh" ] && source "$(brew --prefix nvm)/nvm.sh" # osx
+fi
 
 # ---- aliases ----
 alias t="tmux_session"
