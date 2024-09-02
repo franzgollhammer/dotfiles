@@ -44,9 +44,9 @@ windows:
             - exec: npm run i
         color: blue
 
-      - title: cypress
-        layout:
-          cwd: /Users/fg/dev/planfred-app
-          commands:
-            - exec: npm run cy
-        color: white
+      # - title: cypress
+      #   layout:
+      #     cwd: /Users/fg/dev/planfred-app
+      #     commands:
+      #       - exec: npm run cy
+      #   color: white
