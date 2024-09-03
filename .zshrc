@@ -6,9 +6,14 @@
 
 
 # ---- var ----
-export EDITOR="code"
-export VISUAL="code"
-export VUE_EDITOR="code"
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR="code"
+  export VISUAL="code"
+  export VUE_EDITOR="code"
+fi
+
 export DOTFILES="$HOME/dev/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
@@ -103,13 +108,6 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='code'
-fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
