@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 exec date -u +%Y%m%d%H%M%S "$@" | pbcopy
 

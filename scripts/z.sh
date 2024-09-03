@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Copyright (c) 2009 rupa deadwyler. Licensed under the WTFPL license, Version 2
 

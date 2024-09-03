@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # remove old config files
 rm -rf ~/.zshrc ~/.tmux.conf ~/.config/nvim ~/.config/starship.toml ~/.warp

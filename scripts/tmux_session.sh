@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # store pwd in a variable
 ZOXIDE_RESULT=$(zoxide query $1)
