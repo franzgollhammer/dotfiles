@@ -139,6 +139,7 @@ alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulato
 alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
+alias gh-runner="cd $HOME/dev/actions-runner-1 && sh ./run.sh"
 
 # git aliases
 alias g="git"
