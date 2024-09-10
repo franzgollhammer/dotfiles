@@ -164,7 +164,7 @@ alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias gl="git log --graph"
 alias gp="git pull"
 alias gps="git push"
-alias gbr="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf"
+alias gbr="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout"
 alias gco="git checkout"
 alias gcob="git checkout -b"
 alias com="git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
