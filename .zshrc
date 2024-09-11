@@ -139,9 +139,9 @@ alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulato
 alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
-alias gh-runner="cd $HOME/dev/actions-runner-1 && sh ./run.sh"
-alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress"
-alias test-pf="sh $HOME/dev/actions-runner-pf-1/run.sh & sh $HOME/dev/actions-runner-pf-2/run.sh"
+alias killrunner="pkill -u $(whoami) Runner.Listener"
+alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
+alias test="killall && (sh $HOME/dev/actions-runner-pf-1/run.sh & sh $HOME/dev/actions-runner-pf-2/run.sh)"
 alias test-ucsl="sh $HOME/dev/actions-runner-ucsl-1/run.sh & sh $HOME/dev/actions-runner-ucsl-2/run.sh"
 
 # git aliases
