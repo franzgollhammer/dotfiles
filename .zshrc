@@ -141,7 +141,8 @@ alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killrunner="pkill -u $(whoami) Runner.Listener"
 alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
-alias test="killall && (sh $HOME/dev/actions-runner-pf-1/run.sh & sh $HOME/dev/actions-runner-pf-2/run.sh)"
+alias test="killall && test-pf"
+alias test-pf="sh $HOME/dev/actions-runner-pf-1/run.sh & sh $HOME/dev/actions-runner-pf-2/run.sh"
 alias test-ucsl="sh $HOME/dev/actions-runner-ucsl-1/run.sh & sh $HOME/dev/actions-runner-ucsl-2/run.sh"
 
 # git aliases
