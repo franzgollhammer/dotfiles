@@ -148,6 +148,7 @@ alias test-ucsl="sh $HOME/dev/actions-runner-ucsl-1/run.sh & sh $HOME/dev/action
 alias g="git"
 alias s="git status"
 alias b="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout"
+alias gbr="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout"
 alias ga="git add"
 alias gd="git diff"
 alias gaa="git add ."
