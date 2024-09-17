@@ -147,6 +147,7 @@ alias test-ucsl="sh $HOME/dev/actions-runner-ucsl-1/run.sh & sh $HOME/dev/action
 # git aliases
 alias g="git"
 alias s="git status"
+alias b="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout"
 alias ga="git add"
 alias gd="git diff"
 alias gaa="git add ."
@@ -165,7 +166,6 @@ alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias gl="git log --graph"
 alias gp="git pull"
 alias gps="git push"
-alias gbr="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout"
 alias gco="git checkout"
 alias gcob="git checkout -b"
 alias com="git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
