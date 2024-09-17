@@ -4,7 +4,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-
 # ---- var ----
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -32,6 +31,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -98,6 +98,7 @@ plugins=(
   nvm
   fzf
   zoxide
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -132,8 +133,8 @@ alias cl="clear"
 alias ls="eza -F"
 alias l="ls -ah"
 alias ll="ls -lah"
-alias dot="cd $DOTFILES; c ."
-alias play="cd $HOME/dev/playground; c ."
+alias dot="(cd $DOTFILES; c .)"
+alias play="(cd $HOME/dev/playground; c .)"
 alias neo="neofetch"
 alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
 alias soz="source ~/.zshrc"
