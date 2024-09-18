@@ -8,9 +8,9 @@
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR="code"
-  export VISUAL="code"
-  export VUE_EDITOR="code"
+  export EDITOR="code-insiders"
+  export VISUAL="code-insiders"
+  export VUE_EDITOR="code-insiders"
 fi
 
 export DOTFILES="$HOME/dev/dotfiles"
