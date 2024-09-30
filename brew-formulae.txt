@@ -50,11 +50,13 @@ icu4c
 imath
 jpeg-turbo
 jpeg-xl
+jq
 krb5
 lazygit
 libavif
 libevent
 libgit2
+libgit2@1.7
 libidn2
 liblinear
 libnghttp2
@@ -87,6 +89,7 @@ luv
 lz4
 lzo
 m4
+mongodb-community@7.0
 mongodb-database-tools
 mongosh
 mpdecimal
@@ -110,6 +113,7 @@ pixman
 pkg-config
 pyenv
 python-certifi
+python-packaging
 python@3.11
 python@3.12
 readline
