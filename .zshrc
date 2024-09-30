@@ -144,6 +144,10 @@ alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypre
 alias killrunners="pkill -u $(whoami) Runner.Listener"
 alias test="sh $HOME/dev/actions-runner-pf-1/run.sh & sh $HOME/dev/actions-runner-pf-2/run.sh & sh $HOME/dev/actions-runner-pf-3/run.sh"
 alias test-ucsl="sh $HOME/dev/actions-runner-ucsl-1/run.sh & sh $HOME/dev/actions-runner-ucsl-2/run.sh"
+alias pflocal="sh $HOME/dev/db-connections/pf_mongo_local.sh"
+alias pfdev="sh $HOME/dev/db-connections/pf_mongo_dev.sh"
+alias ucsllocal="sh $HOME/dev/db-connections/ucsl_mongo_local.sh" 
+alias ucsldev="sh $HOME/dev/db-connections/ucsl_mongo_dev.sh" 
 
 # git aliases
 alias g="git"
