@@ -122,8 +122,8 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 # ---- aliases ----
-alias t="tmux_session"
-alias tf="tmux_session_find"
+alias t="tmux_session.sh"
+alias tf="tmux_session_find.sh"
 alias v="nvim"
 alias c="$EDITOR"
 alias ci="code-insiders"
