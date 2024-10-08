@@ -1,20 +1,12 @@
 {
-  "debug.console.fontSize": 14,
   "editor.accessibilitySupport": "off",
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontFamily": "MesloLGM Nerd Font, Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize": 14,
-  "editor.guides.bracketPairs": "active",
-  "editor.linkedEditing": true,
   "editor.tabSize": 2,
-  "github.copilot.editor.enableAutoCompletions": true,
-  "githubPullRequests.pullBranch": "never",
-  "terminal.integrated.fontSize": 14,
-  "terminal.integrated.tabs.enabled": false,
-  "workbench.activityBar.location": "top",
-  "workbench.colorTheme": "Gruv Cat",
-  "workbench.startupEditor": "none"
+  "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "__dark__",
+  "workbench.activityBar.location": "hidden",
+  "security.promptForLocalFileProtocolHandling": false
 }

@@ -1,42 +1,5 @@
-format = """
-$username\
-$hostname\
-$kubernetes\
-$directory\
-$git_branch\
-$git_status\
-$nodejs\
-$python\
-$lua\
-$docker_context\
-$golang\
-$deno\
-$bun\
-$zig\
-$conda\
-$shell\
-$character\
-"""
-[username]
-disabled = false
-show_always = true
-style_user = 'green bold'
-style_root = 'black bold'
-format = '[$user]($style)'
+[bun]
+disabled = true
 
-[hostname]
-ssh_only = false
-disabled = false
-format = '[@](bold white)[$hostname](bold green)'
-
-[directory]
-truncation_symbol = '…/'
-format = ' [$path]($style)[$read_only]($read_only_style) '
-
-[git_branch]
-format = '[git:\(](bold white)[$branch]($style)[\)](bold white) '
-truncation_symbol = '…/'
-
-[nodejs]
-symbol = "[⬢](bold green) "
-format = '[$symbol]($style)[$version]($style) '
+[package]
+disabled = true

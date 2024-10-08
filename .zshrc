@@ -160,6 +160,7 @@ alias gaa="git add ."
 alias gap="git add -p"
 alias gs="git stash"
 alias stash="git stash -u"
+alias stashls="git stash list"
 alias pop="git stash pop"
 alias apply="git stash apply"
 alias gc="git commit"
@@ -190,4 +191,5 @@ function dir() {
   mkdir "$1" && cd "$1" || exit
 }
 
+eval "$(starship init zsh)"
 # zprof # uncomment measure startup time
