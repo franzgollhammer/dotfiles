@@ -180,7 +180,7 @@ alias yolo="git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empt
 
 # github
 alias repo="gh repo view --web"
-alias pr="gh pr view --web"
+alias pr="gh pr view --web || gh pr create --web"
 
 # ---- functions ----
 function d() {
