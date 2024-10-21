@@ -1,5 +1,5 @@
 [bun]
 disabled = true
 
-[package]
-disabled = true
+# [package]
+# disabled = true
