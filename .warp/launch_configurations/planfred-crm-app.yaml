@@ -29,13 +29,13 @@ windows:
         layout:
           cwd: /Users/fg/dev/planfred-crm
           commands:
-            - exec: npm run s
+            - exec: node --run s
         color: cyan
 
       - title: client
         layout:
           cwd: /Users/fg/dev/planfred-crm
           commands:
-            - exec: npm run c
+            - exec: node --run c
         color: yellow
         

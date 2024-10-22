@@ -31,22 +31,22 @@ windows:
           panes:
             - cwd: /Users/fg/dev/planfred-app
               commands:
-                - exec: npm run s
+                - exec: node --run s
             - cwd: /Users/fg/dev/planfred-app
               commands:
-                - exec: npm run c
+                - exec: node --run c
         color: green
 
       - title: ionic
         layout:
           cwd: /Users/fg/dev/planfred-app
           commands:
-            - exec: npm run i
+            - exec: node --run i
         color: blue
 
       # - title: cypress
       #   layout:
       #     cwd: /Users/fg/dev/planfred-app
       #     commands:
-      #       - exec: npm run cy
+      #       - exec: node --run cy
       #   color: white
