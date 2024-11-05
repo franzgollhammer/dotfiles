@@ -192,4 +192,14 @@ function dir() {
 }
 
 eval "$(starship init zsh)"
+
+
+# ---- mongo ----
+# mongoexport --uri="mongodb://localhost:27017/myDatabase" --collection=users --query='{ "age": { "$gt": 25 } }' --limit=100 --out=limited_users.json
+# mongoimport --uri="mongodb://localhost:27017/myDatabase" --collection=users --file=limited_users.json --jsonArray
+
 # zprof # uncomment measure startup time
+
+
+
+
