@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # remove old config files
-rm -rf ~/.zshrc ~/.tmux.conf ~/.config/nvim ~/.config/starship.toml ~/.warp ~/.config/ghossty
+rm -rf ~/.zshrc ~/.tmux.conf ~/.config/nvim ~/.config/starship.toml ~/.warp ~/.config/ghostty
 
 # link new config files
 ln -s ~/dev/dotfiles/.zshrc ~/.zshrc
