@@ -1,0 +1,29 @@
+background = #3c3836
+#font-family = JetBrains Mono Nerd Font
+
+foreground = #ebdbb2
+
+# black
+palette = 0=#3c3836
+palette = 8=#928374
+# red
+palette = 1=#cc241d
+palette = 9=#fb4934
+# green
+palette = 2=#98971a
+palette = 10=#b8bb26
+# yellow
+palette = 3=#d79921
+palette = 11=#fabd2f
+# blue
+palette = 4=#458588
+palette = 12=#83a598
+# purple
+palette = 5=#b16286
+palette = 13=#d3869b
+# aqua
+palette = 6=#689d6a
+palette = 14=#8ec07c
+# white
+palette = 7=#a89984
+palette = 15=#ebdbb2

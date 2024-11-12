@@ -56,6 +56,7 @@ local opts = {
 require("lazy").setup(plugins, opts)
 
 -- colors
+-- vim.cmd([[colorscheme tokyonight]])
 vim.cmd([[colorscheme gruvbox]])
 -- vim.cmd([[colorscheme onedark_dark]])
 

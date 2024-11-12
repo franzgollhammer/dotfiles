@@ -24,9 +24,6 @@ keymap("n", "<leader>lsr", ":LspRestart<cr>", opts)
 -- netrw
 -- keymap("n", "<leader>e", ":Ex<cr>", opts)
 
--- git
-keymap("n", "<leader>gg", ":G<cr>", opts)
-
 -- tmux session
 keymap("n", "<c-f>", "<cmd>silent !tmux neww tmux_session_find<cr>")
 
@@ -107,3 +104,4 @@ keymap("v", "<s-tab>", "<gv", opts)
 -- move text up down
 keymap("v", "J", ":m '>+1<cr>gv=gv", opts)
 keymap("v", "K", ":m '<-2<cr>gv=gv", opts)
+
