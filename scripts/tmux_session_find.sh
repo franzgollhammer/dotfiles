@@ -18,7 +18,7 @@ if [ -z "$TMUX" ]; then
   SESSION=$(tmux list-sessions | grep $FOLDER | awk '{print $1}')
   SESSION=${SESSION//:/}
   echo $SESSION
-  
+
   if [ -z "$SESSION" ]; then
     # session does not exist
     echo "session does not exist"

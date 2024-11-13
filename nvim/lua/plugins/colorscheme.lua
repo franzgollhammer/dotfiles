@@ -4,7 +4,7 @@ return {
     priority = 1000,
     config = function()
       require("gruvbox").setup({
-        transparent_mode = true,
+        -- transparent_mode = true,
         contrast = "hard",
         overrides = {
           -- 	TelescopeBorder = { bg = "none", fg = "none" },
