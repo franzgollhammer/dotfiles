@@ -4,7 +4,7 @@ return {
     priority = 1000,
     config = function()
       require("gruvbox").setup({
-        -- transparent_mode = true,
+        transparent_mode = true,
         contrast = "hard",
         overrides = {
           -- 	TelescopeBorder = { bg = "none", fg = "none" },
@@ -25,16 +25,6 @@ return {
   },
   {
     "catppuccin/nvim",
-    config = function()
-      require("catppuccin").setup({
-        -- color_overrides = {
-        --   mocha = {
-        --     base = "#000000",
-        --     mantle = "#000000",
-        --     crust = "#000000",
-        --   },
-        -- }
-      })
-    end,
+    priority = 1000,
   },
 }

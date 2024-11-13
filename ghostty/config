@@ -1,8 +1,8 @@
-background = #3c3836
-#font-family = JetBrains Mono Nerd Font
+font-family = JetBrainsMono Nerd Font
 
+# Colors
 foreground = #ebdbb2
-
+background = #1e2021
 # black
 palette = 0=#3c3836
 palette = 8=#928374
