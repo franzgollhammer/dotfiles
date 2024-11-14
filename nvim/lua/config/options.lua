@@ -71,7 +71,9 @@ opt.autochdir = false
 opt.clipboard:append("unnamedplus")
 
 -- Folding
+opt.foldenable = true
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99
 
 
