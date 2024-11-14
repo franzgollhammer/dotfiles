@@ -14,6 +14,8 @@ return {
       local cmp = require("cmp")
 
       cmp.setup({
+        keyword_length = 1,
+        max_item_count = 5,
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
@@ -31,11 +33,10 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-        }, {
-          { name = "buffer" },
-        }),
+          { name = "nvim_lsp", keyword_length = 1, max_item_count = 5 },
+          { name = "luasnip" , keyword_length = 1, max_item_count = 5 },
+          { name = "buffer" , keyword_length = 1, max_item_count = 5 },
+        })
       })
     end,
   },
