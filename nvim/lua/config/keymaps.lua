@@ -2,7 +2,7 @@ local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
 -- remove default
-keymap("", "<Space>", "<Nop>", opts)
+keymap("", "<Space>", "<NOP>", opts)
 
 -- modes
 --  normal_mode = "n",
@@ -13,19 +13,19 @@ keymap("", "<Space>", "<Nop>", opts)
 --  command_mode = "c",
 
 -- crazy save
-keymap("n", "<leader>ww", ":w<cr>", opts)
+keymap("n", "<leader>ww", ":w<CR>", opts)
 
--- clear highlight and errors
-keymap("n", "<Esc>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
+-- clear highlight and errors on ESC
+keymap("n", "<ESC>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 
 -- restart lsp
-keymap("n", "<leader>lsr", ":LspRestart<cr>", opts)
+keymap("n", "<leader>lsr", ":LspRestart<CR>", opts)
 
 -- netrw
--- keymap("n", "<leader>e", ":Ex<cr>", opts)
+-- keymap("n", "<leader>e", ":Ex<CR>", opts)
 
 -- tmux session
-keymap("n", "<c-f>", "<cmd>silent !tmux neww tmux_session_find<cr>")
+keymap("n", "<c-f>", "<cmd>silent !tmux neww tmux_session_find.sh<CR>")
 
 -- find and replace word under cursor
 keymap("n", "<leader>*", ":%s/<c-r><c-w>/", opts)
@@ -52,8 +52,8 @@ keymap("n", "<leader>i<", "vi<p", opts)
 keymap("n", "<leader>a", "<c-^>", opts)
 
 -- split panes
-keymap("n", "<leader>w%", "<cmd>vs<cr>", opts)
-keymap("n", '<leader>w"', "<cmd>sp<cr>", opts)
+keymap("n", "<leader>w%", "<cmd>vs<CR>", opts)
+keymap("n", '<leader>w"', "<cmd>sp<CR>", opts)
 
 -- pane navigation
 keymap("n", "<leader>wh", "<c-w>h", opts)
@@ -68,27 +68,27 @@ keymap("n", "<c-d>", "<c-d>zz", opts)
 keymap("n", "<c-u>", "<c-u>zz", opts)
 
 -- qf list
-keymap("n", "<leader>co", "<cmd>copen<cr>", opts)
-keymap("n", "<leader>cc", "<cmd>cclose<cr>", opts)
-keymap("n", "<leader>cn", "<cmd>cnext<cr>", opts)
-keymap("n", "<leader>cp", "<cmd>cprev<cr>", opts)
-keymap("n", "<leader>ch", "<cmd>chistory<cr>", opts)
+keymap("n", "<leader>co", "<cmd>copen<CR>", opts)
+keymap("n", "<leader>cc", "<cmd>cclose<CR>", opts)
+keymap("n", "<leader>cn", "<cmd>cnext<CR>", opts)
+keymap("n", "<leader>cp", "<cmd>cprev<CR>", opts)
+keymap("n", "<leader>ch", "<cmd>chistory<CR>", opts)
 
 -- tabs
-keymap("n", "<leader>to", "<cmd>tabedit %<cr>", opts)
-keymap("n", "<leader>tc", "<cmd>tabclose<cr>", opts)
-keymap("n", "<leader>tn", "<cmd>tabnext<cr>", opts)
-keymap("n", "<leader>tp", "<cmd>tabprevious<cr>", opts)
+keymap("n", "<leader>to", "<cmd>tabedit %<CR>", opts)
+keymap("n", "<leader>tc", "<cmd>tabclose<CR>", opts)
+keymap("n", "<leader>tn", "<cmd>tabnext<CR>", opts)
+keymap("n", "<leader>tp", "<cmd>tabprevious<CR>", opts)
 
 -- resize
-keymap("n", "<c-j>", ":resize -2<cr>", opts)
-keymap("n", "<c-k>", ":resize +2<cr>", opts)
-keymap("n", "<c-l>", ":vertical resize -2<cr>", opts)
-keymap("n", "<c-h>", ":vertical resize +2<cr>", opts)
+keymap("n", "<c-j>", ":resize -2<CR>", opts)
+keymap("n", "<c-k>", ":resize +2<CR>", opts)
+keymap("n", "<c-l>", ":vertical resize -2<CR>", opts)
+keymap("n", "<c-h>", ":vertical resize +2<CR>", opts)
 
 -- buffer navigation
-keymap("n", "<s-l>", ":bnext<cr>", opts)
-keymap("n", "<s-h>", ":bprevious<cr>", opts)
+keymap("n", "<s-l>", ":bnext<CR>", opts)
+keymap("n", "<s-h>", ":bprevious<CR>", opts)
 
 -- crazy esc
 keymap("i", "jk", "<esc>", opts)
@@ -102,6 +102,6 @@ keymap("v", "<tab>", ">gv", opts)
 keymap("v", "<s-tab>", "<gv", opts)
 
 -- move text up down
-keymap("v", "J", ":m '>+1<cr>gv=gv", opts)
-keymap("v", "K", ":m '<-2<cr>gv=gv", opts)
+keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
+keymap("v", "K", ":m '<-2<CR>gv=gv", opts)
 
