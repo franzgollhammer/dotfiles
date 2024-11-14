@@ -57,7 +57,6 @@ opt.backup = false
 vim.opt.list = true
 -- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '↲' }
 
-
 -- Configure how new splits should be opened
 opt.splitright = true
 opt.splitbelow = true
@@ -70,3 +69,9 @@ opt.splitright = true
 opt.splitbelow = true
 opt.autochdir = false
 opt.clipboard:append("unnamedplus")
+
+-- Folding
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+
