@@ -1,5 +1,5 @@
 font-family = MesloLGM Nerd Font
-
+keybind = ctrl+z="echo 'hello'"
 # Colors
 foreground = #ebdbb2
 background = #1e2021
