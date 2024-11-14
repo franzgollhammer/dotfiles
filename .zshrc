@@ -26,9 +26,10 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # ---- aliases ----
 alias t="tmux_session.sh"
-alias tf="tmux_session_find.sh"
+# alias tf="tmux_session_find.sh"
 alias v="nvim"
-alias c="$EDITOR"
+# alias lg="lazygit"
+alias c="code"
 alias ci="code-insiders"
 alias run="node --run"
 alias zj="zellij"
@@ -86,6 +87,14 @@ alias repo="gh repo view --web"
 alias pr="gh pr view --web || gh pr create --web"
 
 # ---- functions ----
+function tf() {
+  tmux_session_find.sh
+}
+
+function lg() {
+  lazygit
+}
+
 function d() {
   cd ~/dev/"$1" || exit
 }
@@ -93,6 +102,14 @@ function d() {
 function dir() {
   mkdir "$1" && cd "$1" || exit
 }
+
+# ---- bind ----
+# bind tmux session finder to ctrl-f
+zle -N tf
+bindkey ^f tf
+# bind lazygit to ctrl-g
+zle -N lg
+bindkey ^g lg
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"

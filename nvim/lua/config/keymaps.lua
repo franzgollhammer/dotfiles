@@ -25,10 +25,10 @@ keymap("n", "<leader>lsr", ":LspRestart<CR>", opts)
 -- keymap("n", "<leader>e", ":Ex<CR>", opts)
 
 -- tmux session
-keymap("n", "<c-f>", "<cmd>silent !tmux neww tmux_session_find.sh<CR>")
+keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux_session_find.sh<CR>")
 
 -- find and replace word under cursor
-keymap("n", "<leader>*", ":%s/<c-r><c-w>/", opts)
+keymap("n", "<leader>*", ":%s/<C-r><c-w>/", opts)
 
 -- dont overwrite paste register
 keymap("v", "p", '"_dP', opts)
@@ -49,23 +49,23 @@ keymap("n", "<leader>i`", "vi`p", opts)
 keymap("n", "<leader>i<", "vi<p", opts)
 
 -- alternate file
-keymap("n", "<leader>a", "<c-^>", opts)
+keymap("n", "<leader>a", "<C-^>", opts)
 
 -- split panes
 keymap("n", "<leader>w%", "<cmd>vs<CR>", opts)
 keymap("n", '<leader>w"', "<cmd>sp<CR>", opts)
 
 -- pane navigation
-keymap("n", "<leader>wh", "<c-w>h", opts)
-keymap("n", "<leader>wj", "<c-w>j", opts)
-keymap("n", "<leader>wk", "<c-w>k", opts)
-keymap("n", "<leader>wl", "<c-w>l", opts)
-keymap("n", "<leader>wq", "<c-w>q", opts)
-keymap("n", "<leader>wo", "<c-w>o", opts)
+keymap("n", "<leader>wh", "<C-w>h", opts)
+keymap("n", "<leader>wj", "<C-w>j", opts)
+keymap("n", "<leader>wk", "<C-w>k", opts)
+keymap("n", "<leader>wl", "<C-w>l", opts)
+keymap("n", "<leader>wq", "<C-w>q", opts)
+keymap("n", "<leader>wo", "<C-w>o", opts)
 
 -- vertical navigation
-keymap("n", "<c-d>", "<c-d>zz", opts)
-keymap("n", "<c-u>", "<c-u>zz", opts)
+keymap("n", "<C-d>", "<c-d>zz", opts)
+keymap("n", "<C-u>", "<c-u>zz", opts)
 
 -- qf list
 keymap("n", "<leader>co", "<cmd>copen<CR>", opts)
@@ -81,14 +81,14 @@ keymap("n", "<leader>tn", "<cmd>tabnext<CR>", opts)
 keymap("n", "<leader>tp", "<cmd>tabprevious<CR>", opts)
 
 -- resize
-keymap("n", "<c-j>", ":resize -2<CR>", opts)
-keymap("n", "<c-k>", ":resize +2<CR>", opts)
-keymap("n", "<c-l>", ":vertical resize -2<CR>", opts)
-keymap("n", "<c-h>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-j>", ":resize -2<CR>", opts)
+keymap("n", "<C-k>", ":resize +2<CR>", opts)
+keymap("n", "<C-l>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-h>", ":vertical resize +2<CR>", opts)
 
 -- buffer navigation
-keymap("n", "<s-l>", ":bnext<CR>", opts)
-keymap("n", "<s-h>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- crazy esc
 keymap("i", "jk", "<esc>", opts)
@@ -99,7 +99,7 @@ keymap("n", "<leader>O", "O<esc>", opts)
 
 -- stay in indent mode
 keymap("v", "<tab>", ">gv", opts)
-keymap("v", "<s-tab>", "<gv", opts)
+keymap("v", "<S-tab>", "<gv", opts)
 
 -- move text up down
 keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
