@@ -34,8 +34,8 @@ keymap("n", "<leader>*", ":%s/<C-r><c-w>/<C-r><C-w>/gI<Left><Left><Left>", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- Goto start/end of line
-keymap("n", "H", "^", opts)
-keymap("n", "L", "$", opts)
+-- keymap("n", "H", "^", opts)
+-- keymap("n", "L", "$", opts)
 
 -- U for Redo
 keymap("n", "U", "<C-r>", opts)
@@ -94,8 +94,8 @@ keymap("n", "<C-h>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-l>", ":vertical resize +2<CR>", opts)
 
 -- buffer navigation
--- keymap("n", "<S-l>", ":bnext<CR>", opts)
--- keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- crazy esc
 keymap("i", "jk", "<esc>", opts)
