@@ -1,9 +1,6 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
--- remove default
-keymap("", "<Space>", "<NOP>", opts)
-
 -- modes
 --  normal_mode = "n",
 --  insert_mode = "i",
@@ -11,27 +8,37 @@ keymap("", "<Space>", "<NOP>", opts)
 --  visual_block_mode = "x",
 --  term_mode = "t",
 --  command_mode = "c",
+--
+--  Disable space bar
+keymap("n", "<Space>", "<Nop>", opts)
+
+-- tmux session
+keymap("", "<C-f>", ":silent !tmux neww tmux_session_find.sh<CR>", opts)
 
 -- crazy save
-keymap("n", "<leader>ww", ":w<CR>", opts)
+keymap("n", "<leader>w", ":w<CR>", opts)
 
 -- clear highlight and errors on ESC
 keymap("n", "<ESC>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 
--- restart lsp
-keymap("n", "<leader>lsr", ":LspRestart<CR>", opts)
+-- save and source file
+keymap("n", "<leader>xx", ":w<CR>:source %<CR>", opts)
 
 -- netrw
 -- keymap("n", "<leader>e", ":Ex<CR>", opts)
 
--- tmux session
-keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux_session_find.sh<CR>")
-
 -- find and replace word under cursor
-keymap("n", "<leader>*", ":%s/<C-r><c-w>/", opts)
+keymap("n", "<leader>*", ":%s/<C-r><c-w>/<C-r><C-w>/gI<Left><Left><Left>", opts)
 
 -- dont overwrite paste register
 keymap("v", "p", '"_dP', opts)
+
+-- Goto start/end of line
+keymap("n", "H", "^", opts)
+keymap("n", "L", "$", opts)
+
+-- U for Redo
+keymap("n", "U", "<C-r>", opts)
 
 -- yank word under cursor
 keymap("n", "<leader>y", "yiw", opts)
@@ -52,16 +59,16 @@ keymap("n", "<leader>i<", "vi<p", opts)
 keymap("n", "<leader>a", "<C-^>", opts)
 
 -- split panes
-keymap("n", "<leader>w%", "<cmd>vs<CR>", opts)
-keymap("n", '<leader>w"', "<cmd>sp<CR>", opts)
+keymap("n", "<leader>%", "<cmd>vs<CR>", opts)
+keymap("n", '<leader>"', "<cmd>sp<CR>", opts)
 
 -- pane navigation
-keymap("n", "<leader>wh", "<C-w>h", opts)
-keymap("n", "<leader>wj", "<C-w>j", opts)
-keymap("n", "<leader>wk", "<C-w>k", opts)
-keymap("n", "<leader>wl", "<C-w>l", opts)
-keymap("n", "<leader>wq", "<C-w>q", opts)
-keymap("n", "<leader>wo", "<C-w>o", opts)
+keymap("n", "<leader>h", "<C-w>h", opts)
+keymap("n", "<leader>j", "<C-w>j", opts)
+keymap("n", "<leader>k", "<C-w>k", opts)
+keymap("n", "<leader>l", "<C-w>l", opts)
+keymap("n", "<leader>q", "<C-w>q", opts)
+keymap("n", "<leader>o", "<C-w>o", opts)
 
 -- vertical navigation
 keymap("n", "<C-d>", "<c-d>zz", opts)
@@ -83,15 +90,16 @@ keymap("n", "<leader>tp", "<cmd>tabprevious<CR>", opts)
 -- resize
 keymap("n", "<C-j>", ":resize -2<CR>", opts)
 keymap("n", "<C-k>", ":resize +2<CR>", opts)
-keymap("n", "<C-l>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-h>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-h>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-l>", ":vertical resize +2<CR>", opts)
 
 -- buffer navigation
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+-- keymap("n", "<S-l>", ":bnext<CR>", opts)
+-- keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- crazy esc
 keymap("i", "jk", "<esc>", opts)
+keymap("i", "jj", "<esc>", opts)
 
 -- insert newline stay in nromal mode
 keymap("n", "<leader>o", "o<esc>", opts)

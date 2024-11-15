@@ -41,8 +41,15 @@ return {
         })
       end
 
+      local function most_recent_files()
+        builtin.buffers({
+          sort_mru = true,
+        })
+      end
+
+      keymap("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
       keymap("n", "<leader><space>", builtin.oldfiles, { desc = "[Space] Find recently opened files" })
-      keymap("n", "<leader>sb", builtin.buffers, { desc = "[S]earch existing [B]uffers" })
+      keymap("n", "<leader>sb", most_recent_files, { desc = "[S]earch existing [B]uffers" })
       keymap(
         "n",
         "<leader>/",

@@ -50,6 +50,7 @@ alias pflocal="sh $HOME/dev/db-connections/pf_mongo_local.sh"
 alias pfdev="sh $HOME/dev/db-connections/pf_mongo_dev.sh"
 alias ucsllocal="sh $HOME/dev/db-connections/ucsl_mongo_local.sh" 
 alias ucsldev="sh $HOME/dev/db-connections/ucsl_mongo_dev.sh" 
+
 # git aliases
 alias g="git"
 alias s="git status"
@@ -78,6 +79,7 @@ alias gco="git checkout"
 alias gcob="git checkout -b"
 alias com="git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
 alias yolo="git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
+
 # github
 alias repo="gh repo view --web"
 alias pr="gh pr view --web || gh pr create --web"

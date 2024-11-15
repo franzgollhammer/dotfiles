@@ -62,24 +62,24 @@ return {
 
           -- actions
           -- visual mode
-          keymap("v", "<leader>hs", function()
+          keymap("v", "<leader>Hs", function()
             gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
           end, { desc = "stage git hunk" })
-          keymap("v", "<leader>hr", function()
+          keymap("v", "<leader>Hr", function()
             gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
           end, { desc = "reset git hunk" })
           -- normal mode
-          keymap("n", "<leader>hs", gs.stage_hunk, { desc = "git stage hunk" })
-          keymap("n", "<leader>hr", gs.reset_hunk, { desc = "git reset hunk" })
-          keymap("n", "<leader>hS", gs.stage_buffer, { desc = "git Stage buffer" })
-          keymap("n", "<leader>hu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
-          keymap("n", "<leader>hR", gs.reset_buffer, { desc = "git Reset buffer" })
-          keymap("n", "<leader>hp", gs.preview_hunk, { desc = "preview git hunk" })
-          keymap("n", "<leader>hb", function()
+          keymap("n", "<leader>Hs", gs.stage_hunk, { desc = "git stage hunk" })
+          keymap("n", "<leader>Hr", gs.reset_hunk, { desc = "git reset hunk" })
+          keymap("n", "<leader>HS", gs.stage_buffer, { desc = "git Stage buffer" })
+          keymap("n", "<leader>Hu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
+          keymap("n", "<leader>HR", gs.reset_buffer, { desc = "git Reset buffer" })
+          keymap("n", "<leader>Hp", gs.preview_hunk, { desc = "preview git hunk" })
+          keymap("n", "<leader>Hb", function()
             gs.blame_line({ full = false })
           end, { desc = "git blame line" })
-          keymap("n", "<leader>hd", gs.diffthis, { desc = "git diff against index" })
-          keymap("n", "<leader>hD", function()
+          keymap("n", "<leader>Hd", gs.diffthis, { desc = "git diff against index" })
+          keymap("n", "<leader>HD", function()
             gs.diffthis("~")
           end, { desc = "git diff against last commit" })
 
@@ -88,7 +88,7 @@ return {
           keymap("n", "<leader>td", gs.toggle_deleted, { desc = "toggle git show deleted" })
 
           -- text object
-          keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select git hunk" })
+        keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select git hunk" })
 
           -- vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none" })
           -- vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none" })
