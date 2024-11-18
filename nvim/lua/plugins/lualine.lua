@@ -15,7 +15,7 @@ return {
         section_separators = "",
       },
       sections = {
-        lualine_c = { { "filename", file_status = true, path = 1 } },
+        lualine_c = { { "filename", file_status = true, path = 1 }, "aerial" },
         lualine_x = { "encoding", "filetype" },
       },
     })

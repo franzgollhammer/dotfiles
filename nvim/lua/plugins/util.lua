@@ -1,9 +1,9 @@
 return {
-  -- {
-  --   "windwp/nvim-autopairs",
-  --   event = "InsertEnter",
-  --   opts = {},
-  -- },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
   {
     "j-hui/fidget.nvim",
     opts = {},
