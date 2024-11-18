@@ -31,8 +31,29 @@ return {
           git_files = {
             hidden = true
           }
-        }
+        },
+        extensions = {
+          aerial = {
+            -- Set the width of the first two columns (the second
+            -- is relevant only when show_columns is set to 'both')
+            col1_width = 4,
+            col2_width = 30,
+            -- How to format the symbols
+            format_symbol = function(symbol_path, filetype)
+              if filetype == "json" or filetype == "yaml" then
+                return table.concat(symbol_path, ".")
+              else
+                return symbol_path[#symbol_path]
+              end
+            end,
+            -- Available modes: symbols, lines, both
+            show_columns = "both",
+          },
+        },
       })
+
+      -- Load extensions for autocomplete
+      require("telescope").load_extension("aerial")
 
       local function telescope_live_grep_open_files()
         builtin.live_grep({
@@ -63,6 +84,9 @@ return {
       keymap("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
       keymap("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
       keymap("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+
+      -- Extensions
+      keymap("n", "<leader>ss", "<CMD>Telescope aerial<CR>", { desc = "[S]earch [S]ymbols" })
     end,
   },
 }
