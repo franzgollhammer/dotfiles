@@ -69,7 +69,7 @@ return {
       end
 
       keymap("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-      keymap("n", "<leader><space>", builtin.oldfiles, { desc = "[Space] Find recently opened files" })
+      keymap("n", "<leader><space>", most_recent_files, { desc = "[Space] Find recently opened files" })
       keymap("n", "<leader>sb", most_recent_files, { desc = "[S]earch existing [B]uffers" })
       keymap(
         "n",
