@@ -10,10 +10,11 @@ else
   export VUE_EDITOR="nvim"
 fi
 
-export DOTFILES="$HOME/dev/dotfiles"
+# set default dirs
+export DEV="$HOME/dev"
+export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
-RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
-export RUBY_DIR
+export RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
 
 # ---- path ----
 export PATH="$SCRIPTS:"\
@@ -35,8 +36,8 @@ alias cl="clear"
 alias ls="eza -F"
 alias l="ls -ah"
 alias ll="ls -lah"
-alias dot="(cd $DOTFILES; c .)"
-alias play="(cd $HOME/dev/playground; c .)"
+alias dot="(cd $DOTFILES; $EDITOR .)"
+alias play="(cd $DEV/playground; $EDITOR .)"
 alias neo="neofetch"
 alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
 alias soz="source ~/.zshrc"
@@ -44,12 +45,12 @@ alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
 alias killrunners="pkill -u $(whoami) Runner.Listener"
-alias test="sh $HOME/dev/actions-runner-pf-1/run.sh & sh $HOME/dev/actions-runner-pf-2/run.sh & sh $HOME/dev/actions-runner-pf-3/run.sh"
-alias test-ucsl="sh $HOME/dev/actions-runner-ucsl-1/run.sh & sh $HOME/dev/actions-runner-ucsl-2/run.sh"
-alias pflocal="sh $HOME/dev/db-connections/pf_mongo_local.sh"
-alias pfdev="sh $HOME/dev/db-connections/pf_mongo_dev.sh"
-alias ucsllocal="sh $HOME/dev/db-connections/ucsl_mongo_local.sh" 
-alias ucsldev="sh $HOME/dev/db-connections/ucsl_mongo_dev.sh" 
+alias test="sh $DEV/actions-runner-pf-1/run.sh & sh $DEV/actions-runner-pf-2/run.sh & sh $DEV/actions-runner-pf-3/run.sh"
+alias test-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh & sh $DEV/actions-runner-ucsl-2/run.sh"
+alias pflocal="sh $DEV/db-connections/pf_mongo_local.sh"
+alias pfdev="sh $DEV/db-connections/pf_mongo_dev.sh"
+alias ucsllocal="sh $DEV/db-connections/ucsl_mongo_local.sh" 
+alias ucsldev="sh $DEV/db-connections/ucsl_mongo_dev.sh" 
 
 # git aliases
 alias g="git"
@@ -98,7 +99,7 @@ function tw() {
 }
 
 function d() {
-  cd ~/dev/"$1" || exit
+  cd $DEV/"$1" || exit
 }
 
 function dir() {
