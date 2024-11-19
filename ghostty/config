@@ -1,6 +1,8 @@
-font-family = MesloLGM Nerd Font
-# theme = GruvboxDarkHard
-theme = tokyonight
+font-family = Hack Nerd Font
+# font-family = MesloLGM Nerd Font
+#
+theme = GruvboxDarkHard
+# theme = tokyonight
 
 # Colors
 #foreground = #ebdbb2
