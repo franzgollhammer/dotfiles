@@ -1,7 +1,8 @@
-font-family = Hack Nerd Font
+font-family = JetBrains Mono
 # font-family = MesloLGM Nerd Font
 #
-theme = GruvboxDarkHard
+theme = OneHalfDark
+# theme = GruvboxDarkHard
 # theme = tokyonight
 
 # Colors

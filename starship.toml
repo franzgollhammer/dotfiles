@@ -9,3 +9,6 @@ disabled = true
 [time]
 disabled = false
 
+[git_status]
+ahead = "↑"
+behind = "↓"
