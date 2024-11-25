@@ -25,6 +25,9 @@ export PATH="$SCRIPTS:"\
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+# ---- .env ----
+export $(grep -v '^#' $DOTFILES/.env | xargs)
+
 # ---- aliases ----
 alias t="tmux_session.sh"
 alias v="nvim"

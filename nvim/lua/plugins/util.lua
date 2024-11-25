@@ -11,9 +11,11 @@ return {
   {
     "norcalli/nvim-colorizer.lua",
     opts = {},
-    config = function()
-      require("colorizer").setup()
-    end,
+    -- config = function()
+    --   require("colorizer").setup({
+    --     '*',
+    --   })
+    -- end,
   },
   {
     "numToStr/Comment.nvim",
@@ -35,6 +37,9 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {}
-  }
+    opts = {},
+  },
+  {
+    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+  },
 }

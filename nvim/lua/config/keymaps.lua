@@ -1,6 +1,6 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
-
+-- TODO: 
 -- modes
 --  normal_mode = "n",
 --  insert_mode = "i",
@@ -43,20 +43,8 @@ keymap("n", "U", "<C-r>", opts)
 -- yank word under cursor
 keymap("n", "<leader>y", "yiw", opts)
 
--- yank in quotes
-keymap("n", "<leader>''", "yi'", opts)
-keymap("n", '<leader>""', 'yi"', opts)
-keymap("n", "<leader>``", "yi`", opts)
-keymap("n", "<leader><<", "yi<", opts)
-
--- paste in quotes
-keymap("n", "<leader>p''", "vi'p", opts)
-keymap("n", '<leader>p""', 'vi"p', opts)
-keymap("n", "<leader>p``", "vi`p", opts)
-keymap("n", "<leader>p<<", "vi<p", opts)
-
 -- alternate file
-keymap("n", "<leader>a", "<C-^>", opts)
+keymap("n", "<leader>p", "<C-^>", opts)
 
 -- split panes
 keymap("n", "<leader>%", "<cmd>vs<CR>", opts)
