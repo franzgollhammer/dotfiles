@@ -13,7 +13,7 @@ return {
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
       -- vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
-      local on_attach = function(event, bufnr)
+      local on_attach = function(_, bufnr) -- (event, bufnr)
         local keymap = function(keys, func, desc)
           if desc then
             desc = "LSP: " .. desc
@@ -57,13 +57,10 @@ return {
               },
             },
           },
-          -- filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         },
         volar = {},
         jsonls = {},
-        eslint = {
-          -- filetypes = { "vue", "javascript", "javascriptreact", "typescript", "typescriptreact" },
-        },
+        eslint = {},
         html = {},
         cssls = {},
         lua_ls = {
@@ -78,7 +75,7 @@ return {
 
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require("cmp_nvim_lsp").default_capabilities()
+      capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
       mason_lspconfig.setup({
         ensure_installed = vim.tbl_keys(servers),

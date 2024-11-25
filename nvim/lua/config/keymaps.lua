@@ -24,6 +24,9 @@ keymap("n", "<ESC>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 -- save and source file
 keymap("n", "<leader>xx", ":w<CR>:source %<CR>", opts)
 
+-- Copy current filename to system clipboard
+keymap("n", "<leader>cb", CB, opts)
+
 -- netrw
 -- keymap("n", "<leader>e", ":Ex<CR>", opts)
 

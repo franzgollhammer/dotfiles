@@ -25,14 +25,6 @@ return {
         palette_overrides = {},
         dim_inactive = false,
         transparent_mode = true,
-        -- overrides = {
-        --   TelescopeBorder = { bg = "none", fg = "none" },
-          -- SignColumn = { bg = "none" },
-        --   GruvboxRedSign = { bg = "none" },
-        --   GruvboxYellowSign = { bg = "none" },
-        --   GruvboxBlueSign = { bg = "none" },
-        --   GruvboxAquaSign = { bg = "none" },
-        -- },
       })
     end
   },
