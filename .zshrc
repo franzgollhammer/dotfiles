@@ -29,7 +29,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export $(grep -v '^#' $DOTFILES/.env | xargs)
 
 # ---- aliases ----
-alias t="tmux_session.sh"
+alias t="tmux_session"
 alias v="nvim"
 alias c="code"
 alias ci="code-insiders"
@@ -39,17 +39,22 @@ alias cl="clear"
 alias ls="eza -F"
 alias l="ls -ah"
 alias ll="ls -lah"
+alias bs="fc -rl 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' | fzf | sh"
 alias dot="(cd $DOTFILES; $EDITOR .)"
 alias play="(cd $DEV/playground; $EDITOR .)"
-alias neo="neofetch"
+alias ff="fastfetch"
 alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
 alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
+
+# test runner
 alias killrunners="pkill -u $(whoami) Runner.Listener"
 alias test="sh $DEV/actions-runner-pf-1/run.sh & sh $DEV/actions-runner-pf-2/run.sh & sh $DEV/actions-runner-pf-3/run.sh"
 alias test-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh & sh $DEV/actions-runner-ucsl-2/run.sh"
+
+# db
 alias pflocal="sh $DEV/db-connections/pf_mongo_local.sh"
 alias pfdev="sh $DEV/db-connections/pf_mongo_dev.sh"
 alias ucsllocal="sh $DEV/db-connections/ucsl_mongo_local.sh" 
@@ -90,15 +95,11 @@ alias pr="gh pr view --web || gh pr create --web"
 
 # ---- functions ----
 function tf() {
-  tmux_session_find.sh
+  tmux_session_find
 }
 
 function lg() {
   lazygit
-}
-
-function tw() {
-  tmux select-window -t $1
 }
 
 function d() {
@@ -109,12 +110,10 @@ function dir() {
   mkdir "$1" && cd "$1" || exit
 }
 
-# ---- bind ----
-# bind tmux session finder to ctrl-f
 zle -N tf
-bindkey ^f tf
-# bind lazygit to ctrl-g
 zle -N lg
+
+bindkey ^f tf
 bindkey ^g lg
 
 # ---- eval ----
