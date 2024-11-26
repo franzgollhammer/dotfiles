@@ -8,11 +8,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = vim.api.nvim_create_augroup("EsLintFixAll", {}),
 })
 
-vim.api.nvim_create_user_command('EslintFix', function()
-  vim.cmd([[!eslint --fix %]])
+vim.api.nvim_create_user_command("Format", function()
+  vim.lsp.buf.format()
+end, {})
+
+vim.api.nvim_create_user_command("EslintFix", function()
+  vim.cmd("write")
+  vim.fn.system("npx eslint --fix " .. CF())
+  vim.cmd("edit")
 end, {})
 
 vim.api.nvim_create_user_command("Prettier", function()
-  vim.cmd([[!prettier --write %]])
+  vim.cmd("write")
+  vim.fn.system("npx prettier --write " .. CF())
+  vim.cmd("edit")
 end, {})
-

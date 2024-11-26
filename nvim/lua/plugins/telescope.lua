@@ -68,25 +68,25 @@ return {
         })
       end
 
-      keymap("n", "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-      keymap("n", "<leader><space>", most_recent_files, { desc = "[Space] Find recently opened files" })
-      keymap("n", "<leader>sb", most_recent_files, { desc = "[S]earch existing [B]uffers" })
+      keymap("n", "<Leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+      keymap("n", "<Leader><space>", most_recent_files, { desc = "[Space] Find recently opened files" })
+      keymap("n", "<Leader>sb", most_recent_files, { desc = "[S]earch existing [B]uffers" })
       keymap(
         "n",
-        "<leader>/",
+        "<Leader>/",
         builtin.current_buffer_fuzzy_find,
         { desc = "[/] Fuzzily search in current buffer" }
       )
-      keymap("n", "<leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
-      keymap("n", "<leader>sf", builtin.git_files, { desc = "Search [G]it [F]iles" })
-      keymap("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
-      keymap("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-      keymap("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-      keymap("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-      keymap("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+      keymap("n", "<Leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
+      keymap("n", "<Leader>sf", builtin.git_files, { desc = "Search [G]it [F]iles" })
+      keymap("n", "<Leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
+      keymap("n", "<Leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+      keymap("n", "<Leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+      keymap("n", "<Leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+      keymap("n", "<Leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 
       -- Extensions
-      keymap("n", "<leader>ss", "<CMD>Telescope aerial<CR>", { desc = "[S]earch [S]ymbols" })
+      keymap("n", "<Leader>ss", "<Cmd>Telescope aerial<CR>", { desc = "[S]earch [S]ymbols" })
     end,
   },
 }

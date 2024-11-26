@@ -10,8 +10,13 @@ P = function(t)
   return t
 end
 
-CB = function()
+CF = function()
   local filename = vim.fn.expand('%:p')
+  return filename
+end
+
+CopyFileNameToClipBoard = function()
+  local filename = CF()
   vim.fn.setreg('+', filename) -- Copy to system clipboard
   print("Copied to clipboard: " .. filename)
 end

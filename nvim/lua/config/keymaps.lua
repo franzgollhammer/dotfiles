@@ -1,6 +1,5 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
--- TODO: 
 -- modes
 --  normal_mode = "n",
 --  insert_mode = "i",
@@ -12,71 +11,64 @@ local keymap = vim.keymap.set
 --  Disable space bar
 keymap("n", "<Space>", "<Nop>", opts)
 
+-- netrw
+-- keymap("n", "<Leader>e", ":Ex<CR>", opts)
+
 -- tmux session
 keymap("", "<C-f>", ":silent !tmux neww tmux_session_find.sh<CR>", opts)
 
 -- crazy save
-keymap("n", "<leader>w", ":w<CR>", opts)
+keymap("n", "<Leader>w", ":w<CR>", opts)
 
 -- clear highlight and errors on ESC
-keymap("n", "<ESC>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
+keymap("n", "<Esc>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 
 -- save and source file
-keymap("n", "<leader>xx", ":w<CR>:source %<CR>", opts)
+keymap("n", "<Leader>xx", ":w<CR>:source %<CR>", opts)
 
 -- Copy current filename to system clipboard
-keymap("n", "<leader>cb", CB, opts)
-
--- netrw
--- keymap("n", "<leader>e", ":Ex<CR>", opts)
+keymap("n", "<Leader>cf", CopyFileNameToClipBoard, opts)
 
 -- find and replace word under cursor
-keymap("n", "<leader>*", ":%s/<C-r><c-w>/<C-r><C-w>/gI<Left><Left><Left>", opts)
+keymap("n", "<Leader>*", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", opts)
 
 -- dont overwrite paste register
 keymap("v", "p", '"_dP', opts)
 
--- Goto start/end of line
--- keymap("n", "H", "^", opts)
--- keymap("n", "L", "$", opts)
-
 -- U for Redo
 keymap("n", "U", "<C-r>", opts)
 
--- yank word under cursor
-keymap("n", "<leader>y", "yiw", opts)
-
 -- alternate file
-keymap("n", "<leader>p", "<C-^>", opts)
+keymap("n", "<Leader>a", "<C-^>", opts)
 
 -- split panes
-keymap("n", "<leader>%", "<cmd>vs<CR>", opts)
-keymap("n", '<leader>"', "<cmd>sp<CR>", opts)
+keymap("n", "<Leader>%", "<Cmd>vs<CR>", opts)
+keymap("n", '<Leader>"', "<Cmd>sp<CR>", opts)
 
 -- pane navigation
-keymap("n", "<leader>h", "<C-w>h", opts)
-keymap("n", "<leader>j", "<C-w>j", opts)
-keymap("n", "<leader>k", "<C-w>k", opts)
-keymap("n", "<leader>l", "<C-w>l", opts)
-keymap("n", "<leader>q", "<C-w>q", opts)
-keymap("n", "<leader>o", "<C-w>o", opts)
+keymap("n", "<Leader>h", "<C-w>h", opts)
+keymap("n", "<Leader>j", "<C-w>j", opts)
+keymap("n", "<Leader>k", "<C-w>k", opts)
+keymap("n", "<Leader>l", "<C-w>l", opts)
+keymap("n", "<Leader>q", "<C-w>q", opts)
+keymap("n", "<Leader>o", "<C-w>o", opts)
 
 -- vertical navigation
 keymap("n", "<C-d>", "<c-d>zz", opts)
 keymap("n", "<C-u>", "<c-u>zz", opts)
 
 -- qf list
-keymap("n", "<leader>co", "<cmd>copen<CR>", opts)
-keymap("n", "<leader>cc", "<cmd>cclose<CR>", opts)
-keymap("n", "<leader>cn", "<cmd>cnext<CR>", opts)
-keymap("n", "<leader>cp", "<cmd>cprev<CR>", opts)
-keymap("n", "<leader>ch", "<cmd>chistory<CR>", opts)
+keymap("n", "<Leader>co", "<Cmd>copen<CR>", opts)
+keymap("n", "<Leader>cc", "<Cmd>cclose<CR>", opts)
+keymap("n", "<Leader>cn", "<Cmd>cnext<CR>", opts)
+keymap("n", "<Leader>cp", "<Cmd>cprev<CR>", opts)
+keymap("n", "<Leader>ch", "<Cmd>chistory<CR>", opts)
 
 -- tabs
-keymap("n", "<leader>to", "<cmd>tabedit %<CR>", opts)
-keymap("n", "<leader>tc", "<cmd>tabclose<CR>", opts)
-keymap("n", "<leader>tn", "<cmd>tabnext<CR>", opts)
-keymap("n", "<leader>tp", "<cmd>tabprevious<CR>", opts)
+keymap("n", "<Leader>to", "<Cmd>tabedit %<CR>", opts)
+keymap("n", "<Leader>tc", "<Cmd>tabclose<CR>", opts)
+keymap("n", "<Leader>tn", "<Cmd>tabnext<CR>", opts)
+keymap("n", "<Leader>tp", "<Cmd>tabprevious<CR>", opts)
 
 -- resize
 keymap("n", "<C-j>", ":resize -2<CR>", opts)
@@ -93,14 +85,19 @@ keymap("i", "jk", "<esc>", opts)
 keymap("i", "jj", "<esc>", opts)
 
 -- insert newline stay in nromal mode
-keymap("n", "<leader>o", "o<esc>", opts)
-keymap("n", "<leader>O", "O<esc>", opts)
+keymap("n", "<Leader>o", "o<esc>", opts)
+keymap("n", "<Leader>O", "O<esc>", opts)
 
 -- stay in indent mode
-keymap("v", "<tab>", ">gv", opts)
-keymap("v", "<S-tab>", "<gv", opts)
+keymap("v", "<Tab>", ">gv", opts)
+keymap("v", "<S-Tab>", "<gv", opts)
 
 -- move text up down
 keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "K", ":m '<-2<CR>gv=gv", opts)
+
+-- keymaps for commands
+keymap("n", "<Leader>bf", "<Cmd>Format<CR>",opts)
+keymap("n", "<Leader>be", "<Cmd>EslintFix<CR>",opts)
+keymap("n", "<Leader>bp", "<Cmd>Prettier<CR>",opts)
 

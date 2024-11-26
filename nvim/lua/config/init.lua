@@ -56,4 +56,3 @@ local opts = {
 require("lazy").setup(plugins, opts)
 
 vim.cmd([[colorscheme gruvbox]])
-vim.cmd([[Supermavenstop]])

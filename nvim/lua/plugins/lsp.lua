@@ -22,19 +22,15 @@ return {
           vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
         end
 
-        keymap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-        keymap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+        keymap("<Leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        keymap("<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
         keymap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
         keymap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
         keymap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-        keymap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+        keymap("<Leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
         keymap("K", vim.lsp.buf.hover, "Hover Documentation")
-        -- keymap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
         keymap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-
-        vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-          vim.lsp.buf.format()
-        end, { desc = "Format current buffer with LSP" })
+        -- keymap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
       end
 
       require("mason").setup()

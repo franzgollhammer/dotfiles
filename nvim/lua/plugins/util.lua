@@ -1,12 +1,21 @@
 return {
   {
+    "nvim-tree/nvim-web-devicons"
+  },
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {},
   },
   {
     "j-hui/fidget.nvim",
-    opts = {},
+    opts = {
+      notification = {
+        window = {
+          winblend = 0,
+        }
+      }
+    },
   },
   {
     "norcalli/nvim-colorizer.lua",
@@ -31,7 +40,7 @@ return {
   {
     "mbbill/undotree",
     config = function()
-      vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { noremap = true, silent = true })
+      vim.keymap.set("n", "<Leader>u", ":UndotreeToggle<CR>", { noremap = true, silent = true })
     end,
   },
   {

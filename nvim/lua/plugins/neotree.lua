@@ -43,9 +43,9 @@ return {
             expander_highlight = "NeoTreeExpander",
           },
           icon = {
-            folder_closed = "",
-            folder_open = "",
-            folder_empty = "",
+            folder_closed = " ",
+            folder_open = " ",
+            folder_empty = " ",
             -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
             -- then these will never be used.
             default = "*",
@@ -109,10 +109,10 @@ return {
           },
           mappings = {
             ["C-f"] = nil, -- Diasble default neo-tree mappings for `C-f` fuzzy find tmux session
-            ["<space>"] = {
-              "toggle_node",
-              nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-            },
+            -- ["<space>"] = {
+            --   "toggle_node",
+            --   nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+            -- },
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
             ["<esc>"] = "cancel", -- close preview or floating neo-tree window
@@ -279,7 +279,7 @@ return {
       })
 
       -- vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-      vim.cmd([[nnoremap <leader>e :Neotree reveal left<cr>]])
+      vim.cmd([[nnoremap <Leader>e :Neotree reveal left<cr>]])
     end,
   },
 }
