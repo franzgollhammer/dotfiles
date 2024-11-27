@@ -86,6 +86,7 @@ return {
       keymap("n", "<Leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 
       -- Extensions
+      -- Aerial symbol search
       keymap("n", "<Leader>ss", "<Cmd>Telescope aerial<CR>", { desc = "[S]earch [S]ymbols" })
     end,
   },

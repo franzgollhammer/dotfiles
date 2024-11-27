@@ -63,7 +63,7 @@ alias ucsldev="sh $DEV/db-connections/ucsl_mongo_dev.sh"
 # git aliases
 alias g="git"
 alias s="git status"
-alias b="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout"
+alias b="branch"
 alias gbr="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout"
 alias ga="git add"
 alias gd="git diff"

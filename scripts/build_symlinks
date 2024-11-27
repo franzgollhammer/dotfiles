@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set default dir
+# set dir if env variable not set
 DOTFILES_DIR=${DOTFILES:-$HOME/dev/dotfiles}
 
 # remove old config files

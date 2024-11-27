@@ -1,2 +1,9 @@
 #!/bin/bash
-git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout
+echo $1
+if [ -z $1 ]; then
+  git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout
+  exit 0
+fi
+
+git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf --query=$1 --select-1 --exit-0 | xargs git checkout
+exit 0
