@@ -15,7 +15,7 @@ keymap("n", "<Space>", "<Nop>", opts)
 -- keymap("n", "<Leader>e", ":Ex<CR>", opts)
 
 -- tmux session
-keymap("", "<C-f>", ":silent !tmux neww tmux_session_find.sh<CR>", opts)
+keymap("", "<C-f>", ":silent !tmux neww tmux_session_find<CR>", opts)
 
 -- crazy save
 keymap("n", "<Leader>w", ":w<CR>", opts)

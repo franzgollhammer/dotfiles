@@ -39,7 +39,7 @@ alias cl="clear"
 alias ls="eza -F"
 alias l="ls -ah"
 alias ll="ls -lah"
-alias bs="fc -rl 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' | fzf | sh"
+alias hs="fc -rl 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' | fzf | zsh"
 alias dot="(cd $DOTFILES; $EDITOR .)"
 alias play="(cd $DEV/playground; $EDITOR .)"
 alias ff="fastfetch"
@@ -112,13 +112,15 @@ function dir() {
 
 zle -N tf
 zle -N lg
-
 bindkey ^f tf
 bindkey ^g lg
 
 # ---- eval ----
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+
+# ---- autosuggestions ----
+source zsh_autosuggestions
 
 # ---- mongo ----
 # mongoexport --uri="mongodb://localhost:27017/myDatabase" --collection=users --query='{ "age": { "$gt": 25 } }' --limit=100 --out=limited_users.json

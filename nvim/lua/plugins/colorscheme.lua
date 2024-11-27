@@ -46,5 +46,12 @@ return {
     opts = {
       transparent = true
     }
+  },
+  {
+    "loctvl842/monokai-pro.nvim",
+    priority = 1000,
+    opts = {
+      transparent_background = true
+    }
   }
 }
