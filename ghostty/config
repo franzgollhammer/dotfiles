@@ -1,5 +1,6 @@
 font-family = JetBrains Mono
-theme = GruvboxDarkHard
+theme = GruvboxDark
+#theme = GruvboxDarkHard
 #theme = kanagawabones
 background-opacity = 0.95
 

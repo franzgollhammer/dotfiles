@@ -41,6 +41,19 @@ return {
     }
   },
   {
+    "rose-pine/neovim",
+    priority = 1000,
+    config = function()
+      require("rose-pine").setup({
+        styles = {
+          bold = true,
+          italic = true,
+          transparency = true,
+        },
+      })
+    end
+  },
+  {
     "rebelot/kanagawa.nvim",
     priority = 1000,
     opts = {
