@@ -69,14 +69,8 @@ return {
       end
 
       keymap("n", "<Leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-      keymap("n", "<Leader><space>", builtin.oldfiles, { desc = "[Space] Find recently opened files" })
       keymap("n", "<Leader>sb", most_recent_files, { desc = "[S]earch existing [B]uffers" })
-      keymap(
-        "n",
-        "<Leader>/",
-        builtin.current_buffer_fuzzy_find,
-        { desc = "[/] Fuzzily search in current buffer" }
-      )
+      keymap( "n", "<Leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in current buffer" })
       keymap("n", "<Leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
       keymap("n", "<Leader>sf", builtin.git_files, { desc = "Search [G]it [F]iles" })
       keymap("n", "<Leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })

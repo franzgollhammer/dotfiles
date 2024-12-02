@@ -26,11 +26,11 @@ keymap("n", "<Esc>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 -- save and source file
 keymap("n", "<Leader>xx", ":w<CR>:source %<CR>", opts)
 
--- Copy current filename to system clipboard
-keymap("n", "<Leader>cf", CopyFileNameToClipBoard, opts)
+-- Yank current file path to system clipboard
+keymap("n", "<Leader>yfp", CopyFileNameToClipBoard, opts)
 
 -- find and replace word under cursor
-keymap("n", "<Leader>*", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", opts)
+keymap("n", "<Leader>rw", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", opts)
 
 -- dont overwrite paste register
 keymap("v", "p", '"_dP', opts)
@@ -71,10 +71,10 @@ keymap("n", "<Leader>tn", "<Cmd>tabnext<CR>", opts)
 keymap("n", "<Leader>tp", "<Cmd>tabprevious<CR>", opts)
 
 -- resize
-keymap("n", "<C-j>", ":resize -2<CR>", opts)
-keymap("n", "<C-k>", ":resize +2<CR>", opts)
-keymap("n", "<C-h>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-l>", ":vertical resize +2<CR>", opts)
+keymap("n", "<Leader>+", ":vertical resize +5<CR>", opts)
+keymap("n", "<Leader>-", ":vertical resize -5<CR>", opts)
+keymap("n", "<Leader>*", ":resize +5<CR>", opts)
+keymap("n", "<Leader>_", ":resize -5<CR>", opts)
 
 -- buffer navigation
 keymap("n", "<S-l>", ":bnext<CR>", opts)
