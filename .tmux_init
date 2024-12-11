@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+tmux neww -d
+
+nvim .
+
+clear

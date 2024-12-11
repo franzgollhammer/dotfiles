@@ -37,7 +37,7 @@ vim.opt.inccommand = 'split'
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
--- opt.colorcolumn = "100"
+opt.colorcolumn = "120,80"
 --
 -- Keep signcolumn on by default
 opt.signcolumn = "yes"

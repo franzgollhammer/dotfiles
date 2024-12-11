@@ -5,6 +5,13 @@ return {
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
     },
     config = function()
       local keymap = vim.keymap.set
@@ -52,9 +59,6 @@ return {
         },
       })
 
-      -- Load extensions for autocomplete
-      require("telescope").load_extension("aerial")
-
       local function telescope_live_grep_open_files()
         builtin.live_grep({
           grep_open_files = true,
@@ -64,13 +68,13 @@ return {
 
       local function most_recent_files()
         builtin.buffers({
-          sort_mru = true,
+          sort_mru = true, -- sort most recent used
         })
       end
 
-      keymap("n", "<Leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+      keymap("n", "<Leader>e", builtin.oldfiles, { desc = "[p] Find recently opened files" })
       keymap("n", "<Leader>sb", most_recent_files, { desc = "[S]earch existing [B]uffers" })
-      keymap( "n", "<Leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in current buffer" })
+      keymap("n", "<Leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in current buffer" })
       keymap("n", "<Leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
       keymap("n", "<Leader>sf", builtin.git_files, { desc = "Search [G]it [F]iles" })
       keymap("n", "<Leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
@@ -78,6 +82,11 @@ return {
       keymap("n", "<Leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
       keymap("n", "<Leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
       keymap("n", "<Leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+      keymap('n', '<Leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+      keymap("n", "<Leader>st", "<Cmd>TodoTelescope<CR>", { desc = "[S]earch [T]odos" })
+
+      -- Load extensions for autocomplete
+      require("telescope").load_extension("aerial")
 
       -- Extensions
       -- Aerial symbol search

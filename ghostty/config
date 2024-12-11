@@ -1,6 +1,4 @@
-font-family = JetBrains Mono
-theme = GruvboxDark
-#theme = GruvboxDarkHard
-#theme = kanagawabones
+# font-family = JetBrainsMono Nerd Font
+theme = rose-pine
+background = 181818
 background-opacity = 0.95
-

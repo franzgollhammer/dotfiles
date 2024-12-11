@@ -15,7 +15,7 @@ keymap("n", "<Space>", "<Nop>", opts)
 -- keymap("n", "<Leader>e", ":Ex<CR>", opts)
 
 -- tmux session
-keymap("", "<C-f>", ":silent !tmux neww tmux_session_find<CR>", opts)
+keymap("", "<C-f>", ":silent !tmux neww tmux_session<CR>", opts)
 
 -- crazy save
 keymap("n", "<Leader>w", ":w<CR>", opts)
@@ -83,6 +83,7 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- crazy esc
 keymap("i", "jk", "<esc>", opts)
 keymap("i", "jj", "<esc>", opts)
+keymap("i", "kk", "<esc>", opts)
 
 -- insert newline stay in nromal mode
 keymap("n", "<Leader>o", "o<esc>", opts)

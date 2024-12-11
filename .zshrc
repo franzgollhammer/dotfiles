@@ -1,7 +1,11 @@
 # ---- fg zsh conf ----
 # zmodload zsh/zprof # uncomment this line and bottom line to measure startup time
 
+# enable vim mode
+bindkey -v
+
 # ---- var ----
+# set default editor
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -25,13 +29,27 @@ export PATH="$SCRIPTS:"\
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+# ---- fzf ----
+source <(fzf --zsh)
+
 # ---- .env ----
 # load env variables from .env file
 export $(grep -v '^#' $DOTFILES/.env | xargs)
 
+# ---- starship ----
+eval "$(starship init zsh)"
+
+# ---- zoxide ----
+eval "$(zoxide init zsh)"
+
+# ---- autosuggestions ----
+source zsh_autosuggestions
+
 # ---- aliases ----
-alias t="tmux_session"
 alias v="nvim"
+alias vim="nvim"
+alias t="tmux_session"
+alias lg="lazygit"
 alias c="code"
 alias ci="code-insiders"
 alias run="node --run"
@@ -49,6 +67,7 @@ alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
+alias cyrun="npx cypress run -s"
 
 # test runner
 alias killrunners="pkill -u $(whoami) Runner.Listener"
@@ -81,7 +100,8 @@ alias gr="git reset"
 alias grh="git reset HEAD"
 alias grh1="git reset HEAD~1"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
-alias gl="git log --graph"
+alias gl="git log --graph --oneline"
+alias glog="git log --graph --parents"
 alias gp="git pull"
 alias gps="git push"
 alias gco="git checkout"
@@ -94,14 +114,6 @@ alias repo="gh repo view --web"
 alias pr="gh pr view --web || gh pr create --web"
 
 # ---- functions ----
-function tf() {
-  tmux_session_find
-}
-
-function lg() {
-  lazygit
-}
-
 function d() {
   cd $DEV/"$1" || exit
 }
@@ -109,18 +121,6 @@ function d() {
 function dir() {
   mkdir "$1" && cd "$1" || exit
 }
-
-zle -N tf
-zle -N lg
-bindkey ^f tf
-bindkey ^g lg
-
-# ---- eval ----
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
-
-# ---- autosuggestions ----
-source zsh_autosuggestions
 
 # ---- mongo ----
 # mongoexport --uri="mongodb://localhost:27017/myDatabase" --collection=users --query='{ "age": { "$gt": 25 } }' --limit=100 --out=limited_users.json

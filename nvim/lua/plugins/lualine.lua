@@ -10,12 +10,22 @@ return {
       options = {
         -- theme = custom_auto,
         theme = "auto",
-        icons_enabled = false,
+        -- icons_enabled = false,
         component_separators = "|",
         section_separators = "",
       },
       sections = {
-        lualine_c = { { "filename", file_status = true, path = 1 }, "aerial" },
+        lualine_c = {
+          {
+            "filename",
+            file_status = true,
+            path = 1
+          },
+          {
+            "aerial",
+            dense = false,
+            colored = true,
+          } },
         lualine_x = { "encoding", "filetype" },
       },
     })
