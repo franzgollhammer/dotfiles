@@ -1,8 +1,10 @@
 #!/bin/zsh
 
-if [[ -x ".tmux_init" ]]; then
-  zsh ./.tmux_init
-elif [[ -x "$HOME/.tmux_init" ]]; then
-  zsh $HOME/.tmux_init
+INIT_FILE=".tmux_init"
+
+if [[ -x $INIT_FILE ]]; then
+  zsh ./$INIT_FILE
+elif [[ -x "$HOME/$INIT_FILE" ]]; then
+  zsh $HOME/$INIT_FILE
 fi
 
