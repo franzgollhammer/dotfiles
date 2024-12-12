@@ -22,6 +22,6 @@ if tmux has-session -t=$SELECTED_NAME 2> /dev/null; then
 fi
 
 tmux new-session -ds $SELECTED_NAME -c $SELECTED_DIR
+tmux send-keys -t $SELECTED_NAME "tmux_init" C-m
 switch_to
-tmux send-keys -t $SELECTED_NAME "tmux_init" ^M
 

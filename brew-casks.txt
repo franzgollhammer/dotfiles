@@ -15,6 +15,17 @@ docker
 figma
 firefox
 firefox@developer-edition
+firefox@nightly
+font-caskaydia-cove-nerd-font
+font-fira-code-nerd-font
+font-fira-mono-nerd-font
+font-hack-nerd-font
+font-jetbrains-mono-nerd-font
+font-juliamono
+font-roboto-mono-nerd-font
+font-ubuntu-mono-nerd-font
+font-zed-mono-nerd-font
+gimp
 github
 google-chrome
 google-chrome-canary

@@ -1,6 +1,8 @@
 #!/bin/zsh
 
-tmux neww -d
+tmux neww -dn "shell"
+
+tmux send-keys -t "shell" "fastfetch" C-m
 
 nvim .
 
