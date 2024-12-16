@@ -53,7 +53,7 @@ keymap("n", "<Leader>l", "<C-w>l", opts)
 keymap("n", "<Leader>q", "<C-w>q", opts)
 keymap("n", "<Leader>o", "<C-w>o", opts)
 
--- vertical navigation
+-- vertical navigation with center
 keymap("n", "<C-d>", "<c-d>zz", opts)
 keymap("n", "<C-u>", "<c-u>zz", opts)
 keymap("n", "{", "{zz", opts)
@@ -102,7 +102,6 @@ keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "K", ":m '<-2<CR>gv=gv", opts)
 
 -- keymaps for commands
-keymap("n", "<Leader>bf", "<Cmd>Format<CR>",opts)
-keymap("n", "<Leader>be", "<Cmd>EslintFix<CR>",opts)
-keymap("n", "<Leader>bp", "<Cmd>Prettier<CR>",opts)
-
+keymap("n", "<Leader>bf", "<Cmd>Format<CR>", opts)
+keymap("n", "<Leader>be", "<Cmd>EslintFix<CR>", opts)
+keymap("n", "<Leader>bp", "<Cmd>Prettier<CR>", opts)
