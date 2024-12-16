@@ -56,6 +56,10 @@ keymap("n", "<Leader>o", "<C-w>o", opts)
 -- vertical navigation
 keymap("n", "<C-d>", "<c-d>zz", opts)
 keymap("n", "<C-u>", "<c-u>zz", opts)
+keymap("n", "{", "{zz", opts)
+keymap("n", "}", "}zz", opts)
+keymap("n", "N", "Nzz", opts)
+keymap("n", "n", "nzz", opts)
 
 -- qf list
 keymap("n", "<Leader>co", "<Cmd>copen<CR>", opts)

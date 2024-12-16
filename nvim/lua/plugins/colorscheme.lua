@@ -29,9 +29,22 @@ return {
   {
     "folke/tokyonight.nvim",
     priority = 1000,
-    opts = {
-      transparent = true
-    }
+    config = function()
+      require("tokyonight").setup({
+        transparent = true,
+        styles = {
+          -- Style to be applied to different syntax groups
+          -- Value is any valid attr-list value for `:help nvim_set_hl`
+          comments = { italic = true },
+          keywords = { italic = true },
+          functions = { bold = true },
+          variables = {},
+          -- Background styles. Can be "dark", "transparent" or "normal"
+          sidebars = "transparent", -- style for sidebars, see below
+          floats = "transparent", -- style for floating windows
+        }
+      })
+    end
   },
   {
     "rose-pine/neovim",
@@ -51,11 +64,16 @@ return {
     priority = 1000,
     config = function()
       require("onedarkpro").setup({
+        styles = {
+          comments = "italic",
+          functions = "bold",
+          methods = "bold"
+        },
         options = {
-          cursorline = false,           -- Use cursorline highlighting?
-          transparency = true,         -- Use a transparent background?
-          terminal_colors = true,       -- Use the theme's colors for Neovim's :terminal?
-          lualine_transparency = false, -- Center bar transparency?
+          cursorline = false,                 -- Use cursorline highlighting?
+          transparency = true,                -- Use a transparent background?
+          terminal_colors = true,             -- Use the theme's colors for Neovim's :terminal?
+          lualine_transparency = false,       -- Center bar transparency?
           highlight_inactive_windows = false, -- When the window is out of focus, change the normal background?
         }
 

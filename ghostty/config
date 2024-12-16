@@ -1,6 +1,7 @@
 font-family = FiraCode Nerd Font
-#theme = rose-pine
-theme = OneHalfDark
+theme = tokyonight
+# theme = rose-pine
+# theme = OneHalfDark
 background = 000000
 background-opacity = 0.95
 selection-invert-fg-bg = true
