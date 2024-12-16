@@ -33,6 +33,9 @@ return {
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
 
+          -- activate line blame
+          gs.toggle_current_line_blame()
+
           local function keymap(mode, l, r, opts)
             opts = opts or {}
             opts.buffer = bufnr
@@ -89,9 +92,6 @@ return {
 
           -- text object
           keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select git hunk" })
-
-          -- activate line blame
-          gs.toggle_current_line_blame()
 
           -- vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none" })
           -- vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none" })
