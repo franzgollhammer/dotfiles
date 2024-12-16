@@ -16,6 +16,7 @@ figma
 firefox
 firefox@developer-edition
 firefox@nightly
+font-0xproto-nerd-font
 font-caskaydia-cove-nerd-font
 font-fira-code-nerd-font
 font-fira-mono-nerd-font
