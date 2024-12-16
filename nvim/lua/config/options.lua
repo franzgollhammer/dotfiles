@@ -37,8 +37,8 @@ vim.opt.inccommand = 'split'
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
-opt.colorcolumn = "120,80"
---
+opt.colorcolumn = "80,120"
+
 -- Keep signcolumn on by default
 opt.signcolumn = "yes"
 opt.cmdheight = 1
@@ -54,7 +54,7 @@ opt.backup = false
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
+-- vim.opt.list = true
 -- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '↲' }
 
 -- Configure how new splits should be opened

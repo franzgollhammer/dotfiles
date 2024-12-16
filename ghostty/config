@@ -1,4 +1,7 @@
-# font-family = JetBrainsMono Nerd Font
-theme = rose-pine
-background = 181818
+font-family = FiraCode Nerd Font
+#theme = rose-pine
+theme = OneHalfDark
+background = 000000
 background-opacity = 0.95
+selection-invert-fg-bg = true
+copy-on-select = true

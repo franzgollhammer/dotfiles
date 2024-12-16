@@ -34,37 +34,32 @@ return {
     }
   },
   {
-    "navarasu/onedark.nvim",
-    priority = 1000,
-    opts = {
-      transparent = true
-    }
-  },
-  {
     "rose-pine/neovim",
     priority = 1000,
     config = function()
       require("rose-pine").setup({
         styles = {
           bold = true,
-          italic = true,
+          italic = false,
           transparency = true,
         },
       })
     end
   },
   {
-    "rebelot/kanagawa.nvim",
+    "olimorris/onedarkpro.nvim",
     priority = 1000,
-    opts = {
-      transparent = true
-    }
+    config = function()
+      require("onedarkpro").setup({
+        options = {
+          cursorline = false,           -- Use cursorline highlighting?
+          transparency = true,         -- Use a transparent background?
+          terminal_colors = true,       -- Use the theme's colors for Neovim's :terminal?
+          lualine_transparency = false, -- Center bar transparency?
+          highlight_inactive_windows = false, -- When the window is out of focus, change the normal background?
+        }
+
+      })
+    end
   },
-  {
-    "loctvl842/monokai-pro.nvim",
-    priority = 1000,
-    opts = {
-      transparent_background = true
-    }
-  }
 }

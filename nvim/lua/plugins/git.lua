@@ -88,7 +88,10 @@ return {
           keymap("n", "<Leader>td", gs.toggle_deleted, { desc = "toggle git show deleted" })
 
           -- text object
-        keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select git hunk" })
+          keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select git hunk" })
+
+          -- activate line blame
+          gs.toggle_current_line_blame()
 
           -- vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none" })
           -- vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none" })
