@@ -38,5 +38,4 @@ require("lazy").setup(plugins, opts)
 
 vim.cmd([[colorscheme tokyonight]])
 -- vim.cmd([[colorscheme rose-pine]])
--- vim.cmd([[colorscheme onedark]])
 

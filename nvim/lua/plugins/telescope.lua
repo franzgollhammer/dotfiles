@@ -83,6 +83,7 @@ return {
       keymap("n", "<Leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
       keymap("n", "<Leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
       keymap('n', '<Leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+      keymap("n", "<Leader>sc",builtin.colorscheme, { desc = "[S]earch [C]olorschemen" })
       keymap("n", "<Leader>st", "<Cmd>TodoTelescope<CR>", { desc = "[S]earch [T]odos" })
 
       -- Load extensions for autocomplete
