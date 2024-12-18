@@ -72,7 +72,7 @@ return {
         })
       end
 
-      keymap("n", "<Leader>e", builtin.oldfiles, { desc = "[p] Find recently opened files" })
+      keymap("n", "<Leader>e", builtin.oldfiles, { desc = "[e] Find recently opened files" })
       keymap("n", "<Leader>sb", most_recent_files, { desc = "[S]earch existing [B]uffers" })
       keymap("n", "<Leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in current buffer" })
       keymap("n", "<Leader>s/", telescope_live_grep_open_files, { desc = "[S]earch [/] in Open Files" })
@@ -80,10 +80,11 @@ return {
       keymap("n", "<Leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
       keymap("n", "<Leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
       keymap("n", "<Leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-      keymap("n", "<Leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+      -- keymap("n", "<Leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+      keymap("n", "<Leader>sg", require("config.grep-with-args"), { desc = "[S]earch by [G]rep" })
       keymap("n", "<Leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
       keymap('n', '<Leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      keymap("n", "<Leader>sc",builtin.colorscheme, { desc = "[S]earch [C]olorschemen" })
+      keymap("n", "<Leader>sc", builtin.colorscheme, { desc = "[S]earch [C]olorschemen" })
       keymap("n", "<Leader>st", "<Cmd>TodoTelescope<CR>", { desc = "[S]earch [T]odos" })
 
       -- Load extensions for autocomplete

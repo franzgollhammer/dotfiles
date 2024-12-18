@@ -11,9 +11,14 @@ local keymap = vim.keymap.set
 --  Disable space bar
 keymap("n", "<Space>", "<Nop>", opts)
 
+-- source lua files
+keymap("n", "<space><space>x", "<Cmd>source %<CR>", opts)
+keymap("n", "<space>x", ":.lua<CR>", opts)
+keymap("v", "<space>x", ":lua<CR>", opts)
+
 -- netrw
 -- keymap("n", "<Leader>e", ":Ex<CR>", opts)
-
+--
 -- tmux session
 keymap("", "<C-f>", ":silent !tmux neww tmux_session<CR>", opts)
 
