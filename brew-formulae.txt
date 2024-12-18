@@ -105,6 +105,7 @@ net-snmp
 nmap
 node
 nvm
+ollama
 oniguruma
 openexr
 openldap

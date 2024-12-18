@@ -1,7 +1,5 @@
 font-family = JetBrainsMono Nerd Font
 theme = tokyonight
-# theme = rose-pine
-# theme = OneHalfDark
 background = 000000
 background-opacity = 0.90
 selection-invert-fg-bg = true

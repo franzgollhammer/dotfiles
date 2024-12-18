@@ -5,7 +5,7 @@ return {
   -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
   -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   config = function()
-    vim.keymap.set("n", "-", "<Cmd>Oil<CR>", { desc = "Open parent directory" })
+    vim.keymap.set("n", "_", "<Cmd>Oil<CR>", { desc = "Open parent directory" })
 
     require("oil").setup({
       default_file_explorer = false,

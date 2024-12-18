@@ -1,9 +1,6 @@
 # ---- fg zsh conf ----
 # zmodload zsh/zprof # uncomment this line and bottom line to measure startup time
 
-# enable vim mode
-bindkey -v
-
 # ---- var ----
 # set default editor
 if [[ -n $SSH_CONNECTION ]]; then
@@ -57,7 +54,7 @@ alias cl="clear"
 alias ls="eza -F"
 alias l="ls -ah"
 alias ll="ls -lah"
-alias hs="fc -rl 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' | fzf" # search last commands with fzf
+alias sh="fc -rl 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' | fzf" # search last commands with fzf
 alias dot="(cd $DOTFILES; $EDITOR .)"
 alias play="(cd $DEV/playground; $EDITOR .)"
 alias ff="fastfetch"
@@ -73,12 +70,6 @@ alias bbb="brew update && brew upgrade && brew cleanup && brew list --casks > $D
 alias killrunners="pkill -u $(whoami) Runner.Listener"
 alias test="sh $DEV/actions-runner-pf-1/run.sh & sh $DEV/actions-runner-pf-2/run.sh & sh $DEV/actions-runner-pf-3/run.sh"
 alias test-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh & sh $DEV/actions-runner-ucsl-2/run.sh"
-
-# db
-alias pflocal="sh $DEV/db-connections/pf_mongo_local.sh"
-alias pfdev="sh $DEV/db-connections/pf_mongo_dev.sh"
-alias ucsllocal="sh $DEV/db-connections/ucsl_mongo_local.sh" 
-alias ucsldev="sh $DEV/db-connections/ucsl_mongo_dev.sh" 
 
 # git aliases
 alias g="git"
