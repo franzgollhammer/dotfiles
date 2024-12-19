@@ -20,11 +20,11 @@ return {
   {
     "norcalli/nvim-colorizer.lua",
     opts = {},
-    -- config = function()
-    --   require("colorizer").setup({
-    --     '*',
-    --   })
-    -- end,
+    config = function()
+      require("colorizer").setup({
+        '*',
+      })
+    end,
   },
   {
     "numToStr/Comment.nvim",
