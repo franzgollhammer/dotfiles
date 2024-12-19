@@ -32,7 +32,7 @@ keymap("n", "<Esc>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 keymap("n", "<Leader>xx", ":w<CR>:source %<CR>", opts)
 
 -- Yank current file path to system clipboard
-keymap("n", "<Leader>yfp", CopyFileNameToClipBoard, opts)
+keymap("n", "<Leader>fp", CopyFileNameToClipBoard, opts)
 
 -- find and replace word under cursor
 keymap("n", "<Leader>rw", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", opts)
