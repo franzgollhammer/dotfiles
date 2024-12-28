@@ -1,6 +1,7 @@
 font-family = JetBrainsMono Nerd Font
+font-feature = -calt
 theme = tokyonight
 background = 000000
-#background-opacity = 0.90
 selection-invert-fg-bg = true
 copy-on-select = true
+

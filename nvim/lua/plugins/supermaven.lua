@@ -3,6 +3,6 @@ return {
   config = function()
     require("supermaven-nvim").setup({})
     -- local api = require("supermaven-nvim.api")
-    -- api.stop()
+    -- -- api.stop()
   end,
 }

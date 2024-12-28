@@ -7,7 +7,7 @@ local keymap = vim.keymap.set
 --  visual_block_mode = "x",
 --  term_mode = "t",
 --  command_mode = "c",
---
+
 --  Disable space bar
 keymap("n", "<Space>", "<Nop>", opts)
 
@@ -32,7 +32,7 @@ keymap("n", "<Esc>", "<Cmd>noh<CR><Bar><Cmd>echon<CR><CR>", opts)
 keymap("n", "<Leader>xx", ":w<CR>:source %<CR>", opts)
 
 -- Yank current file path to system clipboard
-keymap("n", "<Leader>fp", CopyFileNameToClipBoard, opts)
+keymap("n", "<Leader>fp", CopyFilePathToClipBoard, opts)
 
 -- find and replace word under cursor
 keymap("n", "<Leader>rw", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", opts)
