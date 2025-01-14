@@ -46,6 +46,7 @@ source zsh_autosuggestions
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
+alias c="code"
 alias t="tmux_session"
 alias lg="lazygit"
 alias codei="code-insiders"
@@ -54,7 +55,7 @@ alias cl="clear"
 alias ls="eza -F"
 alias l="ls -ah"
 alias ll="ls -lah"
-alias sh="fc -rl 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' | fzf" # search last commands with fzf
+# alias hist="fc -rl 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' | fzf" # search last commands with fzf
 alias dot="(cd $DOTFILES; $EDITOR .)"
 alias play="(cd $DEV/playground; $EDITOR .)"
 alias ff="fastfetch"
