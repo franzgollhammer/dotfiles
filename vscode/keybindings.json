@@ -4,17 +4,6 @@
     "command": "editor.emmet.action.matchTag",
     "key": "ctrl+m"
   },
-  // Balance in / out
-  {
-    "command": "editor.emmet.action.balanceOut",
-    "key": "ctrl+shift+up",
-    "when": "editorTextFocus && editorLangId == html || editorLangId == vue"
-  },
-  {
-    "command": "editor.emmet.action.balanceIn",
-    "key": "ctrl+shift+down",
-    "when": "editorTextFocus && editorLangId == html || editorLangId == vue"
-  },
   // Terminal
   {
     "command": "workbench.action.terminal.new",
@@ -57,18 +46,15 @@
     "when": "workbench.scm.active"
   },
   {
-    "command": "-workbench.view.scm",
-    "key": "ctrl+shift+g",
-    "when": "workbench.scm.active"
-  },
-  {
     "command": "pr:github.focus",
     "key": "shift+cmd+i"
   },
-  // Disable copilot inline chat
   {
-    "command": "-inlineChat.start",
-    "key": "cmd+i",
-    "when": "editorFocus && inlineChatHasProvider && !editorReadonly"
-  }
+    "key": "shift+cmd+m",
+    "command": "workbench.view.extension.mongoDB"
+  },
+  {
+    "key": "shift+cmd+j",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
 ]

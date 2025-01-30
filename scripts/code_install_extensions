@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat $DOTFILES/vscode/vscode-extensions.txt | xargs -n 1 code --install-extension

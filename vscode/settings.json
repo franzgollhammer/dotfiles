@@ -1,12 +1,29 @@
 {
-  "editor.accessibilitySupport": "off",
+  "editor.fontFamily": "FiraCode Nerd Font, Menlo, Monaco, 'Courier New', monospace",
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll.eslint": "explicit"
   },
   "editor.tabSize": 2,
-  "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
-  "workbench.startupEditor": "none",
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  // "i18n-ally.annotations": false,
+  "git.autofetch": true,
+  "editor.guides.bracketPairs": true,
+  "editor.cursorSmoothCaretAnimation": "explicit",
+  "todo-tree.highlights.useColourScheme": true,
+  "workbench.iconTheme": "vscode-icons",
+  "vsicons.dontShowNewVersionMessage": true,
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "gitlens.views.commitDetails.files.layout": "tree",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "terminal.external.osxExec": "ghostty.app",
+  "github.copilot.editor.enableAutoCompletions": false,
   "workbench.colorTheme": "__dark__",
-  "workbench.activityBar.location": "hidden",
-  "security.promptForLocalFileProtocolHandling": false
 }
