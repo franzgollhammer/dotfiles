@@ -2,7 +2,7 @@ font-size = 15
 font-family = FiraCode Nerd Font Mono
 font-feature = -calt
 theme = tokyonight
-background = 181818
+background = 000000
 selection-invert-fg-bg = true
 copy-on-select = true
 
