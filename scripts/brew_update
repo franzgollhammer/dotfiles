@@ -1,0 +1,11 @@
+#!/bin/bash
+
+brew update && brew upgrade && brew cleanup
+
+# ensure brew list files exist
+mkdir -p "$DOTFILES/brew"
+[ ! -f "$DOTFILES/brew/cask.txt" ] && touch "$DOTFILES/brew/cask.txt"
+[ ! -f "$DOTFILES/brew/formula.txt" ] && touch "$DOTFILES/brew/formula.txt"
+
+brew list --cask > $DOTFILES/brew/cask.txt
+brew list --formula > $DOTFILES/brew/formula.txt

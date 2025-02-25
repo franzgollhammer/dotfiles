@@ -26,6 +26,7 @@ font-juliamono
 font-roboto-mono-nerd-font
 font-ubuntu-mono-nerd-font
 font-zed-mono-nerd-font
+ghostty
 gimp
 github
 google-chrome

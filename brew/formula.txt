@@ -59,7 +59,6 @@ libavif
 libdeflate
 libevent
 libgit2
-libgit2@1.7
 libidn2
 liblinear
 libnghttp2
