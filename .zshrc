@@ -112,7 +112,7 @@ function dir() {
   mkdir "$1" && cd "$1" || exit
 }
 
-# ---- mongo ----
+# ---- mongodb ----
 # mongoexport --uri="mongodb://localhost:27017/myDatabase" --collection=users --query='{ "age": { "$gt": 25 } }' --limit=100 --out=limited_users.json
 # mongoimport --uri="mongodb://localhost:27017/myDatabase" --collection=users --file=limited_users.json --jsonArray
 
