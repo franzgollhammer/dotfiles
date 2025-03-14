@@ -65,7 +65,7 @@ alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
 alias cyrun="npx cypress run -s"
-alias bbb="brew update && brew upgrade && brew cleanup && brew list --casks > $DOTFILES/brew-casks.txt && brew list --formulae > $DOTFILES/brew-formulae.txt"
+alias bbb="brew_update"
 
 # test runner
 alias killrunners="pkill -u $(whoami) Runner.Listener"

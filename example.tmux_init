@@ -1,0 +1,19 @@
+#!/bin/bash
+
+tmux neww -dn "scratch"
+tmux neww -dn "server"
+tmux neww -dn "client"
+tmux neww -dn "ionic"
+tmux neww -dn "cypress"
+tmux neww -dn "db"
+
+tmux send-keys -t "scratch"
+tmux send-keys -t "server" "run s" C-m
+tmux send-keys -t "client" "run c" C-m
+tmux send-keys -t "ionic" "run i" C-m
+# tmux send-keys -t "cypress" "run cy" C-m
+tmux send-keys -t "db" "sleep 5 && $DEV/db/pf_mongo_local.sh" C-m
+
+clear
+
+fastfetch

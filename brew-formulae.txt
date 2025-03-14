@@ -117,9 +117,8 @@ pixman
 pkgconf
 pyenv
 python-certifi
-python-packaging
+python-setuptools
 python@3.11
-python@3.12
 python@3.13
 readline
 ripgrep

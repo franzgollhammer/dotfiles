@@ -16,6 +16,5 @@ naumovs.color-highlight
 redhat.vscode-yaml
 stylelint.vscode-stylelint
 tamasfe.even-better-toml
-timonwong.shellcheck
 vscode-icons-team.vscode-icons
 vue.volar
