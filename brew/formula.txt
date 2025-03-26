@@ -49,6 +49,7 @@ highway
 htop
 httpie
 icu4c@76
+icu4c@77
 imath
 jpeg-turbo
 jpeg-xl
@@ -117,9 +118,8 @@ pixman
 pkgconf
 pyenv
 python-certifi
-python-packaging
+python-setuptools
 python@3.11
-python@3.12
 python@3.13
 readline
 ripgrep

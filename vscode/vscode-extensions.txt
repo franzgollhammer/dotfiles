@@ -4,6 +4,10 @@ dbaeumer.vscode-eslint
 eamodio.gitlens
 editorconfig.editorconfig
 esbenp.prettier-vscode
+formulahendry.auto-close-tag
+formulahendry.auto-rename-tag
+franzgollhammer.jb-fleet-dark
+franzgollhammer.spacecat
 github.copilot
 github.copilot-chat
 github.vscode-github-actions
@@ -12,9 +16,11 @@ gruntfuggly.todo-tree
 jannisx11.batch-rename-extension
 lokalise.i18n-ally
 mechatroner.rainbow-csv
+michaelzhou.fleet-theme
 naumovs.color-highlight
 redhat.vscode-yaml
 stylelint.vscode-stylelint
 tamasfe.even-better-toml
-vscode-icons-team.vscode-icons
+vincaslt.highlight-matching-tag
+vitest.explorer
 vue.volar
