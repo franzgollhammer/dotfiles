@@ -1,14 +1,14 @@
 # Warp Launch Configuration
 #
 #
-# Use this to start a certain configuration of windows, tabs, and panes
-# Open the launch configuration palette to access and open any launch configuration
+# Use this to start a certain configuration of windows, tabs, and panes.
+# Open the launch configuration palette to access and open any launch configuration.
 #
-# This file defines your launch configuration
+# This file defines your launch configuration.
 # More on how to do so here:
-# https://docs.warp.dev/features/session-management/launch-configurations
+# https://docs.warp.dev/features/sessions/launch-configurations
 #
-# All launch configurations are stored under ~/.warp/launch_configurations/
+# All launch configurations are stored under ~/.warp/launch_configurations.
 # Edit them anytime!
 #
 # You can also add commands that run on-start for your launch configurations like so:
@@ -23,30 +23,56 @@
 
 ---
 name: planfred-app
+active_window_index: 1
 windows:
-  - tabs:
-      - title: server | client
+  - active_tab_index: 0
+    tabs:
+      - title: zsh
         layout:
-          split_direction: horizontal
-          panes:
-            - cwd: /Users/fg/dev/planfred-app
-              commands:
-                - exec: node --run s
-            - cwd: /Users/fg/dev/planfred-app
-              commands:
-                - exec: node --run c
+          cwd: /Users/fg/dev/planfred-app
+          is_focused: true
         color: green
+
+      - title: server
+        layout:
+          cwd: /Users/fg/dev/planfred-app
+          is_focused: true
+          commands:
+            - exec: node --run s
+        color: red
+
+      - title: client
+        layout:
+          cwd: /Users/fg/dev/planfred-app
+          is_focused: true
+          commands:
+            - exec: node --run c
+        color: magenta
 
       - title: ionic
         layout:
           cwd: /Users/fg/dev/planfred-app
+          is_focused: true
           commands:
             - exec: node --run i
         color: blue
+        
+      - title: cypress
+        layout:
+          cwd: /Users/fg/dev/planfred-app
+          is_focused: true
+          commands:
+            - exec: node --run cy
+        color: cyan
 
-      # - title: cypress
+      # - title: server | client
       #   layout:
-      #     cwd: /Users/fg/dev/planfred-app
-      #     commands:
-      #       - exec: node --run cy
-      #   color: white
+      #     split_direction: horizontal
+      #     panes:
+      #       - cwd: /Users/fg/dev/planfred-app
+      #         commands:
+      #           - exec: node --run s
+      #       - cwd: /Users/fg/dev/planfred-app
+      #         commands:
+      #           - exec: node --run c
+      #   color: green

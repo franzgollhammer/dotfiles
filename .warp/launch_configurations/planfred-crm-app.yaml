@@ -23,11 +23,20 @@
 
 ---
 name: planfred-crm-app
+active_window_index: 1
 windows:
-  - tabs:
+  - active_tab_index: 0
+    tabs:
+      - title: zsh
+        layout:
+          cwd: /Users/fg/dev/planfred-crm
+          is_focused: true
+        color: green
+
       - title: server
         layout:
           cwd: /Users/fg/dev/planfred-crm
+          is_focused: true
           commands:
             - exec: node --run s
         color: cyan
@@ -35,6 +44,7 @@ windows:
       - title: client
         layout:
           cwd: /Users/fg/dev/planfred-crm
+          is_focused: true
           commands:
             - exec: node --run c
         color: yellow
