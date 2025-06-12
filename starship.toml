@@ -3,8 +3,8 @@ right_format = "$nodejs$lua$python$go$rust$time"
 [bun]
 disabled = true
 
-[package]
-disabled = true
+# [package]
+# disabled = true
 
 [time]
 disabled = false

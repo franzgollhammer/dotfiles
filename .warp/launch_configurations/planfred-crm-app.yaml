@@ -11,6 +11,9 @@
 # All launch configurations are stored under ~/.warp/launch_configurations/
 # Edit them anytime!
 #
+# Color support:
+# Red | Green | Yellow | Blue | Magenta | Cyan
+#
 # You can also add commands that run on-start for your launch configurations like so:
 # ---
 # name: Example with Command

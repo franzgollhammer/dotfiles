@@ -11,6 +11,9 @@
 # All launch configurations are stored under ~/.warp/launch_configurations/
 # Edit them anytime!
 #
+# Color support:
+# Red | Green | Yellow | Blue | Magenta | Cyan
+#
 # You can also add commands that run on-start for your launch configurations like so:
 # ---
 # name: Example with Command
@@ -49,21 +52,13 @@ windows:
             - exec: node --run c
         color: magenta
 
-      - title: ionic
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
-          commands:
-            - exec: node --run i
-        color: blue
-        
-      - title: cypress
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
-          commands:
-            - exec: node --run cy
-        color: cyan
+      # - title: cypress
+      #   layout:
+      #     cwd: /Users/fg/dev/ucsl-app
+      #     is_focused: true
+      #     commands:
+      #       - exec: node --run cy
+      #   color: cyan
 
       # - title: server | client
       #   layout:

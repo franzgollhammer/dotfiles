@@ -8,6 +8,7 @@ authy
 balenaetcher
 basecamp
 brave-browser
+bruno
 cleanshot
 cyberduck
 discord
