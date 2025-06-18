@@ -90,6 +90,8 @@ luv
 lz4
 lzo
 m4
+mc
+minio
 mongodb-community@7.0
 mongodb-database-tools
 mongosh
