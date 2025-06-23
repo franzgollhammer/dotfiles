@@ -34,7 +34,7 @@ windows:
         layout:
           cwd: /Users/fg/dev/planfred-crm
           is_focused: true
-        color: green
+        # color: green
 
       - title: server
         layout:
@@ -42,7 +42,7 @@ windows:
           is_focused: true
           commands:
             - exec: node --run s
-        color: cyan
+        color: blue
 
       - title: client
         layout:
