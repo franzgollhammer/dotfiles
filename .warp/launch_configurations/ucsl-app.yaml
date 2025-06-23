@@ -34,23 +34,7 @@ windows:
         layout:
           cwd: /Users/fg/dev/ucsl-app
           is_focused: true
-        color: red
-
-      - title: minio
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
-          commands:
-            - exec: node --run minio
-        color: white
-
-      - title: mongodb
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
-          commands:
-            - exec: node --run mongodb
-        color: green
+        # color: black
 
       - title: server
         layout:
@@ -68,6 +52,22 @@ windows:
             - exec: node --run c
         color: yellow
 
+      - title: minio
+        layout:
+          cwd: /Users/fg/dev/ucsl-app
+          is_focused: true
+          commands:
+            - exec: node --run minio
+        color: magenta
+
+      - title: mongodb
+        layout:
+          cwd: /Users/fg/dev/ucsl-app
+          is_focused: true
+          commands:
+            - exec: node --run mongodb
+        color: green
+     
       # - title: cypress
       #   layout:
       #     cwd: /Users/fg/dev/ucsl-app

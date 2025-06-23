@@ -34,7 +34,7 @@ windows:
         layout:
           cwd: /Users/fg/dev/planfred-app
           is_focused: true
-        color: green
+        # color: green
 
       - title: server
         layout:
@@ -42,7 +42,7 @@ windows:
           is_focused: true
           commands:
             - exec: node --run s
-        color: red
+        color: blue
 
       - title: client
         layout:
@@ -50,7 +50,7 @@ windows:
           is_focused: true
           commands:
             - exec: node --run c
-        color: magenta
+        color: yellow
 
       - title: ionic
         layout:
@@ -58,7 +58,7 @@ windows:
           is_focused: true
           commands:
             - exec: node --run i
-        color: blue
+        color: red
         
       - title: cypress
         layout:
