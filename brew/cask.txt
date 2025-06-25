@@ -13,6 +13,7 @@ cleanshot
 cyberduck
 discord
 docker
+docker-desktop
 figma
 firefox
 firefox@developer-edition
@@ -64,3 +65,4 @@ wave
 wezterm
 whatsapp
 wireshark
+wireshark-app

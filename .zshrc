@@ -93,6 +93,7 @@ alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias gl="git log --graph --oneline"
 alias glog="git log --graph --parents"
 alias gp="git pull"
+alias wt="git worktree"
 alias gps="git push"
 alias gco="git checkout"
 alias gcob="git checkout -b"
