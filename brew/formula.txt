@@ -92,6 +92,7 @@ lzo
 m4
 mc
 minio
+mongodb-community
 mongodb-community@7.0
 mongodb-database-tools
 mongosh
