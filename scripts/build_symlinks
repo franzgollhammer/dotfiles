@@ -13,3 +13,10 @@ ln -s $DOTFILES_DIR/.warp $HOME/.warp
 ln -s $DOTFILES_DIR/nvim $HOME/.config/nvim
 ln -s $DOTFILES_DIR/starship.toml $HOME/.config/starship.toml
 ln -s $DOTFILES_DIR/ghostty $HOME/.config/ghostty
+
+# list all symlinks created
+echo "Symlinks created:"
+find $HOME -maxdepth 1 -type l | while read link; do
+    target=$(readlink "$link")
+    echo "$link -> $target"
+done

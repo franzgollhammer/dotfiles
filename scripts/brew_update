@@ -9,3 +9,5 @@ mkdir -p "$DOTFILES/brew"
 
 brew list --cask > $DOTFILES/brew/cask.txt
 brew list --formula > $DOTFILES/brew/formula.txt
+
+echo "Homebrew packages updated and lists saved to $DOTFILES/brew/cask.txt and $DOTFILES/brew/formula.txt"

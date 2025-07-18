@@ -1,3 +1,4 @@
 #!/bin/bash
 
 code --list-extensions > $DOTFILES/vscode/vscode-extensions.txt
+echo "VSCode extensions exported to $DOTFILES/vscode/vscode-extensions.txt"

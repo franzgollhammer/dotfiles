@@ -1,3 +1,4 @@
 #!/bin/bash
 
 code-insiders --list-extensions | xargs -n 1 code-insiders --uninstall-extension
+echo "VSCode Insiders extensions uninstalled."
