@@ -1,6 +1,4 @@
 font-size = 15
 font-feature = -calt
-theme = dark+
-background = 000000
 selection-invert-fg-bg = true
 copy-on-select = true

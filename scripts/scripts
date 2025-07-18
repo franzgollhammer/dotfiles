@@ -1,0 +1,6 @@
+#!/bin/bash
+
+selected=$(ls $SCRIPTS | fzf)
+if [ -n "$selected" ]; then
+    exec "$SCRIPTS/$selected"
+fi
