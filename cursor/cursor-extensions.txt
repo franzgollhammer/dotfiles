@@ -1,0 +1,4 @@
+# Cursor Extensions
+# This file contains the list of Cursor extensions
+# Run cursor_export_extensions to update this file
+# Run cursor_install_extensions to install all extensions from this file

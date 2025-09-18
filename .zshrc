@@ -6,9 +6,9 @@
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR="code"
-  export VISUAL="code"
-  export VUE_EDITOR="code"
+  export EDITOR="cursor"
+  export VISUAL="cursor"
+  export VUE_EDITOR="cursor"
 fi
 
 # set default dirs
@@ -46,7 +46,7 @@ source zsh_autosuggestions
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias c="code"
+alias c="cursor"
 alias ci="code-insiders"
 alias t="tmux_session"
 alias lg="lazygit"

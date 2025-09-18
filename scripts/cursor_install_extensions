@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cat "$DOTFILES/cursor/cursor-extensions.txt" | xargs -n 1 cursor --install-extension
+echo "Cursor extensions installed from $DOTFILES/cursor/cursor-extensions.txt"

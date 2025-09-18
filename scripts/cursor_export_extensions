@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cursor --list-extensions > "$DOTFILES/cursor/cursor-extensions.txt"
+echo "Cursor extensions exported to $DOTFILES/cursor/cursor-extensions.txt"
