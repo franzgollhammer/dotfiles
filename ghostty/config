@@ -1,10 +1,5 @@
-font-size = 15
+font-size = 13
 font-feature = -calt
-theme = basic
-selection-invert-fg-bg = true
 copy-on-select = true
-cursor-style = block
-cursor-style-blink = false
 shell-integration-features = no-cursor
-window-width = 1600
-window-height = 1000
+theme = basic

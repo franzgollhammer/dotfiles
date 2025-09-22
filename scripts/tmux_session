@@ -1,17 +1,26 @@
-#!/bin/zsh
+#!/bin/bash
 
-SELECTED_DIR=$(find $DEV -type d -mindepth 1 -maxdepth 1 | fzf)
+# Enhanced tmux session management with better error handling
+
+SELECTED_DIR=$(find $DEV -type d -mindepth 1 -maxdepth 1 | fzf --prompt="Select project: " --height=40% --border)
 
 if [[ -z "$SELECTED_DIR" ]]; then
+  echo "No directory selected"
   exit 0
 fi
 
+# Clean up session name and limit length
 SELECTED_NAME=$(basename $SELECTED_DIR | tr ":,. " "____")
+if [[ ${#SELECTED_NAME} -gt 20 ]]; then
+  SELECTED_NAME=${SELECTED_NAME:0:20}
+fi
 
 switch_to() {
   if [[ -z $TMUX ]]; then
+    echo "Attaching to session: $SELECTED_NAME"
     tmux attach-session -t $SELECTED_NAME
   else
+    echo "Switching to session: $SELECTED_NAME"
     tmux switch-client -t $SELECTED_NAME
   fi
 }
@@ -21,7 +30,15 @@ if tmux has-session -t=$SELECTED_NAME 2> /dev/null; then
   exit 0
 fi
 
+echo "Creating new session: $SELECTED_NAME in $SELECTED_DIR"
 tmux new-session -ds $SELECTED_NAME -c $SELECTED_DIR
-tmux send-keys -t $SELECTED_NAME "tmux_init" C-m
+
+# Run tmux_init if it exists in the project directory or home
+if [[ -f "$SELECTED_DIR/.tmux_init" && -x "$SELECTED_DIR/.tmux_init" ]]; then
+  tmux send-keys -t $SELECTED_NAME "./.tmux_init" C-m
+elif [[ -f "$HOME/.tmux_init" && -x "$HOME/.tmux_init" ]]; then
+  tmux send-keys -t $SELECTED_NAME "tmux_init" C-m
+fi
+
 switch_to
 

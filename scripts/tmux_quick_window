@@ -1,0 +1,61 @@
+#!/bin/bash
+# tmux_quick_window - Quick window creation for common development tasks
+
+if [[ -z "$TMUX" ]]; then
+  echo "Not in a tmux session"
+  exit 1
+fi
+
+echo "Quick window creation:"
+echo "1) Server (npm run dev)"
+echo "2) Client (npm start)" 
+echo "3) Database (mongod)"
+echo "4) Tests (npm test)"
+echo "5) Logs (tail -f logs/app.log)"
+echo "6) Git (lazygit)"
+echo "7) Editor (nvim)"
+echo "8) Custom command"
+
+read -p "Choice (1-8): " choice
+
+case $choice in
+  1) 
+    tmux neww -dn "server" "npm run dev" 
+    echo "Created server window"
+    ;;
+  2) 
+    tmux neww -dn "client" "npm start" 
+    echo "Created client window"
+    ;;
+  3) 
+    tmux neww -dn "db" "mongod" 
+    echo "Created database window"
+    ;;
+  4) 
+    tmux neww -dn "tests" "npm test" 
+    echo "Created tests window"
+    ;;
+  5) 
+    tmux neww -dn "logs" "tail -f logs/app.log" 
+    echo "Created logs window"
+    ;;
+  6) 
+    tmux neww -dn "git" "lazygit" 
+    echo "Created git window"
+    ;;
+  7) 
+    tmux neww -dn "editor" "nvim" 
+    echo "Created editor window"
+    ;;
+  8)
+    echo -n "Enter command: "
+    read -r cmd
+    echo -n "Enter window name: "
+    read -r name
+    tmux neww -dn "$name" "$cmd"
+    echo "Created custom window '$name'"
+    ;;
+  *) 
+    echo "Invalid choice" 
+    ;;
+esac

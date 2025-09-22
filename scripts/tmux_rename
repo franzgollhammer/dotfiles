@@ -1,0 +1,30 @@
+#!/bin/bash
+# tmux_rename - Rename current tmux session
+
+if [[ -z "$TMUX" ]]; then
+  echo "Not in a tmux session"
+  exit 1
+fi
+
+current_session=$(tmux display-message -p '#S')
+echo "Current session: $current_session"
+
+echo "Available sessions:"
+tmux list-sessions -F "#{session_name}"
+
+echo -n "New session name: "
+read -r new_name
+
+if [[ -z "$new_name" ]]; then
+  echo "No name provided"
+  exit 1
+fi
+
+# Check if new name already exists
+if tmux has-session -t "$new_name" 2>/dev/null; then
+  echo "Session '$new_name' already exists"
+  exit 1
+fi
+
+tmux rename-session "$new_name"
+echo "Session renamed to: $new_name"

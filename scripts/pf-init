@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Tab 1: Client
+open -na Ghostty.app --args --command "cd $DEV/planfred-app && node --run c"
+
+# Tab 2: Server  
+open -na Ghostty.app --args --command "cd $DEV/planfred-app && node --run s"
+
+# Tab 3: Tests
+open -na Ghostty.app --args --command "cd $DEV/planfred-app && node --run cy"
+
+echo "Started 3 ghostty windows for planfred development"
+echo "Client: http://localhost:9000"
+echo "Server: http://localhost:3000" 
+echo "Cypress: E2E testing interface"
