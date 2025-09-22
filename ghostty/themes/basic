@@ -1,0 +1,32 @@
+# Basic Terminal Theme for Ghostty
+# Based on macOS Terminal Basic profile
+
+# Background and foreground colors
+background = #ffffff
+foreground = #000000
+
+# Cursor colors
+# cursor-color = #000000
+# cursor-text = #ffffff
+
+# Selection colors
+selection-background = #404040
+selection-foreground = #ffffff
+
+# 16-color palette (ANSI colors)
+palette = 0=#000000 
+palette = 1=#ff0000 
+palette = 2=#00ff00 
+palette = 3=#b4a000
+palette = 4=#0000ff 
+palette = 5=#ff00ff 
+palette = 6=#00ffff 
+palette = 7=#ffffff 
+palette = 8=#808080 
+palette = 9=#ff8080 
+palette = 10=#80ff80
+palette = 11=#d0c040
+palette = 12=#8080ff
+palette = 13=#ff80ff
+palette = 14=#80ffff
+palette = 15=#ffffff
