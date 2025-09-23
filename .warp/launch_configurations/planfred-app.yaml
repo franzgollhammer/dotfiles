@@ -34,12 +34,12 @@ windows:
         layout:
           cwd: /Users/fg/dev/planfred-app
           is_focused: true
-        # color: green
+          commands:
+            - exec: fastfetch
 
       - title: server
         layout:
           cwd: /Users/fg/dev/planfred-app
-          is_focused: true
           commands:
             - exec: node --run s
         color: blue
@@ -47,7 +47,6 @@ windows:
       - title: client
         layout:
           cwd: /Users/fg/dev/planfred-app
-          is_focused: true
           commands:
             - exec: node --run c
         color: yellow
@@ -55,7 +54,6 @@ windows:
       - title: ionic
         layout:
           cwd: /Users/fg/dev/planfred-app
-          is_focused: true
           commands:
             - exec: node --run i
         color: red
@@ -63,7 +61,6 @@ windows:
       - title: cypress
         layout:
           cwd: /Users/fg/dev/planfred-app
-          is_focused: true
           commands:
             - exec: node --run cy
         color: cyan

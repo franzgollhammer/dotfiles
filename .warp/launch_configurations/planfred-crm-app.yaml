@@ -34,12 +34,13 @@ windows:
         layout:
           cwd: /Users/fg/dev/planfred-crm
           is_focused: true
+          commands:
+            - exec: fastfetch
         # color: green
 
       - title: server
         layout:
           cwd: /Users/fg/dev/planfred-crm
-          is_focused: true
           commands:
             - exec: node --run s
         color: blue
@@ -47,7 +48,6 @@ windows:
       - title: client
         layout:
           cwd: /Users/fg/dev/planfred-crm
-          is_focused: true
           commands:
             - exec: node --run c
         color: yellow

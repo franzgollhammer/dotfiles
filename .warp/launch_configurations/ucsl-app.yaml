@@ -34,12 +34,13 @@ windows:
         layout:
           cwd: /Users/fg/dev/ucsl-app
           is_focused: true
+          commands:
+            - exec: fastfetch
         # color: black
 
       - title: server
         layout:
           cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
           commands:
             - exec: node --run s
         color: blue
@@ -47,7 +48,6 @@ windows:
       - title: client
         layout:
           cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
           commands:
             - exec: node --run c
         color: yellow
@@ -55,7 +55,6 @@ windows:
       - title: minio
         layout:
           cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
           commands:
             - exec: node --run minio
         color: magenta
@@ -63,7 +62,6 @@ windows:
       - title: mongodb
         layout:
           cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
           commands:
             - exec: node --run mongodb
         color: green
