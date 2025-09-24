@@ -1,0 +1,24 @@
+# Basic Dark Warp Theme
+accent: "#5C5CFF" # Bright blue accent
+background: "#000000" # Black background
+details: darker # Dark theme
+foreground: "#E5E5E5" # Light gray foreground
+terminal_colors: # Custom ANSI escape colors
+  bright:
+    black: "#7F7F7F" # Bright black
+    blue: "#5C5CFF" # Bright blue
+    cyan: "#00FFFF" # Bright cyan
+    green: "#00FF00" # Bright green
+    magenta: "#FF00FF" # Bright magenta
+    red: "#FF0000" # Bright red
+    white: "#FFFFFF" # Bright white
+    yellow: "#FFFF00" # Bright yellow
+  normal:
+    black: "#000000" # Black
+    blue: "#0000EE" # Blue
+    cyan: "#00CDCD" # Cyan
+    green: "#00CD00" # Green
+    magenta: "#CD00CD" # Magenta
+    red: "#CD0000" # Red
+    white: "#E5E5E5" # White
+    yellow: "#CDCD00" # Yellow
