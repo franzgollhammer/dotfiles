@@ -88,7 +88,6 @@ alias pop="git stash pop"
 alias apply="git stash apply"
 alias gc="git commit"
 alias gcm="git commit -m"
-alias gm="git merge"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias gl="git log --graph"
 alias glog="git log --graph --parents"
