@@ -32,7 +32,6 @@ freetype
 fribidi
 fx
 fzf
-gcc
 gd
 gdbm
 gettext
@@ -51,7 +50,6 @@ htop
 httpie
 icu4c@77
 imath
-isl
 jpeg-turbo
 jpeg-xl
 jq
@@ -63,7 +61,6 @@ libevent
 libgit2
 libidn2
 liblinear
-libmpc
 libnghttp2
 libnghttp3
 libngtcp2
@@ -102,7 +99,6 @@ mongodb-community@7.0
 mongodb-database-tools
 mongosh
 mpdecimal
-mpfr
 n
 ncurses
 neofetch

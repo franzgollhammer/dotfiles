@@ -12,8 +12,6 @@ bruno
 cleanshot
 cyberduck
 discord
-docker
-docker-desktop
 figma
 firefox
 firefox@developer-edition
