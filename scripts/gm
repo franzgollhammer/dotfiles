@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+  git for-each-ref --sort=-committerdate refs/remotes/ --format='%(refname:lstrip=2)' | sed 's|^origin/||' | fzf | xargs git merge
+else
+  git merge $1
+fi
