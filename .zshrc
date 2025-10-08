@@ -103,12 +103,19 @@ alias repo="gh repo view --web"
 alias pr="gh pr view --web || gh pr create --web"
 
 # ---- functions ----
-function d() {
-  cd $DEV/"$1" || exit
-}
-
 function dir() {
   mkdir "$1" && cd "$1" || exit
+}
+
+function d() {
+  if [ -z "$1" ]; then
+    selected=$(ls "$DEV" | fzf)
+    if [ -n "$selected" ]; then
+      cd "$DEV"/"$selected"
+    fi
+  else
+    cd "$DEV"/"$1"
+  fi
 }
 
 # ---- mongodb ----
