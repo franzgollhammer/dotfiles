@@ -111,6 +111,8 @@ function d() {
     if [ -n "$selected" ]; then
       cd "$DEV"/"$selected"
     fi
+  elif [ "$1" = '.' ]; then
+    cd "$DEV"
   else
     cd "$DEV"/"$1"
   fi
