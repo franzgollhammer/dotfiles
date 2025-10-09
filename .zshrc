@@ -46,8 +46,6 @@ source zsh_autosuggestions
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias c="cursor"
-alias ci="code-insiders"
 alias t="tmux_session"
 alias lg="lazygit"
 alias run="node --run"
@@ -118,6 +116,16 @@ function d() {
   fi
 }
 
+function c() {
+  if [ -z "$1" ]; then
+    selected=$(ls "$DEV" | fzf)
+    if [ -n "$selected" ]; then
+      $EDITOR "$DEV"/"$selected"
+    fi
+  else
+    $EDITOR "$1"
+  fi
+}
 # ---- mongodb ----
 # mongoexport --uri="mongodb://localhost:27017/myDatabase" --collection=users --query='{ "age": { "$gt": 25 } }' --limit=100 --out=limited_users.json
 # mongoimport --uri="mongodb://localhost:27017/myDatabase" --collection=users --file=limited_users.json --jsonArray
