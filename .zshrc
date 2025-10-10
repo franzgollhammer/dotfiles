@@ -53,7 +53,6 @@ alias cl="clear"
 alias ls="ls -FG"
 alias l="ls -ah"
 alias ll="ls -lah"
-# alias hist="fc -rl 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//' | fzf" # search last commands with fzf
 alias dot="(cd $DOTFILES; $EDITOR .)"
 alias play="(cd $DEV/playground; $EDITOR .)"
 alias ff="fastfetch"
