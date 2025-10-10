@@ -122,7 +122,6 @@ pkgconf
 pyenv
 python-certifi
 python-setuptools
-python@3.11
 python@3.13
 readline
 ripgrep
