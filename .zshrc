@@ -66,8 +66,8 @@ alias bbb="brew_update"
 
 # test runner
 alias killrunners="pkill -u $(whoami) Runner.Listener"
-alias test="sh $DEV/actions-runner-pf-1/run.sh & sh $DEV/actions-runner-pf-2/run.sh & sh $DEV/actions-runner-pf-3/run.sh"
-alias test-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh & sh $DEV/actions-runner-ucsl-2/run.sh"
+alias actions-runner-pf="sh $DEV/actions-runner-pf-1/run.sh"
+alias actions-runner-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh"
 
 # git aliases
 alias g="git"
