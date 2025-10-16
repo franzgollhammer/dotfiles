@@ -1,0 +1,7 @@
+#!/bin/bash
+
+extensions=(txt cs css go html js json lua md py scss sh zsh toml ts vue yaml yml)
+
+for ext in "${extensions[@]}"; do
+  duti -s com.cursor.Cursor "$ext" all
+done
