@@ -19,6 +19,7 @@ cocoapods
 cowsay
 curl
 dprint
+duti
 entr
 eza
 fastfetch
