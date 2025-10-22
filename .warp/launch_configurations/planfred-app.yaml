@@ -61,7 +61,7 @@ windows:
       - title: cypress
         layout:
           cwd: /Users/fg/dev/planfred-app
-          commands:
+          # commands:
             # - exec: node --run cy
         color: cyan
 
