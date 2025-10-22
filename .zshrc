@@ -85,6 +85,7 @@ alias pop="git stash pop"
 alias apply="git stash apply"
 alias gc="git commit"
 alias gcm="git commit -m"
+alias grh="git reset --hard"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias gl="git log --graph"
 alias gp="git pull"
