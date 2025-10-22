@@ -62,7 +62,7 @@ windows:
         layout:
           cwd: /Users/fg/dev/planfred-app
           commands:
-            - exec: node --run cy
+            # - exec: node --run cy
         color: cyan
 
       # - title: server | client
