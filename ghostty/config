@@ -1,5 +1,2 @@
 font-size = 13
-font-feature = -calt
-copy-on-select = true
-shell-integration-features = no-cursor
-theme = basic
+Theme = Monokai Classic
