@@ -18,6 +18,7 @@ cmatrix
 cocoapods
 cowsay
 curl
+dav1d
 dprint
 duti
 entr
