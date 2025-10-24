@@ -88,6 +88,7 @@ alias gcm="git commit -m"
 alias grh="git reset --hard"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias gl="git log --graph"
+alias glf="git log -p -- " # log patch <filename>
 alias gp="git pull"
 alias wt="git worktree"
 alias gps="git push"
