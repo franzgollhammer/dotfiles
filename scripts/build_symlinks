@@ -3,21 +3,11 @@
 # set dir if env variable not set
 DOTFILES_DIR=${DOTFILES:-$HOME/dev/dotfiles}
 
-# remove old config files
-rm -rf $HOME/.zshrc $HOME/.tmux.conf $HOME/.config/nvim/ $HOME/.config/starship.toml $HOME/.warp/ $HOME/.config/ghostty/ $HOME/.config/zed/
-
 # link new config files
-ln -s $DOTFILES_DIR/.zshrc $HOME/.zshrc
-ln -s $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
-ln -s $DOTFILES_DIR/.warp $HOME/.warp
-ln -s $DOTFILES_DIR/nvim $HOME/.config/nvim
-ln -s $DOTFILES_DIR/starship.toml $HOME/.config/starship.toml
-ln -s $DOTFILES_DIR/ghostty $HOME/.config/ghostty
-ln -s $DOTFILES_DIR/zed $HOME/.config/zed
-
-# list all symlinks created
-echo "Symlinks created:"
-find $HOME -maxdepth 1 -type l | while read link; do
-    target=$(readlink "$link")
-    echo "$link -> $target"
-done
+ln -snfv $DOTFILES_DIR/.zshrc $HOME/.zshrc
+ln -snfv $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
+ln -snfv $DOTFILES_DIR/.warp $HOME/.warp
+ln -snfv $DOTFILES_DIR/nvim $HOME/.config/nvim
+ln -snfv $DOTFILES_DIR/starship.toml $HOME/.config/starship.toml
+ln -snfv $DOTFILES_DIR/ghostty $HOME/.config/ghostty
+ln -snfv $DOTFILES_DIR/zed $HOME/.config/zed
