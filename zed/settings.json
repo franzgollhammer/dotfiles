@@ -1,0 +1,67 @@
+{
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_icon": false
+  },
+  "file_types": {
+    "GitHub Actions": [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+  },
+  "lsp": {
+    "gh-actions-language-server": {
+      "initialization_options": {
+        "sessionToken": "" // set to PAT for more information
+      }
+    }
+  },
+  "languages": {
+    "TypeScript": {
+      "formatter": {
+        "external": {
+          "command": "cat << EOF",
+          "arguments": []
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "cat << EOF",
+          "arguments": []
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "Vue.js": {
+      "formatter": {
+        "external": {
+          "command": "cat << EOF",
+          "arguments": []
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    }
+  },
+  "agent": {
+    "always_allow_tool_actions": false,
+    "default_profile": "write",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5"
+    },
+    "model_parameters": []
+  },
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "theme": "Zedokai Classic",
+  "buffer_font_family": "JetBrainsMono Nerd Font"
+}
