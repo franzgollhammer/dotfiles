@@ -30,14 +30,6 @@ active_window_index: 1
 windows:
   - active_tab_index: 0
     tabs:
-      - title: zsh
-        layout:
-          cwd: /Users/fg/dev/planfred-crm
-          is_focused: true
-          commands:
-            - exec: fastfetch
-        # color: green
-
       - title: server
         layout:
           cwd: /Users/fg/dev/planfred-crm
@@ -51,4 +43,3 @@ windows:
           commands:
             - exec: node --run c
         color: yellow
-        

@@ -30,14 +30,6 @@ active_window_index: 1
 windows:
   - active_tab_index: 0
     tabs:
-      - title: zsh
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          is_focused: true
-          commands:
-            - exec: fastfetch
-        # color: black
-
       - title: server
         layout:
           cwd: /Users/fg/dev/ucsl-app
@@ -65,7 +57,7 @@ windows:
           commands:
             - exec: node --run mongodb
         color: green
-     
+
       # - title: cypress
       #   layout:
       #     cwd: /Users/fg/dev/ucsl-app

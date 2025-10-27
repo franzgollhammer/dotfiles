@@ -1,13 +1,7 @@
-# right_format = "$nodejs$lua$python$go$rust$time"
+right_format = "$time"
 
-# [bun]
-# disabled = true
-
-# [package]
-# disabled = true
-
-# [time]
-# disabled = false
+[time]
+disabled = false
 
 [git_status]
 ahead = "↑"
