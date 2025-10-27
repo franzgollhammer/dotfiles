@@ -3,11 +3,10 @@
 # set dir if env variable not set
 DOTFILES_DIR=${DOTFILES:-$HOME/dev/dotfiles}
 
-# link new config files
-ln -snfv $DOTFILES_DIR/.zshrc $HOME/.zshrc
-ln -snfv $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
-ln -snfv $DOTFILES_DIR/.warp $HOME/.warp
-ln -snfv $DOTFILES_DIR/nvim $HOME/.config/nvim
-ln -snfv $DOTFILES_DIR/starship.toml $HOME/.config/starship.toml
-ln -snfv $DOTFILES_DIR/ghostty $HOME/.config/ghostty
-ln -snfv $DOTFILES_DIR/zed $HOME/.config/zed
+# link config files
+[ ! -L $HOME/.zshrc ] && rm -rfv $HOME/.zshrc; ln -snfv $DOTFILES_DIR/.zshrc $HOME/.zshrc
+[ ! -L $HOME/.config/starship.toml ] && rm -rfv $HOME/.config/starship.toml; ln -snfv $DOTFILES_DIR/starship.toml $HOME/.config/starship.toml
+[ ! -L $HOME/.tmux.conf ] && rm -rfv $HOME/.tmux.conf; ln -snfv $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
+# link config dirs
+[ ! -L $HOME/.config/zed/ ] && rm -rfv $HOME/.config/zed/; ln -snfv $DOTFILES_DIR/zed/ $HOME/.config/zed/
+[ ! -L $HOME/.warp/ ] && rm -rfv $HOME/.warp/; ln -snfv $DOTFILES_DIR/warp/ $HOME/.warp/
