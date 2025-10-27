@@ -1,12 +1,17 @@
 #!/bin/bash
 
 # set dir if env variable not set
-DOTFILES_DIR=${DOTFILES:-$HOME/dev/dotfiles}
+DOTFILES_DIR="${DOTFILES:-$HOME/dev/dotfiles}"
 
 # link config files
-[ ! -L $HOME/.zshrc ] && rm -rfv $HOME/.zshrc; ln -snfv $DOTFILES_DIR/.zshrc $HOME/.zshrc
-[ ! -L $HOME/.config/starship.toml ] && rm -rfv $HOME/.config/starship.toml; ln -snfv $DOTFILES_DIR/starship.toml $HOME/.config/starship.toml
-[ ! -L $HOME/.tmux.conf ] && rm -rfv $HOME/.tmux.conf; ln -snfv $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
-# link config dirs
-[ ! -L $HOME/.config/zed/ ] && rm -rfv $HOME/.config/zed/; ln -snfv $DOTFILES_DIR/zed/ $HOME/.config/zed/
-[ ! -L $HOME/.warp/ ] && rm -rfv $HOME/.warp/; ln -snfv $DOTFILES_DIR/warp/ $HOME/.warp/
+[ ! -L "$HOME/.zshrc" ] && rm -rfv "$HOME/.zshrc"; ln -snfv "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+[ ! -L "$HOME/.config/starship.toml" ] && rm -rfv "$HOME/.config/starship.toml"; ln -snfv "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
+[ ! -L "$HOME/.tmux.conf" ] && rm -rfv "$HOME/.tmux.conf"; ln -snfv "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
+
+# zed
+[ ! -L "$HOME/.config/zed/keymap.json" ] && rm -rfv "$HOME/.config/zed/keymap.json"; ln -snfv "$DOTFILES_DIR/zed/keymap.json" "$HOME/.config/zed/keymap.json"
+[ ! -L "$HOME/.config/zed/settings.json" ] && rm -rfv "$HOME/.config/zed/settings.json"; ln -snfv "$DOTFILES_DIR/zed/settings.json" "$HOME/.config/zed/settings.json"
+
+# warp
+# Try this - use && for both commands so ln only runs if rm succeeds
+[ ! -L "$HOME/.warp" ] && rm -rfv "$HOME/.warp" && ln -snfv "$DOTFILES_DIR/warp" "$HOME/.warp"
