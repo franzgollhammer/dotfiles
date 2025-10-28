@@ -1,5 +1,13 @@
 {
-  "theme": "Gruvbox Dark",
+  "git_panel": {
+    "sort_by_path": false
+  },
+  "indent_guides": {
+    "active_line_width": 2,
+    "enabled": true,
+    "coloring": "indent_aware"
+  },
+  "theme": "Gruvbox Dark Hard",
   "tabs": {
     "file_icons": true,
     "git_status": true
@@ -66,6 +74,6 @@
     },
     "model_parameters": []
   },
-  // "icon_theme": "Colored Zed Icons Theme Dark",
+  "icon_theme": "Colored Zed Icons Theme Dark",
   "buffer_font_family": "JetBrainsMono Nerd Font"
 }
