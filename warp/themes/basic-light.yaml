@@ -1,24 +1,24 @@
 # Basic Warp Theme
-accent: "#0000ff" # Blue accent
-background: "#ffffff" # White background
+accent: '#0000ff' # Blue accent
+background: '#ffffff' # White background
 details: lighter # Light theme
-foreground: "#000000" # Black foreground
+foreground: '#000000' # Black foreground
 terminal_colors: # ANSI escape colors from Ghostty basic theme
   bright:
-    black: "#808080" # Bright black
-    blue: "#8080ff" # Bright blue
-    cyan: "#80ffff" # Bright cyan
-    green: "#80ff80" # Bright green
-    magenta: "#ff80ff" # Bright magenta
-    red: "#ff8080" # Bright red
-    white: "#ffffff" # Bright white
-    yellow: "#d0c040" # Bright yellow
+    black: '#808080' # Bright black
+    blue: '#8080ff' # Bright blue
+    cyan: '#80ffff' # Bright cyan
+    green: '#80ff80' # Bright green
+    magenta: '#ff80ff' # Bright magenta
+    red: '#ff8080' # Bright red
+    white: '#ffffff' # Bright white
+    yellow: '#d0c040' # Bright yellow
   normal:
-    black: "#000000" # Black
-    blue: "#0000ff" # Blue
-    cyan: "#00ffff" # Cyan
-    green: "#00ff00" # Green
-    magenta: "#ff00ff" # Magenta
-    red: "#ff0000" # Red
-    white: "#ffffff" # White
-    yellow: "#b4a000" # Yellow
+    black: '#000000' # Black
+    blue: '#0000ff' # Blue
+    cyan: '#00ffff' # Cyan
+    green: '#00ff00' # Green
+    magenta: '#ff00ff' # Magenta
+    red: '#ff0000' # Red
+    white: '#ffffff' # White
+    yellow: '#b4a000' # Yellow
