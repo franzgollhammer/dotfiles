@@ -6,9 +6,9 @@
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR="code"
-  export VISUAL="code"
-  export VUE_EDITOR="code"
+  export EDITOR="cursor"
+  export VISUAL="cursor"
+  export VUE_EDITOR="cursor"
 fi
 
 # set default dirs
