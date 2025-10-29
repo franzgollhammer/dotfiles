@@ -1,7 +1,6 @@
 1password
 1password-cli
 adobe-creative-cloud
-alacritty
 android-studio
 appcleaner
 authy

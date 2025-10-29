@@ -151,7 +151,6 @@ wget
 woff2
 xorgproto
 xz
-yyjson
 zellij
 zoxide
 zsh-autosuggestions
