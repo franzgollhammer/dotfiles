@@ -4,5 +4,5 @@ right_format = "$time"
 disabled = false
 
 [git_status]
-ahead = "↑"
-behind = "↓"
+# ahead = "↑"
+# behind = "↓"
