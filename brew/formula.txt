@@ -51,6 +51,7 @@ highway
 htop
 httpie
 icu4c@77
+icu4c@78
 imath
 jpeg-turbo
 jpeg-xl
@@ -125,6 +126,7 @@ pyenv
 python-certifi
 python-setuptools
 python@3.13
+python@3.14
 readline
 ripgrep
 rtmpdump
@@ -151,6 +153,7 @@ wget
 woff2
 xorgproto
 xz
+yyjson
 zellij
 zoxide
 zsh-autosuggestions

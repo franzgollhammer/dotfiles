@@ -51,12 +51,12 @@ windows:
             - exec: node --run i
         color: red
 
-      # - title: cypress
-      #   layout:
-      #     cwd: /Users/fg/dev/planfred-app
-      # commands:
+      - title: cypress
+        color: cyan
+        layout:
+          cwd: /Users/fg/dev/planfred-app
+        commands:
       # - exec: node --run cy
-      # color: cyan
 
       # - title: server | client
       #   layout:
