@@ -1,0 +1,8 @@
+right_format = "$time"
+
+[time]
+disabled = false
+
+[git_status]
+ahead = "↑"
+behind = "↓"

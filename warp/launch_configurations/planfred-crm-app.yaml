@@ -30,6 +30,13 @@ active_window_index: 1
 windows:
   - active_tab_index: 0
     tabs:
+      - title:
+        layout:
+          cwd: /Users/fg/dev/planfred-crm
+          commands:
+            - exec: fastfetch
+        color:
+
       - title: server
         layout:
           cwd: /Users/fg/dev/planfred-crm
