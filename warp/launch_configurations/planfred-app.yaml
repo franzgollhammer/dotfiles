@@ -35,6 +35,7 @@ windows:
           cwd: /Users/fg/dev/planfred-app
           commands:
             - exec: fastfetch
+            - exec: $EDITOR .
         color:
 
       - title: server
