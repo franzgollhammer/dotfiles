@@ -1,319 +1,283 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-continuation_prompt = "[.](bright-black) "
-
 right_format = "$time"
 
-[time]
-disabled = false
-format = '\[[$time]($style)\]'
-
-[character]
-success_symbol = "[>](bold green)"
-error_symbol = "[x](bold red)"
-vimcmd_symbol = "[<](bold green)"
-vimcmd_visual_symbol = "[<](bold yellow)"
-vimcmd_replace_symbol = "[<](bold purple)"
-vimcmd_replace_one_symbol = "[<](bold purple)"
-
-[git_commit]
-tag_symbol = " tag "
-
-[git_status]
-ahead = ">"
-behind = "<"
-diverged = "<>"
-renamed = "r"
-deleted = "x"
-
 [aws]
-format = '\[[aws ($profile)(\($region\))(\[$duration\])]($style)\]'
+format = '[\[$symbol($profile)(\($region\))(\[$duration\])\]]($style)'
 
 [azure]
-format = '\[[azure ($subscription)]($style)\]'
+format = '[\[$symbol($subscription)\]]($style)'
 
 [battery]
-format = '\[[battery ($percentage)]($style)\]'
+format = '[\[$symbol$percentage\]]($style)'
 
 [buf]
-format = '\[[buf ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [bun]
-format = '\[[bun ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [c]
-format = '\[[c ($version(-$name))]($style)\]'
-
-[cpp]
-format = '\[[cpp ($version(-$name))]($style)\]'
-
-[cobol]
-format = '\[[cobol ($version)]($style)\]'
-
-[conda]
-format = '\[[conda$environment]($style)\]'
-
-[container]
-format = '\[[container \[$name\]]($style)\]'
-
-[crystal]
-format = '\[[crystal ($version)]($style)\]'
+format = '[\[$symbol($version(-$name))\]]($style)'
 
 [cmake]
-format = '\[[cmake ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
+
+[cmd_duration]
+format = '[\[⏱ $duration\]]($style)'
+
+[cobol]
+format = '[\[$symbol($version)\]]($style)'
+
+[conda]
+format = '[\[$symbol$environment\]]($style)'
+
+[container]
+format = '[\[$symbol \[$name\]\]]($style)'
+
+[cpp]
+format = '[\[$symbol($version(-$name))\]]($style)'
+
+[crystal]
+format = '[\[$symbol($version)\]]($style)'
 
 [daml]
-format = '\[[daml ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [dart]
-format = '\[[dart ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [deno]
-format = '\[[deno ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
-[dotnet]
-format = '\[[dotnet ($version)(🎯 $tfm)]($style)\]'
-
-[directory]
-read_only = " ro"
+[direnv]
+format = '[\[$symbol$loaded/$allowed\]]($style)'
 
 [docker_context]
-format = '\[[docker$context]($style)\]'
+format = '[\[$symbol$context\]]($style)'
+
+[dotnet]
+format = '[\[$symbol($version)(🎯 $tfm)\]]($style)'
 
 [elixir]
-format = '\[[elixir ($version \(OTP $otp_version\))]($style)\]'
+format = '[\[$symbol($version \(OTP $otp_version\))\]]($style)'
 
 [elm]
-format = '\[[elm ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [erlang]
-format = '\[[erlang ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [fennel]
-format = '\[[fennel ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [fortran]
-format = '\[[fortran ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [fossil_branch]
-symbol = "\\[fossil\\] "
-truncation_symbol = "..."
+format = '[\[$symbol$branch\]]($style)'
+
+[fossil_metrics]
+format = '[\[+$added]($added_style)\]\[[-$deleted]($deleted_style)\]'
 
 [gcloud]
-format = '\[[gcloud$account(@$domain)(\($region\))]($style)\]'
+format = '[\[$symbol$account(@$domain)(\($region\))\]]($style)'
 
 [git_branch]
-format = '\[[git ($branch)]($style)\]'
+format = '[\[$symbol$branch\]]($style)'
+
+[git_commit]
+format = '[\[\($hash$tag\)\]]($style)'
+
+[git_metrics]
+format = '[\[+$added]($added_style)\]\[[-$deleted]($deleted_style)\]'
+
+[git_state]
+format = '[\[$state ($progress_current/$progress_total)\]]($style)'
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style))'
 
 [gleam]
-format = '\[[gleam ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [golang]
-format = '\[[golang ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [gradle]
-format = '\[[gradle ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [guix_shell]
-format = '\[[guix]\]'
+format = '[\[$symbol\]]($style)'
 
 [haskell]
-format = '\[[haskell ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [haxe]
-format = '\[[haxe ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [helm]
-format = '\[[helm ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [hg_branch]
-format = '\[[hg$branch]($style)\]'
+format = '[\[$symbol$branch\]]($style)'
 
 [hostname]
-format = '\[[ssh ($hostname)]($style)\] '
+format = '[\[$ssh_symbol($hostname)\]]($style) '
 
 [java]
-format = '\[[java ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [jobs]
-format = '\[[jobs$number]($style)\]'
+format = '[\[$symbol$number\]]($style)'
 
 [julia]
-format = '\[[julia ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [kotlin]
-format = '\[[kotlin ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [kubernetes]
-format = '\[[kubernetes$context( \($namespace\))]($style)\]'
+format = '[\[$symbol$context( \($namespace\))\]]($style)'
+
+[localip]
+format = '[\[$localipv4\]]($style)'
 
 [lua]
-format = '\[[lua ($version)]($style)\]'
-
-[nodejs]
-format = '\[[nodejs ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [memory_usage]
-format = '\[memory[$ram( | $swap)]($style)\]'
+format = '\[$symbol[$ram( | $swap)\]]($style)'
 
 [meson]
-format = '\[[meson$project]($style)\]'
+format = '[\[$symbol$project\]]($style)'
+
+[mise]
+format = '[\[$symbol$health\]]($style)'
 
 [mojo]
-format = '\[[mojo ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [nats]
-format = '\[[nats$name]($style)\]'
+format = '[\[$symbol$name\]]($style)'
 
 [netns]
-format = '\[[netns \[$name\]]($style)\]'
+format = '[\[$symbol \[$name\]\]]($style)'
 
 [nim]
-format = '\[[nim ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [nix_shell]
-format = '\[[nix$state( \($name\))]($style)\]'
+format = '[\[$symbol$state( \($name\))\]]($style)'
+
+[nodejs]
+format = '[\[$symbol($version)\]]($style)'
 
 [ocaml]
-symbol = "\\[ml\\] "
+format = '[\[$symbol($version)(\($switch_indicator$switch_name\))\]]($style)'
 
 [odin]
-format = '\[[odin ($version )]($style)\]'
+format = '[\[$symbol($version )\]]($style)'
 
 [opa]
-format = '\[[opa ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [openstack]
-format = '\[[openstack$cloud(\($project\))]($style)\]'
+format = '[\[$symbol$cloud(\($project\))\]]($style)'
 
-[os.symbols]
-AIX = "aix "
-Alpaquita = "alq "
-AlmaLinux = "alma "
-Alpine = "alp "
-Amazon = "amz "
-Android = "andr "
-AOSC = "aosc "
-Arch = "rch "
-Artix = "atx "
-Bluefin = "blfn "
-CachyOS = "cach "
-CentOS = "cent "
-Debian = "deb "
-DragonFly = "dfbsd "
-Emscripten = "emsc "
-EndeavourOS = "ndev "
-Fedora = "fed "
-FreeBSD = "fbsd "
-Garuda = "garu "
-Gentoo = "gent "
-HardenedBSD = "hbsd "
-Illumos = "lum "
-Kali = "kali "
-Linux = "lnx "
-Mabox = "mbox "
-Macos = "mac "
-Manjaro = "mjo "
-Mariner = "mrn "
-MidnightBSD = "mid "
-Mint = "mint "
-NetBSD = "nbsd "
-NixOS = "nix "
-Nobara = "nbra "
-OpenBSD = "obsd "
-OpenCloudOS = "ocos "
-openEuler = "oeul "
-openSUSE = "osuse "
-OracleLinux = "orac "
-Pop = "pop "
-Raspbian = "rasp "
-Redhat = "rhl "
-RedHatEnterprise = "rhel "
-RockyLinux = "rky "
-Redox = "redox "
-Solus = "sol "
-SUSE = "suse "
-Ubuntu = "ubnt "
-Ultramarine = "ultm "
-Unknown = "unk "
-Uos = "uos "
-Void = "void "
-Windows = "win "
+[os]
+format = '[\[$symbol\]]($style)'
 
 [package]
-format = '\[[pkg$version]($style)\]'
+format = '[\[$symbol$version\]]($style)'
 
 [perl]
-format = '\[[perl ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [php]
-format = '\[[php ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [pijul_channel]
-format = '\[[pijul$channel]($style)\]'
+format = '[\[$symbol$channel\]]($style)'
 
 [pixi]
-format = '\[[pixi$version( $environment)]($style)\]'
+format = '[\[$symbol$version( $environment)\]]($style)'
 
 [pulumi]
-format = '\[[pulumi$stack]($style)\]'
+format = '[\[$symbol$stack\]]($style)'
 
 [purescript]
-format = '\[[purs ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [python]
-format = '\[[py${pyenv_prefix}(${version})(\\($virtualenv\\))]($style)\]'
+format = '[\[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))\]]($style)'
 
 [quarto]
-format = '\[[quarto ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [raku]
-format = '\[[raku ($version-$vm_version)]($style)\]'
+format = '[\[$symbol($version-$vm_version)\]]($style)'
 
 [red]
-format = '\[[red ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [rlang]
-symbol = "\\[r\\] "
+format = '[\[$symbol($version)\]]($style)'
 
 [ruby]
-symbol = "\\[rb\\] "
+format = '[\[$symbol($version)\]]($style)'
 
 [rust]
-symbol = "\\[rs\\] "
+format = '[\[$symbol($version)\]]($style)'
 
 [scala]
-format = '\[[scala ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [shell]
-format = '\[[$indicator]($style)\]'
+format = '[\[$indicator\]]($style)'
 
-[spack]
-format = '\[[spack$environment]($style)\]'
+[singularity]
+format = '[\[$symbol\[$env\]\]]($style)'
 
 [solidity]
-format = '\[[solidity ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
+
+[spack]
+format = '[\[$symbol$environment\]]($style)'
 
 [status]
-format = '\[[status$status]($style)\]'
+format = '[\[$symbol$status\]]($style)'
 
 [sudo]
-format = '\[[as sudo]($style)\]'
+format = '[\[as $symbol\]]($style)'
 
 [swift]
-format = '\[[swift ($version)]($style)\]'
-
-[typst]
-format = '\[[typst ($version)]($style)\]'
-
-[vagrant]
-format = '\[[vagrant ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [terraform]
-format = '\[[terraform$workspace]($style)\]'
+format = '[\[$symbol$workspace\]]($style)'
+
+[time]
+format = '[\[$time\]]($style)'
+disabled = false
+
+[typst]
+format = '[\[$symbol($version)\]]($style)'
+
+[username]
+format = '[\[$user\]]($style)'
+
+[vagrant]
+format = '[\[$symbol($version)\]]($style)'
+
+[vcsh]
+format = '\[vcsh [$symbol$repo\]]($style)'
+
+[vlang]
+format = '[\[$symbol($version)\]]($style)'
 
 [xmake]
-format = '\[[xmake ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
 
 [zig]
-format = '\[[zig ($version)]($style)\]'
+format = '[\[$symbol($version)\]]($style)'
