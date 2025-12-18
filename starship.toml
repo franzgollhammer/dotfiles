@@ -26,10 +26,10 @@ renamed = "r"
 deleted = "x"
 
 [aws]
-symbol = "aws "
+symbol = "\\[aws\\] "
 
 [azure]
-symbol = "az "
+symbol = "\\[az\\]"
 
 [battery]
 full_symbol = "full "
@@ -39,159 +39,159 @@ unknown_symbol = "unknown "
 empty_symbol = "empty "
 
 [buf]
-symbol = "buf "
+symbol = "\\[buf\\] "
 
 [bun]
-symbol = "bun "
+symbol = "\\[bun\\] "
 
 [c]
-symbol = "C "
+symbol = "\\[C\\] "
 
 [cpp]
-symbol = "C++ "
+symbol = "\\[C++\\] "
 
 [cobol]
-symbol = "cobol "
+symbol = "\\[cobol\\] "
 
 [conda]
-symbol = "conda "
+symbol = "\\[conda\\] "
 
 [container]
-symbol = "container "
+symbol = "\\[container\\] "
 
 [crystal]
-symbol = "cr "
+symbol = "\\[cr\\] "
 
 [cmake]
-symbol = "cmake "
+symbol = "\\[cmake\\] "
 
 [daml]
-symbol = "daml "
+symbol = "\\[daml\\] "
 
 [dart]
-symbol = "dart "
+symbol = "\\[dart\\] "
 
 [deno]
-symbol = "deno "
+symbol = "\\[deno\\] "
 
 [dotnet]
 format = "via [$symbol($version )(target $tfm )]($style)"
-symbol = ".NET "
+symbol = "\\[.NET\\] "
 
 [directory]
 read_only = " ro"
 
 [docker_context]
-symbol = "docker "
+symbol = "\\[docker\\] "
 
 [elixir]
-symbol = "exs "
+symbol = "\\[exs\\] "
 
 [elm]
-symbol = "elm "
+symbol = "\\[elm\\] "
 
 [erlang]
-symbol = "erl "
+symbol = "\\[erl\\] "
 
 [fennel]
-symbol = "fnl "
+symbol = "\\[fnl\\] "
 
 [fortran]
-symbol = "fortran "
+symbol = "\\[fortran\\] "
 
 [fossil_branch]
-symbol = "fossil "
+symbol = "\\[fossil\\] "
 truncation_symbol = "..."
 
 [gcloud]
-symbol = "gcp "
+symbol = "\\[gcp\\] "
 
 [git_branch]
-symbol = "git "
+symbol = "\\[git\\] "
 truncation_symbol = "..."
 
 [gleam]
-symbol = "gleam "
+symbol = "\\[gleam\\] "
 
 [golang]
-symbol = "go "
+symbol = "\\[go\\] "
 
 [gradle]
-symbol = "gradle "
+symbol = "\\[gradle\\] "
 
 [guix_shell]
-symbol = "guix "
+symbol = "\\[guix\\] "
 
 [haskell]
-symbol = "haskell "
+symbol = "\\[haskell\\] "
 
 [haxe]
-symbol = "hx "
+symbol = "\\[hx\\] "
 
 [helm]
-symbol = "helm "
+symbol = "\\[helm\\] "
 
 [hg_branch]
-symbol = "hg "
+symbol = "\\[hg\\] "
 truncation_symbol = "..."
 
 [hostname]
 ssh_symbol = "ssh "
 
 [java]
-symbol = "java "
+symbol = "\\[java\\] "
 
 [jobs]
-symbol = "*"
+symbol = "\\[*\\]"
 
 [julia]
-symbol = "jl "
+symbol = "\\[jl\\] "
 
 [kotlin]
-symbol = "kt "
+symbol = "\\[kt\\] "
 
 [kubernetes]
-symbol = "kubernetes "
+symbol = "\\[kubernetes\\] "
 
 [lua]
-symbol = "lua "
+symbol = "\\[lua\\] "
 
 [nodejs]
-symbol = "nodejs "
+symbol = "\\[nodejs\\] "
 
 [memory_usage]
-symbol = "memory "
+symbol = "\\[memory\\] "
 
 [meson]
-symbol = "meson "
+symbol = "\\[meson\\] "
 truncation_symbol = "..."
 
 [mojo]
-symbol = "mojo "
+symbol = "\\[mojo\\] "
 
 [nats]
-symbol = "nats "
+symbol = "\\[nats\\] "
 
 [netns]
-symbol = "netns "
+symbol = "\\[netns\\] "
 
 [nim]
-symbol = "nim "
+symbol = "\\[nim\\] "
 
 [nix_shell]
-symbol = "nix "
+symbol = "\\[nix\\] "
 
 [ocaml]
-symbol = "ml "
+symbol = "\\[ml\\] "
 
 [odin]
-symbol = "odin "
+symbol = "\\[odin\\] "
 
 [opa]
-symbol = "opa "
+symbol = "\\[opa\\] "
 
 [openstack]
-symbol = "openstack "
+symbol = "\\[openstack\\] "
 
 [os.symbols]
 AIX = "aix "
@@ -248,84 +248,84 @@ Void = "void "
 Windows = "win "
 
 [package]
-symbol = "pkg "
+symbol = "\\[pkg\\] "
 
 [perl]
-symbol = "pl "
+symbol = "\\[pl\\] "
 
 [php]
-symbol = "php "
+symbol = "\\[php\\] "
 
 [pijul_channel]
-symbol = "pijul "
+symbol = "\\[pijul\\] "
 truncation_symbol = "..."
 
 [pixi]
-symbol = "pixi "
+symbol = "\\[pixi\\] "
 
 [pulumi]
-symbol = "pulumi "
+symbol = "\\[pulumi\\] "
 
 [purescript]
-symbol = "purs "
+symbol = "\\[purs\\] "
 
 [python]
-symbol = "py "
+symbol = "\\[py\\] "
 
 [quarto]
-symbol = "quarto "
+symbol = "\\[quarto\\] "
 
 [raku]
-symbol = "raku "
+symbol = "\\[raku\\] "
 
 [red]
-symbol = "red "
+symbol = "\\[red\\] "
 
 [rlang]
-symbol = "r "
+symbol = "\\[r\\] "
 
 [ruby]
-symbol = "rb "
+symbol = "\\[rb\\] "
 
 [rust]
-symbol = "rs "
+symbol = "\\[rs\\] "
 
 [scala]
-symbol = "scala "
+symbol = "\\[scala\\] "
 
 [shlvl]
-symbol = "shlvl "
+symbol = "\\[shlvl\\] "
 
 [spack]
-symbol = "spack "
+symbol = "\\[spack\\] "
 
 [solidity]
-symbol = "solidity "
+symbol = "\\[solidity\\] "
 
 [status]
-symbol = "[x](bold red) "
+symbol = "\\[[x](bold red)\\] "
 not_executable_symbol = "noexec"
 not_found_symbol = "notfound"
 sigint_symbol = "sigint"
 signal_symbol = "sig"
 
 [sudo]
-symbol = "sudo "
+symbol = "\\[sudo\\] "
 
 [swift]
-symbol = "swift "
+symbol = "\\[swift\\] "
 
 [typst]
-symbol = "typst "
+symbol = "\\[typst\\] "
 
 [vagrant]
-symbol = "vagrant "
+symbol = "\\[vagrant\\] "
 
 [terraform]
-symbol = "terraform "
+symbol = "\\[terraform\\] "
 
 [xmake]
-symbol = "xmake "
+symbol = "\\[xmake\\] "
 
 [zig]
-symbol = "zig "
+symbol = "\\[zig\\] "
