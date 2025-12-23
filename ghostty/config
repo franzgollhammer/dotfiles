@@ -1,2 +1,2 @@
-font-size = 13
-theme = Monokai Classic
+keybind = global:cmd+#=toggle_visibility
+theme = xterm-dark

@@ -7,7 +7,7 @@
     "enabled": true,
     "coloring": "indent_aware"
   },
-  "theme": "Gruvbox Dark Hard",
+  "theme": "Fleet Dark",
   "tabs": {
     "file_icons": true,
     "git_status": true
