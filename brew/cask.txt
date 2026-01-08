@@ -23,6 +23,7 @@ font-hack-nerd-font
 font-jetbrains-mono-nerd-font
 font-juliamono
 font-roboto-mono-nerd-font
+font-sf-mono-nerd-font
 font-ubuntu-mono-nerd-font
 font-zed-mono-nerd-font
 ghostty

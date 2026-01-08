@@ -16,10 +16,12 @@ export DEV="$HOME/dev"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
+export LOCAL_BIN="$HOME/.local/bin"
 
 # ---- path ----
 export PATH="$SCRIPTS:"\
 "$RUBY_DIR:"\
+"$LOCAL_BIN:"\
 "$PATH"
 
 # ---- nvm ----
@@ -61,7 +63,6 @@ alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
-alias cyrun="npx cypress run -s"
 alias bbb="brew_update"
 
 # test runner
@@ -70,30 +71,10 @@ alias actions-runner-pf="sh $DEV/actions-runner-pf-1/run.sh"
 alias actions-runner-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh"
 
 # git aliases
-alias g="git"
-alias s="git status"
-alias gbr="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout"
-alias ga="git add"
-alias gd="git diff"
-alias gaa="git add ."
-alias gap="git add -p"
-alias gs="git stash"
 alias gundo="git reset --soft HEAD~1"
-alias stash="git stash -u"
-alias stashls="git stash list"
-alias pop="git stash pop"
-alias apply="git stash apply"
-alias gc="git commit"
-alias gcm="git commit -m"
 alias grh="git reset --hard"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
-alias gl="git log --graph"
 alias glf="git log -p -- " # log patch <filename>
-alias gp="git pull"
-alias wt="git worktree"
-alias gps="git push"
-alias gco="git checkout"
-alias gcob="git checkout -b"
 alias com="git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
 alias yolo="git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
 

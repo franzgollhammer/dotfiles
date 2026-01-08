@@ -1,79 +1,77 @@
 {
   "git_panel": {
-    "sort_by_path": false
+    "sort_by_path": false,
   },
   "indent_guides": {
     "active_line_width": 2,
     "enabled": true,
-    "coloring": "indent_aware"
+    "coloring": "indent_aware",
   },
   "theme": "Fleet Dark",
   "tabs": {
     "file_icons": true,
-    "git_status": true
+    "git_status": true,
   },
   "title_bar": {
     "show_menus": false,
-    "show_branch_icon": false
+    "show_branch_icon": false,
   },
   "file_types": {
-    "GitHub Actions": [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+    "GitHub Actions": [".github/workflows/*.yml", ".github/workflows/*.yaml"],
   },
   "lsp": {
     "gh-actions-language-server": {
       "initialization_options": {
-        "sessionToken": "" // set to PAT for more information
-      }
-    }
+        "sessionToken": "", // set to PAT for more information
+      },
+    },
   },
   "languages": {
     "TypeScript": {
       "formatter": {
         "external": {
           "command": "cat << EOF",
-          "arguments": []
-        }
+          "arguments": [],
+        },
       },
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
+        "source.fixAll.eslint": true,
+      },
     },
     "JavaScript": {
       "formatter": {
         "external": {
           "command": "cat << EOF",
-          "arguments": []
-        }
+          "arguments": [],
+        },
       },
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
+        "source.fixAll.eslint": true,
+      },
     },
     "Vue.js": {
       "formatter": {
         "external": {
           "command": "cat << EOF",
-          "arguments": []
-        }
+          "arguments": [],
+        },
       },
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
-    }
+        "source.fixAll.eslint": true,
+      },
+    },
   },
   "agent": {
     "always_allow_tool_actions": false,
     "default_profile": "ask",
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-sonnet-4-latest"
+      "model": "claude-sonnet-4-latest",
     },
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "claude-3-5-haiku-latest"
+      "model": "claude-3-5-haiku-latest",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
-  "icon_theme": "Colored Zed Icons Theme Dark",
-  "buffer_font_family": "JetBrainsMono Nerd Font"
 }
