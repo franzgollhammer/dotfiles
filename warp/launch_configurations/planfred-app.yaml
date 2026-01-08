@@ -26,9 +26,9 @@
 
 ---
 name: planfred-app
-active_window_index: 1
+active_window_index: 0
 windows:
-  - active_tab_index: 0
+  - active_tab_index: 1
     tabs:
       - title:
         layout:
@@ -36,35 +36,52 @@ windows:
           commands:
             - exec: fastfetch
             - exec: $EDITOR .
-        color:
-
-      - title: server
-        layout:
-          cwd: /Users/fg/dev/planfred-app
-          commands:
-            - exec: node --run s
         color: blue
 
-      - title: client
+      - title: Server | Client | Ionic
         layout:
-          cwd: /Users/fg/dev/planfred-app
-          commands:
-            - exec: node --run c
-        color: yellow
-
-      - title: ionic
-        layout:
-          cwd: /Users/fg/dev/planfred-app
-          commands:
-            - exec: node --run i
-        color: red
+          split_direction: vertical
+          panes:
+            - cwd: /Users/fg/dev/planfred-app
+              commands:
+                - exec: node --run s
+            - split_direction: horizontal
+              panes:
+                - cwd: /Users/fg/dev/planfred-app
+                  commands:
+                    - exec: node --run c
+                - cwd: /Users/fg/dev/planfred-app
+                  commands:
+                    - exec: node --run i
+        color: green
 
       - title: cypress
         color: cyan
         layout:
           cwd: /Users/fg/dev/planfred-app
-        commands:
-      # - exec: node --run cy
+          commands:
+            - exec: node --run cy
+
+      # - title: server
+      #   layout:
+      #     cwd: /Users/fg/dev/planfred-app
+      #     commands:
+      #       - exec: node --run s
+      #   color: blue
+
+      # - title: client
+      #   layout:
+      #     cwd: /Users/fg/dev/planfred-app
+      #     commands:
+      #       - exec: node --run c
+      #   color: yellow
+
+      # - title: ionic
+      #   layout:
+      #     cwd: /Users/fg/dev/planfred-app
+      #     commands:
+      #       - exec: node --run i
+      #   color: red
 
       # - title: server | client
       #   layout:
