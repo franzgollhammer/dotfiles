@@ -30,41 +30,61 @@ active_window_index: 1
 windows:
   - active_tab_index: 0
     tabs:
+      - title: server | client | mongodb | minio
+        layout:
+          split_direction: vertical
+          panes:
+            - cwd: /Users/fg/dev/ucsl-app
+              commands:
+                - exec: node --run s
+            - split_direction: horizontal
+              panes:
+                - cwd: /Users/fg/dev/ucsl-app
+                  commands:
+                    - exec: node --run c
+                - cwd: /Users/fg/dev/ucsl-app
+                  commands:
+                    - exec: node --run mongodb
+                - cwd: /Users/fg/dev/ucsl-app
+                  commands:
+                    - exec: node --run minio
+        color: magenta
+
       - title:
         layout:
           cwd: /Users/fg/dev/ucsl-app
           commands:
             - exec: fastfetch
             - exec: $EDITOR .
-        color:
-
-      - title: server
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          commands:
-            - exec: node --run s
         color: blue
 
-      - title: client
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          commands:
-            - exec: node --run c
-        color: yellow
+      # - title: server
+      #   layout:
+      #     cwd: /Users/fg/dev/ucsl-app
+      #     commands:
+      #       - exec: node --run s
+      #   color: blue
 
-      - title: minio
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          commands:
-            - exec: node --run minio
-        color: magenta
+      # - title: client
+      #   layout:
+      #     cwd: /Users/fg/dev/ucsl-app
+      #     commands:
+      #       - exec: node --run c
+      #   color: yellow
 
-      - title: mongodb
-        layout:
-          cwd: /Users/fg/dev/ucsl-app
-          commands:
-            - exec: node --run mongodb
-        color: green
+      # - title: minio
+      #   layout:
+      #     cwd: /Users/fg/dev/ucsl-app
+      #     commands:
+      #       - exec: node --run minio
+      #   color: magenta
+
+      # - title: mongodb
+      #   layout:
+      #     cwd: /Users/fg/dev/ucsl-app
+      #     commands:
+      #       - exec: node --run mongodb
+      #   color: green
 
       # - title: cypress
       #   layout:
