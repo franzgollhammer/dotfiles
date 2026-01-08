@@ -28,17 +28,9 @@
 name: planfred-app
 active_window_index: 0
 windows:
-  - active_tab_index: 1
+  - active_tab_index: 0
     tabs:
-      - title:
-        layout:
-          cwd: /Users/fg/dev/planfred-app
-          commands:
-            - exec: fastfetch
-            - exec: $EDITOR .
-        color: blue
-
-      - title: Server | Client | Ionic
+      - title: server | client | ionic
         layout:
           split_direction: vertical
           panes:
@@ -61,6 +53,14 @@ windows:
           cwd: /Users/fg/dev/planfred-app
           commands:
             - exec: node --run cy
+
+      - title:
+        layout:
+          cwd: /Users/fg/dev/planfred-app
+          commands:
+            - exec: fastfetch
+            - exec: $EDITOR .
+        color: blue
 
       # - title: server
       #   layout:
