@@ -71,6 +71,14 @@ alias actions-runner-pf="sh $DEV/actions-runner-pf-1/run.sh"
 alias actions-runner-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh"
 
 # git aliases
+alias s="git status"
+alias ga="git add"
+alias gaa="git add ."
+alias gp="git pull"
+alias gps="git push"
+alias gcm="git commit -m"
+alias gco="git checkout"
+alias gcob="git checkout -b"
 alias gundo="git reset --soft HEAD~1"
 alias grh="git reset --hard"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
