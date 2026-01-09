@@ -26,28 +26,19 @@
 
 ---
 name: planfred-crm-app
-active_window_index: 1
+active_window_index: 0
 windows:
   - active_tab_index: 0
     tabs:
-      - title:
+      - title: server | client
         layout:
-          cwd: /Users/fg/dev/planfred-crm
-          commands:
-            - exec: fastfetch
-            - exec: $EDITOR .
-        color:
+          split_direction: vertical
+          panes:
+            - cwd: /Users/fg/dev/planfred-crm
+              commands:
+                - exec: node --run s
+            - cwd: /Users/fg/dev/planfred-crm
+              commands:
+                - exec: node --run c
+        color: cyan
 
-      - title: server
-        layout:
-          cwd: /Users/fg/dev/planfred-crm
-          commands:
-            - exec: node --run s
-        color: blue
-
-      - title: client
-        layout:
-          cwd: /Users/fg/dev/planfred-crm
-          commands:
-            - exec: node --run c
-        color: yellow

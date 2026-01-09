@@ -111,6 +111,4 @@ function c() {
   fi
 }
 
-
-fastfetch
 # zprof # uncomment measure startup time
