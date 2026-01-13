@@ -72,6 +72,7 @@ alias actions-runner-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh"
 
 # git aliases
 alias s="git status"
+alias gl="git log --graph"
 alias ga="git add"
 alias gaa="git add ."
 alias gp="git pull"
