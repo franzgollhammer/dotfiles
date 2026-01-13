@@ -6,7 +6,6 @@ asciiquarium
 autoconf
 bash
 bat
-berkeley-db
 berkeley-db@5
 brotli
 btop
