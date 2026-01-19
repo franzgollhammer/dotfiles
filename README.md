@@ -4,3 +4,4 @@
 - build symlinks for dotfiles with `./scripts/build-symlinks`
 - install brew formulae `brew install brew/formula.txt`
 - install brew casks `brew install brew/casks.txt`
+
