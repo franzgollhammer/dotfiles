@@ -89,7 +89,6 @@ alias grh="git reset --hard"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias glf="git log -p -- " # log patch <filename>
 alias com="git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
-alias yolo="git add .; git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
 
 # github
 alias repo="gh repo view --web"
@@ -125,3 +124,6 @@ function c() {
 }
 
 # zprof # uncomment measure startup time
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
