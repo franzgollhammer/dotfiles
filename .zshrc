@@ -44,6 +44,10 @@ eval "$(zoxide init zsh)"
 # ---- autosuggestions ----
 source zsh_autosuggestions
 
+# iTerm2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
 # ---- aliases ----
 alias v="nvim"
 alias vi="nvim"
@@ -71,21 +75,7 @@ alias actions-runner-pf="sh $DEV/actions-runner-pf-1/run.sh"
 alias actions-runner-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh"
 
 # git aliases
-alias s="git status"
-alias gl="git log --graph"
-alias ga="git add"
-alias gaa="git add ."
-alias gp="git pull"
-alias gps="git push"
-alias gcm="git commit -m"
-alias gco="git checkout"
-alias gcp="git cherry-pick"
-alias stash="git stash -u"
-alias pop="git stash pop"
-alias apply="git stash apply"
-alias gcob="git checkout -b"
 alias gundo="git reset --soft HEAD~1"
-alias grh="git reset --hard"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias glf="git log -p -- " # log patch <filename>
 alias com="git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
@@ -123,7 +113,6 @@ function c() {
   fi
 }
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 # zprof # uncomment measure startup time
 
 
