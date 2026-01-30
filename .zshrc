@@ -113,5 +113,4 @@ function c() {
 }
 
 # zprof # uncomment measure startup time
-
-
+# ---- end fg zsh conf ----
