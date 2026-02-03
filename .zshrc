@@ -15,7 +15,7 @@ fi
 export DEV="$HOME/dev"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
-export RUBY_DIR="$(brew --prefix)/opt/ruby/bin"
+export RUBY_DIR="/opt/homebrew/opt/ruby/bin"
 export LOCAL_BIN="$HOME/.local/bin"
 
 # ---- path ----
