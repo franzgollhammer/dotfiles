@@ -1,3 +1,4 @@
+ada-url
 aom
 apr
 apr-util
@@ -25,6 +26,7 @@ eza
 fastfetch
 fd
 fish
+fmt
 fontconfig
 fontforge
 fortune
@@ -45,6 +47,7 @@ go
 gotop
 graphite2
 harfbuzz
+hdrhistogram_c
 helix
 highway
 htop
@@ -58,6 +61,7 @@ jq
 krb5
 lazygit
 libavif
+libdatrie
 libdeflate
 libevent
 libgit2
@@ -71,6 +75,7 @@ libpq
 libsodium
 libspiro
 libssh2
+libthai
 libtiff
 libtool
 libuninameslist
@@ -86,6 +91,7 @@ libxrender
 libyaml
 libzip
 little-cms2
+llhttp
 lolcat
 lpeg
 lua
@@ -96,6 +102,8 @@ lzo
 m4
 mc
 minio
+mlx
+mlx-c
 mongodb-community
 mongodb-community@7.0
 mongodb-database-tools

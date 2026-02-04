@@ -1,8 +1,18 @@
 # ---- fg zsh conf ----
 # zmodload zsh/zprof # uncomment this line and bottom line to measure startup time
 
+# ---- oh-my-zsh ----
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+
+plugins=(
+  nvm
+  fzf
+  zoxide
+  zsh-autosuggestions
+)
+
 # ---- var ----
-# set default editor
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -11,7 +21,6 @@ else
   export VUE_EDITOR="code-insiders"
 fi
 
-# set default dirs
 export DEV="$HOME/dev"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
@@ -24,29 +33,14 @@ export PATH="$SCRIPTS:"\
 "$LOCAL_BIN:"\
 "$PATH"
 
-# ---- nvm ----
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-# ---- fzf ----
-source <(fzf --zsh)
-
 # ---- .env ----
-# load env variables from .env file
 export $(grep -v '^#' $DOTFILES/.env | xargs)
 
-# ---- starship ----
-eval "$(starship init zsh)"
+# ---- source oh-my-zsh ----
+source $ZSH/oh-my-zsh.sh
 
-# ---- zoxide ----
-eval "$(zoxide init zsh)"
-
-# ---- autosuggestions ----
-source zsh_autosuggestions
-
-# iTerm2 shell integration
+# ---- iTerm2 shell integration ----
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 
 # ---- aliases ----
 alias v="nvim"
@@ -111,6 +105,3 @@ function c() {
     $EDITOR "$1"
   fi
 }
-
-# zprof # uncomment measure startup time
-# ---- end fg zsh conf ----
