@@ -1,0 +1,16 @@
+format = "$directory$git_branch$git_status$git_metrics$nodejs\n$character"
+right_format = "$time"
+
+[directory]
+truncation_length = 1
+truncate_to_repo = true
+
+[git_branch]
+format = "[$branch]($style) "
+
+[nodejs]
+format = "[$symbol$version]($style) "
+
+[time]
+disabled = false
+format = "[$time]($style)"
