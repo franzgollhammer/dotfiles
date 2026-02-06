@@ -1,10 +1,10 @@
 # Steel Dark Theme for Ghostty
 # Derived from custom VS Code dark theme with steel blue accent
 
-background = #191a1b
+background = #121314
 foreground = #bbbebf
 cursor-color = #bfbfbf
-cursor-text = #191a1b
+cursor-text = #121314
 selection-background = #264b5d
 selection-foreground = #bbbebf
 
