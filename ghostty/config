@@ -1,2 +1,35 @@
+# theme
+theme = steel-dark
+background-opacity = 0.9
+window-padding-x = 10
+window-padding-y = 10
+
+# keybinds
 keybind = global:cmd+#=toggle_visibility
-theme = xterm-dark
+
+# cursor
+cursor-style = block
+cursor-style-blink = false
+
+# macOS
+macos-option-as-alt = true
+font-thicken = true
+
+# clipboard
+copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
+
+# mouse
+mouse-hide-while-typing = true
+
+# window
+confirm-close-surface = false
+window-save-state = always
+unfocused-split-opacity = 0.5
+
+# notifications (desktop notification on bell)
+bell-features = system
+
+# shell integration
+shell-integration-features = no-cursor,sudo,title

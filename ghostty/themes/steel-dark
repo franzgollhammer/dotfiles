@@ -1,0 +1,29 @@
+# Steel Dark Theme for Ghostty
+# Derived from custom VS Code dark theme with steel blue accent
+
+background = #191a1b
+foreground = #bbbebf
+cursor-color = #bfbfbf
+cursor-text = #191a1b
+selection-background = #264b5d
+selection-foreground = #bbbebf
+
+# Normal colors (0-7)
+palette = 0=#1e1f20
+palette = 1=#c86971
+palette = 2=#72c892
+palette = 3=#cd861a
+palette = 4=#3994bc
+palette = 5=#c184c6
+palette = 6=#48c9c4
+palette = 7=#bbbebf
+
+# Bright colors (8-15)
+palette = 8=#858889
+palette = 9=#f48771
+palette = 10=#86cf86
+palette = 11=#e5ba7d
+palette = 12=#90d5ff
+palette = 13=#ad80d7
+palette = 14=#6edcd7
+palette = 15=#e5e5e5
