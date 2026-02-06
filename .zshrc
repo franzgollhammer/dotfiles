@@ -39,8 +39,8 @@ export $(grep -v '^#' $DOTFILES/.env | xargs)
 # ---- source oh-my-zsh ----
 source $ZSH/oh-my-zsh.sh
 
-# ---- iTerm2 shell integration ----
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# ---- fzf ----
+source $DOTFILES/fzf/steel-dark.sh
 
 # ---- aliases ----
 alias v="nvim"
