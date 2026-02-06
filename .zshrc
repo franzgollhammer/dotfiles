@@ -1,5 +1,4 @@
 # ---- fg zsh conf ----
-# zmodload zsh/zprof # uncomment this line and bottom line to measure startup time
 
 # ---- oh-my-zsh ----
 export ZSH="$HOME/.oh-my-zsh"
@@ -61,11 +60,6 @@ alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
 alias bbb="brew_update"
-
-# test runner
-alias killrunners="pkill -u $(whoami) Runner.Listener"
-alias actions-runner-pf="sh $DEV/actions-runner-pf-1/run.sh"
-alias actions-runner-ucsl="sh $DEV/actions-runner-ucsl-1/run.sh"
 
 # git aliases
 alias gundo="git reset --soft HEAD~1"
