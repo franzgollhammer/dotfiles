@@ -1,5 +1,6 @@
 # install from pre-release channel
 auto-update-channel = tip
+macos-icon = holographic
 
 # theme
 theme = steel-dark
