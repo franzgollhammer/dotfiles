@@ -1,8 +1,8 @@
 # theme
 theme = steel-dark
 background-opacity = 0.9
-window-padding-x = 10
-window-padding-y = 10
+window-padding-x = 8
+window-padding-y = 4
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
