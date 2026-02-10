@@ -3,7 +3,7 @@ auto-update-channel = tip
 macos-icon = official
 
 # theme
-theme = steel-dark
+theme = dark:steel-dark,light:steel-light
 background-opacity = 0.95
 window-padding-x = 4
 window-padding-y = 2
