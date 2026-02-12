@@ -2,9 +2,9 @@
 
 if [ -z "$1" ]; then
   {
-    echo "BRANCH|LAST AUTHOR|LAST COMMIT"
+    echo "BRANCH|LAST AUTHOR|LAST COMMIT|MESSAGE"
     git for-each-ref --sort=-committerdate refs/remotes/ \
-      --format='%(refname:lstrip=3)|%(authorname)|%(committerdate:short)'
+      --format='%(refname:lstrip=3)|%(authorname)|%(committerdate:short)|%(contents:subject)'
   } \
     | column -t -s '|' \
     | fzf --header-lines=1 \
