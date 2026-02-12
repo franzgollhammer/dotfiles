@@ -1,7 +1,15 @@
 #!/bin/bash
 
-if [ -z $1 ]; then
-  git for-each-ref --sort=-committerdate refs/remotes/ --format='%(refname:lstrip=2)' | sed 's|^origin/||' | fzf | xargs git switch
+if [ -z "$1" ]; then
+  {
+    echo "BRANCH|LAST AUTHOR|LAST COMMIT"
+    git for-each-ref --sort=-committerdate refs/remotes/ \
+      --format='%(refname:lstrip=3)|%(authorname)|%(committerdate:short)'
+  } \
+    | column -t -s '|' \
+    | fzf --header-lines=1 \
+    | awk '{print $1}' \
+    | xargs git switch
 else
-  git switch $1
+  git switch "$1"
 fi
