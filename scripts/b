@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
       --format='%(refname:lstrip=3)|%(authorname)|%(committerdate:short)|%(contents:subject)'
   } \
     | column -t -s '|' \
-    | fzf --header-lines=1 \
+    | fzf --header-lines=1 --nth=1 \
     | awk '{print $1}' \
     | xargs git switch
 else
