@@ -1,0 +1,29 @@
+# Xcode Default Dark Theme for Ghostty
+# Based on Xcode Default Dark terminal colors
+
+background = #292a30
+foreground = #ffffff
+cursor-color = #009aff
+cursor-text = #292a30
+selection-background = #646f83
+selection-foreground = #ffffff
+
+# Normal colors (0-7)
+palette = 0=#45464a
+palette = 1=#ff8074
+palette = 2=#31de6e
+palette = 3=#ffdc01
+palette = 4=#4eaeff
+palette = 5=#e3a6ff
+palette = 6=#80deff
+palette = 7=#ffffff
+
+# Bright colors (8-15)
+palette = 8=#a0a0a3
+palette = 9=#e96658
+palette = 10=#00c04a
+palette = 11=#ddb900
+palette = 12=#2c94e6
+palette = 13=#c688e3
+palette = 14=#59bdde
+palette = 15=#d6d6d6

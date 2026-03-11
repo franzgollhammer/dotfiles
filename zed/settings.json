@@ -1,8 +1,26 @@
 {
+  "ui_font_size": 16,
+  "buffer_font_size": 12,
+  "icon_theme": {
+    "mode": "system",
+    "light": "Colored Zed Icons Theme Light",
+    "dark": "Colored Zed Icons Theme Dark",
+  },
+  "theme": {
+    "mode": "system",
+    "light": "Xcode Default Light",
+    "dark": "Xcode Default Dark",
+  },
+  "git_panel": {
+    "tree_view": true,
+  },
   "edit_predictions": {
     "provider": "copilot",
   },
   "buffer_font_family": "Lilex Nerd Font",
+  "inlay_hints": {
+    // "enabled": true
+  },
   "format_on_save": "off",
   "languages": {
     "JavaScript": {
@@ -27,6 +45,7 @@
       "formatter": [],
     },
     "Vue.js": {
+      "language_servers": ["vue-language-server", "intl-lens", "..."],
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },
@@ -34,10 +53,19 @@
       "formatter": [],
     },
   },
+  "lsp": {
+    "intl-lens": {
+      "binary": { "path": "/Users/fg/.local/bin/intl-lens" }
+    }
+  },
   "agent": {
-    "commit_message_model": {
+    "default_model": {
       "provider": "anthropic",
-      "model": "claude-3-5-haiku",
+      "model": "claude-opus-4-6",
     },
+    "commit_message_model": {
+      "provider": "zed.dev",
+      "model": "claude-haiku-4-5"
+    }
   },
 }
