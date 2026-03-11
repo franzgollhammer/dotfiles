@@ -48,5 +48,16 @@
     "bindings": {
       "cmd-´": null
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-/": [
+        "editor::ToggleComments",
+        {
+          "advance_downwards": false
+        }
+      ]
+    }
   }
 ]

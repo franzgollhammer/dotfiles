@@ -1,70 +1,43 @@
 {
-  "agent_servers": {
-    "claude": {
-      "favorite_config_option_values": {
-        "mode": ["bypassPermissions"]
-      }
-    }
+  "edit_predictions": {
+    "provider": "copilot",
   },
-  "buffer_font_family": "JetBrainsMono Nerd Font",
-  "git_panel": {
-    "tree_view": true,
-    "sort_by_path": false
-  },
-  "tabs": {
-    "file_icons": true,
-    "git_status": true
-  },
-  "title_bar": {
-    "show_menus": false,
-    "show_branch_icon": false
-  },
-  "file_types": {
-    "GitHub Actions": [".github/workflows/*.yml", ".github/workflows/*.yaml"]
-  },
-  "lsp": {
-    "gh-actions-language-server": {
-      "initialization_options": {
-        "sessionToken": "" // set to PAT for more information
-      }
-    }
-  },
+  "buffer_font_family": "Lilex Nerd Font",
+  "format_on_save": "off",
   "languages": {
-    "Git Commit": {
-      "tab_size": 2
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+      "format_on_save": "on",
+      "formatter": [],
+    },
+    "JSON": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+      "format_on_save": "on",
+      "formatter": [],
     },
     "TypeScript": {
-      "formatter": {
-        "external": {
-          "command": "cat << EOF",
-          "arguments": []
-        }
-      },
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
-    },
-    "JavaScript": {
-      "formatter": {
-        "external": {
-          "command": "cat << EOF",
-          "arguments": []
-        }
+        "source.fixAll.eslint": true,
       },
-      "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
+      "format_on_save": "on",
+      "formatter": [],
     },
     "Vue.js": {
-      "formatter": {
-        "external": {
-          "command": "cat << EOF",
-          "arguments": []
-        }
-      },
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
-    }
-  }
+        "source.fixAll.eslint": true,
+      },
+      "format_on_save": "on",
+      "formatter": [],
+    },
+  },
+  "agent": {
+    "commit_message_model": {
+      "provider": "anthropic",
+      "model": "claude-3-5-haiku",
+    },
+  },
 }

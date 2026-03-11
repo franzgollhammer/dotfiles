@@ -22,6 +22,7 @@ font-fira-mono-nerd-font
 font-hack-nerd-font
 font-jetbrains-mono-nerd-font
 font-juliamono
+font-lilex-nerd-font
 font-roboto-mono-nerd-font
 font-sf-mono-nerd-font
 font-ubuntu-mono-nerd-font

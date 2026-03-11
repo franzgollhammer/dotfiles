@@ -132,7 +132,6 @@ pkgconf
 pyenv
 python-certifi
 python-setuptools
-python@3.13
 python@3.14
 readline
 redis

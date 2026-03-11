@@ -7,7 +7,7 @@ theme = dark:steel-dark,light:steel-light
 background-opacity = 0.95
 window-padding-x = 4
 window-padding-y = 2
-font-family  = JetBrainsMono Nerd Font
+font-family  = Lilex Nerd Font
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility

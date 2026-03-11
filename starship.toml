@@ -1,9 +1,9 @@
 right_format = "$time"
 
-[git_status]
-ahead = "∧"
-behind = "∨"
-diverged = "∧∨"
+# [git_status]
+# ahead = "∧"
+# behind = "∨"
+# diverged = "∧∨"
 
 [git_metrics]
 disabled = false

@@ -38,9 +38,6 @@ export $(grep -v '^#' $DOTFILES/.env | xargs)
 # ---- source oh-my-zsh ----
 source $ZSH/oh-my-zsh.sh
 
-# ---- fzf ----
-source $DOTFILES/fzf/steel-dark.sh
-
 # ---- aliases ----
 alias v="nvim"
 alias vi="nvim"
