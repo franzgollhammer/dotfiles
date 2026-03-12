@@ -1,21 +1,26 @@
 {
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
   "ui_font_size": 16,
   "buffer_font_size": 12,
   "icon_theme": {
     "mode": "system",
     "light": "Colored Zed Icons Theme Light",
-    "dark": "Colored Zed Icons Theme Dark",
+    "dark": "Colored Zed Icons Theme Dark"
   },
   "theme": {
     "mode": "system",
-    "light": "Xcode Default Light",
-    "dark": "Xcode Default Dark",
+    "light": "Xcode Classic Light",
+    "dark": "Xcode Classic Darker"
   },
   "git_panel": {
-    "tree_view": true,
+    "tree_view": true
   },
   "edit_predictions": {
-    "provider": "copilot",
+    "provider": "copilot"
   },
   "buffer_font_family": "Lilex Nerd Font",
   "inlay_hints": {
@@ -25,33 +30,33 @@
   "languages": {
     "JavaScript": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true,
+        "source.fixAll.eslint": true
       },
       "format_on_save": "on",
-      "formatter": [],
+      "formatter": []
     },
     "JSON": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true,
+        "source.fixAll.eslint": true
       },
       "format_on_save": "on",
-      "formatter": [],
+      "formatter": []
     },
     "TypeScript": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true,
+        "source.fixAll.eslint": true
       },
       "format_on_save": "on",
-      "formatter": [],
+      "formatter": []
     },
     "Vue.js": {
       "language_servers": ["vue-language-server", "intl-lens", "..."],
       "code_actions_on_format": {
-        "source.fixAll.eslint": true,
+        "source.fixAll.eslint": true
       },
       "format_on_save": "on",
-      "formatter": [],
-    },
+      "formatter": []
+    }
   },
   "lsp": {
     "intl-lens": {
@@ -59,13 +64,9 @@
     }
   },
   "agent": {
-    "default_model": {
-      "provider": "anthropic",
-      "model": "claude-opus-4-6",
-    },
     "commit_message_model": {
       "provider": "zed.dev",
       "model": "claude-haiku-4-5"
     }
-  },
+  }
 }
