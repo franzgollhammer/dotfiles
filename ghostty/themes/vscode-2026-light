@@ -1,0 +1,29 @@
+# VS Code 2026 Experimental Light Theme for Ghostty
+# Based on microsoft/vscode theme-2026/themes/2026-light.json
+
+background = #FFFFFF
+foreground = #333333
+cursor-color = #202020
+cursor-text = #FFFFFF
+selection-background = #0069CC26
+selection-foreground = #333333
+
+# Normal colors (0-7)
+palette = 0=#000000
+palette = 1=#cd3131
+palette = 2=#107C10
+palette = 3=#949800
+palette = 4=#0451a5
+palette = 5=#bc05bc
+palette = 6=#0598bc
+palette = 7=#555555
+
+# Bright colors (8-15)
+palette = 8=#666666
+palette = 9=#cd3131
+palette = 10=#14CE14
+palette = 11=#b5ba00
+palette = 12=#0451a5
+palette = 13=#bc05bc
+palette = 14=#0598bc
+palette = 15=#a5a5a5
