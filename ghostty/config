@@ -3,7 +3,7 @@ auto-update-channel = tip
 macos-icon = official
 
 # theme
-theme = dark:xcode-dark,light:xcode-light
+theme = dark:vscode-2026-dark,light:vscode-2026-light
 background-opacity = 0.95
 window-padding-x = 4
 window-padding-y = 2
