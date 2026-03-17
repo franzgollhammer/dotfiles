@@ -23,11 +23,13 @@ fi
 export DEV="$HOME/dev"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
+export BUN_INSTALL="$HOME/.bun"
 export RUBY_DIR="/opt/homebrew/opt/ruby/bin"
 export LOCAL_BIN="$HOME/.local/bin"
 
 # ---- path ----
 export PATH="$SCRIPTS:"\
+"$BUN_INSTALL/bin:"\
 "$RUBY_DIR:"\
 "$LOCAL_BIN:"\
 "$PATH"
@@ -37,6 +39,9 @@ export $(grep -v '^#' $DOTFILES/.env | xargs)
 
 # ---- source oh-my-zsh ----
 source $ZSH/oh-my-zsh.sh
+
+# ---- bun completions ----
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
 # ---- aliases ----
 alias v="nvim"

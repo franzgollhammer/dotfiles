@@ -1,6 +1,6 @@
 {
   "agent_servers": {
-    "claude-acp": {
+    "codex-acp": {
       "type": "registry"
     }
   },
@@ -13,8 +13,8 @@
   },
   "theme": {
     "mode": "system",
-    "light": "Xcode Classic Light",
-    "dark": "Xcode Classic Darker"
+    "light": "One Light",
+    "dark": "One Dark"
   },
   "git_panel": {
     "tree_view": true
