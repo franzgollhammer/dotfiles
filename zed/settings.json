@@ -4,13 +4,11 @@
       "type": "registry"
     }
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 12,
-  "icon_theme": {
-    "mode": "system",
-    "light": "Colored Zed Icons Theme Light",
-    "dark": "Colored Zed Icons Theme Dark"
-  },
+  // "icon_theme": {
+  //   "mode": "system",
+  //   "light": "JetBrains New UI Icons (Light)",
+  //   "dark": "JetBrains New UI Icons (Dark)"
+  // },
   "theme": {
     "mode": "system",
     "light": "One Light",
@@ -64,6 +62,8 @@
     }
   },
   "agent": {
+    "expand_terminal_card": false,
+    "expand_edit_card": false,
     "commit_message_model": {
       "provider": "zed.dev",
       "model": "claude-haiku-4-5"
