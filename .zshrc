@@ -15,9 +15,9 @@ plugins=(
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR="zed"
-  export VISUAL="zed"
-  export VUE_EDITOR="zed"
+  export EDITOR="code"
+  export VISUAL="code"
+  export VUE_EDITOR="code"
 fi
 
 export DEV="$HOME/dev"
