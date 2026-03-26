@@ -11,14 +11,13 @@ font-family  = JetBrainsMono Nerd Font
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
-keybind = global:cmd+`=toggle_quick_terminal
 
 # cursor
 cursor-style = block
 cursor-style-blink = false
 
 # macOS
-macos-option-as-alt = true
+macos-option-as-alt = false
 font-thicken = true
 
 # clipboard
