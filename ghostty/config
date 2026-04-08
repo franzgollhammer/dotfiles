@@ -4,7 +4,7 @@ macos-icon = official
 
 # theme
 theme = dark:vscode-2026-dark,light:vscode-2026-light
-background-opacity = 0.90
+background-opacity = 0.95
 window-padding-x = 4
 window-padding-y = 2
 font-family  = JetBrainsMono Nerd Font
@@ -17,7 +17,7 @@ cursor-style = block
 cursor-style-blink = false
 
 # macOS
-macos-option-as-alt = false
+macos-option-as-alt = true
 font-thicken = true
 
 # clipboard

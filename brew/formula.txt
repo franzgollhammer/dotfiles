@@ -148,7 +148,7 @@ tig
 tldr
 tmux
 tree
-tree-sitter@0.25
+tree-sitter
 unibilium
 unixodbc
 unzip
