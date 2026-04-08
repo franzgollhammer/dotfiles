@@ -12,6 +12,9 @@ DOTFILES_DIR="${DOTFILES:-$HOME/dev/dotfiles}"
 [ ! -L "$HOME/.config/zed/keymap.json" ] && rm -rfv "$HOME/.config/zed/keymap.json"; ln -snfv "$DOTFILES_DIR/zed/keymap.json" "$HOME/.config/zed/keymap.json"
 [ ! -L "$HOME/.config/zed/settings.json" ] && rm -rfv "$HOME/.config/zed/settings.json"; ln -snfv "$DOTFILES_DIR/zed/settings.json" "$HOME/.config/zed/settings.json"
 
+# nvim
+[ ! -L "$HOME/.config/nvim" ] && rm -rfv "$HOME/.config/nvim"; ln -snfv "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
+
 # warp
 # Try this - use && for both commands so ln only runs if rm succeeds
 [ ! -L "$HOME/.warp" ] && rm -rfv "$HOME/.warp" && ln -snfv "$DOTFILES_DIR/warp" "$HOME/.warp"

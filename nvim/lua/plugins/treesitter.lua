@@ -28,14 +28,14 @@ return {
       indent = {
         enable = true,
         disable = {},
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<s-CR>",
-            scope_incremental = "<CR>",
-            node_incremental = "<s-n>",
-            node_decremental = "<s-m>",
-          },
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<s-CR>",
+          scope_incremental = "<CR>",
+          node_incremental = "<s-n>",
+          node_decremental = "<s-m>",
         },
       },
     })
