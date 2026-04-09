@@ -9,7 +9,7 @@ return {
     require("lualine").setup({
       options = {
         -- theme = custom_auto,
-        theme = "auto",
+        theme = vim.g.colors_name or "auto",
         -- icons_enabled = false,
         component_separators = "|",
         section_separators = "",
