@@ -94,9 +94,9 @@ keymap("i", "jk", "<esc>", opts)
 keymap("i", "jj", "<esc>", opts)
 keymap("i", "kk", "<esc>", opts)
 
--- insert newline stay in nromal mode
-keymap("n", "<Leader>o", "o<esc>", opts)
-keymap("n", "<Leader>O", "O<esc>", opts)
+-- insert newline stay in normal mode
+keymap("n", "<Leader>nl", "o<esc>", opts)
+keymap("n", "<Leader>nL", "O<esc>", opts)
 
 -- stay in indent mode
 keymap("v", "<Tab>", ">gv", opts)
