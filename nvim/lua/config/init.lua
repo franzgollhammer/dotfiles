@@ -36,6 +36,11 @@ local opts = {
 
 require("lazy").setup(plugins, opts)
 
-vim.cmd([[colorscheme tokyonight]])
+require("vscode2026").setup({
+  transparent = true,
+})
+vim.cmd([[colorscheme dark2026]])
+-- vim.cmd([[colorscheme light2026]])
+-- vim.cmd([[colorscheme tokyonight]])
 -- vim.cmd([[colorscheme rose-pine]])
 
