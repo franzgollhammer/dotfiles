@@ -1,8 +1,10 @@
-right_format = "$time"
+[aws]
+disabled = true
 
 [git_metrics]
 disabled = false
 
-[time]
-disabled = false
-format = "[$time]($style)"
+[git_status]
+ahead = '↑'
+behind = '↓'
+diverged = '↑↓'

@@ -51,7 +51,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
   },
-  {
-    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-  },
+  -- rainbow-delimiters removed: plugin bug crashes on buffers without
+  -- treesitter parser (e.g. Telescope previews), re-attach path at lib.lua:155
+  -- calls get_parser without pcall guard
 }
