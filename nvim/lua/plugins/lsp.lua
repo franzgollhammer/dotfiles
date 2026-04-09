@@ -10,42 +10,46 @@ return {
     vim.keymap.set("n", "<space>K", vim.diagnostic.open_float)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-    -- vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
-    -- Gets called when LSP attaches to buffer
-    local on_attach = function(_, bufnr) -- (event, bufnr)
-      local keymap = function(keys, func, desc)
-        if desc then
-          desc = "LSP: " .. desc
+    -- LSP keymaps on attach
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(event)
+        local bufnr = event.buf
+        local keymap = function(keys, func, desc)
+          vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
         end
 
-        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-      end
+        keymap("<Leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        keymap("<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+        keymap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+        keymap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+        keymap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+        keymap("<Leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+        keymap("K", vim.lsp.buf.hover, "Hover Documentation")
+        keymap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+      end,
+    })
 
-      keymap("<Leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-      keymap("<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-      keymap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-      keymap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-      keymap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-      keymap("<Leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-      keymap("K", vim.lsp.buf.hover, "Hover Documentation")
-      keymap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-      -- keymap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-    end
+    -- BLINK CMP capabilities
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
     -- BASE CONFIG for MASON and LSP
     require("mason").setup()
-    require("mason-lspconfig").setup()
-    local mason_lspconfig = require("mason-lspconfig")
 
-    -- Get Volar LSP path
+    -- Get Volar LSP path (may not be installed yet on first run)
     local mason_registry = require('mason-registry')
-    local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() ..
-        '/node_modules/@vue/language-server'
+    local InstallLocation = require('mason-core.installer.InstallLocation')
+    local vue_language_server_path
+    local ok, pkg = pcall(mason_registry.get_package, 'vue-language-server')
+    if ok and pkg:is_installed() then
+      vue_language_server_path = InstallLocation.global():package('vue-language-server')
+          .. '/node_modules/@vue/language-server'
+    end
 
-    -- ENSURE INSTALLED SERVERS LIST
+    -- Configure servers via vim.lsp.config (Neovim 0.11+)
     local servers = {
-      ts_ls = {
+      ts_ls = vue_language_server_path and {
+        capabilities = capabilities,
         init_options = {
           plugins = {
             {
@@ -55,44 +59,33 @@ return {
             },
           },
         },
-      },
-      volar = {},
-      jsonls = {},
-      eslint = {},
-      html = {},
-      cssls = {},
+      } or { capabilities = capabilities },
+      volar = { capabilities = capabilities },
+      jsonls = { capabilities = capabilities },
+      eslint = { capabilities = capabilities },
+      html = { capabilities = capabilities },
+      cssls = { capabilities = capabilities },
       lua_ls = {
-        Lua = {
-          telemetry = { enable = false },
-          diagnostics = {
-            globals = { "vim" },
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            telemetry = { enable = false },
+            diagnostics = {
+              globals = { "vim" },
+            },
           },
         },
       },
     }
 
-    -- OLD CMP
-    -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+    for server_name, server_config in pairs(servers) do
+      vim.lsp.config(server_name, server_config)
+    end
 
-    -- BLINK CMP
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-    mason_lspconfig.setup({
+    -- mason-lspconfig handles ensure_installed + automatic_enable
+    require("mason-lspconfig").setup({
       ensure_installed = vim.tbl_keys(servers),
-    })
-
-    mason_lspconfig.setup_handlers({
-      function(server_name)
-        require("lspconfig")[server_name].setup({
-          capabilities = capabilities,
-          on_attach = on_attach,
-          settings = servers[server_name],
-          filetypes = (servers[server_name] or {}).filetypes,
-          init_options = (servers[server_name] or {}).init_options,
-        })
-      end,
+      automatic_enable = true,
     })
   end,
 }
