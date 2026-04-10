@@ -1,6 +1,6 @@
 # install from pre-release channel
 auto-update-channel = tip
-macos-icon = xray
+macos-icon = holographic
 
 # theme
 theme = dark:vscode-2026-dark,light:vscode-2026-light
@@ -38,7 +38,7 @@ adjust-cell-height = 1
 scrollback-limit = 10000
 
 # notifications (desktop notification on bell)
-bell-features = system
+bell-features = system,attention,title
 desktop-notifications = true
 
 # shell integration

@@ -20,6 +20,11 @@ switch_to() {
     echo "Attaching to session: $SELECTED_NAME"
     tmux attach-session -t $SELECTED_NAME
   else
+    CURRENT=$(tmux display-message -p '#S')
+    if [[ "$CURRENT" == "$SELECTED_NAME" ]]; then
+      echo "Already in session: $SELECTED_NAME"
+      return 0
+    fi
     echo "Switching to session: $SELECTED_NAME"
     tmux switch-client -t $SELECTED_NAME
   fi
