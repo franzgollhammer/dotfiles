@@ -21,9 +21,9 @@ function M.setup(p, opts)
   hl.SignColumn = { fg = p.fg_dim, bg = bg }
   hl.LineNr = { fg = p.fg_dim }
   hl.CursorLineNr = { fg = p.fg, bold = true }
-  hl.CursorLine = { bg = transparent and p.none or p.bg_float }
+  hl.CursorLine = { bg = transparent and p.none or p.bg_line }
   hl.CursorColumn = { link = "CursorLine" }
-  hl.ColorColumn = { bg = transparent and p.none or p.bg_float }
+  hl.ColorColumn = { bg = transparent and p.none or p.bg_line }
   hl.Cursor = { fg = p.bg, bg = p.cursor }
   hl.lCursor = { link = "Cursor" }
   hl.CursorIM = { link = "Cursor" }
@@ -34,8 +34,8 @@ function M.setup(p, opts)
   hl.Search = { bg = p.bg_search, fg = p.fg }
   hl.IncSearch = { bg = p.accent, fg = p.bg }
   hl.CurSearch = { link = "IncSearch" }
-  hl.Substitute = { bg = p.keyword_control, fg = p.bg }
-  hl.Folded = { fg = p.fg_dim, bg = transparent and p.none or p.bg_float }
+  hl.Substitute = { bg = p.keyword, fg = p.bg }
+  hl.Folded = { fg = p.fg_dim, bg = transparent and p.none or p.bg_line }
   hl.FoldColumn = { fg = p.fg_dim, bg = bg }
   hl.MatchParen = { bg = p.bg_visual, bold = true }
   hl.Pmenu = { fg = p.fg, bg = transparent and p.none or p.bg_popup }
@@ -51,8 +51,8 @@ function M.setup(p, opts)
   hl.WinSeparator = { fg = p.border, bg = bg }
   hl.VertSplit = { link = "WinSeparator" }
   hl.FloatBorder = { fg = p.border, bg = bg_float }
-  hl.FloatTitle = { fg = p.accent, bg = bg_float, bold = true }
-  hl.Title = { fg = p.accent, bold = true }
+  hl.FloatTitle = { fg = p.accent_bright, bg = bg_float, bold = true }
+  hl.Title = { fg = p.accent_bright, bold = true }
   hl.NonText = { fg = p.fg_dark }
   hl.SpecialKey = { fg = p.fg_dark }
   hl.Whitespace = { fg = p.fg_dark }
@@ -65,10 +65,10 @@ function M.setup(p, opts)
   hl.MsgArea = { fg = p.fg }
   hl.ErrorMsg = { fg = p.error }
   hl.WarningMsg = { fg = p.warning }
-  hl.MoreMsg = { fg = p.accent }
+  hl.MoreMsg = { fg = p.accent_bright }
   hl.ModeMsg = { fg = p.fg, bold = true }
-  hl.Question = { fg = p.accent }
-  hl.Directory = { fg = p.accent }
+  hl.Question = { fg = p.accent_bright }
+  hl.Directory = { fg = p.accent_bright }
   hl.QuickFixLine = { bg = p.bg_visual }
   hl.DiffAdd = { bg = p.diff_add }
   hl.DiffChange = { bg = p.diff_change }
@@ -77,44 +77,44 @@ function M.setup(p, opts)
   hl.WinBar = { fg = p.fg, bg = bg }
   hl.WinBarNC = { fg = p.fg_dim, bg = bg }
 
-  -- syntax (vim builtin groups) -- VS Code Dark+/Light+ mapping
+  -- ======================================================================
+  -- syntax (vim builtin groups) -- VS Code 2026 Dark/Light mapping
+  -- ======================================================================
   hl.Comment = vim.tbl_extend("force", { fg = p.comment }, comment_style)
-  hl.Constant = { fg = p.constant }
-  hl.String = { fg = p.string }
-  hl.Character = { fg = p.string }
+  hl.Constant = { fg = p.number }       -- constant → blue
+  hl.String = { fg = p.string }         -- string → light blue
+  hl.Character = { fg = p.keyword }     -- constant.character → red
   hl.Number = { fg = p.number }
   hl.Boolean = { fg = p.constant_builtin }
   hl.Float = { fg = p.number }
   hl.Identifier = vim.tbl_extend("force", { fg = p.variable }, variable_style)
   hl.Function = vim.tbl_extend("force", { fg = p.func }, function_style)
-  -- Statement family: control flow is purple in VS Code Dark+
-  hl.Statement = vim.tbl_extend("force", { fg = p.keyword_control }, keyword_style)
-  hl.Conditional = vim.tbl_extend("force", { fg = p.keyword_control }, keyword_style)
-  hl.Repeat = vim.tbl_extend("force", { fg = p.keyword_control }, keyword_style)
-  hl.Exception = vim.tbl_extend("force", { fg = p.keyword_control }, keyword_style)
+  hl.Statement = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
+  hl.Conditional = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
+  hl.Repeat = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
+  hl.Exception = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
   hl.Label = { fg = p.label }
   hl.Operator = { fg = p.operator }
-  -- Keyword family: declarations/storage are blue
   hl.Keyword = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
   hl.PreProc = { fg = p.keyword }
   hl.Include = { fg = p.keyword }
   hl.Define = { fg = p.keyword }
   hl.Macro = { fg = p.keyword }
   hl.PreCondit = { fg = p.keyword }
-  hl.Type = { fg = p.type }
+  hl.Type = { fg = p.variable_def }       -- entity.name fallthrough → orange
   hl.StorageClass = { fg = p.keyword }
-  hl.Structure = { fg = p.type }
-  hl.Typedef = { fg = p.type }
-  hl.Special = { fg = p.special }
-  hl.SpecialChar = { fg = p.string_escape }
+  hl.Structure = { fg = p.variable_def }
+  hl.Typedef = { fg = p.variable_def }
+  hl.Special = { fg = p.keyword }         -- constant.character / punctuation.section.embedded → red
+  hl.SpecialChar = { fg = p.string_escape, bold = true } -- string.regexp constant.character.escape
   hl.Tag = { fg = p.tag }
   hl.Delimiter = { fg = p.punctuation }
   hl.SpecialComment = { fg = p.comment, bold = true }
-  hl.Debug = { fg = p.warning }
+  hl.Debug = { fg = p.debug_token }
   hl.Underlined = { underline = true }
   hl.Ignore = { fg = p.fg_dark }
-  hl.Error = { fg = p.error }
-  hl.Todo = { fg = p.accent, bold = true }
+  hl.Error = { fg = p.invalid, italic = true }
+  hl.Todo = { fg = p.accent_bright, bold = true }
 
   -- diagnostics
   hl.DiagnosticError = { fg = p.error }
@@ -136,161 +136,168 @@ function M.setup(p, opts)
   hl.DiagnosticSignInfo = { fg = p.info }
   hl.DiagnosticSignHint = { fg = p.hint }
 
-  -- treesitter: variables, parameters, properties
+  -- ======================================================================
+  -- treesitter (2026 scope mapping)
+  -- ======================================================================
+
+  -- variables: usage/members/params default to fg syntax (variable.other)
   hl["@variable"] = vim.tbl_extend("force", { fg = p.variable }, variable_style)
-  hl["@variable.builtin"] = { fg = p.keyword } -- this, self, super
+  hl["@variable.builtin"] = { fg = p.constant_builtin } -- this, self, super (variable.language)
   hl["@variable.parameter"] = { fg = p.parameter }
   hl["@variable.parameter.builtin"] = { fg = p.parameter }
-  hl["@variable.member"] = { fg = p.property }
-  hl["@property"] = { fg = p.property }
+  hl["@variable.member"] = { fg = p.variable } -- obj.member access → fg
+  hl["@property"] = { fg = p.property }        -- object literal keys → meta.property-name blue
   hl["@parameter"] = { fg = p.parameter }
+  hl["@field"] = { fg = p.property }
 
-  -- treesitter: constants and literals
-  hl["@constant"] = { fg = p.constant }
-  hl["@constant.builtin"] = { fg = p.constant_builtin } -- null, undefined, nil, True, False
-  hl["@constant.macro"] = { fg = p.constant }
+  -- constants and literals
+  hl["@constant"] = { fg = p.number }          -- variable.other.constant → blue
+  hl["@constant.builtin"] = { fg = p.constant_builtin } -- null, true, false, nil
+  hl["@constant.macro"] = { fg = p.number }
   hl["@number"] = { fg = p.number }
   hl["@number.float"] = { fg = p.number }
   hl["@boolean"] = { fg = p.constant_builtin }
 
-  -- treesitter: modules/namespaces
-  hl["@module"] = { fg = p.variable }
-  hl["@module.builtin"] = { fg = p.keyword }
+  -- modules / namespaces
+  hl["@module"] = { fg = p.namespace }         -- meta.module-reference → blue
+  hl["@module.builtin"] = { fg = p.namespace }
   hl["@label"] = { fg = p.label }
 
-  -- treesitter: strings
+  -- strings (note: @string.regexp is SAME as @string in 2026)
   hl["@string"] = { fg = p.string }
   hl["@string.documentation"] = { fg = p.string }
-  hl["@string.escape"] = { fg = p.string_escape }
-  hl["@string.regexp"] = { fg = p.regexp }
-  hl["@string.special"] = { fg = p.string_escape }
-  hl["@string.special.symbol"] = { fg = p.constant }
+  hl["@string.escape"] = { fg = p.string_escape, bold = true }
+  hl["@string.regexp"] = { fg = p.string }
+  hl["@string.special"] = { fg = p.keyword }   -- placeholders → red
+  hl["@string.special.symbol"] = { fg = p.number }
   hl["@string.special.url"] = { fg = p.string, underline = true }
   hl["@string.special.path"] = { fg = p.string }
-  hl["@character"] = { fg = p.string }
-  hl["@character.special"] = { fg = p.string_escape }
+  hl["@character"] = { fg = p.keyword }        -- constant.character → red
+  hl["@character.special"] = { fg = p.string_escape, bold = true }
 
-  -- treesitter: functions
+  -- functions: entity.name.function → purple; support.function → blue
   hl["@function"] = vim.tbl_extend("force", { fg = p.func }, function_style)
-  hl["@function.builtin"] = vim.tbl_extend("force", { fg = p.func }, function_style)
+  hl["@function.builtin"] = { fg = p.number }  -- support.function → blue
   hl["@function.call"] = vim.tbl_extend("force", { fg = p.func }, function_style)
   hl["@function.macro"] = { fg = p.func }
   hl["@function.method"] = vim.tbl_extend("force", { fg = p.func }, function_style)
   hl["@function.method.call"] = vim.tbl_extend("force", { fg = p.func }, function_style)
-  hl["@constructor"] = { fg = p.type }
+  hl["@constructor"] = { fg = p.variable_def } -- entity.name → orange
 
-  -- treesitter: operators
+  -- operators
   hl["@operator"] = { fg = p.operator }
 
-  -- treesitter: keywords (declarations/storage = blue, control-flow = purple)
+  -- keywords (all red in 2026)
   hl["@keyword"] = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
   hl["@keyword.function"] = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
-  hl["@keyword.operator"] = { fg = p.keyword } -- new, typeof, instanceof, in, of
-  hl["@keyword.import"] = { fg = p.keyword } -- import, from, export
-  hl["@keyword.storage"] = { fg = p.keyword } -- var, let, const, static
-  hl["@keyword.modifier"] = { fg = p.keyword } -- public, private, async
-  hl["@keyword.type"] = { fg = p.keyword } -- class, struct, enum, interface
+  hl["@keyword.operator"] = { fg = p.keyword } -- new, typeof, instanceof
+  hl["@keyword.import"] = { fg = p.keyword }   -- import, from, export
+  hl["@keyword.storage"] = { fg = p.keyword }  -- var, let, const
+  hl["@keyword.modifier"] = { fg = p.keyword } -- public, private, async, static
+  hl["@keyword.type"] = { fg = p.keyword }     -- class, struct, interface, enum
   hl["@keyword.directive"] = { fg = p.keyword }
   hl["@keyword.directive.define"] = { fg = p.keyword }
-  -- control flow -> purple
-  hl["@keyword.conditional"] = vim.tbl_extend("force", { fg = p.keyword_control }, keyword_style)
+  hl["@keyword.conditional"] = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
   hl["@keyword.conditional.ternary"] = { fg = p.operator }
-  hl["@keyword.repeat"] = vim.tbl_extend("force", { fg = p.keyword_control }, keyword_style)
-  hl["@keyword.return"] = vim.tbl_extend("force", { fg = p.keyword_control }, keyword_style)
-  hl["@keyword.exception"] = vim.tbl_extend("force", { fg = p.keyword_control }, keyword_style)
-  hl["@keyword.debug"] = { fg = p.keyword_control }
-  hl["@keyword.coroutine"] = { fg = p.keyword_control } -- async/await lean purple (await-dominant)
+  hl["@keyword.repeat"] = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
+  hl["@keyword.return"] = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
+  hl["@keyword.exception"] = vim.tbl_extend("force", { fg = p.keyword }, keyword_style)
+  hl["@keyword.debug"] = { fg = p.keyword }
+  hl["@keyword.coroutine"] = { fg = p.keyword } -- async/await
 
-  -- treesitter: types
-  hl["@type"] = { fg = p.type }
-  hl["@type.builtin"] = { fg = p.keyword } -- string, number, void (TS primitives)
-  hl["@type.definition"] = { fg = p.type }
+  -- types: entity.name fallthrough → orange for declarations and refs
+  hl["@type"] = { fg = p.variable_def }
+  hl["@type.builtin"] = { fg = p.number }      -- support.type → blue
+  hl["@type.definition"] = { fg = p.variable_def }
   hl["@type.qualifier"] = { fg = p.keyword }
 
-  -- treesitter: attributes/decorators
-  hl["@attribute"] = { fg = p.func } -- @decorator, Python @classmethod
+  -- attributes / decorators → purple (function-like)
+  hl["@attribute"] = { fg = p.func }
   hl["@attribute.builtin"] = { fg = p.func }
 
-  -- treesitter: comments
+  -- comments
   hl["@comment"] = vim.tbl_extend("force", { fg = p.comment }, comment_style)
   hl["@comment.documentation"] = { fg = p.comment, italic = true }
-  hl["@comment.todo"] = { fg = p.accent, bold = true }
+  hl["@comment.todo"] = { fg = p.accent_bright, bold = true }
   hl["@comment.note"] = { fg = p.info, bold = true }
   hl["@comment.warning"] = { fg = p.warning, bold = true }
   hl["@comment.error"] = { fg = p.error, bold = true }
 
-  -- treesitter: punctuation
+  -- punctuation
   hl["@punctuation.delimiter"] = { fg = p.punctuation }
   hl["@punctuation.bracket"] = { fg = p.punctuation }
-  -- ${} in JS/TS template literals -> blue (VS Code punctuation.definition.template-expression)
+  -- ${} template expression → red (punctuation.section.embedded)
   hl["@punctuation.special"] = { fg = p.keyword }
 
-  -- treesitter: tags (HTML / JSX / Vue)
+  -- tags (HTML / JSX / Vue)
   hl["@tag"] = { fg = p.tag }
   hl["@tag.builtin"] = { fg = p.tag }
   hl["@tag.attribute"] = { fg = p.tag_attr }
   hl["@tag.delimiter"] = { fg = p.tag_delimiter }
 
-  -- treesitter: markup (markdown)
-  hl["@markup.heading"] = { fg = p.keyword, bold = true }
-  hl["@markup.heading.1"] = { fg = p.keyword, bold = true }
-  hl["@markup.heading.2"] = { fg = p.keyword, bold = true }
-  hl["@markup.heading.3"] = { fg = p.keyword, bold = true }
-  hl["@markup.heading.4"] = { fg = p.keyword, bold = true }
-  hl["@markup.heading.5"] = { fg = p.keyword, bold = true }
-  hl["@markup.heading.6"] = { fg = p.keyword, bold = true }
-  hl["@markup.italic"] = { italic = true, fg = p.keyword_control }
-  hl["@markup.strong"] = { bold = true, fg = p.keyword }
+  -- markdown
+  hl["@markup.heading"] = { fg = p.number, bold = true }
+  hl["@markup.heading.1"] = { fg = p.number, bold = true }
+  hl["@markup.heading.2"] = { fg = p.number, bold = true }
+  hl["@markup.heading.3"] = { fg = p.number, bold = true }
+  hl["@markup.heading.4"] = { fg = p.number, bold = true }
+  hl["@markup.heading.5"] = { fg = p.number, bold = true }
+  hl["@markup.heading.6"] = { fg = p.number, bold = true }
+  hl["@markup.italic"] = { italic = true, fg = p.variable }
+  hl["@markup.strong"] = { bold = true, fg = p.variable }
   hl["@markup.strikethrough"] = { strikethrough = true }
   hl["@markup.underline"] = { underline = true }
-  hl["@markup.link"] = { fg = p.variable }
-  hl["@markup.link.label"] = { fg = p.variable }
+  hl["@markup.link"] = { fg = p.string }       -- constant.other.reference.link → light blue
+  hl["@markup.link.label"] = { fg = p.string }
   hl["@markup.link.url"] = { fg = p.string, underline = true }
-  hl["@markup.raw"] = { fg = p.string }
-  hl["@markup.raw.block"] = { fg = p.string }
-  hl["@markup.list"] = { fg = p.accent }
+  hl["@markup.raw"] = { fg = p.number }        -- markup.inline.raw → blue
+  hl["@markup.raw.block"] = { fg = p.number }
+  hl["@markup.list"] = { fg = p.variable_def } -- punctuation.definition.list → orange
   hl["@markup.list.checked"] = { fg = p.success }
   hl["@markup.list.unchecked"] = { fg = p.fg_dim }
-  hl["@markup.quote"] = { fg = p.comment, italic = true }
+  hl["@markup.quote"] = { fg = p.type }        -- markup.quote → green
   hl["@markup.math"] = { fg = p.number }
   hl["@markup.environment"] = { fg = p.keyword }
 
-  -- treesitter: diff
-  hl["@diff.plus"] = { fg = p.git_add }
-  hl["@diff.minus"] = { fg = p.git_delete }
-  hl["@diff.delta"] = { fg = p.git_change }
+  -- diff (2026 markup.*/diff)
+  hl["@diff.plus"] = { fg = p.type }           -- markup.inserted → green
+  hl["@diff.minus"] = { fg = p.invalid }       -- markup.deleted → #ffa198
+  hl["@diff.delta"] = { fg = p.variable_def }  -- markup.changed → orange
 
-  -- bash/zsh specifics
-  -- $FOO: $ should feel like part of the variable (VS Code colors whole thing light blue)
+  -- bash/zsh specifics — $FOO whole token light like variable.other
   hl["@punctuation.special.bash"] = { fg = p.variable }
   hl["@variable.parameter.bash"] = { fg = p.variable }
 
-  -- CSS/SCSS specifics
-  hl["@tag.css"] = { fg = p.css_selector } -- div, body tag selectors
-  hl["@tag.scss"] = { fg = p.css_selector }
-  hl["@property.css"] = { fg = p.tag_attr } -- color:, margin:
-  hl["@type.css"] = { fg = p.css_selector } -- .class / #id
-  hl["@attribute.css"] = { fg = p.css_selector } -- :hover, :focus
+  -- CSS / SCSS
+  hl["@tag.css"] = { fg = p.tag }
+  hl["@tag.scss"] = { fg = p.tag }
+  hl["@property.css"] = { fg = p.property }
+  hl["@type.css"] = { fg = p.tag }             -- .class / #id selectors → green
+  hl["@attribute.css"] = { fg = p.tag }        -- :hover, :focus → green
   hl["@string.plain.css"] = { fg = p.string }
   hl["@number.css"] = { fg = p.number }
   hl["@function.css"] = { fg = p.func }
 
-  -- JSON/YAML specifics
-  hl["@property.json"] = { fg = p.variable }
-  hl["@property.yaml"] = { fg = p.variable }
+  -- JSON / YAML property names (2026 sets .json → green)
+  hl["@property.json"] = { fg = p.tag }
+  hl["@property.yaml"] = { fg = p.tag }
+  hl["@label.json"] = { fg = p.tag }
 
-  -- LSP semantic tokens (VS Code semanticTokenColors + default mapping)
+  -- ======================================================================
+  -- LSP semantic tokens (adds decl/usage distinction the textmate scopes
+  -- provide via meta.definition.variable vs variable.other)
+  -- ======================================================================
   hl["@lsp.type.namespace"] = { fg = p.namespace }
-  hl["@lsp.type.type"] = { fg = p.type }
-  hl["@lsp.type.class"] = { fg = p.type }
-  hl["@lsp.type.enum"] = { fg = p.type }
-  hl["@lsp.type.interface"] = { fg = p.type }
-  hl["@lsp.type.struct"] = { fg = p.type }
-  hl["@lsp.type.typeParameter"] = { fg = p.type }
+  hl["@lsp.type.type"] = { fg = p.variable_def }
+  hl["@lsp.type.class"] = { fg = p.variable_def }
+  hl["@lsp.type.enum"] = { fg = p.variable_def }
+  hl["@lsp.type.interface"] = { fg = p.variable_def }
+  hl["@lsp.type.struct"] = { fg = p.variable_def }
+  hl["@lsp.type.typeParameter"] = { fg = p.variable_def }
   hl["@lsp.type.parameter"] = { fg = p.parameter }
   hl["@lsp.type.variable"] = vim.tbl_extend("force", { fg = p.variable }, variable_style)
-  hl["@lsp.type.property"] = { fg = p.property }
-  hl["@lsp.type.enumMember"] = { fg = p.constant }
+  hl["@lsp.type.property"] = { fg = p.variable }
+  hl["@lsp.type.enumMember"] = { fg = p.number }
   hl["@lsp.type.event"] = { fg = p.variable }
   hl["@lsp.type.function"] = vim.tbl_extend("force", { fg = p.func }, function_style)
   hl["@lsp.type.method"] = vim.tbl_extend("force", { fg = p.func }, function_style)
@@ -300,31 +307,38 @@ function M.setup(p, opts)
   hl["@lsp.type.string"] = { fg = p.string }
   hl["@lsp.type.keyword"] = { fg = p.keyword }
   hl["@lsp.type.number"] = { fg = p.number }
-  hl["@lsp.type.regexp"] = { fg = p.regexp }
+  hl["@lsp.type.regexp"] = { fg = p.string }
   hl["@lsp.type.operator"] = { fg = p.operator }
   hl["@lsp.type.decorator"] = { fg = p.func }
   hl["@lsp.type.modifier"] = { fg = p.keyword }
-  hl["@lsp.type.selfParameter"] = { fg = p.keyword }
+  hl["@lsp.type.selfParameter"] = { fg = p.constant_builtin }
   hl["@lsp.type.builtinConstant"] = { fg = p.constant_builtin }
   hl["@lsp.type.magicFunction"] = { fg = p.func }
+
   -- modifiers
   hl["@lsp.mod.deprecated"] = { strikethrough = true }
   hl["@lsp.mod.readonly"] = {}
   hl["@lsp.mod.defaultLibrary"] = {}
-  -- typemod combinations
-  hl["@lsp.typemod.variable.defaultLibrary"] = { fg = p.variable } -- console, Math, window
-  hl["@lsp.typemod.function.defaultLibrary"] = { fg = p.func }
-  hl["@lsp.typemod.method.defaultLibrary"] = { fg = p.func }
-  hl["@lsp.typemod.type.defaultLibrary"] = { fg = p.type }
-  hl["@lsp.typemod.class.defaultLibrary"] = { fg = p.type }
-  hl["@lsp.typemod.variable.readonly"] = vim.tbl_extend("force", { fg = p.variable }, variable_style)
+
+  -- typemod combinations: 2026 distinguishes declarations (orange) from usages (fg)
+  hl["@lsp.typemod.variable.declaration"] = { fg = p.variable_def }
+  hl["@lsp.typemod.variable.definition"] = { fg = p.variable_def }
+  hl["@lsp.typemod.variable.readonly"] = { fg = p.number }
   hl["@lsp.typemod.variable.readonly.defaultLibrary"] = { fg = p.constant_builtin }
-  hl["@lsp.typemod.variable.constant"] = { fg = p.constant }
-  hl["@lsp.typemod.property.readonly"] = { fg = p.property }
-  hl["@lsp.typemod.enumMember.readonly"] = { fg = p.constant }
-  hl["@lsp.typemod.operator.controlFlow"] = { fg = p.keyword_control }
-  hl["@lsp.typemod.keyword.controlFlow"] = { fg = p.keyword_control }
-  hl["@lsp.typemod.keyword.async"] = { fg = p.keyword_control } -- async/await
+  hl["@lsp.typemod.variable.defaultLibrary"] = { fg = p.number }     -- console, Math, window
+  hl["@lsp.typemod.variable.constant"] = { fg = p.number }
+  hl["@lsp.typemod.function.declaration"] = { fg = p.func }
+  hl["@lsp.typemod.function.definition"] = { fg = p.func }
+  hl["@lsp.typemod.function.defaultLibrary"] = { fg = p.number }     -- support.function → blue
+  hl["@lsp.typemod.method.defaultLibrary"] = { fg = p.number }
+  hl["@lsp.typemod.type.defaultLibrary"] = { fg = p.number }         -- support.type → blue
+  hl["@lsp.typemod.class.defaultLibrary"] = { fg = p.number }        -- support.class → blue
+  hl["@lsp.typemod.interface.defaultLibrary"] = { fg = p.number }
+  hl["@lsp.typemod.property.readonly"] = { fg = p.variable }
+  hl["@lsp.typemod.enumMember.readonly"] = { fg = p.number }
+  hl["@lsp.typemod.operator.controlFlow"] = { fg = p.keyword }
+  hl["@lsp.typemod.keyword.controlFlow"] = { fg = p.keyword }
+  hl["@lsp.typemod.keyword.async"] = { fg = p.keyword }
 
   -- gitsigns
   hl.GitSignsAdd = { fg = p.git_add }
@@ -336,30 +350,30 @@ function M.setup(p, opts)
   hl.TelescopeNormal = { fg = p.fg, bg = bg_float }
   hl.TelescopePromptNormal = { fg = p.fg, bg = bg_float }
   hl.TelescopePromptBorder = { fg = p.border, bg = bg_float }
-  hl.TelescopePromptTitle = { fg = p.accent, bold = true }
-  hl.TelescopePreviewTitle = { fg = p.accent, bold = true }
-  hl.TelescopeResultsTitle = { fg = p.accent, bold = true }
+  hl.TelescopePromptTitle = { fg = p.accent_bright, bold = true }
+  hl.TelescopePreviewTitle = { fg = p.accent_bright, bold = true }
+  hl.TelescopeResultsTitle = { fg = p.accent_bright, bold = true }
   hl.TelescopeSelection = { bg = p.bg_visual }
-  hl.TelescopeMatching = { fg = p.accent, bold = true }
+  hl.TelescopeMatching = { fg = p.accent_bright, bold = true }
 
   -- neo-tree
   hl.NeoTreeNormal = { fg = p.fg, bg = bg_sidebar }
   hl.NeoTreeNormalNC = { fg = p.fg, bg = bg_sidebar }
-  hl.NeoTreeDirectoryName = { fg = p.accent }
-  hl.NeoTreeDirectoryIcon = { fg = p.accent }
-  hl.NeoTreeRootName = { fg = p.accent, bold = true }
+  hl.NeoTreeDirectoryName = { fg = p.accent_bright }
+  hl.NeoTreeDirectoryIcon = { fg = p.accent_bright }
+  hl.NeoTreeRootName = { fg = p.accent_bright, bold = true }
   hl.NeoTreeFileName = { fg = p.fg }
   hl.NeoTreeGitAdded = { fg = p.git_add }
   hl.NeoTreeGitDeleted = { fg = p.git_delete }
   hl.NeoTreeGitModified = { fg = p.git_change }
   hl.NeoTreeGitConflict = { fg = p.error }
-  hl.NeoTreeGitUntracked = { fg = p.variable }
+  hl.NeoTreeGitUntracked = { fg = p.git_add }
   hl.NeoTreeIndentMarker = { fg = p.fg_dark }
   hl.NeoTreeWinSeparator = { fg = p.border, bg = bg }
 
   -- indent-blankline / ibl
   hl.IblIndent = { fg = p.fg_dark }
-  hl.IblScope = { fg = p.accent }
+  hl.IblScope = { fg = p.accent_bright }
 
   -- notify
   hl.NotifyERRORBorder = { fg = p.error }
@@ -383,7 +397,7 @@ function M.setup(p, opts)
   hl.BlinkCmpMenuBorder = { fg = p.border, bg = bg_float }
   hl.BlinkCmpMenuSelection = { bg = p.bg_visual }
   hl.BlinkCmpLabel = { fg = p.fg }
-  hl.BlinkCmpLabelMatch = { fg = p.accent, bold = true }
+  hl.BlinkCmpLabelMatch = { fg = p.accent_bright, bold = true }
   hl.BlinkCmpKind = { fg = p.special }
   hl.BlinkCmpKindFunction = { fg = p.func }
   hl.BlinkCmpKindMethod = { fg = p.func }
@@ -392,27 +406,27 @@ function M.setup(p, opts)
   hl.BlinkCmpKindText = { fg = p.fg }
   hl.BlinkCmpKindProperty = { fg = p.property }
   hl.BlinkCmpKindUnit = { fg = p.number }
-  hl.BlinkCmpKindClass = { fg = p.type }
-  hl.BlinkCmpKindInterface = { fg = p.type }
-  hl.BlinkCmpKindStruct = { fg = p.type }
-  hl.BlinkCmpKindEnum = { fg = p.type }
-  hl.BlinkCmpKindEnumMember = { fg = p.constant }
-  hl.BlinkCmpKindConstant = { fg = p.constant }
-  hl.BlinkCmpKindModule = { fg = p.variable }
+  hl.BlinkCmpKindClass = { fg = p.variable_def }
+  hl.BlinkCmpKindInterface = { fg = p.variable_def }
+  hl.BlinkCmpKindStruct = { fg = p.variable_def }
+  hl.BlinkCmpKindEnum = { fg = p.variable_def }
+  hl.BlinkCmpKindEnumMember = { fg = p.number }
+  hl.BlinkCmpKindConstant = { fg = p.number }
+  hl.BlinkCmpKindModule = { fg = p.namespace }
   hl.BlinkCmpKindField = { fg = p.property }
   hl.BlinkCmpKindSnippet = { fg = p.comment }
   hl.BlinkCmpKindColor = { fg = p.string_escape }
   hl.BlinkCmpKindFile = { fg = p.fg }
-  hl.BlinkCmpKindFolder = { fg = p.accent }
+  hl.BlinkCmpKindFolder = { fg = p.accent_bright }
 
   -- rainbow delimiters
-  hl.RainbowDelimiterRed = { fg = p.error }
-  hl.RainbowDelimiterYellow = { fg = p.func }
-  hl.RainbowDelimiterBlue = { fg = p.keyword }
-  hl.RainbowDelimiterOrange = { fg = p.string }
-  hl.RainbowDelimiterGreen = { fg = p.number }
-  hl.RainbowDelimiterViolet = { fg = p.keyword_control }
-  hl.RainbowDelimiterCyan = { fg = p.type }
+  hl.RainbowDelimiterRed = { fg = p.keyword }
+  hl.RainbowDelimiterYellow = { fg = p.variable_def }
+  hl.RainbowDelimiterBlue = { fg = p.number }
+  hl.RainbowDelimiterOrange = { fg = p.variable_def }
+  hl.RainbowDelimiterGreen = { fg = p.type }
+  hl.RainbowDelimiterViolet = { fg = p.func }
+  hl.RainbowDelimiterCyan = { fg = p.accent_bright }
 
   return hl
 end
