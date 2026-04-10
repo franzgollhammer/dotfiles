@@ -17,7 +17,6 @@ cursor-style = block
 cursor-style-blink = false
 
 # macOS
-macos-option-as-alt = true
 font-thicken = true
 
 # clipboard
@@ -40,6 +39,7 @@ scrollback-limit = 10000
 
 # notifications (desktop notification on bell)
 bell-features = system
+desktop-notifications = true
 
 # shell integration
 shell-integration-features = no-cursor,sudo,title

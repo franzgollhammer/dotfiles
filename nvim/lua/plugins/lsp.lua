@@ -60,7 +60,7 @@ return {
           },
         },
       } or { capabilities = capabilities },
-      volar = { capabilities = capabilities },
+      vue_ls = { capabilities = capabilities },
       jsonls = { capabilities = capabilities },
       eslint = { capabilities = capabilities },
       html = { capabilities = capabilities },
