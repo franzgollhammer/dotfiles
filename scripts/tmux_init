@@ -6,5 +6,7 @@ if [[ -x "$INIT_FILE" ]]; then
   zsh ./$INIT_FILE
 elif [[ -x "$HOME/$INIT_FILE" ]]; then
   zsh "$HOME/$INIT_FILE"
+elif [[ -n "$DOTFILES" && -x "$DOTFILES/$INIT_FILE" ]]; then
+  zsh "$DOTFILES/$INIT_FILE"
 fi
 
