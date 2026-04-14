@@ -12,6 +12,8 @@ plugins=(
 )
 
 # ---- var ----
+export XDG_CONFIG_HOME="$HOME/.config"
+
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
