@@ -8,8 +8,9 @@ if [[ -z "$TMUX" ]]; then
   exit 1
 fi
 
-REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
-if [[ -z "$REPO_ROOT" ]]; then
+# Get the main repo root (not the worktree root)
+REPO_ROOT=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null | sed 's|/\.git$||')
+if [[ -z "$REPO_ROOT" || ! -d "$REPO_ROOT" ]]; then
   echo "Not in a git repo"
   exit 1
 fi
