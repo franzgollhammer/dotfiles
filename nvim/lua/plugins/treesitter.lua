@@ -25,7 +25,6 @@ return {
         "html",
         "bash",
         "markdown",
-        "markdown_inline",
         "toml",
         "yaml",
         "dockerfile",

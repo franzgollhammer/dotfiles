@@ -35,6 +35,7 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
+    ft = { "html", "vue", "javascript", "typescript", "javascriptreact", "typescriptreact", "xml" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
