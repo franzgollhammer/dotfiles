@@ -59,11 +59,25 @@ open_window() {
 create_worktree() {
   # list local + remote branches, deduplicate
   local branch
-  branch=$(git branch -a --format='%(refname:short)' | sed 's|^origin/||' | sort -u | fzf --prompt="Branch: " --height=40% --border)
+  branch=$( (echo "[+] New branch"; git branch -a --format='%(refname:short)' | sed 's|^origin/||' | sort -u) | fzf --prompt="Branch: " --height=40% --border)
 
   if [[ -z "$branch" ]]; then
     echo "No branch selected"
     exit 0
+  fi
+
+  # create a brand new branch
+  if [[ "$branch" == "[+] New branch" ]]; then
+    read -p "Branch name: " branch
+    if [[ -z "$branch" ]]; then
+      echo "No name provided"
+      exit 0
+    fi
+    local wt_path="$WORKTREE_DIR/$branch"
+    mkdir -p "$(dirname "$wt_path")"
+    git worktree add "$wt_path" -b "$branch"
+    open_window "$wt_path" "$branch"
+    return
   fi
 
   local wt_path="$WORKTREE_DIR/$branch"
