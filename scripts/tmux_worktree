@@ -8,22 +8,8 @@ if [[ -z "$TMUX" ]]; then
   exit 1
 fi
 
-# Get the main repo root (not the current worktree root)
-resolve_repo_root() {
-  local line
-
-  while IFS= read -r line; do
-    if [[ "$line" == worktree\ * ]]; then
-      printf '%s\n' "${line#worktree }"
-      return 0
-    fi
-  done < <(git worktree list --porcelain 2>/dev/null)
-
-  return 1
-}
-
-REPO_ROOT=$(resolve_repo_root || true)
-if [[ -z "$REPO_ROOT" || ! -d "$REPO_ROOT" ]]; then
+# Get the main repo root (not the worktree root)
+if ! REPO_ROOT=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null | sed 's|/\.git$||') || [[ -z "$REPO_ROOT" || ! -d "$REPO_ROOT" ]]; then
   echo "Not in a git repo"
   exit 1
 fi
