@@ -65,6 +65,12 @@ return {
       eslint = { capabilities = capabilities },
       html = { capabilities = capabilities },
       cssls = { capabilities = capabilities },
+      gopls = { capabilities = capabilities },
+      pyright = { capabilities = capabilities },
+      rust_analyzer = { capabilities = capabilities },
+      bashls = { capabilities = capabilities },
+      taplo = { capabilities = capabilities },
+      yamlls = { capabilities = capabilities },
       lua_ls = {
         capabilities = capabilities,
         settings = {
