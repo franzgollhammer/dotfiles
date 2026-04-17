@@ -1,26 +1,48 @@
 {
+  "semantic_tokens": "combined",
+  "tabs": {
+    "file_icons": true
+  },
+  "title_bar": {
+    "show_branch_icon": false
+  },
   "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
     "codex-acp": {
+      "default_config_options": {
+        "mode": "full-access"
+      },
+      "favorite_config_option_values": {
+        "mode": ["full-access"]
+      },
       "type": "registry"
     }
   },
   // "icon_theme": {
   //   "mode": "system",
-  //   "light": "JetBrains New UI Icons (Light)",
-  //   "dark": "JetBrains New UI Icons (Dark)"
+  //   "light": "JetBrains Air Icons Light",
+  //   "dark": "JetBrains Air Icons Dark"
   // },
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
-  },
+  // "icon_theme": {
+  //   "mode": "system",
+  //   "light": "Colored Zed Icons Theme Light",
+  //   "dark": "Colored Zed Icons Theme Dark"
+  // },
+  // "theme": {
+  //   "mode": "system",
+  //   "light": "One Light",
+  //   "dark": "Catppuccin Mocha"
+  // },
   "git_panel": {
     "tree_view": true
   },
   "edit_predictions": {
     "provider": "copilot"
   },
-  "buffer_font_family": "Lilex Nerd Font",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "ui_font_family": ".SystemUIFont",
   "inlay_hints": {
     // "enabled": true
   },
@@ -62,8 +84,25 @@
     }
   },
   "agent": {
-    "expand_terminal_card": false,
-    "expand_edit_card": false,
+    "dock": "right",
+    "profiles": {
+      "yolo": {
+        "default_model": {
+          "provider": "openai",
+          "model": "gpt-5.4",
+          "enable_thinking": false
+        },
+        "name": "YOLO",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5.4",
+      "enable_thinking": false
+    },
     "commit_message_model": {
       "provider": "zed.dev",
       "model": "claude-haiku-4-5"

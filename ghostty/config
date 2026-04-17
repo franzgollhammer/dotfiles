@@ -4,10 +4,11 @@ macos-icon = holographic
 
 # theme
 theme = dark:vscode-2026-dark,light:vscode-2026-light
-background-opacity = 0.95
+# background-opacity = 0.95
 window-padding-x = 4
 window-padding-y = 2
-font-family  = JetBrainsMono Nerd Font
+font-family  = Monaco Nerd Font Mono
+font-size = 12
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
