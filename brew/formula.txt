@@ -40,6 +40,7 @@ gdbm
 gettext
 gh
 giflib
+git-delta
 git-lfs
 glib
 gmp
@@ -101,6 +102,7 @@ lz4
 lzo
 m4
 mc
+merve
 minio
 mlx
 mlx-c
@@ -110,6 +112,7 @@ mongodb-database-tools
 mongosh
 mpdecimal
 n
+nbytes
 ncurses
 neofetch
 neovim
@@ -141,6 +144,7 @@ screenfetch
 screenresolution
 shellcheck
 simdjson
+simdutf
 sqlite
 starship
 tidy-html5
