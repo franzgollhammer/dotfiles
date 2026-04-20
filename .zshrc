@@ -110,3 +110,11 @@ function c() {
 eval "$(starship init zsh)"
 
 # ---- end fg zsh conf ----
+
+# pnpm
+export PNPM_HOME="/Users/fg/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
