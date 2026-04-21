@@ -1,0 +1,28 @@
+# Air Light Theme for Ghostty
+
+background = #F6F6EF
+foreground = #1B1B1B
+cursor-color = #1B1B1B
+cursor-text = #F6F6EF
+selection-background = #D8E2F3
+selection-foreground = #1B1B1B
+
+# Normal colors (0-7)
+palette = 0=#1B1B1B
+palette = 1=#9C2020
+palette = 2=#28A440
+palette = 3=#8E7A1F
+palette = 4=#1E5CC6
+palette = 5=#8E2ED1
+palette = 6=#0C647A
+palette = 7=#3D3D3D
+
+# Bright colors (8-15)
+palette = 8=#6A6A6A
+palette = 9=#E9A0A0
+palette = 10=#4BCE5C
+palette = 11=#8E7A1F
+palette = 12=#1E5CC6
+palette = 13=#B73EDB
+palette = 14=#5FB1D7
+palette = 15=#000000
