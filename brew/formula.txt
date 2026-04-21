@@ -16,6 +16,7 @@ cairo
 certifi
 cmatrix
 cocoapods
+coreutils
 cowsay
 curl
 dav1d
