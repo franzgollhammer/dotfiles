@@ -1,28 +1,29 @@
-# Air Dark Theme for Ghostty
+# Air Dark Theme for Ghostty — high-contrast vivid palette
+# Synced with iterm/themes/air-dark.itermcolors
 
-background = #0F1013
-foreground = #C5C8CC
-cursor-color = #C5C8CC
-cursor-text = #0F1013
-selection-background = #2A3142
-selection-foreground = #C5C8CC
+background = #18191B
+foreground = #ECECEC
+cursor-color = #ECECEC
+cursor-text = #18191B
+selection-background = #3A3D41
+selection-foreground = #ECECEC
 
 # Normal colors (0-7)
-palette = 0=#24262C
-palette = 1=#D16B6B
-palette = 2=#4EA88C
-palette = 3=#D2A65B
-palette = 4=#8AB3E6
-palette = 5=#D18AB7
-palette = 6=#5BAEAE
-palette = 7=#A8A8A8
+palette = 0=#2A2C2F
+palette = 1=#FB7185
+palette = 2=#4ADE80
+palette = 3=#FBBF24
+palette = 4=#60A5FA
+palette = 5=#E879F9
+palette = 6=#22D3EE
+palette = 7=#D4D4D8
 
 # Bright colors (8-15)
-palette = 8=#3A3D45
-palette = 9=#B84A4A
-palette = 10=#2E7A5E
-palette = 11=#9E7A36
-palette = 12=#A8C5ED
-palette = 13=#E3A8CD
-palette = 14=#7CC5C5
+palette = 8=#9CA3AF
+palette = 9=#FDA4AF
+palette = 10=#86EFAC
+palette = 11=#FCD34D
+palette = 12=#93C5FD
+palette = 13=#F0ABFC
+palette = 14=#67E8F9
 palette = 15=#FFFFFF
