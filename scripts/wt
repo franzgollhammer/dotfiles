@@ -1,0 +1,44 @@
+#!/bin/bash
+# wt - fzf worktree picker. cd into selected worktree (spawns new shell).
+# Usage: wt          # interactive
+#        wt <query>  # match branch substring
+#
+# Finds all worktrees git tracks (./.worktrees, .claude/worktrees, codex dirs, ...).
+
+set -euo pipefail
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "Not in a git repo" >&2
+  exit 1
+fi
+
+list_worktrees() {
+  git worktree list --porcelain | awk '
+    /^worktree / { path=$2 }
+    /^branch /   { sub("refs/heads/","",$2); branch=$2 }
+    /^detached/  { branch="(detached)" }
+    /^$/         { if (path) printf "%s|%s\n", branch, path; path=""; branch="" }
+    END          { if (path) printf "%s|%s\n", branch, path }
+  '
+}
+
+if [ -n "${1:-}" ]; then
+  target=$(list_worktrees | awk -F'|' -v q="$1" '$1 ~ q { print $2; exit }')
+  if [ -z "$target" ]; then
+    echo "No worktree matching: $1" >&2
+    exit 1
+  fi
+else
+  selected=$(
+    {
+      echo "BRANCH|PATH"
+      list_worktrees
+    } \
+      | column -t -s '|' \
+      | fzf --header-lines=1 --nth=1
+  )
+  [ -z "$selected" ] && exit 1
+  target=$(echo "$selected" | awk '{ for(i=2;i<=NF;i++) printf "%s%s", $i, (i<NF?" ":"\n") }')
+fi
+
+cd "$target" && exec "${SHELL:-/bin/zsh}"

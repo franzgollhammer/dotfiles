@@ -9,6 +9,7 @@ basecamp
 brave-browser
 bruno
 cleanshot
+codex
 cyberduck
 discord
 figma
@@ -23,6 +24,7 @@ font-hack-nerd-font
 font-jetbrains-mono-nerd-font
 font-juliamono
 font-lilex-nerd-font
+font-meslo-lg-nerd-font
 font-roboto-mono-nerd-font
 font-sf-mono-nerd-font
 font-ubuntu-mono-nerd-font
