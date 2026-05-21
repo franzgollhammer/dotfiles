@@ -1,6 +1,18 @@
 {
-  "icon_theme": "Air Icons Dark",
-  "theme": "Air Dark Italic",
+  "buffer_font_size": 12.0,
+  "terminal": {
+    "font_size": 12.0
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Air Icons Light",
+    "dark": "Air Icons Dark"
+  },
+  "theme": {
+    "mode": "system",
+    "light": "Air Light",
+    "dark": "Air Dark"
+  },
   "cli_default_open_behavior": "new_window",
   "diff_view_style": "split",
   "tabs": {
