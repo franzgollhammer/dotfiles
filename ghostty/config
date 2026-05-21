@@ -3,12 +3,14 @@ auto-update-channel = tip
 macos-icon = holographic
 
 # theme
-theme = dark:air-dark,light:air-light
+# theme = dark:air-dark,light:air-light
+theme = air-dark
 # background-opacity = 0.95
 window-padding-x = 8
 window-padding-y = 8
-font-family  = MesloLGL Nerd Font Mono
-font-size = 13
+font-family = ZedMono Nerd Font Mono
+font-size = 15
+font-style = Medium
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
