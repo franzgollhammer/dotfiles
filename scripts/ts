@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Copy date as YYYY-MM-DD to the system clipboard.
+exec date +%Y-%m-%d "$@" | pbcopy
