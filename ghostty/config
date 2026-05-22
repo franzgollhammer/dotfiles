@@ -8,6 +8,7 @@ theme = dark:air-dark,light:air-light
 window-padding-x = 8
 window-padding-y = 8
 font-family = JetBrainsMono Nerd Font Mono
+font-size = 14
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility

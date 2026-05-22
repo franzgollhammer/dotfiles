@@ -1,22 +1,22 @@
 {
   "buffer_font_size": 12.0,
   "terminal": {
-    "font_size": 12.0
+    "font_size": 12.0,
   },
   "icon_theme": {
     "mode": "system",
     "light": "Air Icons Light",
-    "dark": "Air Icons Dark"
+    "dark": "Air Icons Dark",
   },
   "theme": {
     "mode": "system",
     "light": "Air Light",
-    "dark": "Air Dark"
+    "dark": "Air Dark",
   },
   "cli_default_open_behavior": "new_window",
   "diff_view_style": "split",
   "tabs": {
-    "file_icons": true
+    "file_icons": true,
   },
   "colorize_brackets": true,
   "indent_guides": {
@@ -24,55 +24,57 @@
     "line_width": 1,
     "active_line_width": 1,
     "coloring": "indent_aware",
-    "background_coloring": "disabled"
+    "background_coloring": "disabled",
   },
   "agent": {
     "default_profile": "claude-code",
     "commit_message_model": {
       "provider": "zed.dev",
-      "model": "claude-haiku-4-5"
-    }
+      "model": "claude-haiku-4-5",
+    },
   },
   "agent_servers": {
     "cursor": {
-      "type": "registry"
+      "type": "registry",
     },
     "codex-acp": {
-      "type": "registry"
+      "type": "registry",
     },
     "claude-acp": {
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
   "format_on_save": "off",
   "languages": {
+    "Markdown": {
+      "format_on_save": "on",
+    },
     "JavaScript": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
       "format_on_save": "on",
-      "formatter": []
+      "formatter": [],
+    },
+    "JSONC": {
+      "format_on_save": "on",
     },
     "JSON": {
-      "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      },
       "format_on_save": "on",
-      "formatter": []
     },
     "TypeScript": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
       "format_on_save": "on",
-      "formatter": []
+      "formatter": [],
     },
     "Vue.js": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
       "format_on_save": "on",
-      "formatter": []
-    }
+      "formatter": [],
+    },
   },
 }

@@ -1,8 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
+right_format = "$time"
 
-[character]
-success_symbol = "[➜](bold green)"
-error_symbol = "[➜](bold red)"
+[time]
+disabled = false
+format = "[$time]($style)"
 
 [battery]
 full_symbol = "• "
