@@ -10,8 +10,8 @@
   },
   "theme": {
     "mode": "system",
-    "light": "Air Light",
-    "dark": "Air Dark",
+    "light": "Air Light Italic",
+    "dark": "Air Dark Italic",
   },
   "cli_default_open_behavior": "new_window",
   "diff_view_style": "split",
@@ -27,13 +27,22 @@
     "background_coloring": "disabled",
   },
   "agent": {
-    "default_profile": "claude-code",
+    "default_model": {
+      "provider": "openai-subscribed",
+      "model": "gpt-5.5",
+      "enable_thinking": true,
+      "effort": "medium"
+    },
+    "default_profile": "write",
     "commit_message_model": {
       "provider": "zed.dev",
       "model": "claude-haiku-4-5",
     },
   },
   "agent_servers": {
+    "gemini": {
+      "type": "registry"
+    },
     "cursor": {
       "type": "registry",
     },

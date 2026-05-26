@@ -1,6 +1,6 @@
 # install from pre-release channel
 auto-update-channel = tip
-macos-icon = holographic
+# macos-icon = holographic
 
 # theme
 theme = dark:air-dark,light:air-light
@@ -18,7 +18,7 @@ cursor-style = block
 cursor-style-blink = false
 
 # macOS
-font-thicken = true
+# font-thicken = true
 
 # clipboard
 copy-on-select = clipboard
