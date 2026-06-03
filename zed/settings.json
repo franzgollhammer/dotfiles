@@ -1,20 +1,33 @@
 {
-  "buffer_font_size": 12.0,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  // "ui_font_size": 17.0,
+  "edit_predictions": {
+    "provider": "copilot",
+  },
+  // "buffer_font_size": 13.0,
   "terminal": {
-    "font_size": 12.0,
+    "font_family": "JetBrainsMono Nerd Font",
+    // "font_size": 13.0,
+  },
+  "project_panel": {
+    "bold_folder_labels": true,
+    "folder_icons": false,
+  },
+  "git_panel": {
+    "tree_view": true,
   },
   "icon_theme": {
     "mode": "system",
-    "light": "Air Icons Light",
-    "dark": "Air Icons Dark",
+    "light": "Air Material Icons Light",
+    "dark": "Air Material Icons Dark",
   },
   "theme": {
     "mode": "system",
     "light": "Air Light Italic",
-    "dark": "Air Dark Italic",
+    "dark": "Air Dark",
   },
   "cli_default_open_behavior": "new_window",
-  "diff_view_style": "split",
+  "diff_view_style": "unified",
   "tabs": {
     "file_icons": true,
   },
@@ -27,11 +40,16 @@
     "background_coloring": "disabled",
   },
   "agent": {
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "claude-haiku-4.5",
+      "enable_thinking": false,
+    },
     "default_model": {
       "provider": "openai-subscribed",
       "model": "gpt-5.5",
       "enable_thinking": true,
-      "effort": "medium"
+      "effort": "medium",
     },
     "default_profile": "write",
     "commit_message_model": {
@@ -41,7 +59,7 @@
   },
   "agent_servers": {
     "gemini": {
-      "type": "registry"
+      "type": "registry",
     },
     "cursor": {
       "type": "registry",
@@ -58,18 +76,18 @@
     "Markdown": {
       "format_on_save": "on",
     },
+    "JSONC": {
+      "format_on_save": "on",
+    },
+    "JSON": {
+      "format_on_save": "on",
+    },
     "JavaScript": {
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },
       "format_on_save": "on",
       "formatter": [],
-    },
-    "JSONC": {
-      "format_on_save": "on",
-    },
-    "JSON": {
-      "format_on_save": "on",
     },
     "TypeScript": {
       "code_actions_on_format": {
