@@ -1,13 +1,15 @@
 {
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  // "buffer_font_family": "JetBrainsMono Nerd Font",
   // "ui_font_size": 17.0,
+  "buffer_font_size": 13.0,
   "edit_predictions": {
     "provider": "copilot",
   },
   // "buffer_font_size": 13.0,
   "terminal": {
-    "font_family": "JetBrainsMono Nerd Font",
+    // "font_family": "JetBrainsMono Nerd Font",
     // "font_size": 13.0,
+    "font_size": 13.0
   },
   "project_panel": {
     "bold_folder_labels": true,
@@ -40,6 +42,7 @@
     "background_coloring": "disabled",
   },
   "agent": {
+    "thinking_display": "always_collapsed",
     "inline_assistant_model": {
       "provider": "copilot_chat",
       "model": "claude-haiku-4.5",
@@ -68,6 +71,10 @@
       "type": "registry",
     },
     "claude-acp": {
+      "default_config_options": {
+        "effort": "high",
+        "mode": "bypassPermissions",
+      },
       "type": "registry",
     },
   },

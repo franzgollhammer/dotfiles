@@ -66,6 +66,7 @@ libavif
 libdatrie
 libdeflate
 libevent
+libffi
 libgit2
 libidn2
 liblinear

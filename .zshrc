@@ -4,6 +4,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="robbyrussell"
 
+# shellcheck disable=SC2034  # consumed by oh-my-zsh
 plugins=(
   nvm
   fzf
@@ -31,17 +32,13 @@ export RUBY_DIR="/opt/homebrew/opt/ruby/bin"
 export LOCAL_BIN="$HOME/.local/bin"
 
 # ---- path ----
-export PATH="$SCRIPTS:"\
-"$BUN_INSTALL/bin:"\
-"$RUBY_DIR:"\
-"$LOCAL_BIN:"\
-"$PATH"
+export PATH="$SCRIPTS:$BUN_INSTALL/bin:$RUBY_DIR:$LOCAL_BIN:$PATH"
 
 # ---- .env ----
-export $(grep -v '^#' $DOTFILES/.env | xargs)
+export "$(grep -v '^#' "$DOTFILES/.env" | xargs)"
 
 # ---- source oh-my-zsh ----
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # ---- bun completions ----
 [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
@@ -58,21 +55,21 @@ alias run="node --run"
 alias ls="ls -FG"
 alias l="ls -ah"
 alias ll="ls -lah"
-alias dot="(cd $DOTFILES; $EDITOR .)"
-alias play="(cd $DEV/playground; $EDITOR .)"
+alias dot="(cd \$DOTFILES; \$EDITOR .)"
+alias play="(cd \$DEV/playground; \$EDITOR .)"
 alias ff="fastfetch"
 alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
 alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
-alias killall="pkill -u $(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
+alias killall="pkill -u \$(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
 alias bbb="brew_update"
 
 # git aliases
 alias gundo="git reset --soft HEAD~1"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias glf="git log -p -- " # log patch <filename>
-alias com="git commit -m "$(date "+%Y-%m-%d-%H:%M:%S")" --allow-empty; git push"
+alias com="git commit -m \"\$(date '+%Y-%m-%d-%H:%M:%S')\" --allow-empty; git push"
 
 # github
 alias repo="gh repo view --web"
@@ -87,12 +84,12 @@ function d() {
   if [ -z "$1" ]; then
     selected=$(ls "$DEV" | fzf)
     if [ -n "$selected" ]; then
-      cd "$DEV"/"$selected"
+      cd "$DEV"/"$selected" || return
     fi
   elif [ "$1" = '.' ]; then
-    cd "$DEV"
+    cd "$DEV" || return
   else
-    cd "$DEV"/"$1"
+    cd "$DEV"/"$1" || return
   fi
 }
 
