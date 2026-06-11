@@ -1,11 +1,11 @@
 {
   "outline_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "collaboration_panel": {
-    "dock": "right"
+    "dock": "right",
   },
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  // "buffer_font_family": "JetBrainsMono Nerd Font",
   // "ui_font_size": 17.0,
   "buffer_font_size": 13.0,
   "edit_predictions": {
@@ -13,7 +13,7 @@
   },
   // "buffer_font_size": 13.0,
   "terminal": {
-    "font_family": "JetBrainsMono Nerd Font",
+    // "font_family": "JetBrainsMono Nerd Font",
     // "font_size": 13.0,
     "font_size": 13.0,
     "cursor_shape": "bar",
