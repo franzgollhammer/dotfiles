@@ -1,0 +1,8 @@
+name = "New tab: fg"
+
+[[panes]]
+id = "main"
+type = "terminal"
+directory = "/Users/fg"
+
+[params]
