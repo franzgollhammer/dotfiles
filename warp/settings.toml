@@ -101,7 +101,7 @@ top = { height = 50, width = 100 }
 [general]
 show_warning_before_quitting = false
 snackbar_enabled = true
-restore_session = false
+restore_session = true
 
 [text_editing]
 vim_mode_enabled = false
