@@ -7,19 +7,23 @@ cloud_conversation_storage_enabled = true
 ai_auto_detection_enabled = false
 nld_in_terminal_enabled = false
 
+[agents.warp_agent.other]
+should_render_use_agent_toolbar_for_user_commands = false
+
 [agents.profiles]
 agent_mode_coding_permissions = "always_allow_reading"
 
 [terminal]
 use_audible_bell = false
 mouse_reporting_enabled = true
+show_terminal_zero_state_block = false
 
 [terminal.input]
 error_underlining_enabled = true
-input_box_type_setting = "classic"
+input_box_type_setting = "universal"
 completions_open_while_typing = false
 alias_expansion_enabled = false
-honor_ps1 = true
+honor_ps1 = false
 
 [terminal.input.extra_meta_keys]
 left_alt = false
@@ -55,6 +59,13 @@ zoom_level = 100
 
 [appearance.input]
 input_mode = "pinned_to_bottom"
+
+[appearance.vertical_tabs]
+enabled = true
+display_granularity = "panes"
+view_mode = "compact"
+primary_info = "command"
+compact_subtitle = "branch"
 
 [code]
 
