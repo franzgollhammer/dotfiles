@@ -1,5 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 right_format = "$time"
+format = """$username$hostname$localip$shlvl$singularity$kubernetes$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch$git_commit$git_state$git_metrics$git_status$custom$hg_branch$hg_state$pijul_channel$docker_context$package$bun$c$cmake$cobol$cpp$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$fortran$gleam$golang$gradle$haskell$haxe$helm$java$julia$kotlin$lua$maven$mojo$nim$nodejs$ocaml$odin$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$swift$terraform$typst$vlang$vagrant$xmake$zig$buf$guix_shell$nix_shell$conda$pixi$meson$spack$memory_usage$aws$gcloud$openstack$azure$direnv$env_var$mise$crystal$sudo$cmd_duration$line_break$jobs$battery$status$container$netns$os$shell$character"""
 
 [time]
 disabled = false
@@ -37,3 +38,10 @@ disabled = false
 ahead = '↑'
 behind = '↓'
 diverged = '↑↓'
+
+[custom.github_pr]
+command = "gh pr view --json number --template '#{{.number}}' 2>/dev/null"
+when = "gh pr view --json number >/dev/null 2>&1"
+symbol = " "
+format = "[$symbol$output]($style) "
+style = "bold purple"
