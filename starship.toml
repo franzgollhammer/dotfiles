@@ -41,7 +41,7 @@ diverged = '↑↓'
 
 [custom.github_pr]
 command = "gh pr view --json number --template '#{{.number}}' 2>/dev/null"
-when = "gh pr view --json number >/dev/null 2>&1"
+ignore_timeout = true
 symbol = " "
 format = "[$symbol$output]($style) "
 style = "bold purple"
