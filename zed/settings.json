@@ -5,7 +5,7 @@
   "collaboration_panel": {
     "dock": "right",
   },
-  // "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   // "ui_font_size": 17.0,
   "buffer_font_size": 13.0,
   "edit_predictions": {
@@ -13,7 +13,7 @@
   },
   // "buffer_font_size": 13.0,
   "terminal": {
-    // "font_family": "JetBrainsMono Nerd Font",
+    "font_family": "JetBrainsMono Nerd Font",
     // "font_size": 13.0,
     "font_size": 13.0,
     "cursor_shape": "bar",
@@ -29,8 +29,8 @@
   },
   "icon_theme": {
     "mode": "system",
-    "light": "Air Material Icons Light",
-    "dark": "Air Material Icons Dark",
+    "light": "Air + Material Icons Light",
+    "dark": "Air + Material Icons Dark",
   },
   "theme": {
     "mode": "system",
@@ -78,6 +78,9 @@
       "type": "registry",
     },
     "codex-acp": {
+      "default_config_options": {
+        "mode": "full-access",
+      },
       "type": "registry",
     },
     "claude-acp": {

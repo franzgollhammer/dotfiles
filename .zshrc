@@ -19,9 +19,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR="zed"
-  export VISUAL="zed"
-  export VUE_EDITOR="zed"
+  export EDITOR="code"
+  export VISUAL="code"
+  export VUE_EDITOR="code"
 fi
 
 export DEV="$HOME/dev"
@@ -35,7 +35,9 @@ export LOCAL_BIN="$HOME/.local/bin"
 export PATH="$SCRIPTS:$BUN_INSTALL/bin:$RUBY_DIR:$LOCAL_BIN:$PATH"
 
 # ---- .env ----
-export "$(grep -v '^#' "$DOTFILES/.env" | xargs)"
+set -a
+source "$DOTFILES/.env"
+set +a
 
 # ---- source oh-my-zsh ----
 source "$ZSH/oh-my-zsh.sh"
