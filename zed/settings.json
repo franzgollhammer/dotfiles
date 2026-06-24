@@ -21,7 +21,7 @@
   "project_panel": {
     "dock": "right",
     "bold_folder_labels": true,
-    "folder_icons": false,
+    // "folder_icons": false,
   },
   "git_panel": {
     "dock": "right",

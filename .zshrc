@@ -68,6 +68,8 @@ alias killall="pkill -u \$(whoami) node npm mongod redis redis-server minio Cypr
 alias bbb="brew_update"
 
 # git aliases
+alias gwa="git worktree add"
+alias gwl="git worktree list"
 alias gundo="git reset --soft HEAD~1"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias glf="git log -p -- " # log patch <filename>
@@ -118,3 +120,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Added by Devin
+export PATH="/Users/fg/.codeium/windsurf/bin:$PATH"
