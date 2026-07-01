@@ -123,3 +123,6 @@ esac
 
 # Added by Devin
 export PATH="/Users/fg/.codeium/windsurf/bin:$PATH"
+
+# opencode
+export PATH=/Users/fg/.opencode/bin:$PATH

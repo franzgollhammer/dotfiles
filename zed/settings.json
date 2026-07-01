@@ -29,7 +29,7 @@
   },
   "icon_theme": {
     "mode": "system",
-    "light": "Air + Material Icons Light",
+    "light": "Material Icon Theme",
     "dark": "Air + Material Icons Dark",
   },
   "theme": {
