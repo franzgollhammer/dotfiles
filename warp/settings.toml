@@ -127,7 +127,7 @@ is_settings_sync_enabled = true
 [global_hotkey]
 
 [global_hotkey.dedicated_window]
-enabled = false
+enabled = true
 
 [global_hotkey.dedicated_window.settings]
 active_pin_position = "top"
@@ -141,7 +141,7 @@ right = { height = 100, width = 40 }
 top = { height = 50, width = 100 }
 
 [global_hotkey.toggle_all_windows]
-enabled = true
+enabled = false
 keybinding = "cmd-#"
 
 [general]
