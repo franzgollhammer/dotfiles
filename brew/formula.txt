@@ -66,6 +66,7 @@ jbig2dec
 jpeg-turbo
 jpeg-xl
 jq
+json-c
 krb5
 lazygit
 leptonica
@@ -89,6 +90,7 @@ libnghttp3
 libngtcp2
 libpng
 libpq
+libpsl
 libsodium
 libspiro
 libssh2
@@ -127,6 +129,7 @@ mlx-c
 mongodb-community
 mongodb-community@7.0
 mongodb-database-tools
+mongosh
 mpdecimal
 n
 nbytes

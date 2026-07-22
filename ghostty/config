@@ -3,41 +3,42 @@ auto-update-channel = tip
 # macos-icon = holographic
 
 # theme
-theme = dark:air-dark,light:air-light
+# theme = dark:air-dark,light:air-light
+# theme = Monokai Classic
 # background-opacity = 0.95
-window-padding-x = 8
-window-padding-y = 8
+# window-padding-x = 8
+# window-padding-y = 8
 # font-family = Lilex
-font-size = 14
+# font-size = 14
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
 
 # cursor
-cursor-style = block
-cursor-style-blink = false
+# cursor-style = block
+# cursor-style-blink = false
 
 # macOS
 font-thicken = true
 
 # clipboard
-copy-on-select = clipboard
-clipboard-read = allow
-clipboard-write = allow
+# copy-on-select = clipboard
+# clipboard-read = allow
+# clipboard-write = allow
 
 # mouse
-mouse-hide-while-typing = true
+# mouse-hide-while-typing = true
 
 # window
-confirm-close-surface = false
-window-save-state = always
-window-inherit-font-size = true
+# confirm-close-surface = false
+# window-save-state = always
+# window-inherit-font-size = true
 
 # text
 # bold-color = bright
 # adjust-cell-width = 5%
 # adjust-cell-height = 20%
-scrollback-limit = 10000
+# scrollback-limit = 10000
 
 # notifications (desktop notification on bell)
 bell-features = system,attention,title

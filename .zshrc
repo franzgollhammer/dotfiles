@@ -126,3 +126,7 @@ export PATH="/Users/fg/.codeium/windsurf/bin:$PATH"
 
 # opencode
 export PATH=/Users/fg/.opencode/bin:$PATH
+
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
