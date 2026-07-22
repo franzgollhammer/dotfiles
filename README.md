@@ -25,6 +25,7 @@ xargs brew install --cask < brew/cask.txt
 |----------|-------|
 | Shell | `.zshrc`, `starship.toml` |
 | Tmux | `.tmux.conf`, `.tmux_init` |
+| Herdr | `herdr/config.toml` |
 | Editors | `nvim/`, `vscode/`, `cursor/`, `zed/` |
 | Terminals | `ghostty/`, `warp/` (settings, keybindings, themes, launch configs), `iterm/` (themes) |
 | Tools | `fzf/` (theme) |
