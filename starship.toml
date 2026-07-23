@@ -2,10 +2,6 @@
 right_format = "$time"
 continuation_prompt = "[.](bright-black) "
 
-[time]
-disabled = false
-format = "[$time]($style)"
-
 [character]
 success_symbol = "[>](bold green)"
 error_symbol = "[x](bold red)"
