@@ -8,6 +8,7 @@
   // "buffer_font_family": "JetBrainsMono Nerd Font",
   // "ui_font_size": 17.0,
   // "buffer_font_size": 13.0,
+  "icon_theme": "JetBrains New UI Icons (Dark)",
   "theme": "Air Dark Italic",
   "project_panel": {
     "dock": "left"
