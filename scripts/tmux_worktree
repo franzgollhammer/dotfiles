@@ -15,7 +15,9 @@ if ! REPO_ROOT=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/nu
 fi
 
 REPO_NAME=$(basename "$REPO_ROOT")
-WORKTREE_DIR="$REPO_ROOT/.worktrees"
+# new worktrees go to $GIT_WORKTREE_DIR/<repo>/<branch>, fallback to in-repo .worktrees
+WORKTREE_DIR="${GIT_WORKTREE_DIR:+$GIT_WORKTREE_DIR/$REPO_NAME}"
+WORKTREE_DIR="${WORKTREE_DIR:-$REPO_ROOT/.worktrees}"
 
 # Build worktree list: path | branch | label
 build_list() {
