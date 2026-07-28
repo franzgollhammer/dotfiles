@@ -25,6 +25,7 @@ else
 fi
 
 export DEV="$HOME/dev"
+export GIT_WORKTREE_DIR="$DEV/worktrees"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export BUN_INSTALL="$HOME/.bun"
