@@ -70,9 +70,7 @@ alias bbb="brew_update"
 
 # git aliases
 alias gwa="git worktree add"
-# worktrees under $GIT_WORKTREE_DIR/<repo>/<branch> (wta is a function, see below)
-alias wtl="git worktree list"
-alias wtr="wt_remove"
+alias wtl="git worktree list" # wta/wtr are functions, see below
 alias gundo="git reset --soft HEAD~1"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias glf="git log -p -- " # log patch <filename>
@@ -87,14 +85,34 @@ function dir() {
   mkdir "$1" && cd "$1" || exit
 }
 
-# Add a worktree and cd into it. Has to be a function, not an alias:
-# wt_add is a script and cannot change this shell's cwd, so it prints
-# the path instead.
-# Do not name the local "path" - zsh ties that one to $PATH.
+# Worktrees live in $GIT_WORKTREE_DIR/<repo>/<branch>. Functions rather
+# than scripts, because only a function can cd the calling shell.
+
+# wta [branch] - add a worktree and cd into it. Without an argument, pick
+# the branch with fzf. git resolves the branch itself: local one gets
+# checked out, remote-only one gets a tracking branch, unknown one is new.
 function wta() {
-  local target
-  target=$(wt_add "$@") || return
-  cd "$target" || return
+  local root branch dir
+  root=$(git rev-parse --path-format=absolute --git-common-dir) || return
+  root=${root:h}
+  branch=${1:-$(git branch -a --format='%(refname:short)' | sed 's|^origin/||' | sort -u | fzf)}
+  [[ -n $branch ]] || return 1
+  dir=$GIT_WORKTREE_DIR/${root:t}/$branch
+  [[ -d $dir ]] || git worktree add $dir $branch 2> /dev/null || git worktree add $dir -b $branch || return
+  cd $dir
+}
+
+# wtr - remove a worktree. sed 1d drops the main one, which git always
+# lists first. Keeps the branch; git refuses if there are uncommitted changes.
+function wtr() {
+  local dir
+  dir=$(git worktree list | sed 1d | fzf | awk '{print $1}')
+  [[ -n $dir ]] || return 1
+  [[ $dir != $(git rev-parse --show-toplevel) ]] || {
+    echo "You are inside that worktree - cd out first" >&2
+    return 1
+  }
+  git worktree remove $dir
 }
 
 function d() {

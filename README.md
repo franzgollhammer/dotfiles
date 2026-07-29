@@ -41,8 +41,7 @@ Located in `scripts/`, added to PATH via `.zshrc`:
 | `brew_update` | Update brew + export package lists |
 | `b` / `list_branches` | Browse branches (fzf picker / pretty list) |
 | `gm` (repo root) | fzf-pick a branch and merge it |
-| `wt` | fzf worktree picker, cd into the pick |
-| `wt_add`, `wt_remove` | Add/remove worktrees under `$GIT_WORKTREE_DIR/<repo>/<branch>` (aliased to `wta`, `wtr`; `wtl` is plain `git worktree list`) |
+| `wt` | fzf worktree picker, cd into the pick (add/remove: `wta`/`wtr` in `.zshrc`) |
 | `tmux_session`, `tmux_init` | Create/attach tmux sessions, run `.tmux_init` |
 | `code_*`, `cursor_*` | Export/install/uninstall VS Code and Cursor extensions |
 | `lazy_nvm` | Lazy-load nvm for faster shell startup |
