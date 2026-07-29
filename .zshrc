@@ -71,6 +71,9 @@ alias bbb="brew_update"
 # git aliases
 alias gwa="git worktree add"
 alias gwl="git worktree list"
+# worktrees under $GIT_WORKTREE_DIR/<repo>/<branch> (wta is a function, see below)
+alias wtl="wt_list"
+alias wtr="wt_remove"
 alias gundo="git reset --soft HEAD~1"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias glf="git log -p -- " # log patch <filename>
@@ -83,6 +86,16 @@ alias pr="gh pr view --web || gh pr create --web"
 # ---- functions ----
 function dir() {
   mkdir "$1" && cd "$1" || exit
+}
+
+# Add a worktree and cd into it. Has to be a function, not an alias:
+# wt_add is a script and cannot change this shell's cwd, so it prints
+# the path instead.
+# Do not name the local "path" - zsh ties that one to $PATH.
+function wta() {
+  local target
+  target=$(wt_add "$@") || return
+  cd "$target" || return
 }
 
 function d() {

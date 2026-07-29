@@ -1,0 +1,41 @@
+#!/bin/bash
+# wt_common - shared helpers for wt_add / wt_list / wt_remove
+# Sourced, not executed. Sets REPO_ROOT, REPO_NAME, WORKTREE_DIR, CURRENT.
+#
+# Everything meant for the user goes to stderr, so a caller can capture
+# stdout. wt_add relies on this: it prints only the worktree path there,
+# which the `wta` shell function cd's into.
+
+say() { printf '%s\n' "$*" >&2; }
+die() {
+  printf '%s\n' "$*" >&2
+  exit 1
+}
+
+git rev-parse --git-dir > /dev/null 2>&1 || die "Not in a git repo"
+
+# --git-common-dir points at the main repo's .git even from inside a worktree
+REPO_ROOT=$(git rev-parse --path-format=absolute --git-common-dir) || die "Cannot resolve repo root"
+REPO_ROOT=${REPO_ROOT%/}
+REPO_ROOT=${REPO_ROOT%/.git}
+[[ -d "$REPO_ROOT" ]] || die "Repo root not found: $REPO_ROOT"
+
+[[ -n "${GIT_WORKTREE_DIR:-}" ]] || die "GIT_WORKTREE_DIR is not set"
+
+REPO_NAME=$(basename "$REPO_ROOT")
+# shellcheck disable=SC2034  # both consumed by the sourcing wt_* scripts
+WORKTREE_DIR="$GIT_WORKTREE_DIR/$REPO_NAME"
+# shellcheck disable=SC2034
+CURRENT=$(git rev-parse --show-toplevel 2> /dev/null || true)
+
+# One "branch|path" line per worktree. substr() instead of $2 so paths
+# containing spaces survive.
+list_worktrees() {
+  git worktree list --porcelain | awk '
+    /^worktree /  { path = substr($0, 10) }
+    /^branch /    { branch = substr($0, 8); sub("refs/heads/", "", branch) }
+    /^detached$/  { branch = "(detached)" }
+    /^$/          { if (path) printf "%s|%s\n", branch, path; path = ""; branch = "" }
+    END           { if (path) printf "%s|%s\n", branch, path }
+  '
+}

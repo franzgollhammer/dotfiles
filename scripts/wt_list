@@ -1,0 +1,18 @@
+#!/bin/bash
+# wt_list - list the worktrees of the current repo
+# The worktree you are standing in is marked with *, the main one with (main).
+
+set -euo pipefail
+# shellcheck source-path=SCRIPTDIR
+# shellcheck source=wt_common
+source "$(dirname "$0")/wt_common"
+
+{
+  echo "|BRANCH|PATH"
+  list_worktrees | while IFS='|' read -r branch path; do
+    marker=" "
+    [[ "$path" == "$CURRENT" ]] && marker="*"
+    [[ "$path" == "$REPO_ROOT" ]] && path="$path  (main)"
+    printf '%s|%s|%s\n' "$marker" "$branch" "$path"
+  done
+} | column -t -s '|'

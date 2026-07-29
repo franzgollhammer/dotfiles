@@ -1,0 +1,54 @@
+#!/bin/bash
+# wt_add - create a worktree at $GIT_WORKTREE_DIR/<repo>/<branch>
+# Usage: wt_add            # fzf-pick a branch, or create a new one
+#        wt_add <branch>   # check out that branch (creates it if needed)
+#
+# Prints the worktree path to stdout, everything else to stderr.
+# Use the `wta` shell function to also cd into it.
+
+set -euo pipefail
+# shellcheck source-path=SCRIPTDIR
+# shellcheck source=wt_common
+source "$(dirname "$0")/wt_common"
+
+branch="${1:-}"
+
+if [[ -z "$branch" ]]; then
+  branch=$(
+    {
+      echo "[+] New branch"
+      git branch -a --format='%(refname:short)' \
+        | sed 's|^origin/||' \
+        | grep -v '^HEAD$' \
+        | sort -u
+    } | fzf --prompt="Branch: " --height=40% --border
+  )
+  [[ -n "$branch" ]] || exit 1
+
+  if [[ "$branch" == "[+] New branch" ]]; then
+    read -rp "Branch name: " branch
+    [[ -n "$branch" ]] || die "No name given"
+  fi
+fi
+
+# already checked out somewhere? hand back that path instead of failing
+existing=$(list_worktrees | awk -F'|' -v b="$branch" '$1 == b { print $2; exit }')
+if [[ -n "$existing" ]]; then
+  say "Worktree already exists: $existing"
+  printf '%s\n' "$existing"
+  exit 0
+fi
+
+wt_path="$WORKTREE_DIR/$branch"
+mkdir -p "$(dirname "$wt_path")"
+
+if git show-ref --verify --quiet "refs/heads/$branch"; then
+  git worktree add "$wt_path" "$branch" >&2
+elif git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+  git worktree add "$wt_path" -b "$branch" --track "origin/$branch" >&2
+else
+  git worktree add "$wt_path" -b "$branch" >&2
+fi
+
+say "Created $wt_path"
+printf '%s\n' "$wt_path"
