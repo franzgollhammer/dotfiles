@@ -6,11 +6,30 @@
 # Leaves the branch itself alone - delete it with `git branch -d <branch>`.
 
 set -euo pipefail
-# shellcheck source-path=SCRIPTDIR
-# shellcheck source=wt_common
-source "$(dirname "$0")/wt_common"
 
-entries=$(list_worktrees | awk -F'|' -v root="$REPO_ROOT" '$2 != root')
+die() {
+  printf '%s\n' "$*" >&2
+  exit 1
+}
+
+git rev-parse --git-dir > /dev/null 2>&1 || die "Not in a git repo"
+
+# --git-common-dir points at the main repo's .git even from inside a worktree
+REPO_ROOT=$(git rev-parse --path-format=absolute --git-common-dir)
+REPO_ROOT=${REPO_ROOT%/}
+REPO_ROOT=${REPO_ROOT%/.git}
+CURRENT=$(git rev-parse --show-toplevel 2> /dev/null || true)
+
+# "branch|path" per worktree, main one excluded.
+# substr() instead of $2 so paths containing spaces survive.
+entries=$(git worktree list --porcelain | awk -v root="$REPO_ROOT" '
+  function emit() { if (path && path != root) printf "%s|%s\n", branch, path; path = ""; branch = "" }
+  /^worktree /  { path = substr($0, 10) }
+  /^branch /    { branch = substr($0, 8); sub("refs/heads/", "", branch) }
+  /^detached$/  { branch = "(detached)" }
+  /^$/          { emit() }
+  END           { emit() }
+')
 [[ -n "$entries" ]] || die "No removable worktrees (only the main one exists)"
 
 if [[ -n "${1:-}" ]]; then
@@ -31,7 +50,7 @@ path=${selected#*|}
 
 read -rp "Remove worktree '$branch' at $path? (y/N) " confirm
 [[ "$confirm" =~ ^[Yy]$ ]] || {
-  say "Cancelled"
+  echo "Cancelled" >&2
   exit 0
 }
 
@@ -39,4 +58,4 @@ if ! git worktree remove "$path" >&2; then
   die "Not removed - if it has uncommitted changes: git worktree remove --force '$path'"
 fi
 
-say "Removed $branch"
+echo "Removed $branch" >&2

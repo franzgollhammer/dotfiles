@@ -42,7 +42,7 @@ Located in `scripts/`, added to PATH via `.zshrc`:
 | `b` / `list_branches` | Browse branches (fzf picker / pretty list) |
 | `gm` (repo root) | fzf-pick a branch and merge it |
 | `wt` | fzf worktree picker, cd into the pick |
-| `wt_add`, `wt_list`, `wt_remove` | Manage worktrees under `$GIT_WORKTREE_DIR/<repo>/<branch>` (aliased to `wta`, `wtl`, `wtr`) |
+| `wt_add`, `wt_remove` | Add/remove worktrees under `$GIT_WORKTREE_DIR/<repo>/<branch>` (aliased to `wta`, `wtr`; `wtl` is plain `git worktree list`) |
 | `tmux_session`, `tmux_init` | Create/attach tmux sessions, run `.tmux_init` |
 | `code_*`, `cursor_*` | Export/install/uninstall VS Code and Cursor extensions |
 | `lazy_nvm` | Lazy-load nvm for faster shell startup |

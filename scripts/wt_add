@@ -3,13 +3,24 @@
 # Usage: wt_add            # fzf-pick a branch, or create a new one
 #        wt_add <branch>   # check out that branch (creates it if needed)
 #
-# Prints the worktree path to stdout, everything else to stderr.
-# Use the `wta` shell function to also cd into it.
+# Prints the worktree path to stdout, everything else to stderr, so the
+# `wta` shell function can cd into it.
 
 set -euo pipefail
-# shellcheck source-path=SCRIPTDIR
-# shellcheck source=wt_common
-source "$(dirname "$0")/wt_common"
+
+die() {
+  printf '%s\n' "$*" >&2
+  exit 1
+}
+
+git rev-parse --git-dir > /dev/null 2>&1 || die "Not in a git repo"
+[[ -n "${GIT_WORKTREE_DIR:-}" ]] || die "GIT_WORKTREE_DIR is not set"
+
+# --git-common-dir points at the main repo's .git even from inside a worktree
+REPO_ROOT=$(git rev-parse --path-format=absolute --git-common-dir)
+REPO_ROOT=${REPO_ROOT%/}
+REPO_ROOT=${REPO_ROOT%/.git}
+WORKTREE_DIR="$GIT_WORKTREE_DIR/$(basename "$REPO_ROOT")"
 
 branch="${1:-}"
 
@@ -32,9 +43,12 @@ if [[ -z "$branch" ]]; then
 fi
 
 # already checked out somewhere? hand back that path instead of failing
-existing=$(list_worktrees | awk -F'|' -v b="$branch" '$1 == b { print $2; exit }')
+existing=$(git worktree list --porcelain | awk -v b="branch refs/heads/$branch" '
+  /^worktree / { path = substr($0, 10) }
+  $0 == b      { print path; exit }
+')
 if [[ -n "$existing" ]]; then
-  say "Worktree already exists: $existing"
+  printf 'Worktree already exists: %s\n' "$existing" >&2
   printf '%s\n' "$existing"
   exit 0
 fi
@@ -50,5 +64,4 @@ else
   git worktree add "$wt_path" -b "$branch" >&2
 fi
 
-say "Created $wt_path"
 printf '%s\n' "$wt_path"

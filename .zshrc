@@ -70,9 +70,8 @@ alias bbb="brew_update"
 
 # git aliases
 alias gwa="git worktree add"
-alias gwl="git worktree list"
 # worktrees under $GIT_WORKTREE_DIR/<repo>/<branch> (wta is a function, see below)
-alias wtl="wt_list"
+alias wtl="git worktree list"
 alias wtr="wt_remove"
 alias gundo="git reset --soft HEAD~1"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
