@@ -41,7 +41,6 @@ Located in `scripts/`, added to PATH via `.zshrc`:
 | `brew_update` | Update brew + export package lists |
 | `b` / `list_branches` | Browse branches (fzf picker / pretty list) |
 | `gm` (repo root) | fzf-pick a branch and merge it |
-| `wt` | fzf worktree picker, cd into the pick (add/remove: `wta`/`wtr` in `.zshrc`) |
 | `tmux_session`, `tmux_init` | Create/attach tmux sessions, run `.tmux_init` |
 | `code_*`, `cursor_*` | Export/install/uninstall VS Code and Cursor extensions |
 | `lazy_nvm` | Lazy-load nvm for faster shell startup |
@@ -53,6 +52,15 @@ Located in `scripts/`, added to PATH via `.zshrc`:
 | `kill_node`, `kill_mongo`, `kill_all` | Kill processes |
 | `mongodb_export` | mongoexport/mongoimport reference |
 | `vm` | Start VMware VM from `$vmFile` |
+
+Worktrees are handled by three zsh functions in `.zshrc`, not by scripts —
+they have to `cd` the calling shell, which a script cannot do:
+
+| Function | Description |
+|----------|-------------|
+| `wt [query]` | Jump to any worktree git knows |
+| `wta [branch]` | Add one under `$GIT_WORKTREE_DIR/<repo>/<branch>` and cd in |
+| `wtr` | Remove one (never the main worktree) |
 
 ## Customization
 

@@ -88,6 +88,16 @@ function dir() {
 # Worktrees live in $GIT_WORKTREE_DIR/<repo>/<branch>. Functions rather
 # than scripts, because only a function can cd the calling shell.
 
+# wt [query] - jump to any worktree git knows, .claude/worktrees included.
+# fzf flags: -q prefills the search, -1 takes a lone match without asking,
+# -0 gives up when nothing matches.
+function wt() {
+  local target
+  target=$(git worktree list | fzf -0 -1 -q "${1:-}" | awk '{print $1}') || return
+  [[ -n $target ]] || return 1
+  cd $target
+}
+
 # wta [branch] - add a worktree and cd into it. Without an argument, pick
 # the branch with fzf. git resolves the branch itself: local one gets
 # checked out, remote-only one gets a tracking branch, unknown one is new.
