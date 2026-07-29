@@ -43,8 +43,6 @@ Located in `scripts/`, added to PATH via `.zshrc`:
 | `gm` (repo root) | fzf-pick a branch and merge it |
 | `wt` / `tmux_worktree` | fzf worktree picker / tmux sessionizer for worktrees |
 | `tmux_session`, `tmux_init` | Create/attach tmux sessions, run `.tmux_init` |
-| `tmux_list`, `tmux_cleanup`, `tmux_rename`, `tmux_quick_window` | Manage tmux sessions/windows |
-| `zoxide_tmux_session`, `zoxide_tmux_session_find` | Jump to a zoxide dir as a tmux session |
 | `code_*`, `cursor_*` | Export/install/uninstall VS Code and Cursor extensions |
 | `lazy_nvm` | Lazy-load nvm for faster shell startup |
 | `goentr`, `goentrtest` | Rerun `go run` / `go test` on file changes (entr) |
