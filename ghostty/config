@@ -1,44 +1,43 @@
 # install from pre-release channel
-auto-update-channel = tip
-# macos-icon = holographic
+# auto-update-channel = tip
+
+# macOS
+# font-thicken = true
+# macos-icon = xray
+# official
+# blueprint
+# chalkboard
+# microchip
+# glass
+# holographic
+# paper
+# retro
+# xray
+
 
 # theme
-# theme = dark:air-dark,light:air-light
-# theme = Monokai Classic
+theme = dark:xterm-dark,light:xterm-light
 # background-opacity = 0.95
 # window-padding-x = 8
 # window-padding-y = 8
-# font-family = Lilex
-# font-size = 14
+
+# font
+font-size = 12
+# font-family = JetBrainsMono Nerd Font Mono
+font-family = MesloLGM Nerd Font
+# scrollback-limit = 10000
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
 
 # cursor
-# cursor-style = block
-# cursor-style-blink = false
-
-# macOS
-font-thicken = true
+cursor-style = block
+cursor-style-blink = false
 
 # clipboard
 # copy-on-select = clipboard
 # clipboard-read = allow
 # clipboard-write = allow
-
-# mouse
-# mouse-hide-while-typing = true
-
-# window
-# confirm-close-surface = false
-# window-save-state = always
-# window-inherit-font-size = true
-
-# text
-# bold-color = bright
-# adjust-cell-width = 5%
-# adjust-cell-height = 20%
-# scrollback-limit = 10000
 
 # notifications (desktop notification on bell)
 bell-features = system,attention,title
