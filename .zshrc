@@ -95,34 +95,45 @@ function wt() {
   local target
   target=$(git worktree list | fzf -0 -1 -q "${1:-}" | awk '{print $1}') || return
   [[ -n $target ]] || return 1
-  cd $target
+  cd -- "$target"
 }
 
 # wta [branch] - add a worktree and cd into it. Without an argument, pick
-# the branch with fzf. git resolves the branch itself: local one gets
-# checked out, remote-only one gets a tracking branch, unknown one is new.
+# the branch with fzf. A branch that already exists gets checked out (git
+# creates the tracking branch when it only lives on origin), anything else
+# is created fresh.
 function wta() {
   local root branch dir
+  [[ -n $GIT_WORKTREE_DIR ]] || { echo "GIT_WORKTREE_DIR is not set" >&2; return 1 }
   root=$(git rev-parse --path-format=absolute --git-common-dir) || return
   root=${root:h}
   branch=${1:-$(git branch -a --format='%(refname:short)' | sed 's|^origin/||' | sort -u | fzf)}
   [[ -n $branch ]] || return 1
   dir=$GIT_WORKTREE_DIR/${root:t}/$branch
-  [[ -d $dir ]] || git worktree add $dir $branch 2> /dev/null || git worktree add $dir -b $branch || return
-  cd $dir
+  # Ask git which case this is instead of trying and falling back - a failed
+  # fallback would report "branch already exists" when the real reason is
+  # that the branch sits in another worktree.
+  if [[ ! -d $dir ]]; then
+    if git rev-parse --verify -q "$branch" > /dev/null || git rev-parse --verify -q "origin/$branch" > /dev/null; then
+      git worktree add "$dir" "$branch" || return
+    else
+      git worktree add "$dir" -b "$branch" || return
+    fi
+  fi
+  cd -- "$dir"
 }
 
 # wtr - remove a worktree. sed 1d drops the main one, which git always
 # lists first. Keeps the branch; git refuses if there are uncommitted changes.
 function wtr() {
   local dir
-  dir=$(git worktree list | sed 1d | fzf | awk '{print $1}')
+  dir=$(git worktree list | sed 1d | fzf -0 | awk '{print $1}')
   [[ -n $dir ]] || return 1
-  [[ $dir != $(git rev-parse --show-toplevel) ]] || {
+  [[ "$dir" != "$(git rev-parse --show-toplevel)" ]] || {
     echo "You are inside that worktree - cd out first" >&2
     return 1
   }
-  git worktree remove $dir
+  git worktree remove "$dir"
 }
 
 function d() {
