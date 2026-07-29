@@ -8,19 +8,19 @@
   // "buffer_font_family": "JetBrainsMono Nerd Font",
   // "ui_font_size": 17.0,
   // "buffer_font_size": 13.0,
-  "icon_theme": "JetBrains New UI Icons (Dark)",
-  "theme": "Air Dark Italic",
+  // "icon_theme": "JetBrains New UI Icons (Dark)",
+  // "theme": "Air Dark Italic",
   "project_panel": {
-    "dock": "left"
+    "dock": "right",
   },
   "outline_panel": {
-    "dock": "left"
+    "dock": "right",
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "right",
   },
   "git_panel": {
-    "dock": "left"
+    "dock": "right",
   },
   "edit_predictions": {
     "provider": "copilot",
@@ -65,7 +65,7 @@
     "background_coloring": "disabled",
   },
   "agent": {
-    "dock": "right",
+    "dock": "left",
     "thinking_display": "always_collapsed",
     "inline_assistant_model": {
       "provider": "copilot_chat",
@@ -99,7 +99,7 @@
     },
     "claude-acp": {
       "default_config_options": {
-        "effort": "high",
+        "effort": "x-high",
         "mode": "bypassPermissions",
       },
       "type": "registry",
