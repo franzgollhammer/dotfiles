@@ -69,7 +69,7 @@ alias killall="pkill -u \$(whoami) node npm mongod redis redis-server minio Cypr
 alias bbb="brew_update"
 
 # git aliases
-alias gs="git status"
+alias s="git status"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit"
@@ -78,7 +78,7 @@ alias gp="git pull"
 alias gps="git push"
 alias gco="git checkout"
 alias gcob="git checkout -b"
-alias gw="git worktree"
+alias gwt="git worktree"
 alias gundo="git reset --soft HEAD~1"
 alias grhu="git reset --hard @{u}" # reset hard to upstream branch
 alias glf="git log -p -- " # log patch <filename>
