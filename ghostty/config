@@ -22,7 +22,7 @@ theme = dark:xterm-dark,light:xterm-light
 # window-padding-y = 8
 
 # font
-font-size = 12
+# font-size = 12
 # font-family = JetBrainsMono Nerd Font Mono
 font-family = MesloLGM Nerd Font
 # scrollback-limit = 10000
