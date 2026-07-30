@@ -23,7 +23,7 @@ theme = dark:xterm-dark,light:xterm-light
 
 # font
 font-size = 14
-# font-family = MesloLGM Nerd Font
+font-family = Hack Nerd Font
 # scrollback-limit = 10000
 
 # keybinds
