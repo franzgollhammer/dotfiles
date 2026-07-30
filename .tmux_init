@@ -1,7 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-tmux neww -dn "shell"
+tmux neww -dn "MAIN"
 
-tmux send-keys -t "shell" "fastfetch" C-m
+tmux send-keys -t "MAIN" "fastfetch" C-m
 
-clear
+# tmux neww -dn "client"
+# tmux neww -dn "server"
+# tmux send-keys -t "client" "run c" C-m
+# tmux send-keys -t "server" "run s" C-m
+
+# clear

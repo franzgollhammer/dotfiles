@@ -159,6 +159,7 @@ php
 pinentry
 pixman
 pkgconf
+pnpm
 poppler
 pyenv
 python-certifi

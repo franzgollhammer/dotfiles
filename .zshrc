@@ -25,7 +25,6 @@ else
 fi
 
 export DEV="$HOME/dev"
-export GIT_WORKTREE_DIR="$DEV/worktrees"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export BUN_INSTALL="$HOME/.bun"
@@ -41,7 +40,7 @@ source "$DOTFILES/.env"
 set +a
 
 # ---- source oh-my-zsh ----
-source "$ZSH/oh-my-zsh.sh"
+# source "$ZSH/oh-my-zsh.sh"
 
 # ---- bun completions ----
 [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
@@ -134,6 +133,3 @@ export PATH="/Users/fg/.codeium/windsurf/bin:$PATH"
 # opencode
 export PATH=/Users/fg/.opencode/bin:$PATH
 
-
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
