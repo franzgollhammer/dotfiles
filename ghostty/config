@@ -3,7 +3,7 @@
 
 # macOS
 # font-thicken = true
-# macos-icon = xray
+macos-icon = xray
 # official
 # blueprint
 # chalkboard
