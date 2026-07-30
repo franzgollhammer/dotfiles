@@ -1,138 +1,158 @@
-# ---- fg zsh conf ----
+#  ─────────────────────────────────────────────────────────────
+#   fg · zsh configuration
+#  ─────────────────────────────────────────────────────────────
 
-# ---- var ----
-export TERM=xterm-256color
+# ═══ Environment ═════════════════════════════════════════════
+
+export TERM="xterm-256color"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR="vim"
 else
   export EDITOR="code"
   export VISUAL="code"
   export VUE_EDITOR="code"
 fi
 
+# ═══ Directories ═════════════════════════════════════════════
+
 export DEV="$HOME/dev"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
-export BUN_INSTALL="$HOME/.bun"
-export RUBY_DIR="/opt/homebrew/opt/ruby/bin"
+
 export LOCAL_BIN="$HOME/.local/bin"
+export BUN_INSTALL="$HOME/.bun"
+export PNPM_HOME="$HOME/Library/pnpm"
+export RUBY_DIR="/opt/homebrew/opt/ruby/bin"
+export NVM_DIR="$HOME/.nvm"
 
-# ---- path ----
-export PATH="$SCRIPTS:$BUN_INSTALL/bin:$RUBY_DIR:$LOCAL_BIN:$PATH"
+# ═══ Path ════════════════════════════════════════════════════
+# `typeset -U` keeps entries unique, so re-sourcing never duplicates.
 
-# ---- .env ----
-set -a
-source "$DOTFILES/.env"
-set +a
+typeset -U path PATH
+path=(
+  "$HOME/.opencode/bin"           # opencode
+  "$HOME/.codeium/windsurf/bin"   # devin / windsurf
+  "$PNPM_HOME"
+  "$SCRIPTS"
+  "$BUN_INSTALL/bin"
+  "$RUBY_DIR"
+  "$LOCAL_BIN"
+  $path
+)
+export PATH
 
-# ---- history ----
-# /etc/zshrc caps SAVEHIST at 1000, which truncates ~/.zsh_history on exit
+# ═══ Secrets ═════════════════════════════════════════════════
+
+if [[ -f "$DOTFILES/.env" ]]; then
+  set -a
+  source "$DOTFILES/.env"
+  set +a
+fi
+
+# ═══ History ═════════════════════════════════════════════════
+# /etc/zshrc caps SAVEHIST at 1000, which truncates ~/.zsh_history on exit.
+
 HISTSIZE=50000
 SAVEHIST=50000
 
-# ---- completion ----
+# ═══ Completion ══════════════════════════════════════════════
+
 autoload -Uz compinit && compinit
 
-# ---- nvm ----
-export NVM_DIR="$HOME/.nvm"
-source "$NVM_DIR/nvm.sh"
+[[ -s "$BUN_INSTALL/_bun" ]] && source "$BUN_INSTALL/_bun"
 
-# ---- fzf ----
+# ═══ Tools ═══════════════════════════════════════════════════
+
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+
 source <(fzf --zsh)
 
-# ---- bun completions ----
-[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+eval "$(starship init zsh)"
 
-# ---- aliases ----
+# ═══ Aliases ═════════════════════════════════════════════════
+
+# — editors —
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias ci="code-insiders"
-alias t="tmux_session"
-alias lg="lazygit"
-alias p="pnpm"
-alias run="node --run"
+
+# — navigation & listing —
 alias ls="ls -FG"
 alias l="ls -ah"
 alias ll="ls -lah"
 alias dot="(cd \$DOTFILES; \$EDITOR .)"
 alias play="(cd \$DEV/playground; \$EDITOR .)"
-alias ff="fastfetch"
-alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
-alias soz="source ~/.zshrc"
-alias sot="tmux source ~/.tmux.conf"
-alias zsh-startup="time zsh -i -c exit"
-alias killall="pkill -u \$(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
-alias bbb="brew_update"
 
-# git aliases
+# — dev —
+alias p="pnpm"
+alias run="node --run"
+alias lg="lazygit"
+alias t="tmux_session"
+alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+
+# — git —
 alias s="git status"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit"
 alias gcm="git commit -m"
-alias gp="git pull"
-alias gps="git push"
 alias gco="git checkout"
 alias gcob="git checkout -b"
+alias gp="git pull"
+alias gps="git push"
 alias gwt="git worktree"
 alias gundo="git reset --soft HEAD~1"
-alias grhu="git reset --hard @{u}" # reset hard to upstream branch
-alias glf="git log -p -- " # log patch <filename>
+alias grhu="git reset --hard @{u}"                 # reset hard to upstream branch
+alias glf="git log -p -- "                         # log patch <filename>
 alias com="git commit -m \"\$(date '+%Y-%m-%d-%H:%M:%S')\" --allow-empty; git push"
 
-# github
+# — github —
 alias repo="gh repo view --web"
 alias pr="gh pr view --web || gh pr create --web"
 
-# ---- functions ----
+# — system —
+alias ff="fastfetch"
+alias bbb="brew_update"
+alias soz="source ~/.zshrc"
+alias sot="tmux source ~/.tmux.conf"
+alias zsh-startup="time zsh -i -c exit"
+alias killall="pkill -u \$(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
+
+# ═══ Functions ═══════════════════════════════════════════════
+
+# mkdir + cd into it
 function dir() {
-  mkdir "$1" && cd "$1" || exit
+  mkdir "$1" && cd "$1" || return
 }
 
+# cd into a project under $DEV — no arg picks one via fzf, `.` goes to $DEV
 function d() {
-  if [ -z "$1" ]; then
-    selected=$(ls "$DEV" | fzf)
-    if [ -n "$selected" ]; then
-      cd "$DEV"/"$selected" || return
-    fi
-  elif [ "$1" = '.' ]; then
-    cd "$DEV" || return
+  if [[ -z "$1" ]]; then
+    local selected
+    selected=$(ls "$DEV" | fzf) || return
+    [[ -n "$selected" ]] && cd "$DEV/$selected"
+  elif [[ "$1" == "." ]]; then
+    cd "$DEV"
   else
-    cd "$DEV"/"$1" || return
+    cd "$DEV/$1"
   fi
 }
 
+# open a project under $DEV in $EDITOR — no arg picks one via fzf
 function c() {
-  if [ -z "$1" ]; then
-    selected=$(ls "$DEV" | fzf)
-    if [ -n "$selected" ]; then
-      $EDITOR "$DEV"/"$selected"
-    fi
+  if [[ -z "$1" ]]; then
+    local selected
+    selected=$(ls "$DEV" | fzf) || return
+    [[ -n "$selected" ]] && $EDITOR "$DEV/$selected"
   else
     $EDITOR "$1"
   fi
 }
 
-# ---- starship prompt ----
-eval "$(starship init zsh)"
+# ═══ Autosuggestions ═════════════════════════════════════════
+# Must stay last: it wraps existing ZLE widgets.
 
-# pnpm
-export PNPM_HOME="/Users/fg/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# Added by Devin
-export PATH="/Users/fg/.codeium/windsurf/bin:$PATH"
-
-# opencode
-export PATH=/Users/fg/.opencode/bin:$PATH
-
-# ---- zsh-autosuggestions ---- (must stay last: it wraps existing ZLE widgets)
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
