@@ -152,6 +152,17 @@ function c() {
   fi
 }
 
+# cd into a git worktree of the current repo — picks one via fzf
+function wt() {
+  local dir
+  dir=$(git worktree list --porcelain \
+    | awk '/^worktree /{p=$2} /^branch /{sub("refs/heads/","",$2); print p"\t"$2}' \
+    | column -t \
+    | fzf --height=40% --reverse --prompt="worktree> " \
+    | awk '{print $1}')
+  [[ -n "$dir" ]] && cd "$dir"
+}
+
 # ═══ Autosuggestions ═════════════════════════════════════════
 # Must stay last: it wraps existing ZLE widgets.
 

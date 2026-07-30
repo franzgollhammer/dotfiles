@@ -5,7 +5,6 @@ android-studio
 appcleaner
 authy
 balenaetcher
-basecamp
 brave-browser
 bruno
 cleanshot
