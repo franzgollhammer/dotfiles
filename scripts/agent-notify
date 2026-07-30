@@ -1,0 +1,221 @@
+#!/bin/sh
+# agent-notify — macOS desktop notification when a CLI coding agent needs input,
+# finishes a turn, or errors out. Shared by claude, codex and opencode.
+#
+# Usage:
+#   agent-notify <agent> <event> [message ...]
+#
+#   <agent>  claude | codex | opencode   (free-form; shown first in the title)
+#   <event>  needs-input | done | error  (free-form; shown after the agent name)
+#
+# Codex's `notify` appends its JSON payload as a trailing argument; any argument
+# starting with '{' is parsed for cwd and the assistant's last message instead of
+# being treated as message text.
+#
+# Options:
+#   --stdin       read a JSON hook payload from stdin (Claude Code / Codex hooks)
+#   --pane <id>   tmux pane to report (default: $TMUX_PANE)
+#   --cwd <dir>   directory to report (default: payload cwd, else $PWD)
+#
+# Environment:
+#   AGENT_NOTIFY_BACKEND  auto | osascript | ghostty   (default: auto)
+#   AGENT_NOTIFY_ALWAYS   1 = notify on `done` even when the pane is on screen
+#   AGENT_NOTIFY_LOG      append a debug line per invocation to this file
+#
+# Backend `auto` prefers Ghostty's own OSC 777 notification (correct icon, click
+# focuses Ghostty) but falls back to osascript whenever Ghostty would swallow it:
+# Ghostty drops notifications from a focused surface, and rate-limits to one per
+# second app-wide with a 5s identical-message filter. Both are unconditional in
+# the macOS app, so routing around them is the only option.
+#
+# Always exits 0 and never writes to stdout — hook stdout is a contract channel.
+
+set -u
+
+TITLE_MAX=63    # Ghostty caps desktop_notification.title at 63 bytes
+BODY_MAX=255    # ...and .body at 255 bytes
+STAMP="${TMPDIR:-/tmp}/agent-notify.stamp"
+
+log() {
+	[ -n "${AGENT_NOTIFY_LOG:-}" ] || return 0
+	printf '%s %s\n' "$(date '+%F %T')" "$*" >>"$AGENT_NOTIFY_LOG" 2>/dev/null || true
+}
+
+# Strip the bytes that would break OSC 777 framing or smear across lines.
+clean() { printf '%s' "$1" | tr -d '\033\007\r' | tr '\n' ' '; }
+# Byte-exact truncation; LC_ALL=C makes cut count bytes, not characters.
+clip() { printf '%s' "$2" | LC_ALL=C cut -c"1-$1"; }
+
+# ── arguments ────────────────────────────────────────────────────────────────
+
+agent='' event='' msg='' payload='' cwd='' pane="${TMUX_PANE:-}" use_stdin=0
+
+while [ $# -gt 0 ]; do
+	case $1 in
+	--stdin) use_stdin=1 ;;
+	--pane) shift; pane="${1:-}" ;;
+	--cwd) shift; cwd="${1:-}" ;;
+	-h | --help) sed -n '2,38p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+	--*) ;; # ignore unknown flags rather than failing a hook
+	'{'*) payload=$1 ;;
+	*)
+		if [ -z "$agent" ]; then agent=$1
+		elif [ -z "$event" ]; then event=$1
+		else msg="${msg:+$msg }$1"
+		fi
+		;;
+	esac
+	shift
+done
+
+[ -n "$agent" ] || agent='agent'
+[ -n "$event" ] || event='done'
+
+[ "$use_stdin" -eq 1 ] && [ ! -t 0 ] && payload=$(cat 2>/dev/null || true)
+
+# ── payload ──────────────────────────────────────────────────────────────────
+# Claude Code and Codex hooks deliver snake_case JSON on stdin; Codex's `notify`
+# delivers kebab-case JSON as argv. Accept every spelling and take the first hit.
+
+if [ -n "$payload" ] && command -v jq >/dev/null 2>&1; then
+	[ -n "$cwd" ] || cwd=$(printf '%s' "$payload" |
+		jq -r '.cwd // empty' 2>/dev/null | head -1)
+	[ -n "$msg" ] || msg=$(printf '%s' "$payload" |
+		jq -r '(.message // .["last-assistant-message"] // .last_assistant_message
+		        // .error // .error_details // empty)' 2>/dev/null | head -1)
+fi
+
+# ── location ─────────────────────────────────────────────────────────────────
+
+loc='' onscreen=0
+if [ -n "${TMUX:-}" ] && [ -n "$pane" ] && command -v tmux >/dev/null 2>&1; then
+	# NOTE: display-message runs formats through strftime, so a literal '%' is
+	# eaten — always address the pane via -t and read back #{pane_id}-free fields.
+	loc=$(tmux display-message -p -t "$pane" \
+		'#{session_name}:#{window_index}.#{pane_index}' 2>/dev/null) || loc=''
+	state=$(tmux display-message -p -t "$pane" \
+		'#{window_active} #{session_attached}' 2>/dev/null) || state=''
+	[ -n "$cwd" ] || cwd=$(tmux display-message -p -t "$pane" \
+		'#{pane_current_path}' 2>/dev/null) || true
+	case $state in
+	# session_attached is a COUNT, not a boolean — >0 means some client has it.
+	'1 '[1-9]*) onscreen=1 ;;
+	esac
+fi
+
+[ -n "$cwd" ] || cwd=$PWD
+
+# Worktree-safe repo name: --show-toplevel yields the branch leaf inside a
+# worktree, --git-common-dir always points at the main repo's .git.
+repo='' branch=''
+gitdir=$(git -C "$cwd" rev-parse --git-common-dir 2>/dev/null) || gitdir=''
+if [ -n "$gitdir" ]; then
+	case $gitdir in /*) ;; *) gitdir="$cwd/$gitdir" ;; esac
+	repo=$(basename "$(dirname "$gitdir")")
+	branch=$(git -C "$cwd" rev-parse --abbrev-ref HEAD 2>/dev/null) || branch=''
+else
+	repo=$(basename "$cwd")
+fi
+
+# ── frontmost app ────────────────────────────────────────────────────────────
+
+front_ghostty=0
+if command -v lsappinfo >/dev/null 2>&1; then
+	case $(lsappinfo info -only bundleid "$(lsappinfo front 2>/dev/null)" 2>/dev/null) in
+	*com.mitchellh.ghostty*) front_ghostty=1 ;;
+	esac
+fi
+
+# ── suppression ──────────────────────────────────────────────────────────────
+# You are looking straight at this pane, so a banner for "turn finished" is noise.
+# "needs input" and "error" always fire.
+
+case $event in
+done | idle | complete | agent-turn-complete)
+	if [ "$onscreen" -eq 1 ] && [ "$front_ghostty" -eq 1 ] &&
+		[ "${AGENT_NOTIFY_ALWAYS:-0}" != 1 ]; then
+		log "suppress $agent/$event — pane $pane on screen"
+		exit 0
+	fi
+	;;
+esac
+
+# ── compose ──────────────────────────────────────────────────────────────────
+
+case $event in
+needs-input | needs_input | permission | question | idle_prompt) label='braucht dich' ;;
+done | idle | complete | agent-turn-complete) label='fertig' ;;
+error | failure) label='Fehler' ;;
+*) label=$event ;;
+esac
+
+# ';' is the OSC 777 field delimiter and may not appear in the title.
+title=$(clip "$TITLE_MAX" "$(clean "$agent · $label" | tr ';' ',')")
+
+body=$repo
+[ -n "$branch" ] && body="$body @ $branch"
+[ -n "$loc" ] && body="$body · $loc"
+[ -n "$msg" ] && body="$body — $msg"
+body=$(clip "$BODY_MAX" "$(clean "$body")")
+
+# ── backends ─────────────────────────────────────────────────────────────────
+
+notify_osascript() { # <title> <body>
+	# Pass through argv: interpolating into the AppleScript source breaks on any
+	# embedded quote or backslash.
+	osascript -e 'on run {b, t}' \
+		-e 'display notification b with title t' \
+		-e 'end run' "$2" "$1" >/dev/null 2>&1
+}
+
+notify_ghostty() { # <title> <body>
+	# Write the bare OSC to the tmux CLIENT's tty, which Ghostty owns directly.
+	# This sidesteps `allow-passthrough`, which otherwise drops sequences from
+	# any pane whose window is not the client's current window.
+	_tty=''
+	if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
+		_tty=$(tmux list-clients -F '#{client_tty}' 2>/dev/null | head -1)
+	fi
+	[ -n "$_tty" ] || _tty=/dev/tty
+	[ -w "$_tty" ] || return 1
+	printf '\033]777;notify;%s;%s\033\\' "$1" "$2" >"$_tty" 2>/dev/null
+}
+
+# Ghostty drops a notification sent within 1s of the previous one (app-wide) and
+# suppresses an identical title+body for 5s. Rather than sleeping in a hook, hand
+# those cases to osascript — it has no such filter.
+ghostty_slot_free() { # <title> <body>
+	_now=$(date +%s)
+	_sig=$(printf '%s\n%s' "$1" "$2" | cksum | cut -d' ' -f1)
+	_prev=$(cat "$STAMP" 2>/dev/null) || _prev=''
+	_pt=${_prev%% *} _ps=${_prev##* }
+	case $_pt in '' | *[!0-9]*) _pt=0 ;; esac
+
+	if [ $((_now - _pt)) -lt 2 ]; then return 1; fi
+	if [ "$_sig" = "$_ps" ] && [ $((_now - _pt)) -lt 5 ]; then return 1; fi
+
+	printf '%s %s' "$_now" "$_sig" >"$STAMP" 2>/dev/null
+	return 0
+}
+
+send() { # <title> <body>
+	case ${AGENT_NOTIFY_BACKEND:-auto} in
+	osascript) notify_osascript "$1" "$2"; return ;;
+	ghostty) notify_ghostty "$1" "$2" || notify_osascript "$1" "$2"; return ;;
+	esac
+
+	if [ "$front_ghostty" -eq 1 ]; then
+		# Ghostty refuses to present a banner from a focused surface, and every
+		# tmux pane shares one surface — so anything sent now would be silent.
+		notify_osascript "$1" "$2"
+	elif ghostty_slot_free "$1" "$2"; then
+		notify_ghostty "$1" "$2" || notify_osascript "$1" "$2"
+	else
+		notify_osascript "$1" "$2"
+	fi
+}
+
+log "send $agent/$event pane=$pane onscreen=$onscreen front_ghostty=$front_ghostty | $title | $body"
+send "$title" "$body"
+
+exit 0

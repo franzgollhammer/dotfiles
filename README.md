@@ -37,6 +37,7 @@ Located in `scripts/`, added to PATH via `.zshrc`:
 
 | Script | Description |
 |--------|-------------|
+| `agent-notify` | Desktop notification when a coding agent needs input or finishes |
 | `build_symlinks` | Link dotfiles to home dir |
 | `brew_update` | Update brew + export package lists |
 | `b` / `list_branches` | Browse branches (fzf picker / pretty list) |
