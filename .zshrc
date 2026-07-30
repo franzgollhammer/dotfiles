@@ -1,17 +1,5 @@
 # ---- fg zsh conf ----
 
-# ---- oh-my-zsh ----
-export ZSH="$HOME/.oh-my-zsh"
-# ZSH_THEME="robbyrussell"
-
-# shellcheck disable=SC2034  # consumed by oh-my-zsh
-plugins=(
-  nvm
-  fzf
-  zoxide
-  zsh-autosuggestions
-)
-
 # ---- var ----
 export TERM=xterm-256color
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -39,8 +27,20 @@ set -a
 source "$DOTFILES/.env"
 set +a
 
-# ---- source oh-my-zsh ----
-# source "$ZSH/oh-my-zsh.sh"
+# ---- history ----
+# /etc/zshrc caps SAVEHIST at 1000, which truncates ~/.zsh_history on exit
+HISTSIZE=50000
+SAVEHIST=50000
+
+# ---- completion ----
+autoload -Uz compinit && compinit
+
+# ---- nvm ----
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
+
+# ---- fzf ----
+source <(fzf --zsh)
 
 # ---- bun completions ----
 [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
@@ -132,4 +132,7 @@ export PATH="/Users/fg/.codeium/windsurf/bin:$PATH"
 
 # opencode
 export PATH=/Users/fg/.opencode/bin:$PATH
+
+# ---- zsh-autosuggestions ---- (must stay last: it wraps existing ZLE widgets)
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
