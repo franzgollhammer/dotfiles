@@ -27,8 +27,8 @@ xargs brew install --cask < brew/cask.txt
 | Tmux | `.tmux.conf`, `.tmux_init` |
 | Herdr | `herdr/config.toml` |
 | Editors | `nvim/`, `vscode/`, `cursor/`, `zed/` |
-| Terminals | `ghostty/`, `wezterm/` (config + ported themes), `kitty/` (config + ported themes + icon), `warp/` (settings, keybindings, themes, launch configs), `iterm/` (themes) |
-| Tools | `fzf/` (theme) |
+| Terminals | `ghostty/`, `wezterm/` (config + ported themes), `kitty/` (config + ported themes + icon + quick access terminal), `warp/` (settings, keybindings, themes, launch configs), `iterm/` (themes) |
+| Tools | `fzf/` (theme), `raycast/` (script commands) |
 | Packages | `brew/formula.txt`, `brew/cask.txt` |
 
 ## Scripts

@@ -31,7 +31,7 @@ mkdir -p "$HOME/.config/herdr"
 # The *-theme.auto.conf files must live here; their presence is what makes kitty
 # follow the macOS light/dark appearance.
 mkdir -p "$HOME/.config/kitty/themes"
-for f in kitty.conf session.conf dark-theme.auto.conf light-theme.auto.conf no-preference-theme.auto.conf; do
+for f in kitty.conf session.conf quick-access-terminal.conf dark-theme.auto.conf light-theme.auto.conf no-preference-theme.auto.conf; do
   [ ! -L "$HOME/.config/kitty/$f" ] && rm -fv "$HOME/.config/kitty/$f"; ln -snfv "$DOTFILES_DIR/kitty/$f" "$HOME/.config/kitty/$f"
 done
 for f in "$DOTFILES_DIR"/kitty/themes/*.conf; do
