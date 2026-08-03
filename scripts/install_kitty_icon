@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Apply the alternative kitty icon from https://github.com/DinkDonk/kitty-icon
+# (vendored in kitty/icon/).
+#
+# Two levels, because macOS caches app icons in two places:
+#
+#   default    flush the Dock/icon-services caches. kitty itself picks the icon
+#              up from ~/.config/kitty/kitty.app.icns (linked by build_symlinks)
+#              every time it starts — but the Dock reverts to the bundled icon
+#              once kitty quits, and Finder never sees it at all.
+#   --bundle   also overwrite the icon inside /Applications/kitty.app, which
+#              makes it stick everywhere. This invalidates the app's code
+#              signature and is undone by every kitty update, so re-run it then.
+#
+# Usage: install_kitty_icon [dark|light] [--bundle]
+
+set -euo pipefail
+
+DOTFILES_DIR="${DOTFILES:-$HOME/dev/dotfiles}"
+APP="/Applications/kitty.app"
+variant=dark
+bundle=0
+
+for arg in "$@"; do
+  case $arg in
+  dark | light) variant=$arg ;;
+  --bundle) bundle=1 ;;
+  *) echo "usage: $(basename "$0") [dark|light] [--bundle]" >&2; exit 2 ;;
+  esac
+done
+
+ICON="$DOTFILES_DIR/kitty/icon/kitty-$variant.icns"
+[ -f "$ICON" ] || { echo "missing $ICON"; exit 1; }
+
+# What build_symlinks links; re-point it here so `install_kitty_icon light`
+# switches variants without editing the symlink by hand.
+mkdir -p "$HOME/.config/kitty"
+ln -snfv "$ICON" "$HOME/.config/kitty/kitty.app.icns"
+
+if [ "$bundle" -eq 1 ]; then
+  [ -d "$APP" ] || { echo "kitty.app not found at /Applications"; exit 1; }
+
+  # Read the icon file name out of Info.plist instead of guessing it.
+  name=$(defaults read "$APP/Contents/Info" CFBundleIconFile 2>/dev/null || echo kitty)
+  case $name in *.icns) ;; *) name="$name.icns" ;; esac
+  TARGET="$APP/Contents/Resources/$name"
+
+  [ -f "$TARGET" ] || { echo "no icon at $TARGET"; exit 1; }
+  if cmp -s "$ICON" "$TARGET"; then
+    echo "bundle icon already installed"
+  else
+    cp -v "$ICON" "$TARGET"
+    # The bundle signature no longer matches; an ad-hoc re-sign keeps macOS
+    # from killing kitty on launch.
+    codesign --force --sign - "$APP" 2>/dev/null || \
+      echo "warning: could not re-sign $APP — reinstall kitty if it refuses to start"
+  fi
+fi
+
+# Flush the icon caches so Finder/Dock pick up the change.
+rm -f /var/folders/*/*/*/com.apple.dock.iconcache 2>/dev/null || true
+rm -rf /var/folders/*/*/*/com.apple.iconservices* 2>/dev/null || true
+killall Dock
+
+echo "kitty-$variant icon installed - restart kitty to see it"

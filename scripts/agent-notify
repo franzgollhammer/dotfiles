@@ -18,23 +18,28 @@
 #   --cwd <dir>   directory to report (default: payload cwd, else $PWD)
 #
 # Environment:
-#   AGENT_NOTIFY_BACKEND  auto | osascript | ghostty   (default: auto)
 #   AGENT_NOTIFY_ALWAYS   1 = notify on `done` even when the pane is on screen
 #   AGENT_NOTIFY_LOG      append a debug line per invocation to this file
 #
-# Backend `auto` prefers Ghostty's own OSC 777 notification (correct icon, click
-# focuses Ghostty) but falls back to osascript whenever Ghostty would swallow it:
-# Ghostty drops notifications from a focused surface, and rate-limits to one per
-# second app-wide with a 5s identical-message filter. Both are unconditional in
-# the macOS app, so routing around them is the only option.
+# The only backend is the terminal's own escape-code notification: correct icon,
+# and a click focuses the terminal. Ghostty and WezTerm implement OSC 777; kitty
+# implements OSC 99 instead and ignores OSC 777 entirely, so the protocol is
+# picked per terminal below. iTerm2, Warp and Terminal.app do neither and will
+# silently show nothing.
+#
+# Ghostty also drops notifications from a focused surface and rate-limits to one
+# per second app-wide, so banners can go missing while it is frontmost — accepted
+# trade, the osascript fallback was unclickable noise. WezTerm defaults to the
+# same suppression; wezterm/wezterm.lua sets `notification_handling = AlwaysShow`
+# to switch it off. kitty shows them regardless of focus (OSC 99 `o` defaults to
+# `always`), so only the `done` suppression below applies there.
 #
 # Always exits 0 and never writes to stdout — hook stdout is a contract channel.
 
 set -u
 
-TITLE_MAX=63    # Ghostty caps desktop_notification.title at 63 bytes
-BODY_MAX=255    # ...and .body at 255 bytes
-STAMP="${TMPDIR:-/tmp}/agent-notify.stamp"
+TITLE_MAX=63    # Ghostty caps desktop_notification.title at 63 bytes — the
+BODY_MAX=255    # tightest of the supported terminals, so clip to it everywhere
 
 log() {
 	[ -n "${AGENT_NOTIFY_LOG:-}" ] || return 0
@@ -55,7 +60,7 @@ while [ $# -gt 0 ]; do
 	--stdin) use_stdin=1 ;;
 	--pane) shift; pane="${1:-}" ;;
 	--cwd) shift; cwd="${1:-}" ;;
-	-h | --help) sed -n '2,38p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+	-h | --help) sed -n '2,37p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
 	--*) ;; # ignore unknown flags rather than failing a hook
 	'{'*) payload=$1 ;;
 	*)
@@ -87,12 +92,13 @@ fi
 
 # ── location ─────────────────────────────────────────────────────────────────
 
-loc='' onscreen=0
+loc='' sess='' onscreen=0
 if [ -n "${TMUX:-}" ] && [ -n "$pane" ] && command -v tmux >/dev/null 2>&1; then
 	# NOTE: display-message runs formats through strftime, so a literal '%' is
 	# eaten — always address the pane via -t and read back #{pane_id}-free fields.
 	loc=$(tmux display-message -p -t "$pane" \
 		'#{session_name}:#{window_index}.#{pane_index}' 2>/dev/null) || loc=''
+	sess=$(tmux display-message -p -t "$pane" '#{session_name}' 2>/dev/null) || sess=''
 	state=$(tmux display-message -p -t "$pane" \
 		'#{window_active} #{session_attached}' 2>/dev/null) || state=''
 	[ -n "$cwd" ] || cwd=$(tmux display-message -p -t "$pane" \
@@ -118,11 +124,14 @@ else
 fi
 
 # ── frontmost app ────────────────────────────────────────────────────────────
+# NOTE: this only asks "is a supported terminal frontmost", not "is it the one
+# hosting this tmux client". With Ghostty, WezTerm and kitty all open the answer
+# can be the wrong app; the cost is a suppressed `done` banner, so it stays simple.
 
-front_ghostty=0
+front_term=0
 if command -v lsappinfo >/dev/null 2>&1; then
 	case $(lsappinfo info -only bundleid "$(lsappinfo front 2>/dev/null)" 2>/dev/null) in
-	*com.mitchellh.ghostty*) front_ghostty=1 ;;
+	*com.mitchellh.ghostty* | *com.github.wez.wezterm* | *net.kovidgoyal.kitty*) front_term=1 ;;
 	esac
 fi
 
@@ -132,7 +141,7 @@ fi
 
 case $event in
 done | idle | complete | agent-turn-complete)
-	if [ "$onscreen" -eq 1 ] && [ "$front_ghostty" -eq 1 ] &&
+	if [ "$onscreen" -eq 1 ] && [ "$front_term" -eq 1 ] &&
 		[ "${AGENT_NOTIFY_ALWAYS:-0}" != 1 ]; then
 		log "suppress $agent/$event — pane $pane on screen"
 		exit 0
@@ -158,64 +167,61 @@ body=$repo
 [ -n "$msg" ] && body="$body — $msg"
 body=$(clip "$BODY_MAX" "$(clean "$body")")
 
-# ── backends ─────────────────────────────────────────────────────────────────
+# ── backend ──────────────────────────────────────────────────────────────────
 
-notify_osascript() { # <title> <body>
-	# Pass through argv: interpolating into the AppleScript source breaks on any
-	# embedded quote or backslash.
-	osascript -e 'on run {b, t}' \
-		-e 'display notification b with title t' \
-		-e 'end run' "$2" "$1" >/dev/null 2>&1
-}
+# Write the bare OSC to the tmux CLIENT's tty, which the terminal owns directly.
+# This sidesteps `allow-passthrough`, which otherwise drops sequences from any
+# pane whose window is not the client's current window.
+#
+# Read the protocol off the ATTACHED CLIENT's terminal name, not $TERM: inside
+# tmux $TERM is tmux-256color, and the value a pane inherited when it was created
+# goes stale the moment the session is reattached from a different terminal.
 
-notify_ghostty() { # <title> <body>
-	# Write the bare OSC to the tmux CLIENT's tty, which Ghostty owns directly.
-	# This sidesteps `allow-passthrough`, which otherwise drops sequences from
-	# any pane whose window is not the client's current window.
-	_tty=''
-	if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
-		_tty=$(tmux list-clients -F '#{client_tty}' 2>/dev/null | head -1)
+term_tty=/dev/tty
+termname="${TERM:-}"
+if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
+	# Prefer a client attached to THIS pane's session. With ghostty, wezterm and
+	# kitty all attached to different sessions, the first client on the server is
+	# frequently the wrong terminal — and then the wrong protocol too.
+	client=''
+	[ -n "$sess" ] && client=$(tmux list-clients -t "$sess" \
+		-F '#{client_tty} #{client_termname}' 2>/dev/null | head -1)
+	[ -n "$client" ] || client=$(tmux list-clients \
+		-F '#{client_tty} #{client_termname}' 2>/dev/null | head -1)
+	if [ -n "$client" ]; then
+		term_tty=${client%% *}
+		termname=${client#* }
 	fi
-	[ -n "$_tty" ] || _tty=/dev/tty
-	[ -w "$_tty" ] || return 1
-	printf '\033]777;notify;%s;%s\033\\' "$1" "$2" >"$_tty" 2>/dev/null
+fi
+
+notify_osc777() { # <title> <body> — Ghostty, WezTerm
+	printf '\033]777;notify;%s;%s\033\\' "$1" "$2" >"$term_tty" 2>/dev/null
 }
 
-# Ghostty drops a notification sent within 1s of the previous one (app-wide) and
-# suppresses an identical title+body for 5s. Rather than sleeping in a hook, hand
-# those cases to osascript — it has no such filter.
-ghostty_slot_free() { # <title> <body>
-	_now=$(date +%s)
-	_sig=$(printf '%s\n%s' "$1" "$2" | cksum | cut -d' ' -f1)
-	_prev=$(cat "$STAMP" 2>/dev/null) || _prev=''
-	_pt=${_prev%% *} _ps=${_prev##* }
-	case $_pt in '' | *[!0-9]*) _pt=0 ;; esac
-
-	if [ $((_now - _pt)) -lt 2 ]; then return 1; fi
-	if [ "$_sig" = "$_ps" ] && [ $((_now - _pt)) -lt 5 ]; then return 1; fi
-
-	printf '%s %s' "$_now" "$_sig" >"$STAMP" 2>/dev/null
-	return 0
+notify_osc99() { # <title> <body> — kitty
+	# One escape per field: i= groups the chunks, d=0 means "more to come", and a
+	# final metadata-only chunk closes the group and raises the banner. Fields are
+	# base64 (e=1) exactly like kitty's own `kitten notify`, which keeps ';' and
+	# non-ASCII out of the escape code's syntax.
+	# All three chunks go out in ONE write: inside tmux this tty is shared with
+	# tmux's own redraws, and a group split across writes can be torn apart.
+	_id="agent$$"
+	_t=$(printf '%s' "$1" | base64 | tr -d '\n')
+	_b=$(printf '%s' "$2" | base64 | tr -d '\n')
+	printf '\033]99;i=%s:d=0:e=1;%s\033\\\033]99;i=%s:d=0:e=1:p=body;%s\033\\\033]99;i=%s;\033\\' \
+		"$_id" "$_t" "$_id" "$_b" "$_id" >"$term_tty" 2>/dev/null
 }
 
-send() { # <title> <body>
-	case ${AGENT_NOTIFY_BACKEND:-auto} in
-	osascript) notify_osascript "$1" "$2"; return ;;
-	ghostty) notify_ghostty "$1" "$2" || notify_osascript "$1" "$2"; return ;;
-	esac
+log "send $agent/$event pane=$pane onscreen=$onscreen front_term=$front_term term=$termname | $title | $body"
 
-	if [ "$front_ghostty" -eq 1 ]; then
-		# Ghostty refuses to present a banner from a focused surface, and every
-		# tmux pane shares one surface — so anything sent now would be silent.
-		notify_osascript "$1" "$2"
-	elif ghostty_slot_free "$1" "$2"; then
-		notify_ghostty "$1" "$2" || notify_osascript "$1" "$2"
-	else
-		notify_osascript "$1" "$2"
-	fi
-}
+if [ ! -w "$term_tty" ]; then
+	log "notify failed — $term_tty not writable"
+	exit 0
+fi
 
-log "send $agent/$event pane=$pane onscreen=$onscreen front_ghostty=$front_ghostty | $title | $body"
-send "$title" "$body"
+case $termname in
+*kitty*) notify_osc99 "$title" "$body" || log "osc99 notify failed" ;;
+*) notify_osc777 "$title" "$body" || log "osc777 notify failed" ;;
+esac
 
 exit 0

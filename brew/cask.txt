@@ -35,6 +35,7 @@ google-chrome
 google-chrome-canary
 google-chrome@canary
 iterm2
+kitty
 libreoffice
 marta
 microsoft-auto-update
