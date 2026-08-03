@@ -3,15 +3,24 @@
 # Apply the alternative kitty icon from https://github.com/DinkDonk/kitty-icon
 # (vendored in kitty/icon/).
 #
-# Two levels, because macOS caches app icons in two places:
+# Two levels, because macOS resolves an app's icon from two different places:
 #
-#   default    flush the Dock/icon-services caches. kitty itself picks the icon
-#              up from ~/.config/kitty/kitty.app.icns (linked by build_symlinks)
-#              every time it starts — but the Dock reverts to the bundled icon
-#              once kitty quits, and Finder never sees it at all.
-#   --bundle   also overwrite the icon inside /Applications/kitty.app, which
-#              makes it stick everywhere. This invalidates the app's code
-#              signature and is undone by every kitty update, so re-run it then.
+#   default    kitty reads ~/.config/kitty/kitty.app.icns (linked by
+#              build_symlinks) on every start and writes it onto the app as a
+#              Finder custom icon — an `Icon` file with a resource fork next to
+#              Contents/. That covers Finder and the Dock.
+#   --bundle   also overwrite Contents/Resources/<CFBundleIconFile>.icns.
+#              Needed for desktop NOTIFICATIONS: usernoted renders the banner
+#              with the icon from the bundle and ignores the Finder custom icon.
+#              Undone by every kitty update, so re-run it then.
+#
+# No ad-hoc re-sign here. It cannot succeed: codesign rejects the very Finder
+# custom icon kitty writes for itself ("resource fork, Finder information, or
+# similar detritus not allowed"), and kitty recreates it on the next start
+# anyway. Replacing a resource leaves the Developer ID signature in place and
+# only breaks `codesign --verify`; kitty still launches, having already cleared
+# Gatekeeper on first run. Do not "fix" this with `codesign --force --sign -` —
+# that trades a valid notarized signature for an ad-hoc one.
 #
 # Usage: install_kitty_icon [dark|light] [--bundle]
 
@@ -51,10 +60,8 @@ if [ "$bundle" -eq 1 ]; then
     echo "bundle icon already installed"
   else
     cp -v "$ICON" "$TARGET"
-    # The bundle signature no longer matches; an ad-hoc re-sign keeps macOS
-    # from killing kitty on launch.
-    codesign --force --sign - "$APP" 2>/dev/null || \
-      echo "warning: could not re-sign $APP — reinstall kitty if it refuses to start"
+    # Drop the xattrs cp carried over, so nothing new lands in the bundle.
+    xattr -c "$TARGET" 2>/dev/null || true
   fi
 fi
 
