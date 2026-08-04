@@ -25,7 +25,7 @@ theme = dark:macos-terminal-dark,light:macos-terminal-light
 
 # font
 font-size = 14
-font-family = Hack Nerd Font
+font-family = SFMono Nerd Font
 # scrollback-limit = 10000
 
 # keybinds
