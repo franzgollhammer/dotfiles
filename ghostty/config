@@ -2,10 +2,10 @@
 # auto-update-channel = tip
 
 # macOS
-# font-thicken = true
+font-thicken = true
 # macos-icon = custom
 # macos-custom-icon = /Users/fg/.config/ghostty/icons/ghostty-light.icns
-# macos-icon = xray
+macos-icon = official
 # official
 # blueprint
 # chalkboard
@@ -19,6 +19,8 @@
 
 # theme
 theme = dark:macos-terminal-dark,light:macos-terminal-light
+# Closest Ghostty equivalent to Terminal.app's "Dynamic foreground colours".
+minimum-contrast = 3
 # background-opacity = 0.95
 # window-padding-x = 8
 # window-padding-y = 8
