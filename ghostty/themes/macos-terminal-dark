@@ -1,4 +1,6 @@
 # macOS Terminal Basic profile in Dark appearance
+# ANSI colors sampled with "Dynamic foreground colours" enabled, then
+# converted from the screenshot's Studio Display profile to sRGB.
 
 background = #1e1e1e
 foreground = #ffffff
@@ -8,21 +10,21 @@ selection-background = #3f638b
 selection-foreground = #ffffff
 
 # Normal colors (0-7)
-palette = 0=#000000
-palette = 1=#990000
-palette = 2=#00a600
-palette = 3=#999900
-palette = 4=#0000b2
-palette = 5=#b200b2
-palette = 6=#00a6b2
-palette = 7=#bfbfbf
+palette = 0=#080808
+palette = 1=#d6492e
+palette = 2=#41c731
+palette = 3=#b8b72f
+palette = 4=#6a43f6
+palette = 5=#e44ce2
+palette = 6=#41c5d1
+palette = 7=#d1d1d1
 
 # Bright colors (8-15)
 palette = 8=#666666
-palette = 9=#e50000
-palette = 10=#00d900
-palette = 11=#e5e500
-palette = 12=#0000ff
-palette = 13=#e500e5
-palette = 14=#00e5e5
-palette = 15=#e5e5e5
+palette = 9=#ff4c29
+palette = 10=#39ed29
+palette = 11=#efef1a
+palette = 12=#7646ff
+palette = 13=#ff4bff
+palette = 14=#32f4f4
+palette = 15=#ededed

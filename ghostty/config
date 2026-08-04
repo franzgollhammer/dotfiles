@@ -19,17 +19,17 @@ macos-icon = official
 
 # theme
 theme = dark:macos-terminal-dark,light:macos-terminal-light
-# Closest Ghostty equivalent to Terminal.app's "Dynamic foreground colours".
-minimum-contrast = 3
 # background-opacity = 0.95
-# window-padding-x = 8
-# window-padding-y = 8
+window-padding-x = 8
+window-padding-y = 6
+
 
 # font
 # Matches Terminal.app's Basic profile: SF Mono Regular 13.
-font-family = SFMono Nerd Font
-# font-style = Regular
 font-size = 13
+font-family = Liga SFMono Nerd Font
+font-style = Regular
+adjust-cell-height = 10%
 # scrollback-limit = 10000
 
 # keybinds
