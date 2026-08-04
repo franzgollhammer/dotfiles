@@ -3,8 +3,8 @@
 
 # macOS
 # font-thicken = true
-macos-icon = custom
-macos-custom-icon = /Users/fg/.config/ghostty/icons/ghostty-light.icns
+# macos-icon = custom
+# macos-custom-icon = /Users/fg/.config/ghostty/icons/ghostty-light.icns
 # macos-icon = xray
 # official
 # blueprint
