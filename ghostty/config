@@ -28,7 +28,7 @@ minimum-contrast = 3
 # font
 # Matches Terminal.app's Basic profile: SF Mono Regular 13.
 font-family = SFMono Nerd Font
-font-style = Regular
+# font-style = Regular
 font-size = 13
 # scrollback-limit = 10000
 
