@@ -21,3 +21,22 @@ mkdir -p "$HOME/.config/herdr"
 
 # warp
 [ ! -L "$HOME/.warp" ] && rm -rfv "$HOME/.warp"; ln -snfv "$DOTFILES_DIR/warp" "$HOME/.warp"
+
+# wezterm
+[ ! -L "$HOME/.config/wezterm" ] && rm -rfv "$HOME/.config/wezterm"; ln -snfv "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
+
+# kitty — linked file by file, not as a whole directory: kitty writes state into
+# its config dir (kitten themes, `kitty +kitten` caches) and any theme collection
+# already sitting in ~/.config/kitty/themes has to survive.
+# The *-theme.auto.conf files must live here; their presence is what makes kitty
+# follow the macOS light/dark appearance.
+mkdir -p "$HOME/.config/kitty/themes"
+for f in kitty.conf session.conf quick-access-terminal.conf dark-theme.auto.conf light-theme.auto.conf no-preference-theme.auto.conf; do
+  [ ! -L "$HOME/.config/kitty/$f" ] && rm -fv "$HOME/.config/kitty/$f"; ln -snfv "$DOTFILES_DIR/kitty/$f" "$HOME/.config/kitty/$f"
+done
+for f in "$DOTFILES_DIR"/kitty/themes/*.conf; do
+  ln -snfv "$f" "$HOME/.config/kitty/themes/$(basename "$f")"
+done
+# kitty reads its macOS app icon from this exact filename (scripts/install_kitty_icon
+# re-points it to the light variant and flushes the Dock cache).
+ln -snfv "$DOTFILES_DIR/kitty/icon/kitty-dark.icns" "$HOME/.config/kitty/kitty.app.icns"

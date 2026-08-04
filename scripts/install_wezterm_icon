@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Replace the WezTerm.app icon with the alternative icon from
+# https://github.com/mikker/wezterm-icon (vendored in wezterm/icon/).
+#
+# The icon lives inside the app bundle, so this has to be re-run after every
+# WezTerm update.
+
+set -euo pipefail
+
+DOTFILES_DIR="${DOTFILES:-$HOME/dev/dotfiles}"
+ICON="$DOTFILES_DIR/wezterm/icon/wezterm.icns"
+TARGET="/Applications/WezTerm.app/Contents/Resources/terminal.icns"
+
+[ -f "$ICON" ] || { echo "missing $ICON"; exit 1; }
+[ -f "$TARGET" ] || { echo "WezTerm.app not found at /Applications"; exit 1; }
+
+if cmp -s "$ICON" "$TARGET"; then
+  echo "icon already installed"
+  exit 0
+fi
+
+cp -v "$ICON" "$TARGET"
+
+# Flush the icon caches so Finder/Dock pick up the change.
+# NOTE: absolute path - `killall` is aliased in .zshrc to a pkill of dev processes.
+LSREGISTER=/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister
+touch /Applications/WezTerm.app
+rm -f /var/folders/*/*/*/com.apple.dock.iconcache
+rm -rf /var/folders/*/*/*/com.apple.iconservices* 2>/dev/null || true
+rm -rf "$HOME/Library/Caches/com.apple.iconservices.store"
+"$LSREGISTER" -f /Applications/WezTerm.app
+/usr/bin/killall Dock
+/usr/bin/killall Finder
+mdimport /Applications/WezTerm.app
+
+echo "icon installed - restart WezTerm to see it in the Dock"

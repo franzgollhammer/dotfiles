@@ -1,4 +1,17 @@
 {
+  "icon_theme": {
+    "mode": "system",
+    "light": "Air + Material Icons Light",
+    "dark": "Air + Material Icons Dark",
+  },
+  "theme": {
+    "mode": "system",
+    "light": "Air Light Italic",
+    "dark": "Air Dark Italic",
+  },
+  "git_panel": {
+    "tree_view": true,
+  },
   "edit_predictions": {
     "provider": "copilot",
   },
@@ -13,9 +26,9 @@
     },
     "default_model": {
       "provider": "openai-subscribed",
-      "model": "gpt-5.5",
+      "model": "gpt-5.6-sol",
       "enable_thinking": true,
-      "effort": "medium",
+      "effort": "low",
     },
     "default_profile": "write",
     "commit_message_model": {

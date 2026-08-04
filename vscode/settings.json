@@ -38,5 +38,9 @@
   // "i18n-ally.annotations": false,
   "terminal.integrated.lineHeight": 1.4,
   "terminal.integrated.smoothScrolling": true,
-  "todo-tree.highlights.useColourScheme": true
+  "todo-tree.highlights.useColourScheme": true,
+  "window.autoDetectColorScheme": true,
+  "workbench.iconTheme": "air-file-icons",
+  "workbench.preferredDarkColorTheme": "Air dark italic",
+  "workbench.preferredLightColorTheme": "Air light italic"
 }

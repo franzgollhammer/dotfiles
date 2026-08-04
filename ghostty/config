@@ -3,7 +3,9 @@
 
 # macOS
 # font-thicken = true
-macos-icon = xray
+macos-icon = custom
+macos-custom-icon = /Users/fg/.config/ghostty/icons/ghostty-light.icns
+# macos-icon = xray
 # official
 # blueprint
 # chalkboard
@@ -16,7 +18,7 @@ macos-icon = xray
 
 
 # theme
-theme = dark:xterm-dark,light:xterm-light
+theme = dark:macos-terminal-dark,light:macos-terminal-light
 # background-opacity = 0.95
 # window-padding-x = 8
 # window-padding-y = 8
