@@ -24,8 +24,10 @@ theme = dark:macos-terminal-dark,light:macos-terminal-light
 # window-padding-y = 8
 
 # font
-font-size = 14
+# Matches Terminal.app's Basic profile: SF Mono Regular 13.
 font-family = SFMono Nerd Font
+font-style = Regular
+font-size = 13
 # scrollback-limit = 10000
 
 # keybinds

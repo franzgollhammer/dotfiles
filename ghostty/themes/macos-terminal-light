@@ -1,7 +1,11 @@
-# Standard macOS Terminal colors on a light background
+# macOS Terminal Basic profile in Light appearance
 
 background = #ffffff
 foreground = #000000
+cursor-color = #9d9d9d
+cursor-text = #ffffff
+selection-background = #b3d7ff
+selection-foreground = #000000
 
 # Normal colors (0-7)
 palette = 0=#000000
