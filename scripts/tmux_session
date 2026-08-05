@@ -2,7 +2,7 @@
 
 # Enhanced tmux session management with better error handling
 
-SELECTED_DIR=$(find $DEV -type d -mindepth 1 -maxdepth 1 | fzf --prompt="Select project: " --height=40% --border)
+SELECTED_DIR=$(find $DEV -type d -mindepth 1 -maxdepth 1 | sort | fzf --prompt="Select project: " --height=40% --border)
 
 if [[ -z "$SELECTED_DIR" ]]; then
   echo "No directory selected"

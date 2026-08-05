@@ -151,6 +151,7 @@ openjpeg
 openjph
 openldap
 openssl@3
+openusage
 p11-kit
 pango
 pcre2

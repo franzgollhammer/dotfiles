@@ -20,6 +20,7 @@ fi
 export DEV="$HOME/dev"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
+export WT="$DEV/worktrees"
 
 export LOCAL_BIN="$HOME/.local/bin"
 export BUN_INSTALL="$HOME/.bun"
@@ -103,7 +104,9 @@ alias gco="git checkout"
 alias gcob="git checkout -b"
 alias gp="git pull"
 alias gps="git push"
-alias gwt="git worktree"
+alias gw="git worktree"
+alias gwa="git worktree add"
+alias gwr="git worktree remove"
 alias gundo="git reset --soft HEAD~1"
 alias grhu="git reset --hard @{u}"                 # reset hard to upstream branch
 alias glf="git log -p -- "                         # log patch <filename>
