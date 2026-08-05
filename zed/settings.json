@@ -1,14 +1,14 @@
 {
-  "icon_theme": {
-    "mode": "system",
-    "light": "Air + Material Icons Light",
-    "dark": "Air + Material Icons Dark",
-  },
-  "theme": {
-    "mode": "system",
-    "light": "Air Light Italic",
-    "dark": "Air Dark Italic",
-  },
+  // "icon_theme": {
+  //   "mode": "system",
+  //   "light": "Air + Material Icons Light",
+  //   "dark": "Air + Material Icons Dark",
+  // },
+  // "theme": {
+  //   "mode": "system",
+  //   "light": "Air Light Italic",
+  //   "dark": "Air Dark Italic",
+  // },
   "git_panel": {
     "tree_view": true,
   },
