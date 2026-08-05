@@ -38,12 +38,9 @@ fi
 echo "Creating new session: $SELECTED_NAME in $SELECTED_DIR"
 tmux new-session -ds $SELECTED_NAME -c $SELECTED_DIR
 
-# Run tmux_init if it exists in the project directory or home
-if [[ -f "$SELECTED_DIR/.tmux_init" && -x "$SELECTED_DIR/.tmux_init" ]]; then
-  tmux send-keys -t $SELECTED_NAME "./.tmux_init" C-m
-elif [[ -f "$HOME/.tmux_init" && -x "$HOME/.tmux_init" ]]; then
-  tmux send-keys -t $SELECTED_NAME "tmux_init" C-m
-fi
+# The pane starts in $SELECTED_DIR, so tmux_init resolves the lookup order
+# itself: ./.tmux_init -> ~/.tmux_init -> $DOTFILES/.tmux_init.
+tmux send-keys -t "$SELECTED_NAME" "tmux_init" C-m
 
 switch_to
 
