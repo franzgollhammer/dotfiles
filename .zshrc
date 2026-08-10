@@ -10,9 +10,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR="vim"
 else
-  export EDITOR="code-insiders"
-  export VISUAL="code-insiders"
-  export VUE_EDITOR="code-insiders"
+  export EDITOR="code"
+  export VISUAL="code"
+  export VUE_EDITOR="code"
 fi
 
 # ═══ Directories ═════════════════════════════════════════════
