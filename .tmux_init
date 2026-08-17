@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# tmux neww -dn "scratch"
-# tmux send-keys -t "scratch" "fastfetch" C-m
+main_window=$(tmux display-message -p '#{window_id}')
+tmux rename-window -t "$main_window" MAIN
 
-# tmux neww -dn "client"
-# tmux neww -dn "server"
-# tmux send-keys -t "client" "run c" C-m
-# tmux send-keys -t "server" "run s" C-m
+stats_window=$(tmux new-window -d -P -F '#{window_id}' -n STATS)
+tmux send-keys -t "$stats_window" fastfetch C-m
 
-clear
-fastfetch
+tmux select-window -t "$main_window"
+cmatrix
