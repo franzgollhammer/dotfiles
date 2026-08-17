@@ -26,10 +26,10 @@ window-padding-y = 6
 
 # font
 # Matches Terminal.app's Basic profile: SF Mono Regular 13.
-font-size = 13
+# font-size = 13
 font-family = SFMono Nerd Font
-font-style = Regular
-adjust-cell-height = 10%
+# font-style = Regular
+# adjust-cell-height = 10%
 # scrollback-limit = 10000
 
 # keybinds
