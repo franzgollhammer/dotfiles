@@ -152,14 +152,14 @@ esac
 # ── compose ──────────────────────────────────────────────────────────────────
 
 case $event in
-needs-input | needs_input | permission | question | idle_prompt) label='braucht dich' ;;
+needs-input | needs_input | permission | question | idle_prompt) label='' ;;
 done | idle | complete | agent-turn-complete) label='fertig' ;;
 error | failure) label='Fehler' ;;
 *) label=$event ;;
 esac
 
 # ';' is the OSC 777 field delimiter and may not appear in the title.
-title=$(clip "$TITLE_MAX" "$(clean "$agent · $label" | tr ';' ',')")
+title=$(clip "$TITLE_MAX" "$(clean "$agent${label:+ · $label}" | tr ';' ',')")
 
 body=$repo
 [ -n "$branch" ] && body="$body @ $branch"
