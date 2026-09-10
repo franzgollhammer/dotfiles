@@ -75,6 +75,7 @@ eval "$(starship init zsh)"
 # ═══ Aliases ═════════════════════════════════════════════════
 
 # — editors —
+alias z="zed"
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
@@ -123,6 +124,7 @@ alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killall="pkill -u \$(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
+alias exif="exiftool -a -u -g1"
 
 # ═══ Functions ═══════════════════════════════════════════════
 

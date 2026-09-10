@@ -9,6 +9,8 @@
   //   "light": "Air Light Italic",
   //   "dark": "Air Dark Italic",
   // },
+  "buffer_font_size": 13,
+  "buffer_font_family": "Hack Nerd Font Mono",
   "git_panel": {
     "tree_view": true,
   },
@@ -50,9 +52,12 @@
       "type": "registry",
     },
     "claude-acp": {
+      "favorite_config_option_values": {
+        "mode": ["auto"],
+      },
       "default_config_options": {
         "effort": "x-high",
-        "mode": "bypassPermissions",
+        "mode": "auto",
       },
       "type": "registry",
     },

@@ -7,7 +7,6 @@ asciiquarium
 autoconf
 bash
 bat
-berkeley-db@5
 brotli
 btop
 c-ares
@@ -23,9 +22,11 @@ dav1d
 dprint
 duti
 entr
+exiftool
 eza
 fastfetch
 fd
+ffmpeg
 fish
 fmt
 fontconfig
@@ -37,7 +38,6 @@ fribidi
 fx
 fzf
 gd
-gdbm
 gettext
 gh
 ghostscript
@@ -63,11 +63,13 @@ icu4c@77
 icu4c@78
 imath
 jbig2dec
+jemalloc
 jpeg-turbo
 jpeg-xl
 jq
 json-c
 krb5
+lame
 lazygit
 leptonica
 libarchive
@@ -103,6 +105,7 @@ libunistring
 libusb
 libuv
 libvmaf
+libvpx
 libx11
 libxau
 libxcb
@@ -131,6 +134,7 @@ mongodb-community@7.0
 mongodb-database-tools
 mongosh
 mpdecimal
+mpg123
 n
 nbytes
 ncurses
@@ -151,10 +155,10 @@ openjpeg
 openjph
 openldap
 openssl@3
+opus
 p11-kit
 pango
 pcre2
-perl
 php
 pinentry
 pixman
@@ -171,11 +175,14 @@ ripgrep
 ruby
 screenfetch
 screenresolution
+sdl2-compat
+sdl3
 shellcheck
 simdjson
 simdutf
 sqlite
 starship
+svt-av1
 tesseract
 tidy-html5
 tig
@@ -191,6 +198,8 @@ uvwasi
 webp
 wget
 woff2
+x264
+x265
 xorgproto
 xz
 yyjson
