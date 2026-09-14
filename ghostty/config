@@ -19,6 +19,7 @@ macos-icon = official
 
 # theme
 theme = dark:macos-terminal-dark,light:macos-terminal-light
+# theme = dark:iterm-regular-dark,light:iterm-regular-light
 # background-opacity = 0.95
 # window-padding-x = 8
 # window-padding-y = 6
@@ -26,9 +27,9 @@ theme = dark:macos-terminal-dark,light:macos-terminal-light
 
 # font
 # Matches Terminal.app's Basic profile: SF Mono Regular 13.
-font-size = 14
+font-size = 12
 font-family = JetBrainsMono Nerd Font
-# font-family = SFMono Nerd Font
+# font-family = Monaco Nerd Font Mono
 # font-family = Hack Nerd Font Mono
 # font-style = Regular
 # adjust-cell-height = 10%
