@@ -1,0 +1,15 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+right_format = "$time"
+
+[time]
+# disabled = false
+# format = "[$time]($style)"
+
+[git_metrics]
+# disabled = false
+
+[git_status]
+ahead = '↑'
+behind = '↓'
+diverged = '↑↓'

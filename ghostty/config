@@ -16,21 +16,15 @@ macos-icon = official
 # retro
 # xray
 
-
 # theme
 theme = dark:macos-terminal-dark,light:macos-terminal-light
 # theme = dark:iterm-regular-dark,light:iterm-regular-light
 # background-opacity = 0.95
-# window-padding-x = 8
-# window-padding-y = 6
-
 
 # font
 # Matches Terminal.app's Basic profile: SF Mono Regular 13.
 font-size = 12
 font-family = JetBrainsMono Nerd Font
-# font-family = Monaco Nerd Font Mono
-# font-family = Hack Nerd Font Mono
 # font-style = Regular
 # adjust-cell-height = 10%
 # scrollback-limit = 10000
@@ -43,9 +37,9 @@ keybind = global:cmd+#=toggle_visibility
 # cursor-style-blink = false
 
 # clipboard
-# copy-on-select = clipboard
-# clipboard-read = allow
-# clipboard-write = allow
+copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
 
 # notifications (desktop notification on bell)
 bell-features = system,attention,title
