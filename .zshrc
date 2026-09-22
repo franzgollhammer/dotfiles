@@ -21,7 +21,6 @@ export DEV="$HOME/dev"
 export DOTFILES="$DEV/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export WT="$DEV/worktrees"
-
 export LOCAL_BIN="$HOME/.local/bin"
 export BUN_INSTALL="$HOME/.bun"
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -58,19 +57,24 @@ fi
 HISTSIZE=50000
 SAVEHIST=50000
 
-# ═══ Completion ══════════════════════════════════════════════
+# ═══ Oh My Zsh ═══════════════════════════════════════════════
 
-autoload -Uz compinit && compinit
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(fzf zsh-autosuggestions)
+source "$ZSH/oh-my-zsh.sh"
+
+# ═══ Starship ════════════════════════════════════════════════
+
+eval "$(starship init zsh)"
+
+# ═══ Completion ══════════════════════════════════════════════
 
 [[ -s "$BUN_INSTALL/_bun" ]] && source "$BUN_INSTALL/_bun"
 
 # ═══ Tools ═══════════════════════════════════════════════════
 
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-
-source <(fzf --zsh)
-
-eval "$(starship init zsh)"
 
 # ═══ Aliases ═════════════════════════════════════════════════
 
@@ -82,9 +86,6 @@ alias vim="nvim"
 alias ci="code-insiders"
 
 # — navigation & listing —
-alias ls="ls -FG"
-alias l="ls -ah"
-alias ll="ls -lah"
 alias dot="(cd \$DOTFILES; \$EDITOR .)"
 alias play="(cd \$DEV/playground; \$EDITOR .)"
 
@@ -199,8 +200,3 @@ function wtr() {
     fi
   done
 }
-
-# ═══ Autosuggestions ═════════════════════════════════════════
-# Must stay last: it wraps existing ZLE widgets.
-
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh

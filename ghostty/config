@@ -22,9 +22,8 @@ theme = dark:macos-terminal-dark,light:macos-terminal-light
 # background-opacity = 0.95
 
 # font
-# Matches Terminal.app's Basic profile: SF Mono Regular 13.
 font-size = 12
-font-family = JetBrainsMono Nerd Font
+font-family = FiraCode Nerd Font
 # font-style = Regular
 # adjust-cell-height = 10%
 # scrollback-limit = 10000

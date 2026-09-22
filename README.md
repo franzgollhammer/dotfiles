@@ -17,13 +17,12 @@ git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/dotfiles
 # 4. Install packages
 xargs brew install < brew/formula.txt
 xargs brew install --cask < brew/cask.txt
-```
 
 ## What's Included
 
 | Category | Files |
 |----------|-------|
-| Shell | `.zshrc`, `starship.toml` |
+| Shell | `.zshrc` (oh-my-zsh) |
 | Tmux | `.tmux.conf`, `.tmux_init` |
 | Herdr | `herdr/config.toml` |
 | Editors | `nvim/`, `vscode/`, `cursor/`, `zed/` |
