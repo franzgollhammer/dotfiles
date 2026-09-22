@@ -65,8 +65,6 @@ opt.splitbelow = true
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.vim/undodir")
 opt.backspace = "indent,eol,start"
-opt.splitright = true
-opt.splitbelow = true
 opt.autochdir = false
 opt.clipboard:append("unnamedplus")
 
@@ -82,5 +80,4 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.foldmethod = "manual"
   end,
 })
-
 

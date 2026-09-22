@@ -2,7 +2,7 @@
 
 # Enhanced tmux session management with better error handling
 
-SELECTED_DIR=$(find $DEV -type d -mindepth 1 -maxdepth 1 | sort | fzf --prompt="Select project: " --height=40% --border)
+SELECTED_DIR=$(find "${DEV:-$HOME/dev}" -mindepth 1 -maxdepth 1 -type d | sort | fzf --prompt="Select project: " --height=40% --border)
 
 if [[ -z "$SELECTED_DIR" ]]; then
   echo "No directory selected"
@@ -10,7 +10,7 @@ if [[ -z "$SELECTED_DIR" ]]; then
 fi
 
 # Clean up session name and limit length
-SELECTED_NAME=$(basename $SELECTED_DIR | tr ":,. " "____")
+SELECTED_NAME=$(basename "$SELECTED_DIR" | tr ":,. " "____")
 if [[ ${#SELECTED_NAME} -gt 20 ]]; then
   SELECTED_NAME=${SELECTED_NAME:0:20}
 fi
@@ -18,7 +18,7 @@ fi
 switch_to() {
   if [[ -z $TMUX ]]; then
     echo "Attaching to session: $SELECTED_NAME"
-    tmux attach-session -t $SELECTED_NAME
+    tmux attach-session -t "=$SELECTED_NAME"
   else
     CURRENT=$(tmux display-message -p '#S')
     if [[ "$CURRENT" == "$SELECTED_NAME" ]]; then
@@ -26,21 +26,20 @@ switch_to() {
       return 0
     fi
     echo "Switching to session: $SELECTED_NAME"
-    tmux switch-client -t $SELECTED_NAME
+    tmux switch-client -t "=$SELECTED_NAME"
   fi
 }
 
-if tmux has-session -t=$SELECTED_NAME 2> /dev/null; then
+if tmux has-session -t "=$SELECTED_NAME" 2> /dev/null; then
   switch_to
   exit 0
 fi
 
 echo "Creating new session: $SELECTED_NAME in $SELECTED_DIR"
-tmux new-session -ds $SELECTED_NAME -c $SELECTED_DIR
+tmux new-session -ds "$SELECTED_NAME" -c "$SELECTED_DIR" || exit 1
 
 # The pane starts in $SELECTED_DIR, so tmux_init resolves the lookup order
 # itself: ./.tmux_init -> ~/.tmux_init -> $DOTFILES/.tmux_init.
-tmux send-keys -t "$SELECTED_NAME" "tmux_init" C-m
+tmux send-keys -t "=$SELECTED_NAME" "tmux_init" C-m
 
 switch_to
-

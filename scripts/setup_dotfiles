@@ -1,0 +1,152 @@
+#!/bin/bash
+# Usage: setup_dotfiles [--dry-run] [--backup] [--home /absolute/path]
+# Link this checkout's configuration; preserve existing files unless backed up.
+
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: setup_dotfiles [--dry-run] [--backup] [--home /absolute/path]
+
+  --dry-run   Preview links and conflicts without changing anything.
+  --backup    Move conflicting files, directories, or links to unique adjacent
+              .dotfiles-backup.* paths before creating links.
+  --home DIR  Use another home directory and DIR/.config (ignores XDG_CONFIG_HOME).
+  -h, --help  Show this help.
+
+By default, use HOME and XDG_CONFIG_HOME (or HOME/.config). Existing correct
+links are left alone. Any conflict aborts installation unless --backup is set.
+No packages, shell frameworks, secrets, or system preferences are installed.
+EOF
+}
+
+dry_run=0
+backup=0
+target_home=${HOME:?HOME must be set}
+config_home=${XDG_CONFIG_HOME:-$target_home/.config}
+
+while [ "$#" -gt 0 ]; do
+  case $1 in
+    --dry-run) dry_run=1 ;;
+    --backup) backup=1 ;;
+    --home)
+      [ "$#" -ge 2 ] || { echo 'Missing directory after --home.' >&2; exit 2; }
+      target_home=$2
+      config_home=$target_home/.config
+      shift
+      ;;
+    -h|--help) usage; exit 0 ;;
+    *) printf 'Unknown argument: %s\n' "$1" >&2; usage >&2; exit 2 ;;
+  esac
+  shift
+done
+
+case $target_home in /*) ;; *) echo 'Home directory must be absolute.' >&2; exit 2 ;; esac
+case $config_home in /*) ;; *) echo 'XDG_CONFIG_HOME must be absolute.' >&2; exit 2 ;; esac
+
+# Resolve the entry point, including invocation through a symlink or PATH.
+script_path=${BASH_SOURCE[0]}
+while [ -L "$script_path" ]; do
+  script_dir=$(cd -- "$(dirname -- "$script_path")" && pwd -P)
+  script_path=$(readlink "$script_path")
+  case $script_path in /*) ;; *) script_path=$script_dir/$script_path ;; esac
+done
+repo_dir=$(cd -- "$(dirname -- "$script_path")/.." && pwd -P)
+
+sources=()
+targets=()
+add_link() {
+  sources+=("$repo_dir/$1")
+  targets+=("$2")
+}
+
+add_link .zshrc "$target_home/.zshrc"
+add_link .tmux.conf "$target_home/.tmux.conf"
+add_link starship.toml "$config_home/starship.toml"
+for app in nvim ghostty wezterm; do
+  add_link "$app" "$config_home/$app"
+done
+add_link warp "$target_home/.warp"
+
+# Link individual files where applications also keep local state or themes.
+for file in keymap.json settings.json; do
+  add_link "zed/$file" "$config_home/zed/$file"
+done
+for file in kitty.conf session.conf quick-access-terminal.conf dark-theme.auto.conf light-theme.auto.conf no-preference-theme.auto.conf; do
+  add_link "kitty/$file" "$config_home/kitty/$file"
+done
+for file in "$repo_dir"/kitty/themes/*.conf; do
+  add_link "kitty/themes/${file##*/}" "$config_home/kitty/themes/${file##*/}"
+done
+add_link kitty/icon/kitty-dark.icns "$config_home/kitty/kitty.app.icns"
+
+# This repository targets macOS; keep VS Code's other user data local.
+for file in settings.json keybindings.json; do
+  add_link "vscode/$file" "$target_home/Library/Application Support/Code/User/$file"
+done
+
+# Preflight every source, parent, and conflict before making any changes.
+errors=0
+conflicts=0
+for i in "${!sources[@]}"; do
+  source_path=${sources[$i]}
+  target_path=${targets[$i]}
+  if [ ! -e "$source_path" ]; then
+    printf 'Missing source: %s\n' "$source_path" >&2
+    errors=1
+  fi
+  parent=$(dirname -- "$target_path")
+  while [ "$parent" != / ]; do
+    if { [ -e "$parent" ] || [ -L "$parent" ]; } && [ ! -d "$parent" ]; then
+      printf 'Parent is not a directory: %s\n' "$parent" >&2
+      errors=1
+      break
+    fi
+    parent=$(dirname -- "$parent")
+  done
+  if [ "$source_path" -ef "$target_path" ]; then
+    printf 'OK       %s\n' "$target_path"
+  elif [ -e "$target_path" ] || [ -L "$target_path" ]; then
+    if [ "$backup" -eq 1 ]; then
+      printf 'BACKUP   %s\n' "$target_path"
+    else
+      printf 'CONFLICT %s\n' "$target_path" >&2
+      conflicts=1
+    fi
+  else
+    printf 'LINK     %s -> %s\n' "$target_path" "$source_path"
+  fi
+done
+
+if [ "$errors" -ne 0 ] || [ "$conflicts" -ne 0 ]; then
+  echo 'No changes made. Resolve reported problems or use --backup for conflicts.' >&2
+  exit 1
+fi
+if [ "$dry_run" -eq 1 ]; then
+  echo 'Dry run complete; no changes made.'
+  exit 0
+fi
+
+backup_suffix=$(date -u +%Y%m%dT%H%M%SZ).$$
+for i in "${!sources[@]}"; do
+  source_path=${sources[$i]}
+  target_path=${targets[$i]}
+  [ "$source_path" -ef "$target_path" ] && continue
+  mkdir -p -- "$(dirname -- "$target_path")"
+  if [ -e "$target_path" ] || [ -L "$target_path" ]; then
+    # Recheck so a new conflict after preflight is never overwritten silently.
+    if [ "$backup" -ne 1 ]; then
+      printf 'New conflict: %s; stopping. Earlier links may already exist.\n' "$target_path" >&2
+      exit 1
+    fi
+    backup_path=$target_path.dotfiles-backup.$backup_suffix
+    while [ -e "$backup_path" ] || [ -L "$backup_path" ]; do
+      backup_path=$backup_path.next
+    done
+    mv -- "$target_path" "$backup_path"
+    printf 'Saved    %s\n' "$backup_path"
+  fi
+  ln -s -- "$source_path" "$target_path"
+done
+
+echo 'Dotfiles linked. Open a new shell after installing the prerequisites in README.md.'

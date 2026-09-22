@@ -3,7 +3,6 @@
 # oh-my-zsh robbyrussell look, plus node version, 2-level directory truncation and time:
 # …/dev/dotfiles git:(main)[!?] node:(v22.11.0)          at 14:03:22
 # ➜
-# add_newline = true
 format = "$directory($git_branch$git_commit$git_status )$nodejs$fill$time$line_break$character"
 
 [character]
@@ -25,7 +24,6 @@ format = '[git:\(](bold blue)[$branch](bold red)[\)](bold blue)'
 format = '[git:\(](bold blue)[$hash$tag](bold red)[\)](bold blue)'
 
 [git_status]
-# style = "bold purple"
 format = '([\[](bold blue)[$all_status$ahead_behind]($style)[\]](bold blue))'
 
 [fill]
