@@ -17,6 +17,7 @@ truncation_symbol = '…/'
 truncate_to_repo = false
 
 [git_branch]
+only_attached = true
 format = '[git:\(](bold blue)[$branch](bold red)[\)](bold blue)'
 
 # Detached HEAD: robbyrussell shows the short sha in place of the branch
