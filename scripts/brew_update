@@ -1,13 +1,15 @@
 #!/bin/bash
+# Usage: brew_update — update Homebrew and refresh this checkout's package lists.
 
-brew update && brew upgrade && brew cleanup
+set -euo pipefail
+dotfiles_dir="${DOTFILES:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)}"
 
-# ensure brew list files exist
-mkdir -p "$DOTFILES/brew"
-[ ! -f "$DOTFILES/brew/cask.txt" ] && touch "$DOTFILES/brew/cask.txt"
-[ ! -f "$DOTFILES/brew/formula.txt" ] && touch "$DOTFILES/brew/formula.txt"
+brew update
+brew upgrade
+brew cleanup
 
-brew list --cask > $DOTFILES/brew/cask.txt
-brew list --formula > $DOTFILES/brew/formula.txt
+mkdir -p "$dotfiles_dir/brew"
+brew list --cask > "$dotfiles_dir/brew/cask.txt"
+brew list --formula > "$dotfiles_dir/brew/formula.txt"
 
-echo "Homebrew packages updated and lists saved to $DOTFILES/brew/cask.txt and $DOTFILES/brew/formula.txt"
+echo "Homebrew packages updated and lists saved to $dotfiles_dir/brew/"

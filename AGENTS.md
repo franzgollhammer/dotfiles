@@ -1,27 +1,50 @@
-# AGENTS.md
+# Working on dotfiles
 
-## Purpose
-- This repository stores personal dotfiles and machine setup configuration.
-- Keep changes small, reviewable, and safe to apply on a live system.
+This repository configures a personal macOS development machine. The checkout
+may be linked into a live home directory, so tracked configuration edits can
+immediately affect running applications. Read README.md when changing setup,
+prerequisites, link targets, or local customization.
 
-## Working Rules
-- Prefer minimal, surgical edits over broad refactors.
-- Preserve existing file layout unless a change clearly improves maintainability.
-- Do not commit secrets, tokens, private keys, or machine-specific credentials.
-- Favor portable shell where practical; call out macOS-only behavior when used.
-- When changing shell scripts, prefer idempotent commands so reruns are safe.
+## Scope and workflow
 
-## Repository Conventions
-- Keep documentation close to the relevant config when possible.
-- For new scripts, use descriptive names and include a short usage comment at the top.
-- Avoid adding generated files, caches, or local machine artifacts to the repo.
+- Keep edits focused and preserve personal themes, app choices, and package
+  inventories unless there is evidence they are obsolete. The Homebrew lists
+  include dependencies; being unfamiliar is not grounds for removal.
+- Work on a dedicated branch in a new worktree under
+  `~/dev/worktrees/dotfiles/<branch>/`. Never commit, push, or merge to `main`.
+  Ask for permission before any merge.
+- Save plans in `.claude/plans/` with three options where practical, their tradeoffs,
+  and unresolved questions. This directory is intentionally ignored.
+- Store local credentials in ignored `.env` files. Preserve local settings and
+  generated data; never include credentials, caches, or machine logs in commits.
 
-## Validation
-- For shell changes, run the narrowest relevant check first.
-- If a formatter or linter already exists for the changed area, use it.
-- Do not fix unrelated breakages while completing a focused task.
+## Setup and shell changes
 
-## Safety
-- Flag destructive operations before making them.
-- Treat symlink management, bootstrap scripts, and system preference changes as high impact.
-- When a change is machine-specific, document the assumption in the final response.
+- `scripts/setup_dotfiles` owns the symlink mapping; `scripts/build_symlinks` is
+  only a compatibility wrapper. Update the README mapping when changing targets.
+- Keep setup compatible with macOS `/bin/bash` 3.2. Quote paths, resolve sources
+  from the running checkout, and preserve idempotence and dry-run behavior.
+- Preflight missing sources, blocked parents, and existing destinations before
+  changing anything. Preserve conflicts through explicit `--backup`; never
+  replace them with recursive deletion or an implicit force option.
+- Link individual files for applications that share config directories with
+  local state, especially Kitty, Zed, and VS Code. Keep the default tmux init in
+  the repository; customization belongs in project or home `.tmux_init` files.
+- Preserve source comments that identify theme provenance and cross-terminal
+  palette relationships. Avoid vendoring plugins already installed externally.
+- Add a shebang and short usage comment to new scripts, and mark runnable scripts
+  executable. Document macOS-only dependencies in README.md.
+
+## Validation and completion
+
+- Check modified shell syntax first with its declared interpreter. Use ShellCheck
+  for Bash/POSIX scripts; `.zshrc` and `scripts/list_branches` require zsh.
+- Exercise symlink mutations only in temporary directories with `--home`. Check
+  dry runs, reruns, existing files/directories, and dangling links when setup
+  behavior changes. Do not repoint the live home directory during a review.
+- Run the full suite through the `Dotfiles checks` GitHub Actions workflow, never
+  locally. Local checks should stay limited to relevant files or specific cases.
+  Follow the same restriction in Docker: run only relevant spec files locally.
+- Finish with `git diff --check`, a review of every changed file, and a report of
+  checks run, failures or untested behavior, and any machine-specific assumptions.
+  Keep unrelated fixes out of a focused change.

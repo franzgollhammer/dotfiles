@@ -5,7 +5,7 @@
 # ═══ Environment ═════════════════════════════════════════════
 
 export TERM="xterm-256color"
-export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR="vim"
@@ -18,7 +18,8 @@ fi
 # ═══ Directories ═════════════════════════════════════════════
 
 export DEV="$HOME/dev"
-export DOTFILES="$DEV/dotfiles"
+# Resolve this file's symlink so scripts and secrets follow the active checkout.
+export DOTFILES="${${(%):-%x}:A:h}"
 export SCRIPTS="$DOTFILES/scripts"
 export WT="$DEV/worktrees"
 export LOCAL_BIN="$HOME/.local/bin"
@@ -60,13 +61,20 @@ SAVEHIST=50000
 # ═══ Oh My Zsh ═══════════════════════════════════════════════
 
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
-plugins=(fzf zsh-autosuggestions)
-source "$ZSH/oh-my-zsh.sh"
+ZSH_THEME=""
+plugins=(fzf)
+if [[ -f "${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh" ]]; then
+  plugins+=(zsh-autosuggestions)
+elif [[ -f "$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh" ]]; then
+  plugins+=(zsh-autosuggestions)
+fi
+[[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
 # ═══ Starship ════════════════════════════════════════════════
 
-eval "$(starship init zsh)"
+if (( $+commands[starship] )); then
+  eval "$(starship init zsh)"
+fi
 
 # ═══ Completion ══════════════════════════════════════════════
 

@@ -1,0 +1,43 @@
+name: Dotfiles checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install validation tools
+        run: |
+          if [[ "$RUNNER_OS" == macOS ]]; then
+            brew install shellcheck
+          else
+            sudo apt-get update
+            sudo apt-get install -y shellcheck zsh
+          fi
+      - name: Check shell syntax
+        run: |
+          /bin/zsh -n .zshrc
+          for script in scripts/* .tmux_init example.tmux_init; do
+            case "$(head -n 1 "$script")" in
+              '#!/bin/zsh') /bin/zsh -n "$script" ;;
+              '#!/bin/sh') /bin/sh -n "$script" ;;
+              '#!/bin/bash') /bin/bash -n "$script" ;;
+              *) echo "Missing supported shebang: $script"; exit 1 ;;
+            esac
+          done
+      - name: Lint setup and maintained helpers
+        run: shellcheck scripts/setup_dotfiles scripts/build_symlinks scripts/brew_update scripts/scr scripts/tmux_session
+      - name: Run safety tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Check whitespace
+        run: git diff --check
