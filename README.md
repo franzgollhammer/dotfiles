@@ -38,8 +38,8 @@ during installation can leave earlier links installed; fix the cause and rerun.
 The script finds the checkout from its own location, so it works from any
 working directory and ignores a stale `DOTFILES` environment variable. Links
 point to that checkout: keep it in place, and avoid installing from a temporary
-worktree you intend to delete. `scripts/build_symlinks` remains a compatibility
-wrapper with the same options.
+worktree you intend to delete. After loading `.zshrc`, invoke `setup_dotfiles`
+from any directory; it is the single entry point for synchronizing these links.
 
 By default, config links use `XDG_CONFIG_HOME`, falling back to `~/.config`.
 To inspect or install into an isolated destination:
@@ -94,11 +94,9 @@ Paths below use the default `~/.config` location unless stated otherwise.
 | `nvim/`, `ghostty/`, `wezterm/` | Matching directories in `~/.config/` |
 | `warp/` | `~/.warp` |
 | `zed/keymap.json`, `zed/settings.json` | Matching files in `~/.config/zed/` |
-| `kitty/*.conf`, `kitty/themes/*.conf` | Matching files under `~/.config/kitty/` |
-| `kitty/icon/kitty-dark.icns` | `~/.config/kitty/kitty.app.icns` |
 | `vscode/settings.json`, `vscode/keybindings.json` | Matching files in `~/Library/Application Support/Code/User/` |
 
-Kitty, Zed, and VS Code are linked file by file so unrelated local settings,
+Zed and VS Code are linked file by file so unrelated local settings,
 themes, and state survive. Whole-directory links for the other applications mean
 changes within those directories can affect the checkout; inspect `git status`
 before committing. Warp launch configurations contain personal project paths
@@ -112,7 +110,7 @@ Additional files are opt-in:
   extension inventories. With each editor's CLI installed, use
   `xargs -n 1 code --install-extension < vscode/vscode-extensions.txt` or
   `xargs -n 1 cursor --install-extension < cursor/cursor-extensions.txt`.
-- `ghostty/icons/`, `kitty/icon/`, `wezterm/icon/`: optional app icons.
+- `ghostty/icons/`, `wezterm/icon/`: optional app icons.
 
 ## Local customization
 
@@ -138,9 +136,9 @@ Commands in `scripts/` become available after loading `.zshrc`.
 
 | Command | Purpose |
 | --- | --- |
-| `setup_dotfiles`, `build_symlinks` | Preview or create configuration links |
+| `setup_dotfiles` | Preview or create configuration links |
 | `brew_update` | Update Homebrew packages and export inventories |
-| `agent-notify` | Terminal notifications for agent hooks; see `agent-notify --help` |
+| `agent-notify` | Ghostty/WezTerm notifications for agent hooks; see `agent-notify --help` |
 | `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
 | `scr` | Pick and execute a helper with fzf |
@@ -149,7 +147,7 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `kill_node`, `kill_mongo`, `kill_all` | Stop the corresponding development processes |
 | `set_default_app` | Associate common source-file extensions with Cursor using duti |
 | `vm` | Control a VMware VM; requires vmrun and the `vmFile` environment variable |
-| `install_kitty_icon`, `install_wezterm_icon` | Apply optional macOS icons; these can modify app bundles/caches and restart Dock or Finder |
+| `install_wezterm_icon` | Apply an optional macOS icon; modifies the app bundle/caches and restarts Dock and Finder |
 
 Worktree navigation lives in `.zshrc`: `wt` picks a worktree of the current
 repository; `wtr` picks worktrees to remove and offers branch deletion; `wta` is
@@ -165,7 +163,7 @@ For local edits, use narrow checks such as:
 
 ```sh
 bash -n scripts/setup_dotfiles
-shellcheck scripts/setup_dotfiles scripts/build_symlinks
+shellcheck scripts/setup_dotfiles
 zsh -n .zshrc
 ./scripts/setup_dotfiles --home /tmp/dotfiles-preview --dry-run
 git diff --check

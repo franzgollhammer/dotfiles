@@ -41,14 +41,6 @@ class SetupDotfilesTests(unittest.TestCase):
             pairs[config / app] = repo / app
         for name in ("keymap.json", "settings.json"):
             pairs[config / "zed" / name] = repo / "zed" / name
-        for name in (
-            "kitty.conf", "session.conf", "quick-access-terminal.conf",
-            "dark-theme.auto.conf", "light-theme.auto.conf", "no-preference-theme.auto.conf",
-            "themes/steel-dark.conf", "themes/steel-light.conf",
-            "themes/xterm-dark.conf", "themes/xterm-light.conf",
-        ):
-            pairs[config / "kitty" / name] = repo / "kitty" / name
-        pairs[config / "kitty/kitty.app.icns"] = repo / "kitty/icon/kitty-dark.icns"
         for name in ("settings.json", "keybindings.json"):
             pairs[self.target / "Library/Application Support/Code/User" / name] = repo / "vscode" / name
         return pairs
@@ -65,7 +57,7 @@ class SetupDotfilesTests(unittest.TestCase):
         self.assertFalse(self.target.exists())
 
     def test_install_and_rerun_preserve_links_and_local_state(self):
-        local_theme = self.target / ".config/kitty/themes/personal.conf"
+        local_theme = self.target / ".config/zed/themes/personal.json"
         local_theme.parent.mkdir(parents=True)
         local_theme.write_text("personal theme")
         self.setup_command()
@@ -171,10 +163,6 @@ class SetupDotfilesTests(unittest.TestCase):
         (checkout / "starship.toml").unlink()
         self.setup_command(repo=checkout, expected=1)
         self.assertFalse(self.target.exists())
-
-    def test_compatibility_entry_point(self):
-        self.setup_command(script=REPO / "scripts/build_symlinks")
-        self.assert_links()
 
     def test_symlinked_entry_point(self):
         entry = self.root / "setup"

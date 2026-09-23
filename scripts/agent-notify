@@ -22,17 +22,14 @@
 #   AGENT_NOTIFY_LOG      append a debug line per invocation to this file
 #
 # The only backend is the terminal's own escape-code notification: correct icon,
-# and a click focuses the terminal. Ghostty and WezTerm implement OSC 777; kitty
-# implements OSC 99 instead and ignores OSC 777 entirely, so the protocol is
-# picked per terminal below. iTerm2, Warp and Terminal.app do neither and will
-# silently show nothing.
+# and a click focuses the terminal. Ghostty and WezTerm implement OSC 777.
+# iTerm2, Warp and Terminal.app do not and will silently show nothing.
 #
 # Ghostty also drops notifications from a focused surface and rate-limits to one
 # per second app-wide, so banners can go missing while it is frontmost — accepted
 # trade, the osascript fallback was unclickable noise. WezTerm defaults to the
 # same suppression; wezterm/wezterm.lua sets `notification_handling = AlwaysShow`
-# to switch it off. kitty shows them regardless of focus (OSC 99 `o` defaults to
-# `always`), so only the `done` suppression below applies there.
+# to switch it off.
 #
 # Always exits 0 and never writes to stdout — hook stdout is a contract channel.
 
@@ -60,7 +57,7 @@ while [ $# -gt 0 ]; do
 	--stdin) use_stdin=1 ;;
 	--pane) shift; pane="${1:-}" ;;
 	--cwd) shift; cwd="${1:-}" ;;
-	-h | --help) sed -n '2,37p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+	-h | --help) sed -n '2,/^$/p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
 	--*) ;; # ignore unknown flags rather than failing a hook
 	'{'*) payload=$1 ;;
 	*)
@@ -125,13 +122,13 @@ fi
 
 # ── frontmost app ────────────────────────────────────────────────────────────
 # NOTE: this only asks "is a supported terminal frontmost", not "is it the one
-# hosting this tmux client". With Ghostty, WezTerm and kitty all open the answer
+# hosting this tmux client". With Ghostty and WezTerm both open the answer
 # can be the wrong app; the cost is a suppressed `done` banner, so it stays simple.
 
 front_term=0
 if command -v lsappinfo >/dev/null 2>&1; then
 	case $(lsappinfo info -only bundleid "$(lsappinfo front 2>/dev/null)" 2>/dev/null) in
-	*com.mitchellh.ghostty* | *com.github.wez.wezterm* | *net.kovidgoyal.kitty*) front_term=1 ;;
+	*com.mitchellh.ghostty* | *com.github.wez.wezterm*) front_term=1 ;;
 	esac
 fi
 
@@ -173,16 +170,15 @@ body=$(clip "$BODY_MAX" "$(clean "$body")")
 # This sidesteps `allow-passthrough`, which otherwise drops sequences from any
 # pane whose window is not the client's current window.
 #
-# Read the protocol off the ATTACHED CLIENT's terminal name, not $TERM: inside
+# Read terminal metadata from the attached client, not $TERM: inside
 # tmux $TERM is tmux-256color, and the value a pane inherited when it was created
 # goes stale the moment the session is reattached from a different terminal.
 
 term_tty=/dev/tty
 termname="${TERM:-}"
 if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
-	# Prefer a client attached to THIS pane's session. With ghostty, wezterm and
-	# kitty all attached to different sessions, the first client on the server is
-	# frequently the wrong terminal — and then the wrong protocol too.
+	# Prefer a client attached to this pane's session. The first client on the
+	# server may belong to a different session and receive the wrong notification.
 	client=''
 	[ -n "$sess" ] && client=$(tmux list-clients -t "$sess" \
 		-F '#{client_tty} #{client_termname}' 2>/dev/null | head -1)
@@ -198,20 +194,6 @@ notify_osc777() { # <title> <body> — Ghostty, WezTerm
 	printf '\033]777;notify;%s;%s\033\\' "$1" "$2" >"$term_tty" 2>/dev/null
 }
 
-notify_osc99() { # <title> <body> — kitty
-	# One escape per field: i= groups the chunks, d=0 means "more to come", and a
-	# final metadata-only chunk closes the group and raises the banner. Fields are
-	# base64 (e=1) exactly like kitty's own `kitten notify`, which keeps ';' and
-	# non-ASCII out of the escape code's syntax.
-	# All three chunks go out in ONE write: inside tmux this tty is shared with
-	# tmux's own redraws, and a group split across writes can be torn apart.
-	_id="agent$$"
-	_t=$(printf '%s' "$1" | base64 | tr -d '\n')
-	_b=$(printf '%s' "$2" | base64 | tr -d '\n')
-	printf '\033]99;i=%s:d=0:e=1;%s\033\\\033]99;i=%s:d=0:e=1:p=body;%s\033\\\033]99;i=%s;\033\\' \
-		"$_id" "$_t" "$_id" "$_b" "$_id" >"$term_tty" 2>/dev/null
-}
-
 log "send $agent/$event pane=$pane onscreen=$onscreen front_term=$front_term term=$termname | $title | $body"
 
 if [ ! -w "$term_tty" ]; then
@@ -219,9 +201,6 @@ if [ ! -w "$term_tty" ]; then
 	exit 0
 fi
 
-case $termname in
-*kitty*) notify_osc99 "$title" "$body" || log "osc99 notify failed" ;;
-*) notify_osc777 "$title" "$body" || log "osc777 notify failed" ;;
-esac
+notify_osc777 "$title" "$body" || log "osc777 notify failed"
 
 exit 0

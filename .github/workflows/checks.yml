@@ -36,7 +36,7 @@ jobs:
             esac
           done
       - name: Lint setup and maintained helpers
-        run: shellcheck scripts/setup_dotfiles scripts/build_symlinks scripts/brew_update scripts/scr scripts/tmux_session
+        run: shellcheck scripts/setup_dotfiles scripts/brew_update scripts/scr scripts/tmux_session
       - name: Run safety tests
         run: python3 -m unittest discover -s tests -v
       - name: Check whitespace

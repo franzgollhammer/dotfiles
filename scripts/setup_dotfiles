@@ -72,13 +72,6 @@ add_link warp "$target_home/.warp"
 for file in keymap.json settings.json; do
   add_link "zed/$file" "$config_home/zed/$file"
 done
-for file in kitty.conf session.conf quick-access-terminal.conf dark-theme.auto.conf light-theme.auto.conf no-preference-theme.auto.conf; do
-  add_link "kitty/$file" "$config_home/kitty/$file"
-done
-for file in "$repo_dir"/kitty/themes/*.conf; do
-  add_link "kitty/themes/${file##*/}" "$config_home/kitty/themes/${file##*/}"
-done
-add_link kitty/icon/kitty-dark.icns "$config_home/kitty/kitty.app.icns"
 
 # This repository targets macOS; keep VS Code's other user data local.
 for file in settings.json keybindings.json; do
