@@ -6,7 +6,7 @@
 # Two levels, because macOS resolves an app's icon from two different places:
 #
 #   default    kitty reads ~/.config/kitty/kitty.app.icns (linked by
-#              build_symlinks) on every start and writes it onto the app as a
+#              setup_dotfiles) on every start and writes it onto the app as a
 #              Finder custom icon — an `Icon` file with a resource fork next to
 #              Contents/. That covers Finder and the Dock.
 #   --bundle   also overwrite Contents/Resources/<CFBundleIconFile>.icns.
@@ -42,7 +42,7 @@ done
 ICON="$DOTFILES_DIR/kitty/icon/kitty-$variant.icns"
 [ -f "$ICON" ] || { echo "missing $ICON"; exit 1; }
 
-# What build_symlinks links; re-point it here so `install_kitty_icon light`
+# What setup_dotfiles links; re-point it here so `install_kitty_icon light`
 # switches variants without editing the symlink by hand.
 mkdir -p "$HOME/.config/kitty"
 ln -snfv "$ICON" "$HOME/.config/kitty/kitty.app.icns"

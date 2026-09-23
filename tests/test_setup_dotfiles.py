@@ -172,10 +172,6 @@ class SetupDotfilesTests(unittest.TestCase):
         self.setup_command(repo=checkout, expected=1)
         self.assertFalse(self.target.exists())
 
-    def test_compatibility_entry_point(self):
-        self.setup_command(script=REPO / "scripts/build_symlinks")
-        self.assert_links()
-
     def test_symlinked_entry_point(self):
         entry = self.root / "setup"
         entry.symlink_to(REPO / "scripts/setup_dotfiles")

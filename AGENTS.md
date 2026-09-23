@@ -20,8 +20,8 @@ prerequisites, link targets, or local customization.
 
 ## Setup and shell changes
 
-- `scripts/setup_dotfiles` owns the symlink mapping; `scripts/build_symlinks` is
-  only a compatibility wrapper. Update the README mapping when changing targets.
+- `scripts/setup_dotfiles` is the sole setup entry point and owns the symlink
+  mapping. Update the README mapping when changing targets.
 - Keep setup compatible with macOS `/bin/bash` 3.2. Quote paths, resolve sources
   from the running checkout, and preserve idempotence and dry-run behavior.
 - Preflight missing sources, blocked parents, and existing destinations before

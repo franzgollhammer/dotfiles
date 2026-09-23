@@ -1,4 +1,0 @@
-#!/bin/bash
-# Compatibility entry point. Usage: build_symlinks [setup_dotfiles options]
-set -euo pipefail
-exec "$(dirname -- "${BASH_SOURCE[0]}")/setup_dotfiles" "$@"
