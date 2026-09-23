@@ -22,21 +22,19 @@
 #   AGENT_NOTIFY_LOG      append a debug line per invocation to this file
 #
 # The only backend is the terminal's own escape-code notification: correct icon,
-# and a click focuses the terminal. Ghostty and WezTerm implement OSC 777.
+# and a click focuses the terminal. Ghostty implements OSC 777.
 # iTerm2, Warp and Terminal.app do not and will silently show nothing.
 #
 # Ghostty also drops notifications from a focused surface and rate-limits to one
 # per second app-wide, so banners can go missing while it is frontmost — accepted
-# trade, the osascript fallback was unclickable noise. WezTerm defaults to the
-# same suppression; wezterm/wezterm.lua sets `notification_handling = AlwaysShow`
-# to switch it off.
+# trade, the osascript fallback was unclickable noise.
 #
 # Always exits 0 and never writes to stdout — hook stdout is a contract channel.
 
 set -u
 
-TITLE_MAX=63    # Ghostty caps desktop_notification.title at 63 bytes — the
-BODY_MAX=255    # tightest of the supported terminals, so clip to it everywhere
+TITLE_MAX=63    # Ghostty notification title limit in bytes.
+BODY_MAX=255    # Ghostty notification body limit in bytes.
 
 log() {
 	[ -n "${AGENT_NOTIFY_LOG:-}" ] || return 0
@@ -122,13 +120,13 @@ fi
 
 # ── frontmost app ────────────────────────────────────────────────────────────
 # NOTE: this only asks "is a supported terminal frontmost", not "is it the one
-# hosting this tmux client". With Ghostty and WezTerm both open the answer
-# can be the wrong app; the cost is a suppressed `done` banner, so it stays simple.
+# hosting this tmux client". A different Ghostty window may be frontmost;
+# the cost is a suppressed `done` banner, so it stays simple.
 
 front_term=0
 if command -v lsappinfo >/dev/null 2>&1; then
 	case $(lsappinfo info -only bundleid "$(lsappinfo front 2>/dev/null)" 2>/dev/null) in
-	*com.mitchellh.ghostty* | *com.github.wez.wezterm*) front_term=1 ;;
+	*com.mitchellh.ghostty*) front_term=1 ;;
 	esac
 fi
 
@@ -190,7 +188,7 @@ if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
 	fi
 fi
 
-notify_osc777() { # <title> <body> — Ghostty, WezTerm
+notify_osc777() { # <title> <body> — Ghostty
 	printf '\033]777;notify;%s;%s\033\\' "$1" "$2" >"$term_tty" 2>/dev/null
 }
 

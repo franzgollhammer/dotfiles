@@ -91,7 +91,7 @@ Paths below use the default `~/.config` location unless stated otherwise.
 | --- | --- |
 | `.zshrc`, `.tmux.conf` | Same filenames in `~` |
 | `starship.toml` | `~/.config/starship.toml` |
-| `nvim/`, `ghostty/`, `wezterm/` | Matching directories in `~/.config/` |
+| `nvim/`, `ghostty/` | Matching directories in `~/.config/` |
 | `warp/` | `~/.warp` |
 | `zed/keymap.json`, `zed/settings.json` | Matching files in `~/.config/zed/` |
 | `vscode/settings.json`, `vscode/keybindings.json` | Matching files in `~/Library/Application Support/Code/User/` |
@@ -110,7 +110,7 @@ Additional files are opt-in:
   extension inventories. With each editor's CLI installed, use
   `xargs -n 1 code --install-extension < vscode/vscode-extensions.txt` or
   `xargs -n 1 cursor --install-extension < cursor/cursor-extensions.txt`.
-- `ghostty/icons/`, `wezterm/icon/`: optional app icons.
+- `ghostty/icons/`: optional app icons.
 
 ## Local customization
 
@@ -138,7 +138,7 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | --- | --- |
 | `setup_dotfiles` | Preview or create configuration links |
 | `brew_update` | Update Homebrew packages and export inventories |
-| `agent-notify` | Ghostty/WezTerm notifications for agent hooks; see `agent-notify --help` |
+| `agent-notify` | Ghostty notifications for agent hooks; see `agent-notify --help` |
 | `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
 | `scr` | Pick and execute a helper with fzf |
@@ -147,7 +147,6 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `kill_node`, `kill_mongo`, `kill_all` | Stop the corresponding development processes |
 | `set_default_app` | Associate common source-file extensions with Cursor using duti |
 | `vm` | Control a VMware VM; requires vmrun and the `vmFile` environment variable |
-| `install_wezterm_icon` | Apply an optional macOS icon; modifies the app bundle/caches and restarts Dock and Finder |
 
 Worktree navigation lives in `.zshrc`: `wt` picks a worktree of the current
 repository; `wtr` picks worktrees to remove and offers branch deletion; `wta` is

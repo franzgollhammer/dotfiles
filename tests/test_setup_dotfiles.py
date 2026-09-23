@@ -37,7 +37,7 @@ class SetupDotfilesTests(unittest.TestCase):
             self.target / ".warp": repo / "warp",
             config / "starship.toml": repo / "starship.toml",
         }
-        for app in ("nvim", "ghostty", "wezterm"):
+        for app in ("nvim", "ghostty"):
             pairs[config / app] = repo / app
         for name in ("keymap.json", "settings.json"):
             pairs[config / "zed" / name] = repo / "zed" / name
