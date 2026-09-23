@@ -96,7 +96,6 @@ config.keys = {
 -- There is none. WezTerm has no drop-down/quick terminal and no global hotkey
 -- API — config.keys only ever fires while a WezTerm window already has focus,
 -- so ghostty's `global:cmd+#=toggle_visibility` cannot be reproduced here.
--- kitty at least has the panel kitten (kitty/quick-access-terminal.conf).
 --
 -- The closest fake: `wezterm start --class quake --position main:0,0` for a
 -- pinned window plus an external hotkey daemon (Raycast, skhd, Karabiner)
