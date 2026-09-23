@@ -1,18 +1,22 @@
 #!/bin/bash
-# Usage: setup_dotfiles [--dry-run] [--backup] [--home /absolute/path]
+# Usage: setup_dotfiles [--dry-run] [--backup] [--profile minimal|full] [--home /absolute/path]
 # Link this checkout's configuration; preserve existing files unless backed up.
 
 set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: setup_dotfiles [--dry-run] [--backup] [--home /absolute/path]
+Usage: setup_dotfiles [--dry-run] [--backup] [--profile minimal|full]
+                      [--home /absolute/path]
 
-  --dry-run   Preview links and conflicts without changing anything.
-  --backup    Move conflicting files, directories, or links to unique adjacent
-              .dotfiles-backup.* paths before creating links.
-  --home DIR  Use another home directory and DIR/.config (ignores XDG_CONFIG_HOME).
-  -h, --help  Show this help.
+  --dry-run      Preview links and conflicts without changing anything.
+  --backup       Move conflicting files, directories, or links to unique
+                 adjacent .dotfiles-backup.* paths before creating links.
+  --profile NAME Select the link set (default: full).
+                 minimal: terminal only, for remote machines used over SSH.
+                 full:    minimal plus Ghostty, Warp, Zed, and VS Code.
+  --home DIR     Use another home directory and DIR/.config (ignores XDG_CONFIG_HOME).
+  -h, --help     Show this help.
 
 By default, use HOME and XDG_CONFIG_HOME (or HOME/.config). Existing correct
 links are left alone. Any conflict aborts installation unless --backup is set.
@@ -22,6 +26,7 @@ EOF
 
 dry_run=0
 backup=0
+profile=full
 target_home=${HOME:?HOME must be set}
 config_home=${XDG_CONFIG_HOME:-$target_home/.config}
 
@@ -29,6 +34,11 @@ while [ "$#" -gt 0 ]; do
   case $1 in
     --dry-run) dry_run=1 ;;
     --backup) backup=1 ;;
+    --profile)
+      [ "$#" -ge 2 ] || { echo 'Missing profile after --profile.' >&2; exit 2; }
+      profile=$2
+      shift
+      ;;
     --home)
       [ "$#" -ge 2 ] || { echo 'Missing directory after --home.' >&2; exit 2; }
       target_home=$2
@@ -41,6 +51,10 @@ while [ "$#" -gt 0 ]; do
   shift
 done
 
+case $profile in
+  minimal|full) ;;
+  *) printf 'Unknown profile: %s (use minimal or full).\n' "$profile" >&2; exit 2 ;;
+esac
 case $target_home in /*) ;; *) echo 'Home directory must be absolute.' >&2; exit 2 ;; esac
 case $config_home in /*) ;; *) echo 'XDG_CONFIG_HOME must be absolute.' >&2; exit 2 ;; esac
 
@@ -60,23 +74,27 @@ add_link() {
   targets+=("$2")
 }
 
+# Minimal profile: the terminal itself, which is all a remote machine needs.
 add_link .zshrc "$target_home/.zshrc"
 add_link .tmux.conf "$target_home/.tmux.conf"
 add_link starship.toml "$config_home/starship.toml"
-for app in nvim ghostty; do
-  add_link "$app" "$config_home/$app"
-done
-add_link warp "$target_home/.warp"
+add_link nvim "$config_home/nvim"
 
-# Link individual files where applications also keep local state or themes.
-for file in keymap.json settings.json; do
-  add_link "zed/$file" "$config_home/zed/$file"
-done
+# Full profile adds the graphical applications of the personal machine.
+if [ "$profile" = full ]; then
+  add_link ghostty "$config_home/ghostty"
+  add_link warp "$target_home/.warp"
 
-# This repository targets macOS; keep VS Code's other user data local.
-for file in settings.json keybindings.json; do
-  add_link "vscode/$file" "$target_home/Library/Application Support/Code/User/$file"
-done
+  # Link individual files where applications also keep local state or themes.
+  for file in keymap.json settings.json; do
+    add_link "zed/$file" "$config_home/zed/$file"
+  done
+
+  # This repository targets macOS; keep VS Code's other user data local.
+  for file in settings.json keybindings.json; do
+    add_link "vscode/$file" "$target_home/Library/Application Support/Code/User/$file"
+  done
+fi
 
 # Preflight every source, parent, and conflict before making any changes.
 errors=0
@@ -142,4 +160,4 @@ for i in "${!sources[@]}"; do
   ln -s -- "$source_path" "$target_path"
 done
 
-echo 'Dotfiles linked. Open a new shell after installing the prerequisites in README.md.'
+printf 'Dotfiles linked (%s profile). Open a new shell after installing the prerequisites in README.md.\n' "$profile"

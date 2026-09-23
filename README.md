@@ -30,6 +30,14 @@ and install the links, run:
 ./scripts/setup_dotfiles --backup
 ```
 
+Two profiles select how much is linked. `--profile full` is the default and
+installs everything below, including graphical application configuration.
+`--profile minimal` installs only the terminal set — `.zshrc`, `.tmux.conf`,
+`starship.toml`, and `nvim/` — which is what a machine reached over SSH needs.
+Both profiles share the same preflight, backup, and rerun behavior, and running
+the full profile later on a minimal machine adds the remaining links without
+touching the existing ones.
+
 Repeated runs leave correct links alone. Backups are never intentionally
 reused or removed. To restore one, remove only the installed symlink at its
 original path, then move the corresponding backup back into place. An I/O error
@@ -52,6 +60,34 @@ To inspect or install into an isolated destination:
 `--home` must be absolute and uses `<home>/.config`, ignoring `XDG_CONFIG_HOME`.
 The linker does not install packages, create secrets, replace the login shell,
 patch application icons, or change system preferences.
+
+## Remote machines over SSH
+
+On a remote Mac (for example a Mac mini used only through `ssh` and tmux),
+install the terminal tools and the minimal profile. Nothing here needs a
+graphical session, and the linker leaves the machine's own application settings
+untouched:
+
+```sh
+brew install starship fzf tmux neovim ripgrep fd lazygit
+
+# Oh My Zsh with the autosuggestions plugin; the prompt comes from Starship.
+git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+git clone https://github.com/zsh-users/zsh-autosuggestions.git \
+  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+
+git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/dotfiles
+cd ~/dev/dotfiles
+./scripts/setup_dotfiles --profile minimal --dry-run
+./scripts/setup_dotfiles --profile minimal
+```
+
+Over SSH, `.zshrc` sets `EDITOR` to `vim` instead of the graphical editor, so
+`c`, `dot`, and `play` open a terminal editor. Aliases for local applications
+(`z`, `ci`, `sim`) stay defined but have nothing to open there. `.env` is
+optional: create it only for credentials the remote machine actually uses. tmux
+copies with `pbcopy`, which reaches the clipboard of the remote machine, not the
+one in front of you; use your terminal's own copy mode for that.
 
 ## Shell and application prerequisites
 
@@ -87,14 +123,15 @@ manifest. `brew_update` upgrades installed packages and refreshes both lists.
 
 Paths below use the default `~/.config` location unless stated otherwise.
 
-| Source | Destination |
-| --- | --- |
-| `.zshrc`, `.tmux.conf` | Same filenames in `~` |
-| `starship.toml` | `~/.config/starship.toml` |
-| `nvim/`, `ghostty/` | Matching directories in `~/.config/` |
-| `warp/` | `~/.warp` |
-| `zed/keymap.json`, `zed/settings.json` | Matching files in `~/.config/zed/` |
-| `vscode/settings.json`, `vscode/keybindings.json` | Matching files in `~/Library/Application Support/Code/User/` |
+| Source | Destination | Profile |
+| --- | --- | --- |
+| `.zshrc`, `.tmux.conf` | Same filenames in `~` | minimal |
+| `starship.toml` | `~/.config/starship.toml` | minimal |
+| `nvim/` | `~/.config/nvim` | minimal |
+| `ghostty/` | `~/.config/ghostty` | full |
+| `warp/` | `~/.warp` | full |
+| `zed/keymap.json`, `zed/settings.json` | Matching files in `~/.config/zed/` | full |
+| `vscode/settings.json`, `vscode/keybindings.json` | Matching files in `~/Library/Application Support/Code/User/` | full |
 
 Zed and VS Code are linked file by file so unrelated local settings,
 themes, and state survive. Whole-directory links for the other applications mean
@@ -136,7 +173,7 @@ Commands in `scripts/` become available after loading `.zshrc`.
 
 | Command | Purpose |
 | --- | --- |
-| `setup_dotfiles` | Preview or create configuration links |
+| `setup_dotfiles` | Preview or create configuration links (`--profile minimal` for remote machines) |
 | `brew_update` | Update Homebrew packages and export inventories |
 | `agent-notify` | Ghostty notifications for agent hooks; see `agent-notify --help` |
 | `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
@@ -165,6 +202,7 @@ bash -n scripts/setup_dotfiles
 shellcheck scripts/setup_dotfiles
 zsh -n .zshrc
 ./scripts/setup_dotfiles --home /tmp/dotfiles-preview --dry-run
+./scripts/setup_dotfiles --home /tmp/dotfiles-preview --profile minimal --dry-run
 git diff --check
 ```
 
