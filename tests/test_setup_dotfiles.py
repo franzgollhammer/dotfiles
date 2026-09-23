@@ -45,6 +45,15 @@ class SetupDotfilesTests(unittest.TestCase):
             pairs[self.target / "Library/Application Support/Code/User" / name] = repo / "vscode" / name
         return pairs
 
+    def minimal_links(self, config=None, repo=REPO):
+        config = config or self.target / ".config"
+        return {
+            self.target / ".zshrc": repo / ".zshrc",
+            self.target / ".tmux.conf": repo / ".tmux.conf",
+            config / "starship.toml": repo / "starship.toml",
+            config / "nvim": repo / "nvim",
+        }
+
     def assert_links(self, **kwargs):
         for target, source in self.expected_links(**kwargs).items():
             self.assertTrue(target.is_symlink(), str(target))
@@ -67,6 +76,26 @@ class SetupDotfilesTests(unittest.TestCase):
         self.assertEqual(initial, {path: path.lstat().st_ino for path in initial})
         self.assertEqual(local_theme.read_text(), "personal theme")
         self.assertFalse(list(self.target.rglob("*.dotfiles-backup.*")))
+
+    def test_minimal_profile_links_terminal_configuration_only(self):
+        self.setup_command("--profile", "minimal")
+        for target, source in self.minimal_links().items():
+            self.assertTrue(target.is_symlink(), str(target))
+            self.assertEqual(target.resolve(), source.resolve())
+        for path in (
+            self.target / ".warp",
+            self.target / ".config/ghostty",
+            self.target / ".config/zed",
+            self.target / "Library/Application Support/Code/User/settings.json",
+        ):
+            self.assertFalse(path.exists() or path.is_symlink(), str(path))
+
+    def test_full_profile_completes_an_existing_minimal_installation(self):
+        self.setup_command("--profile", "minimal")
+        initial = {path: path.lstat().st_ino for path in self.minimal_links()}
+        self.setup_command("--profile", "full")
+        self.assert_links()
+        self.assertEqual(initial, {path: path.lstat().st_ino for path in initial})
 
     def test_conflicts_abort_before_creating_any_links(self):
         # Use a late target to catch scripts that only check conflicts as they write.
@@ -175,6 +204,8 @@ class SetupDotfilesTests(unittest.TestCase):
         self.setup_command("--unknown", expected=2)
         self.setup_command("--home", expected=2)
         self.setup_command("--home", "relative/path", expected=2)
+        self.setup_command("--profile", expected=2)
+        self.setup_command("--profile", "desktop", expected=2)
         self.env["XDG_CONFIG_HOME"] = "relative/config"
         self.setup_command(home_option=False, expected=2)
         self.assertFalse(self.target.exists())
