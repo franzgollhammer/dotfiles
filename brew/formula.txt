@@ -156,6 +156,7 @@ openjpeg
 openjph
 openldap
 openssl@3
+openssl@4
 opus
 p11-kit
 pango
@@ -168,7 +169,6 @@ pnpm
 poppler
 pyenv
 python-certifi
-python-setuptools
 python@3.14
 readline
 redis
