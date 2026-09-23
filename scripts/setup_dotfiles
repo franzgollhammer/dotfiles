@@ -63,7 +63,7 @@ add_link() {
 add_link .zshrc "$target_home/.zshrc"
 add_link .tmux.conf "$target_home/.tmux.conf"
 add_link starship.toml "$config_home/starship.toml"
-for app in nvim ghostty wezterm; do
+for app in nvim ghostty; do
   add_link "$app" "$config_home/$app"
 done
 add_link warp "$target_home/.warp"

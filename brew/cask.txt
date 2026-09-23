@@ -61,7 +61,6 @@ visual-studio-code@insiders
 vlc
 warp
 wave
-wezterm
 whatsapp
 wireshark
 wireshark-app
