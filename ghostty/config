@@ -23,7 +23,7 @@ theme = dark:macos-terminal-dark,light:macos-terminal-light
 
 # font
 font-size = 12
-font-family = FiraCode Nerd Font
+font-family = SFMono Nerd Font
 # font-style = Regular
 # adjust-cell-height = 10%
 # scrollback-limit = 10000
