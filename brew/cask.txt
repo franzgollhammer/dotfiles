@@ -6,7 +6,6 @@ appcleaner
 authy
 balenaetcher
 brave-browser
-bruno
 cleanshot
 codex
 cyberduck
@@ -36,7 +35,6 @@ google-chrome-canary
 google-chrome@canary
 iterm2
 libreoffice
-marta
 microsoft-auto-update
 microsoft-edge
 mongodb-compass
@@ -45,8 +43,6 @@ obsidian
 opera
 postman
 raspberry-pi-imager
-raycast
-rectangle
 sequel-ace
 signal
 slack
@@ -60,7 +56,6 @@ visual-studio-code-insiders
 visual-studio-code@insiders
 vlc
 warp
-wave
 whatsapp
 wireshark
 wireshark-app
