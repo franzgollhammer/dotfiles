@@ -178,33 +178,3 @@ function wt() {
   [[ -n "$dir" ]] && cd "$dir"
 }
 
-# remove git worktree(s) of the current repo — picks via fzf (tab = multi), -f forces
-function wtr() {
-  git rev-parse --git-dir >/dev/null || return
-  local force=()
-  [[ "$1" == "-f" ]] && force=(--force)
-
-  local main selected line dir branch
-  main=$(git worktree list --porcelain | awk '/^worktree /{print $2; exit}')
-  selected=$(git worktree list --porcelain \
-    | awk '/^worktree /{p=$2; n++} n>1 && /^branch /{sub("refs/heads/","",$2); print p"\t"$2} n>1 && /^detached/{print p"\t(detached)"}' \
-    | column -t \
-    | fzf --multi --height=40% --reverse --prompt="remove worktree> " \
-    | awk '{print $1"\t"$2}')
-  [[ -z "$selected" ]] && return
-
-  for line in ${(f)selected}; do
-    dir=${line%%$'\t'*}
-    branch=${line#*$'\t'}
-    git -C "$main" worktree remove $force "$dir" || continue
-    [[ "$PWD" == "$dir" || "$PWD" == "$dir"/* ]] && cd "$main"
-    echo "removed $dir"
-    [[ "$branch" == "(detached)" ]] && continue
-    if read -q "?delete branch $branch? [y/N] "; then
-      echo
-      git -C "$main" branch -d "$branch"
-    else
-      echo
-    fi
-  done
-}
