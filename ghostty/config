@@ -2,7 +2,7 @@
 # auto-update-channel = tip
 
 # macOS
-font-thicken = true
+# font-thicken = true
 # macos-icon = custom
 # macos-custom-icon = /Users/fg/.config/ghostty/icons/ghostty-light.icns
 macos-icon = official
@@ -22,8 +22,8 @@ theme = dark:macos-terminal-dark,light:macos-terminal-light
 # background-opacity = 0.95
 
 # font
-font-size = 12
-font-family = SFMono Nerd Font
+# font-size = 12
+# font-family = SFMono Nerd Font
 # font-style = Regular
 # adjust-cell-height = 10%
 # scrollback-limit = 10000
