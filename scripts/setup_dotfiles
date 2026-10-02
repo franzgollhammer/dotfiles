@@ -78,7 +78,7 @@ add_link() {
 add_link .zshrc "$target_home/.zshrc"
 add_link .tmux.conf "$target_home/.tmux.conf"
 add_link starship.toml "$config_home/starship.toml"
-add_link nvim "$config_home/nvim"
+add_link .vimrc "$target_home/.vimrc"
 
 # Full profile adds the graphical applications of the personal machine.
 if [ "$profile" = full ]; then

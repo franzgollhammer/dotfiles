@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal macOS development environment: zsh, Starship, tmux, Neovim, editors,
+Personal macOS development environment: zsh, Starship, tmux, Vim, editors,
 terminal configurations, and helper scripts. Some paths and commands assume
 macOS; this is not a portable Linux workstation installer.
 
@@ -33,7 +33,7 @@ and install the links, run:
 Two profiles select how much is linked. `--profile full` is the default and
 installs everything below, including graphical application configuration.
 `--profile minimal` installs only the terminal set — `.zshrc`, `.tmux.conf`,
-`starship.toml`, and `nvim/` — which is what a machine reached over SSH needs.
+`.vimrc`, and `starship.toml` — which is what a machine reached over SSH needs.
 Both profiles share the same preflight, backup, and rerun behavior, and running
 the full profile later on a minimal machine adds the remaining links without
 touching the existing ones.
@@ -69,7 +69,7 @@ graphical session, and the linker leaves the machine's own application settings
 untouched:
 
 ```sh
-brew install starship fzf tmux neovim ripgrep fd lazygit
+brew install starship fzf tmux ripgrep fd lazygit
 
 # Oh My Zsh with the autosuggestions plugin; the prompt comes from Starship.
 git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
@@ -94,7 +94,7 @@ one in front of you; use your terminal's own copy mode for that.
 Install the tools you use. A useful starting set for this configuration is:
 
 ```sh
-brew install starship fzf tmux neovim ripgrep fd lazygit fastfetch cmatrix
+brew install starship fzf tmux ripgrep fd lazygit fastfetch cmatrix
 brew install --cask font-fira-code-nerd-font font-jetbrains-mono-nerd-font font-hack-nerd-font
 ```
 
@@ -111,8 +111,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git \
 
 Missing Oh My Zsh, autosuggestions, or Starship do not stop shell startup.
 Install Node.js separately if needed; `.zshrc` loads nvm when `~/.nvm/nvm.sh`
-exists. Neovim requires 0.11+ and downloads plugins on first launch; its language
-servers and parsers also need their respective runtimes/build tools.
+exists. `.vimrc` targets the Vim 9 that ships with macOS and uses no plugins;
+`:grep` uses ripgrep when it is installed.
 
 `brew/formula.txt` and `brew/cask.txt` are machine inventory snapshots, including
 transitive dependencies and potentially retired or renamed packages. Review
@@ -125,9 +125,8 @@ Paths below use the default `~/.config` location unless stated otherwise.
 
 | Source | Destination | Profile |
 | --- | --- | --- |
-| `.zshrc`, `.tmux.conf` | Same filenames in `~` | minimal |
+| `.zshrc`, `.tmux.conf`, `.vimrc` | Same filenames in `~` | minimal |
 | `starship.toml` | `~/.config/starship.toml` | minimal |
-| `nvim/` | `~/.config/nvim` | minimal |
 | `ghostty/` | `~/.config/ghostty` | full |
 | `warp/` | `~/.warp` | full |
 | `zed/keymap.json`, `zed/settings.json` | Matching files in `~/.config/zed/` | full |

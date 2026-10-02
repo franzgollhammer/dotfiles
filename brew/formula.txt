@@ -140,7 +140,6 @@ n
 nbytes
 ncurses
 neofetch
-neovim
 net-snmp
 nettle
 nmap
