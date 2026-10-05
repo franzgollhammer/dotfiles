@@ -166,6 +166,33 @@ For tmux, `tmux_init` uses the first executable file in this order:
 fallback intact. Copy `example.tmux_init` into a project's `.tmux_init` (or
 `~/.tmux_init`), adapt the commands, and run `chmod +x` on the copy.
 
+### Agent notifications
+
+Use the agents' built-in terminal notifications. Claude Code uses its default
+notification channel when `preferredNotifChannel` is unset. Codex TUI
+notifications default to enabled, with `notification_method = "auto"` and
+`notification_condition = "unfocused"`. Leave these notification overrides unset
+to follow each agent's defaults. See the
+[Claude Code terminal guide](https://code.claude.com/docs/en/terminal-config)
+and the [OpenAI Docs configuration reference](https://developers.openai.com/codex/config-reference/).
+
+Agent settings live outside this repository and are not managed by
+`setup_dotfiles`. If migrating from the retired `agent-notify` helper, remove
+only its commands from `~/.claude/settings.json` hooks and
+`~/.codex/hooks.json`, and remove its callback from `notify` in
+`~/.codex/config.toml`. Preserve unrelated hooks and application integrations;
+if `notify` is a computer-use wrapper, remove only the `--previous-notify`
+argument and its associated custom command. Restart existing agent sessions to
+ensure cached hooks are refreshed. Deleting the helper alone does not update
+local settings. For OpenCode, move
+`~/.config/opencode/plugins/agent-notify.js` outside the plugin directory;
+local plugins there load automatically at startup. See the
+[OpenCode plugin guide](https://opencode.ai/v2/docs/plugins).
+
+The existing Ghostty notification settings and tmux bell/passthrough settings
+support native notifications. Actual banners depend on terminal support, focus,
+and macOS notification permissions.
+
 ## Helpers
 
 Commands in `scripts/` become available after loading `.zshrc`.
@@ -174,7 +201,6 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | --- | --- |
 | `setup_dotfiles` | Preview or create configuration links (`--profile minimal` for remote machines) |
 | `brew_update` | Update Homebrew packages and export inventories |
-| `agent-notify` | Ghostty notifications for agent hooks; see `agent-notify --help` |
 | `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
 | `scr` | Pick and execute a helper with fzf |
