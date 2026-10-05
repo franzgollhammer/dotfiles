@@ -34,11 +34,11 @@ class SetupDotfilesTests(unittest.TestCase):
         pairs = {
             self.target / ".zshrc": repo / ".zshrc",
             self.target / ".tmux.conf": repo / ".tmux.conf",
+            self.target / ".vimrc": repo / ".vimrc",
             self.target / ".warp": repo / "warp",
             config / "starship.toml": repo / "starship.toml",
+            config / "ghostty": repo / "ghostty",
         }
-        for app in ("nvim", "ghostty"):
-            pairs[config / app] = repo / app
         for name in ("keymap.json", "settings.json"):
             pairs[config / "zed" / name] = repo / "zed" / name
         for name in ("settings.json", "keybindings.json"):
@@ -50,8 +50,8 @@ class SetupDotfilesTests(unittest.TestCase):
         return {
             self.target / ".zshrc": repo / ".zshrc",
             self.target / ".tmux.conf": repo / ".tmux.conf",
+            self.target / ".vimrc": repo / ".vimrc",
             config / "starship.toml": repo / "starship.toml",
-            config / "nvim": repo / "nvim",
         }
 
     def assert_links(self, **kwargs):
@@ -111,9 +111,9 @@ class SetupDotfilesTests(unittest.TestCase):
         self.target.mkdir()
         rc = self.target / ".zshrc"
         rc.write_text("original shell config")
-        nvim = self.target / ".config/nvim"
-        nvim.mkdir(parents=True)
-        (nvim / "local.lua").write_text("personal editor config")
+        ghostty = self.target / ".config/ghostty"
+        ghostty.mkdir(parents=True)
+        (ghostty / "local.conf").write_text("personal terminal config")
         tmux = self.target / ".tmux.conf"
         tmux.symlink_to("missing-config")
         self.setup_command("--backup")
@@ -121,9 +121,9 @@ class SetupDotfilesTests(unittest.TestCase):
         backups = list(self.target.glob(".zshrc.dotfiles-backup.*"))
         self.assertEqual(len(backups), 1)
         self.assertEqual(backups[0].read_text(), "original shell config")
-        editor_backups = list(nvim.parent.glob("nvim.dotfiles-backup.*"))
-        self.assertEqual(len(editor_backups), 1)
-        self.assertEqual((editor_backups[0] / "local.lua").read_text(), "personal editor config")
+        dir_backups = list(ghostty.parent.glob("ghostty.dotfiles-backup.*"))
+        self.assertEqual(len(dir_backups), 1)
+        self.assertEqual((dir_backups[0] / "local.conf").read_text(), "personal terminal config")
         link_backups = list(self.target.glob(".tmux.conf.dotfiles-backup.*"))
         self.assertEqual(len(link_backups), 1)
         self.assertEqual(os.readlink(link_backups[0]), "missing-config")

@@ -88,9 +88,8 @@ fi
 
 # — editors —
 alias z="zed"
-alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
+alias v="vim"
+alias vi="vim"
 alias ci="code-insiders"
 
 # — navigation & listing —
