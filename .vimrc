@@ -31,7 +31,6 @@ set incsearch hlsearch ignorecase smartcase
 
 " appearance
 set number relativenumber
-set colorcolumn=80,120
 set cursorline cursorlineopt=number
 set scrolloff=5
 
@@ -59,24 +58,12 @@ if executable("rg")
   set grepprg=rg\ --vimgrep\ --smart-case grepformat=%f:%l:%c:%m
 endif
 
-augroup vimrc
-  autocmd!
-  " Tone down the red/yellow accents of the default colorscheme
-  autocmd ColorScheme default highlight ColorColumn ctermbg=8
-  autocmd ColorScheme default highlight LineNr ctermfg=8
-  autocmd ColorScheme default highlight CursorLineNr cterm=bold ctermfg=NONE
-  " open the quickfix list after :grep
-  autocmd QuickFixCmdPost grep cwindow | redraw!
-augroup END
 colorscheme default
 
 " ═══ Keymaps ═════════════════════════════════════════════════
 
 " Disable space bar
 nnoremap <Space> <Nop>
-
-" tmux session
-nnoremap <C-f> <Cmd>call system("tmux neww tmux_session")<CR>
 
 " crazy save
 nnoremap <Leader>w <Cmd>w<CR>
