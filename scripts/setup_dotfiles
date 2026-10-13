@@ -12,7 +12,7 @@ Usage: setup_dotfiles [--dry-run] [--backup] [--profile minimal|full]
   --dry-run      Preview links and conflicts without changing anything.
   --backup       Move conflicting files, directories, or links to unique
                  adjacent .dotfiles-backup.* paths before creating links.
-  --profile NAME Select the link set (default: full).
+  --profile NAME Select the link set (default: minimal).
                  minimal: terminal only, for remote machines used over SSH.
                  full:    minimal plus Ghostty, Warp, Zed, and VS Code.
   --home DIR     Use another home directory and DIR/.config (ignores XDG_CONFIG_HOME).
@@ -26,7 +26,7 @@ EOF
 
 dry_run=0
 backup=0
-profile=full
+profile=minimal
 target_home=${HOME:?HOME must be set}
 config_home=${XDG_CONFIG_HOME:-$target_home/.config}
 

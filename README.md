@@ -19,6 +19,10 @@ cd ~/dev/dotfiles
 
 # Install when destinations are empty or already point to this checkout.
 ./scripts/setup_dotfiles
+
+# On the personal Mac, also link Ghostty, Warp, Zed, and VS Code.
+./scripts/setup_dotfiles --profile full --dry-run
+./scripts/setup_dotfiles --profile full
 ```
 
 Existing files, directories, or different symlinks cause the entire preflight to
@@ -30,13 +34,13 @@ and install the links, run:
 ./scripts/setup_dotfiles --backup
 ```
 
-Two profiles select how much is linked. `--profile full` is the default and
-installs everything below, including graphical application configuration.
-`--profile minimal` installs only the terminal set — `.zshrc`, `.tmux.conf`,
-`.vimrc`, and `starship.toml` — which is what a machine reached over SSH needs.
-Both profiles share the same preflight, backup, and rerun behavior, and running
-the full profile later on a minimal machine adds the remaining links without
-touching the existing ones.
+Two profiles select how much is linked. `--profile minimal` is the default and
+installs only the terminal set — `.zshrc`, `.tmux.conf`, `.vimrc`, and
+`starship.toml` — which is what a machine reached over SSH needs.
+`--profile full` installs everything below, including graphical application
+configuration. Both profiles share the same preflight, backup, and rerun
+behavior, and running the full profile later on a minimal machine adds the
+remaining links without touching the existing ones.
 
 Repeated runs leave correct links alone. Backups are never intentionally
 reused or removed. To restore one, remove only the installed symlink at its
@@ -199,7 +203,7 @@ Commands in `scripts/` become available after loading `.zshrc`.
 
 | Command | Purpose |
 | --- | --- |
-| `setup_dotfiles` | Preview or create configuration links (`--profile minimal` for remote machines) |
+| `setup_dotfiles` | Preview or create configuration links (`--profile full` adds graphical applications) |
 | `brew_update` | Update Homebrew packages and export inventories |
 | `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
@@ -227,7 +231,7 @@ bash -n scripts/setup_dotfiles
 shellcheck scripts/setup_dotfiles
 zsh -n .zshrc
 ./scripts/setup_dotfiles --home /tmp/dotfiles-preview --dry-run
-./scripts/setup_dotfiles --home /tmp/dotfiles-preview --profile minimal --dry-run
+./scripts/setup_dotfiles --home /tmp/dotfiles-preview --profile full --dry-run
 git diff --check
 ```
 
