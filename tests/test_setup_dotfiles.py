@@ -69,16 +69,16 @@ class SetupDotfilesTests(unittest.TestCase):
         local_theme = self.target / ".config/zed/themes/personal.json"
         local_theme.parent.mkdir(parents=True)
         local_theme.write_text("personal theme")
-        self.setup_command()
+        self.setup_command("--profile", "full")
         self.assert_links()
         initial = {path: path.lstat().st_ino for path in self.expected_links()}
-        self.setup_command("--backup")
+        self.setup_command("--profile", "full", "--backup")
         self.assertEqual(initial, {path: path.lstat().st_ino for path in initial})
         self.assertEqual(local_theme.read_text(), "personal theme")
         self.assertFalse(list(self.target.rglob("*.dotfiles-backup.*")))
 
-    def test_minimal_profile_links_terminal_configuration_only(self):
-        self.setup_command("--profile", "minimal")
+    def test_default_profile_links_terminal_configuration_only(self):
+        self.setup_command()
         for target, source in self.minimal_links().items():
             self.assertTrue(target.is_symlink(), str(target))
             self.assertEqual(target.resolve(), source.resolve())
@@ -102,7 +102,7 @@ class SetupDotfilesTests(unittest.TestCase):
         conflict = self.target / "Library/Application Support/Code/User/settings.json"
         conflict.parent.mkdir(parents=True)
         conflict.write_text("original settings")
-        self.setup_command(expected=1)
+        self.setup_command("--profile", "full", expected=1)
         self.assertEqual(conflict.read_text(), "original settings")
         self.assertFalse((self.target / ".zshrc").exists())
         self.assertFalse((self.target / ".config").exists())
@@ -116,7 +116,7 @@ class SetupDotfilesTests(unittest.TestCase):
         (ghostty / "local.conf").write_text("personal terminal config")
         tmux = self.target / ".tmux.conf"
         tmux.symlink_to("missing-config")
-        self.setup_command("--backup")
+        self.setup_command("--profile", "full", "--backup")
         self.assert_links()
         backups = list(self.target.glob(".zshrc.dotfiles-backup.*"))
         self.assertEqual(len(backups), 1)
@@ -132,6 +132,38 @@ class SetupDotfilesTests(unittest.TestCase):
         self.target.mkdir()
         (self.target / ".zshrc").write_text("keep me")
         self.setup_command("--dry-run", "--backup")
+        self.assertEqual((self.target / ".zshrc").read_text(), "keep me")
+        self.assertEqual([p.name for p in self.target.iterdir()], [".zshrc"])
+
+    def test_force_replaces_files_and_links_without_backup(self):
+        self.target.mkdir()
+        (self.target / ".zshrc").write_text("original shell config")
+        (self.target / ".tmux.conf").symlink_to("missing-config")
+        existing = self.root / "existing config"
+        existing.write_text("keep target")
+        (self.target / ".vimrc").symlink_to(existing)
+        self.setup_command("--force")
+        for target, source in self.minimal_links().items():
+            self.assertTrue(target.is_symlink(), str(target))
+            self.assertEqual(target.resolve(), source.resolve())
+        self.assertEqual(existing.read_text(), "keep target")
+        self.assertFalse(list(self.target.rglob("*.dotfiles-backup.*")))
+
+    def test_force_never_deletes_directories(self):
+        rc = self.target / ".zshrc"
+        ghostty = self.target / ".config/ghostty"
+        ghostty.mkdir(parents=True)
+        (ghostty / "local.conf").write_text("personal terminal config")
+        rc.write_text("original shell config")
+        self.setup_command("--profile", "full", "--force", expected=1)
+        self.assertEqual((ghostty / "local.conf").read_text(), "personal terminal config")
+        self.assertEqual(rc.read_text(), "original shell config")
+        self.assertFalse((self.target / ".tmux.conf").exists())
+
+    def test_dry_run_with_force_preserves_conflicts(self):
+        self.target.mkdir()
+        (self.target / ".zshrc").write_text("keep me")
+        self.setup_command("--dry-run", "--force")
         self.assertEqual((self.target / ".zshrc").read_text(), "keep me")
         self.assertEqual([p.name for p in self.target.iterdir()], [".zshrc"])
 
@@ -168,14 +200,14 @@ class SetupDotfilesTests(unittest.TestCase):
     def test_default_home_honors_xdg_config_home(self):
         config = self.root / "custom config"
         self.env["XDG_CONFIG_HOME"] = str(config)
-        self.setup_command(home_option=False)
+        self.setup_command("--profile", "full", home_option=False)
         self.assert_links(config=config)
         self.assertFalse((self.target / ".config").exists())
 
     def test_home_option_does_not_touch_inherited_xdg_directory(self):
         other_config = self.root / "real config"
         self.env["XDG_CONFIG_HOME"] = str(other_config)
-        self.setup_command()
+        self.setup_command("--profile", "full")
         self.assert_links()
         self.assertFalse(other_config.exists())
 
@@ -183,7 +215,7 @@ class SetupDotfilesTests(unittest.TestCase):
         checkout = self.root / "checkout with spaces"
         shutil.copytree(REPO, checkout, ignore=shutil.ignore_patterns(".git", ".claude", "__pycache__"))
         self.env["DOTFILES"] = str(self.root / "wrong checkout")
-        self.setup_command(repo=checkout)
+        self.setup_command("--profile", "full", repo=checkout)
         self.assert_links(repo=checkout)
 
     def test_missing_source_fails_without_creating_home(self):
@@ -196,7 +228,7 @@ class SetupDotfilesTests(unittest.TestCase):
     def test_symlinked_entry_point(self):
         entry = self.root / "setup"
         entry.symlink_to(REPO / "scripts/setup_dotfiles")
-        self.setup_command(script=entry)
+        self.setup_command("--profile", "full", script=entry)
         self.assert_links()
 
     def test_help_and_invalid_arguments_do_not_write(self):
@@ -206,6 +238,7 @@ class SetupDotfilesTests(unittest.TestCase):
         self.setup_command("--home", "relative/path", expected=2)
         self.setup_command("--profile", expected=2)
         self.setup_command("--profile", "desktop", expected=2)
+        self.setup_command("--backup", "--force", expected=2)
         self.env["XDG_CONFIG_HOME"] = "relative/config"
         self.setup_command(home_option=False, expected=2)
         self.assertFalse(self.target.exists())
