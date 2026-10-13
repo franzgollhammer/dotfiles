@@ -34,6 +34,16 @@ and install the links, run:
 ./scripts/setup_dotfiles --backup
 ```
 
+To discard conflicting files and symlinks instead, without a backup, use
+`--force`. It never deletes directories: a conflicting directory such as
+`~/.config/ghostty` still aborts the run and needs `--backup`. `--force` and
+`--backup` cannot be combined.
+
+```sh
+./scripts/setup_dotfiles --dry-run --force
+./scripts/setup_dotfiles --force
+```
+
 Two profiles select how much is linked. `--profile minimal` is the default and
 installs only the terminal set — `.zshrc`, `.tmux.conf`, `.vimrc`, and
 `starship.toml` — which is what a machine reached over SSH needs.

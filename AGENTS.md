@@ -25,8 +25,9 @@ prerequisites, link targets, or local customization.
 - Keep setup compatible with macOS `/bin/bash` 3.2. Quote paths, resolve sources
   from the running checkout, and preserve idempotence and dry-run behavior.
 - Preflight missing sources, blocked parents, and existing destinations before
-  changing anything. Preserve conflicts through explicit `--backup`; never
-  replace them with recursive deletion or an implicit force option.
+  changing anything. Preserve conflicts through explicit `--backup`. Explicit
+  `--force` may delete conflicting files and links only; never replace
+  conflicts with recursive deletion or an implicit force option.
 - Link individual files for applications that share config directories with
   local state, especially Zed and VS Code. Keep the default tmux init in
   the repository; customization belongs in project or home `.tmux_init` files.

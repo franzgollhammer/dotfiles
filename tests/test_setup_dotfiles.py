@@ -135,6 +135,38 @@ class SetupDotfilesTests(unittest.TestCase):
         self.assertEqual((self.target / ".zshrc").read_text(), "keep me")
         self.assertEqual([p.name for p in self.target.iterdir()], [".zshrc"])
 
+    def test_force_replaces_files_and_links_without_backup(self):
+        self.target.mkdir()
+        (self.target / ".zshrc").write_text("original shell config")
+        (self.target / ".tmux.conf").symlink_to("missing-config")
+        existing = self.root / "existing config"
+        existing.write_text("keep target")
+        (self.target / ".vimrc").symlink_to(existing)
+        self.setup_command("--force")
+        for target, source in self.minimal_links().items():
+            self.assertTrue(target.is_symlink(), str(target))
+            self.assertEqual(target.resolve(), source.resolve())
+        self.assertEqual(existing.read_text(), "keep target")
+        self.assertFalse(list(self.target.rglob("*.dotfiles-backup.*")))
+
+    def test_force_never_deletes_directories(self):
+        rc = self.target / ".zshrc"
+        ghostty = self.target / ".config/ghostty"
+        ghostty.mkdir(parents=True)
+        (ghostty / "local.conf").write_text("personal terminal config")
+        rc.write_text("original shell config")
+        self.setup_command("--profile", "full", "--force", expected=1)
+        self.assertEqual((ghostty / "local.conf").read_text(), "personal terminal config")
+        self.assertEqual(rc.read_text(), "original shell config")
+        self.assertFalse((self.target / ".tmux.conf").exists())
+
+    def test_dry_run_with_force_preserves_conflicts(self):
+        self.target.mkdir()
+        (self.target / ".zshrc").write_text("keep me")
+        self.setup_command("--dry-run", "--force")
+        self.assertEqual((self.target / ".zshrc").read_text(), "keep me")
+        self.assertEqual([p.name for p in self.target.iterdir()], [".zshrc"])
+
     def test_wrong_symlink_is_preserved_without_backup(self):
         self.target.mkdir()
         existing = self.root / "existing config"
@@ -206,6 +238,7 @@ class SetupDotfilesTests(unittest.TestCase):
         self.setup_command("--home", "relative/path", expected=2)
         self.setup_command("--profile", expected=2)
         self.setup_command("--profile", "desktop", expected=2)
+        self.setup_command("--backup", "--force", expected=2)
         self.env["XDG_CONFIG_HOME"] = "relative/config"
         self.setup_command(home_option=False, expected=2)
         self.assertFalse(self.target.exists())
