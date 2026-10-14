@@ -17,7 +17,7 @@ macos-icon = official
 # xray
 
 # theme
-# theme = dark:macos-terminal-dark,light:macos-terminal-light
+theme = dark:macos-terminal-dark,light:macos-terminal-light
 # theme = dark:iterm-regular-dark,light:iterm-regular-light
 # background-opacity = 0.95
 
