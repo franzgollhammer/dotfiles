@@ -217,6 +217,7 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `brew_update` | Update Homebrew packages and export inventories |
 | `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
+| `tmux_pr_title` | Rename the tmux window to the worktree branch and PR number (requires gh) |
 | `scr` | Pick and execute a helper with fzf |
 | `goentr`, `goentrtest` | Rerun `go run .` or `go test .` using entr |
 | `ts`, `isosec` | Copy a date or compact UTC timestamp to the macOS clipboard |

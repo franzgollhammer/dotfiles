@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Usage: tmux_pr_title [dir]
+# Rename the current tmux window to "<branch> #<pr-number>" for the PR of the
+# worktree's branch (default: current directory). Falls back to the branch name
+# when no PR exists. Requires tmux and an authenticated gh.
+
+set -euo pipefail
+
+dir="${1:-.}"
+
+[ -n "${TMUX:-}" ] || { echo "tmux_pr_title: not inside tmux" >&2; exit 1; }
+
+branch=$(git -C "$dir" symbolic-ref --quiet --short HEAD) || {
+  echo "tmux_pr_title: not on a branch" >&2
+  exit 1
+}
+
+number=$(cd "$dir" && gh pr view --json number --jq .number 2>/dev/null || true)
+
+if [ -n "$number" ]; then
+  title="$branch #$number"
+else
+  title="$branch"
+fi
+
+tmux rename-window -t "${TMUX_PANE:-}" "$title"
