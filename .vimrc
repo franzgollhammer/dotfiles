@@ -48,6 +48,25 @@ if has("clipboard")
   set clipboard=unnamed
 endif
 
+" Over SSH that clipboard belongs to the remote machine, so also send yanks as
+" OSC 52; tmux (set-clipboard on) and the terminal pass it to the local clipboard.
+function! s:Osc52(lines) abort
+  if exists("*echoraw") && exists("*str2blob") && exists("*base64_encode")
+    call echoraw("\e]52;c;" . base64_encode(str2blob(a:lines)) . "\x07")
+  endif
+endfunction
+
+function! s:Osc52Yank() abort
+  if v:event.operator ==# "y" && index(["", "*", "+"], v:event.regname) >= 0
+    call s:Osc52(v:event.regcontents + (v:event.regtype ==# "V" ? [""] : []))
+  endif
+endfunction
+
+augroup osc52_yank
+  autocmd!
+  autocmd TextYankPost * call s:Osc52Yank()
+augroup END
+
 " Folding
 set foldmethod=indent foldlevel=99
 
@@ -75,7 +94,7 @@ nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<CR><C-l>
 nnoremap <Leader>xx <Cmd>w<Bar>source %<CR>
 
 " Yank current file path to system clipboard
-nnoremap <Leader>fp <Cmd>let @+ = expand("%:p")<Bar>echo "Copied to clipboard: " . @+<CR>
+nnoremap <Leader>fp <Cmd>let @+ = expand("%:p")<Bar>call <SID>Osc52([expand("%:p")])<Bar>echo "Copied to clipboard: " . @+<CR>
 
 " find and replace word under cursor
 nnoremap <Leader>rw :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>

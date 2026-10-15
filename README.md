@@ -99,9 +99,11 @@ cd ~/dev/dotfiles
 Over SSH, `.zshrc` sets `EDITOR` to `vim` instead of the graphical editor, so
 `c`, `dot`, and `play` open a terminal editor. Aliases for local applications
 (`z`, `ci`, `sim`) stay defined but have nothing to open there. `.env` is
-optional: create it only for credentials the remote machine actually uses. tmux
-copies with `pbcopy`, which reaches the clipboard of the remote machine, not the
-one in front of you; use your terminal's own copy mode for that.
+optional: create it only for credentials the remote machine actually uses. Vim
+yanks and tmux copy mode send OSC 52, which tmux (`set-clipboard on`) passes to
+the clipboard of the machine in front of you when the terminal allows it
+(Ghostty: `clipboard-write = allow`). A Vim without `str2blob()` copies only to
+the remote clipboard, and so does `pbcopy` in `ts` and `isosec`.
 
 ## Shell and application prerequisites
 
