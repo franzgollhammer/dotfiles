@@ -9,6 +9,16 @@
   //   "light": "Air Light Italic",
   //   "dark": "Air Dark Italic",
   // },
+  "icon_theme": {
+    "mode": "light",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "theme": {
+    "mode": "light",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
   "buffer_font_size": 13,
   "buffer_font_family": "Hack Nerd Font Mono",
   "git_panel": {
