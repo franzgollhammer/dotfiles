@@ -3,8 +3,8 @@
 # Cursor and selection use Zed's local player color; selection blends
 # #74ade8 at Zed's 0x3d alpha over the terminal background.
 
-background = #282c34
-foreground = #abb2bf
+background = #1A1A1A
+foreground = #E7E8EB
 cursor-color = #74ade8
 cursor-text = #282c34
 selection-background = #3a4b5f
