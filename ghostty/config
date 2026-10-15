@@ -17,8 +17,7 @@ macos-icon = official
 # xray
 
 # theme
-theme = dark:one-dark,light:one-light
-# theme = dark:Atom One Dark,light:Atom One Light
+theme = dark:macos-terminal-dark,light:one-light
 window-padding-x = 8
 window-padding-y = 6
 window-save-state = always
