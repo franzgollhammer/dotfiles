@@ -1,0 +1,31 @@
+# One Light Theme for Ghostty
+# Based on zed-industries/zed assets/themes/one/one.json (One Light)
+# Cursor and selection use Zed's local player color; selection blends
+# #5c78e2 at Zed's 0x3d alpha over the terminal background.
+
+background = #fafafa
+foreground = #2a2c33
+cursor-color = #5c78e2
+cursor-text = #fafafa
+selection-background = #d4dbf4
+selection-foreground = #2a2c33
+
+# Normal colors (0-7)
+palette = 0=#000000
+palette = 1=#de3e35
+palette = 2=#3f953a
+palette = 3=#d2b67c
+palette = 4=#2f5af3
+palette = 5=#950095
+palette = 6=#0997b3
+palette = 7=#bbbbbb
+
+# Bright colors (8-15)
+palette = 8=#000000
+palette = 9=#de3e35
+palette = 10=#3f953a
+palette = 11=#d2b67c
+palette = 12=#2f5af3
+palette = 13=#a00095
+palette = 14=#0bbcd6
+palette = 15=#ffffff
