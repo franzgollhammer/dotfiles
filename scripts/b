@@ -1,15 +1,26 @@
 #!/bin/bash
+# Usage: b [branch] — switch directly or choose a remote branch by number.
 
-if [ -z "$1" ]; then
-  {
-    echo "BRANCH|LAST AUTHOR|LAST COMMIT|MESSAGE"
-    git for-each-ref --sort=-committerdate refs/remotes/ \
-      --format='%(refname:lstrip=3)|%(authorname)|%(committerdate:short)|%(contents:subject)'
-  } \
-    | column -t -s '|' \
-    | fzf --header-lines=1 --nth=1 \
-    | awk '{print $1}' \
-    | xargs git switch
-else
-  git switch "$1"
+if [ -n "${1:-}" ]; then
+  exec git switch "$1"
 fi
+
+rows=$(git for-each-ref --sort=-committerdate refs/remotes/ \
+  --format='%(if)%(symref)%(then)%(else)%(refname:lstrip=3)%09%(authorname)%09%(committerdate:short)%09%(contents:subject)%(end)') || exit 1
+branches=()
+while IFS= read -r row; do
+  [ -n "$row" ] && branches+=("$row")
+done <<< "$rows"
+
+if [ "${#branches[@]}" -eq 0 ]; then
+  echo 'No remote branches found.' >&2
+  exit 1
+fi
+
+echo 'BRANCH / LAST AUTHOR / LAST COMMIT / MESSAGE' >&2
+PS3='Branch number (Ctrl-D to cancel): '
+select selected in "${branches[@]}"; do
+  [ -n "$selected" ] || continue
+  exec git switch -- "${selected%%$'\t'*}"
+done
+exit 0
