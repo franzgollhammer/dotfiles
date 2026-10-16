@@ -83,7 +83,7 @@ graphical session, and the linker leaves the machine's own application settings
 untouched:
 
 ```sh
-brew install starship tmux ripgrep fd lazygit
+brew install starship fzf tmux ripgrep fd lazygit
 
 # Oh My Zsh with the autosuggestions plugin; the prompt comes from Starship.
 git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
@@ -108,13 +108,13 @@ one in front of you; use your terminal's own copy mode for that.
 Install the tools you use. A useful starting set for this configuration is:
 
 ```sh
-brew install starship tmux ripgrep fd lazygit fastfetch cmatrix
+brew install starship fzf tmux ripgrep fd lazygit fastfetch cmatrix
 brew install --cask font-fira-code-nerd-font font-jetbrains-mono-nerd-font font-hack-nerd-font
 ```
 
 The shell uses [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh#manual-installation)
-with Starship providing the prompt. If these directories do not already exist,
-install Oh My Zsh and the optional
+and its fzf plugin, with Starship providing the prompt. If these directories do
+not already exist, install Oh My Zsh and the optional
 [zsh-autosuggestions plugin](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md):
 
 ```sh
@@ -210,20 +210,16 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
 | `tmux_pr_title` | Rename the tmux window to the worktree branch and PR number (requires gh) |
-| `scr` | Pick and execute a helper from a numbered menu |
+| `scr` | Pick and execute a helper with fzf |
 | `goentr`, `goentrtest` | Rerun `go run .` or `go test .` using entr |
 | `ts`, `isosec` | Copy a date or compact UTC timestamp to the macOS clipboard |
 | `kill_node`, `kill_mongo`, `kill_all` | Stop the corresponding development processes |
 | `vm` | Control a VMware VM; requires vmrun and the `vmFile` environment variable |
 
-`b`, `scr`, and `tmux_session` use numbered menus. The shell functions `d` and `c`
-also show a project menu when called without an argument. Enter a number to
-select an item, or press Ctrl-D to cancel.
-
 Worktree navigation lives in `.zshrc`: `wt` picks a worktree of the current
-repository from a numbered menu; `wtr` picks worktrees to remove and offers
-branch deletion; `wta` is an alias for `git worktree add` and takes ordinary Git
-arguments. The `WT` environment variable points to `~/dev/worktrees`.
+repository; `wtr` picks worktrees to remove and offers branch deletion; `wta` is
+an alias for `git worktree add` and takes ordinary Git arguments. The `WT`
+environment variable points to `~/dev/worktrees`.
 
 ## Validation
 

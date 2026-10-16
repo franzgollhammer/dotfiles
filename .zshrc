@@ -57,7 +57,7 @@ SAVEHIST=50000
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
-plugins=()
+plugins=(fzf)
 if [[ -f "${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh" ]]; then
   plugins+=(zsh-autosuggestions)
 elif [[ -f "$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh" ]]; then
@@ -135,19 +135,12 @@ function dir() {
   mkdir "$1" && cd "$1" || return
 }
 
-# cd into a project under $DEV — no arg shows a menu, `.` goes to $DEV
+# cd into a project under $DEV — no arg picks one via fzf, `.` goes to $DEV
 function d() {
   if [[ -z "$1" ]]; then
     local selected
-    local PS3='Project number (Ctrl-D to cancel): '
-    local -a projects=("$DEV"/*(N/))
-    (( ${#projects} )) || { print -u2 'No project directories found.'; return 1; }
-    select selected in "${projects[@]}"; do
-      [[ -n "$selected" ]] || continue
-      cd -- "$selected"
-      return
-    done
-    return 1
+    selected=$(ls "$DEV" | fzf) || return
+    [[ -n "$selected" ]] && cd "$DEV/$selected"
   elif [[ "$1" == "." ]]; then
     cd "$DEV"
   else
@@ -155,39 +148,25 @@ function d() {
   fi
 }
 
-# open a project under $DEV in $EDITOR — no arg shows a menu
+# open a project under $DEV in $EDITOR — no arg picks one via fzf
 function c() {
   if [[ -z "$1" ]]; then
     local selected
-    local PS3='Project number (Ctrl-D to cancel): '
-    local -a projects=("$DEV"/*(N/))
-    (( ${#projects} )) || { print -u2 'No project directories found.'; return 1; }
-    select selected in "${projects[@]}"; do
-      [[ -n "$selected" ]] || continue
-      $EDITOR "$selected"
-      return
-    done
-    return 1
+    selected=$(ls "$DEV" | fzf) || return
+    [[ -n "$selected" ]] && $EDITOR "$DEV/$selected"
   else
     $EDITOR "$1"
   fi
 }
 
-# cd into a git worktree of the current repo — choose from a numbered menu
+# cd into a git worktree of the current repo — picks one via fzf
 function wt() {
-  git rev-parse --git-dir > /dev/null || return
-  local entry selected
-  local PS3='Worktree number (Ctrl-D to cancel): '
-  local -a worktrees=()
-  while IFS= read -r -d '' entry; do
-    [[ "$entry" == 'worktree '* ]] && worktrees+=("${entry#worktree }")
-  done < <(git worktree list --porcelain -z)
-  (( ${#worktrees} )) || return 1
-  select selected in "${worktrees[@]}"; do
-    [[ -n "$selected" ]] || continue
-    cd -- "$selected"
-    return
-  done
-  return 1
+  local dir
+  dir=$(git worktree list --porcelain \
+    | awk '/^worktree /{p=$2} /^branch /{sub("refs/heads/","",$2); print p"\t"$2}' \
+    | column -t \
+    | fzf --height=40% --reverse --prompt="worktree> " \
+    | awk '{print $1}')
+  [[ -n "$dir" ]] && cd "$dir"
 }
 

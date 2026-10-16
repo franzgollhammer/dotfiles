@@ -1,22 +1,7 @@
 #!/bin/bash
-# Usage: scr — choose an executable helper by number and run it.
 
 scripts_dir="${SCRIPTS:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)}"
-scripts=()
-shopt -s nullglob dotglob
-for script in "$scripts_dir"/*; do
-  if [ -f "$script" ] && [ -x "$script" ]; then
-    scripts+=("${script##*/}")
-  fi
-done
-if [ "${#scripts[@]}" -eq 0 ]; then
-  echo 'No executable helpers found.' >&2
-  exit 1
+selected=$(find "$scripts_dir" -maxdepth 1 -type f -perm -111 -exec basename {} \; | sort | fzf)
+if [ -n "$selected" ]; then
+    exec "$scripts_dir/$selected"
 fi
-
-PS3='Helper number (Ctrl-D to cancel): '
-select selected in "${scripts[@]}"; do
-  [ -n "$selected" ] || continue
-  exec "$scripts_dir/$selected"
-done
-exit 0

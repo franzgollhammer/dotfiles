@@ -37,6 +37,7 @@ freetds
 freetype
 fribidi
 fx
+fzf
 gd
 gettext
 gh
