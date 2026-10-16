@@ -7,13 +7,8 @@
 export TERM="xterm-256color"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR="vim"
-else
-  export EDITOR="code"
-  export VISUAL="code"
-  export VUE_EDITOR="code"
-fi
+export EDITOR="vim"
+export VISUAL="vim"
 
 # ═══ Directories ═════════════════════════════════════════════
 
@@ -87,10 +82,8 @@ fi
 # ═══ Aliases ═════════════════════════════════════════════════
 
 # — editors —
-alias z="zed"
 alias v="vim"
 alias vi="vim"
-alias ci="code-insiders"
 
 # — navigation & listing —
 alias dot="(cd \$DOTFILES; \$EDITOR .)"

@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal macOS development environment: zsh, Starship, tmux, Vim, editors,
+Personal macOS development environment: zsh, Starship, tmux, Vim,
 terminal configurations, and helper scripts. Some paths and commands assume
 macOS; this is not a portable Linux workstation installer.
 
@@ -20,7 +20,7 @@ cd ~/dev/dotfiles
 # Install when destinations are empty or already point to this checkout.
 ./scripts/setup_dotfiles
 
-# On the personal Mac, also link Ghostty, Warp, Zed, and VS Code.
+# On the personal Mac, also link Ghostty and Warp.
 ./scripts/setup_dotfiles --profile full --dry-run
 ./scripts/setup_dotfiles --profile full
 ```
@@ -96,9 +96,9 @@ cd ~/dev/dotfiles
 ./scripts/setup_dotfiles --profile minimal
 ```
 
-Over SSH, `.zshrc` sets `EDITOR` to `vim` instead of the graphical editor, so
-`c`, `dot`, and `play` open a terminal editor. Aliases for local applications
-(`z`, `ci`, `sim`) stay defined but have nothing to open there. `.env` is
+`.zshrc` sets `EDITOR` and `VISUAL` to `vim` locally and over SSH, so
+`c`, `dot`, and `play` open a terminal editor. The `sim` alias for the local
+Xcode Simulator stays defined but has nothing to open there. `.env` is
 optional: create it only for credentials the remote machine actually uses. tmux
 copies with `pbcopy`, which reaches the clipboard of the remote machine, not the
 one in front of you; use your terminal's own copy mode for that.
@@ -143,11 +143,8 @@ Paths below use the default `~/.config` location unless stated otherwise.
 | `starship.toml` | `~/.config/starship.toml` | minimal |
 | `ghostty/` | `~/.config/ghostty` | full |
 | `warp/` | `~/.warp` | full |
-| `zed/keymap.json`, `zed/settings.json` | Matching files in `~/.config/zed/` | full |
-| `vscode/settings.json`, `vscode/keybindings.json` | Matching files in `~/Library/Application Support/Code/User/` | full |
 
-Zed and VS Code are linked file by file so unrelated local settings,
-themes, and state survive. Whole-directory links for the other applications mean
+Whole-directory links for Ghostty and Warp mean
 changes within those directories can affect the checkout; inspect `git status`
 before committing. Warp launch configurations contain personal project paths
 under `/Users/fg/dev`; adapt them before using them on another machine.
@@ -156,10 +153,6 @@ Additional files are opt-in:
 
 - `iterm/themes/`: import the `.itermcolors` presets in iTerm2.
 - `fzf/steel-dark.sh`: source it after Oh My Zsh to use the steel palette.
-- `vscode/vscode-extensions.txt` and `cursor/cursor-extensions.txt`: separate
-  extension inventories. With each editor's CLI installed, use
-  `xargs -n 1 code --install-extension < vscode/vscode-extensions.txt` or
-  `xargs -n 1 cursor --install-extension < cursor/cursor-extensions.txt`.
 - `ghostty/icons/`: optional app icons.
 
 ## Local customization
@@ -222,7 +215,6 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `goentr`, `goentrtest` | Rerun `go run .` or `go test .` using entr |
 | `ts`, `isosec` | Copy a date or compact UTC timestamp to the macOS clipboard |
 | `kill_node`, `kill_mongo`, `kill_all` | Stop the corresponding development processes |
-| `set_default_app` | Associate common source-file extensions with Cursor using duti |
 | `vm` | Control a VMware VM; requires vmrun and the `vmFile` environment variable |
 
 Worktree navigation lives in `.zshrc`: `wt` picks a worktree of the current

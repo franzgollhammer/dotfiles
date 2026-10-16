@@ -22,7 +22,7 @@
 #      - layout:
 #          cwd: /Users/warp-user/project
 #          commands:
-#            - exec: code .
+#            - exec: pwd
 
 ---
 name: ucsl-app
@@ -49,5 +49,3 @@ windows:
                   commands:
                     - exec: node --run minio
         color: blue
-
-     

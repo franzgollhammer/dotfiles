@@ -29,7 +29,7 @@ prerequisites, link targets, or local customization.
   `--force` may delete conflicting files and links only; never replace
   conflicts with recursive deletion or an implicit force option.
 - Link individual files for applications that share config directories with
-  local state, especially Zed and VS Code. Keep the default tmux init in
+  local state. Keep the default tmux init in
   the repository; customization belongs in project or home `.tmux_init` files.
 - Preserve source comments that identify theme provenance and cross-terminal
   palette relationships. Avoid vendoring plugins already installed externally.

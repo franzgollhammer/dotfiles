@@ -31,7 +31,7 @@ class SetupDotfilesTests(unittest.TestCase):
 
     def expected_links(self, config=None, repo=REPO):
         config = config or self.target / ".config"
-        pairs = {
+        return {
             self.target / ".zshrc": repo / ".zshrc",
             self.target / ".tmux.conf": repo / ".tmux.conf",
             self.target / ".vimrc": repo / ".vimrc",
@@ -39,11 +39,6 @@ class SetupDotfilesTests(unittest.TestCase):
             config / "starship.toml": repo / "starship.toml",
             config / "ghostty": repo / "ghostty",
         }
-        for name in ("keymap.json", "settings.json"):
-            pairs[config / "zed" / name] = repo / "zed" / name
-        for name in ("settings.json", "keybindings.json"):
-            pairs[self.target / "Library/Application Support/Code/User" / name] = repo / "vscode" / name
-        return pairs
 
     def minimal_links(self, config=None, repo=REPO):
         config = config or self.target / ".config"
@@ -62,19 +57,21 @@ class SetupDotfilesTests(unittest.TestCase):
         self.assertFalse((self.target / ".tmux_init").exists())
 
     def test_dry_run_does_not_create_home(self):
-        self.setup_command("--dry-run")
-        self.assertFalse(self.target.exists())
+        for profile in ("minimal", "full"):
+            with self.subTest(profile=profile):
+                self.setup_command("--profile", profile, "--dry-run")
+                self.assertFalse(self.target.exists())
 
     def test_install_and_rerun_preserve_links_and_local_state(self):
-        local_theme = self.target / ".config/zed/themes/personal.json"
-        local_theme.parent.mkdir(parents=True)
-        local_theme.write_text("personal theme")
+        local_settings = self.target / ".config/local-app/settings.json"
+        local_settings.parent.mkdir(parents=True)
+        local_settings.write_text("personal settings")
         self.setup_command("--profile", "full")
         self.assert_links()
         initial = {path: path.lstat().st_ino for path in self.expected_links()}
         self.setup_command("--profile", "full", "--backup")
         self.assertEqual(initial, {path: path.lstat().st_ino for path in initial})
-        self.assertEqual(local_theme.read_text(), "personal theme")
+        self.assertEqual(local_settings.read_text(), "personal settings")
         self.assertFalse(list(self.target.rglob("*.dotfiles-backup.*")))
 
     def test_default_profile_links_terminal_configuration_only(self):
@@ -85,8 +82,6 @@ class SetupDotfilesTests(unittest.TestCase):
         for path in (
             self.target / ".warp",
             self.target / ".config/ghostty",
-            self.target / ".config/zed",
-            self.target / "Library/Application Support/Code/User/settings.json",
         ):
             self.assertFalse(path.exists() or path.is_symlink(), str(path))
 
@@ -99,7 +94,7 @@ class SetupDotfilesTests(unittest.TestCase):
 
     def test_conflicts_abort_before_creating_any_links(self):
         # Use a late target to catch scripts that only check conflicts as they write.
-        conflict = self.target / "Library/Application Support/Code/User/settings.json"
+        conflict = self.target / ".warp"
         conflict.parent.mkdir(parents=True)
         conflict.write_text("original settings")
         self.setup_command("--profile", "full", expected=1)
@@ -246,14 +241,21 @@ class SetupDotfilesTests(unittest.TestCase):
     def test_shell_resolves_checkout_without_optional_dependencies(self):
         self.setup_command()
         self.env["XDG_CONFIG_HOME"] = str(self.root / "custom config")
-        result = subprocess.run(
-            ["/bin/zsh", "-f", "-c", 'source "$1"; printf "%s\\n" "$DOTFILES" "$XDG_CONFIG_HOME"',
-             "zsh", str(self.target / ".zshrc")],
-            env=self.env, text=True, capture_output=True, check=False,
-        )
-        self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(result.stderr, "")
-        self.assertEqual(result.stdout.splitlines(), [str(REPO), self.env["XDG_CONFIG_HOME"]])
+        for connection in ("", "192.0.2.1 12345 192.0.2.2 22"):
+            with self.subTest(ssh=bool(connection)):
+                env = dict(self.env, SSH_CONNECTION=connection)
+                result = subprocess.run(
+                    ["/bin/zsh", "-f", "-c",
+                     'source "$1"; printf "%s\\n" "$DOTFILES" "$XDG_CONFIG_HOME" "$EDITOR" "$VISUAL"',
+                     "zsh", str(self.target / ".zshrc")],
+                    env=env, text=True, capture_output=True, check=False,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stderr, "")
+                self.assertEqual(
+                    result.stdout.splitlines(),
+                    [str(REPO), self.env["XDG_CONFIG_HOME"], "vim", "vim"],
+                )
 
 
 if __name__ == "__main__":
