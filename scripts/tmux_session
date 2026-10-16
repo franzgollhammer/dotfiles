@@ -1,9 +1,21 @@
 #!/bin/bash
+# Usage: tmux_session — choose a project by number, then attach or create its session.
 
-# Enhanced tmux session management with better error handling
+projects=()
+shopt -s nullglob dotglob
+for project in "${DEV:-$HOME/dev}"/*; do
+  [ -d "$project" ] && projects+=("$project")
+done
+if [ "${#projects[@]}" -eq 0 ]; then
+  echo 'No project directories found.' >&2
+  exit 1
+fi
 
-SELECTED_DIR=$(find "${DEV:-$HOME/dev}" -mindepth 1 -maxdepth 1 -type d | sort | fzf --prompt="Select project: " --height=40% --border)
-
+PS3='Project number (Ctrl-D to cancel): '
+SELECTED_DIR=''
+select SELECTED_DIR in "${projects[@]}"; do
+  [[ -n "$SELECTED_DIR" ]] && break
+done
 if [[ -z "$SELECTED_DIR" ]]; then
   echo "No directory selected"
   exit 0
