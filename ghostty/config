@@ -24,7 +24,8 @@ window-save-state = always
 # background-opacity = 0.95
 
 # font
-font-family = Lilex
+# font-family = Lilex
+# font-family = SF Mono
 # adjust-cell-height = 10%
 # scrollback-limit = 10000
 
