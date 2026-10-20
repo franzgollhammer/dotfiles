@@ -52,7 +52,6 @@ studio-3t
 sublime-text
 transmit
 vlc
-warp
 whatsapp
 wireshark
 wireshark-app
