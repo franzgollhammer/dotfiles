@@ -51,11 +51,7 @@ stats
 studio-3t
 sublime-text
 transmit
-visual-studio-code
-visual-studio-code-insiders
-visual-studio-code@insiders
 vlc
-warp
 whatsapp
 wireshark
 wireshark-app

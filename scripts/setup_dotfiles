@@ -16,7 +16,7 @@ Usage: setup_dotfiles [--dry-run] [--backup|--force] [--profile minimal|full]
                  Conflicting directories still abort; use --backup for them.
   --profile NAME Select the link set (default: minimal).
                  minimal: terminal only, for remote machines used over SSH.
-                 full:    minimal plus Ghostty, Warp, Zed, and VS Code.
+                 full:    minimal plus Ghostty.
   --home DIR     Use another home directory and DIR/.config (ignores XDG_CONFIG_HOME).
   -h, --help     Show this help.
 
@@ -92,17 +92,6 @@ add_link .vimrc "$target_home/.vimrc"
 # Full profile adds the graphical applications of the personal machine.
 if [ "$profile" = full ]; then
   add_link ghostty "$config_home/ghostty"
-  add_link warp "$target_home/.warp"
-
-  # Link individual files where applications also keep local state or themes.
-  for file in keymap.json settings.json; do
-    add_link "zed/$file" "$config_home/zed/$file"
-  done
-
-  # This repository targets macOS; keep VS Code's other user data local.
-  for file in settings.json keybindings.json; do
-    add_link "vscode/$file" "$target_home/Library/Application Support/Code/User/$file"
-  done
 fi
 
 # Preflight every source, parent, and conflict before making any changes.
