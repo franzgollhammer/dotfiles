@@ -35,7 +35,6 @@ class SetupDotfilesTests(unittest.TestCase):
             self.target / ".zshrc": repo / ".zshrc",
             self.target / ".tmux.conf": repo / ".tmux.conf",
             self.target / ".vimrc": repo / ".vimrc",
-            self.target / ".warp": repo / "warp",
             config / "starship.toml": repo / "starship.toml",
             config / "ghostty": repo / "ghostty",
         }
@@ -80,7 +79,6 @@ class SetupDotfilesTests(unittest.TestCase):
             self.assertTrue(target.is_symlink(), str(target))
             self.assertEqual(target.resolve(), source.resolve())
         for path in (
-            self.target / ".warp",
             self.target / ".config/ghostty",
         ):
             self.assertFalse(path.exists() or path.is_symlink(), str(path))
@@ -94,13 +92,13 @@ class SetupDotfilesTests(unittest.TestCase):
 
     def test_conflicts_abort_before_creating_any_links(self):
         # Use a late target to catch scripts that only check conflicts as they write.
-        conflict = self.target / ".warp"
+        conflict = self.target / ".config/ghostty"
         conflict.parent.mkdir(parents=True)
         conflict.write_text("original settings")
         self.setup_command("--profile", "full", expected=1)
         self.assertEqual(conflict.read_text(), "original settings")
         self.assertFalse((self.target / ".zshrc").exists())
-        self.assertFalse((self.target / ".config").exists())
+        self.assertFalse((self.target / ".config/starship.toml").exists())
 
     def test_backup_preserves_file_directory_and_dangling_symlink(self):
         self.target.mkdir()

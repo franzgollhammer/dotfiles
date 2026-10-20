@@ -20,7 +20,7 @@ cd ~/dev/dotfiles
 # Install when destinations are empty or already point to this checkout.
 ./scripts/setup_dotfiles
 
-# On the personal Mac, also link Ghostty and Warp.
+# On the personal Mac, also link Ghostty.
 ./scripts/setup_dotfiles --profile full --dry-run
 ./scripts/setup_dotfiles --profile full
 ```
@@ -142,12 +142,9 @@ Paths below use the default `~/.config` location unless stated otherwise.
 | `.zshrc`, `.tmux.conf`, `.vimrc` | Same filenames in `~` | minimal |
 | `starship.toml` | `~/.config/starship.toml` | minimal |
 | `ghostty/` | `~/.config/ghostty` | full |
-| `warp/` | `~/.warp` | full |
 
-Whole-directory links for Ghostty and Warp mean
-changes within those directories can affect the checkout; inspect `git status`
-before committing. Warp launch configurations contain personal project paths
-under `/Users/fg/dev`; adapt them before using them on another machine.
+The whole-directory Ghostty link means changes within that directory can affect
+the checkout; inspect `git status` before committing.
 
 Additional files are opt-in:
 

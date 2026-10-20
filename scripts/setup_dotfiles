@@ -16,7 +16,7 @@ Usage: setup_dotfiles [--dry-run] [--backup|--force] [--profile minimal|full]
                  Conflicting directories still abort; use --backup for them.
   --profile NAME Select the link set (default: minimal).
                  minimal: terminal only, for remote machines used over SSH.
-                 full:    minimal plus Ghostty and Warp.
+                 full:    minimal plus Ghostty.
   --home DIR     Use another home directory and DIR/.config (ignores XDG_CONFIG_HOME).
   -h, --help     Show this help.
 
@@ -92,7 +92,6 @@ add_link .vimrc "$target_home/.vimrc"
 # Full profile adds the graphical applications of the personal machine.
 if [ "$profile" = full ]; then
   add_link ghostty "$config_home/ghostty"
-  add_link warp "$target_home/.warp"
 fi
 
 # Preflight every source, parent, and conflict before making any changes.
