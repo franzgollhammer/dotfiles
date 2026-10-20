@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Show the 16 ANSI terminal colors with their hex values for color picking.
+# The hex values come from the terminal's own palette (OSC 4 query), so they
+# follow the active theme; tmux forwards the query to the host terminal.
+# Usage: term_colors
+
+blocks='██████████'
+names=(Black Red Green Yellow Blue Magenta Cyan White)
+# Neutrals first, then each color next to its bright variant.
+order=(0 8 7 15 4 12 6 14 2 10 5 13 3 11 1 9)
+hex=()
+
+# Scale an OSC 4 component (1-4 hex digits) to two hex digits.
+byte() {
+  local component=$1
+  [ ${#component} -eq 1 ] && component=$component$component
+  printf '%02x' "0x${component:0:2}"
+}
+
+# Ask for palette entries 0-15, then request the device attributes as a
+# sentinel: terminals answer it after the palette replies, so reading stops
+# without waiting for the timeout.
+query_palette() {
+  local query='' reply='' char line tty_state i index
+  local pattern='^4;([0-9]+);rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+)'
+
+  tty_state=$(stty -g 2> /dev/null < /dev/tty) || return 1
+  for ((i = 0; i < 16; i++)); do
+    query+=$'\e]4;'"$i"$';?\a'
+  done
+
+  trap 'stty "$tty_state" < /dev/tty; exit 130' INT TERM
+  stty -echo -icanon < /dev/tty
+  printf '%s\e[c' "$query" > /dev/tty
+  while IFS= read -r -n 1 -t 1 char; do
+    reply+=$char
+    case $reply in *$'\e[?'*c) break ;; esac
+  done < /dev/tty
+  stty "$tty_state" < /dev/tty
+  trap - INT TERM
+
+  while IFS= read -r line; do
+    [[ $line =~ $pattern ]] || continue
+    index=${BASH_REMATCH[1]}
+    hex[index]="#$(byte "${BASH_REMATCH[2]}")$(byte "${BASH_REMATCH[3]}")$(byte "${BASH_REMATCH[4]}")"
+  done <<< "${reply//$'\e]'/$'\n'}"
+}
+
+print_rainbow() {
+  local text=$1 rainbow=(31 33 32 34 35) out='' char i j=0
+  for ((i = 0; i < ${#text}; i++)); do
+    char=${text:i:1}
+    if [ "$char" = ' ' ]; then
+      out+=$char
+      continue
+    fi
+    out+=$'\e['"${rainbow[j % 5]}m$char"
+    j=$((j + 1))
+  done
+  printf '%s\e[0m\n' "$out"
+}
+
+query_palette
+print_rainbow 'All the nice terminal colors'
+
+for i in "${order[@]}"; do
+  if [ "$i" -lt 8 ]; then
+    code=$((30 + i))
+    name=ansi${names[i]}
+  else
+    code=$((90 + i - 8))
+    name=ansiBright${names[i - 8]}
+  fi
+  printf '\e[%dm%s %-17s\e[0m %s\n' "$code" "$blocks" "$name" "${hex[i]:-unknown}"
+done
+
+if [ ${#hex[@]} -eq 0 ]; then
+  echo "Terminal did not report its palette (OSC 4); hex values unknown." >&2
+fi
