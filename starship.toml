@@ -1,10 +1,10 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# oh-my-zsh robbyrussell look, plus node version, 2-level directory truncation and time.
+# oh-my-zsh robbyrussell look, plus node + bun version, 2-level directory truncation and time.
 # Over SSH, user@host leads the line:
 # fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0)          at 14:03:22
 # ➜
-format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$fill$time$line_break$character"
+format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$fill$time$line_break$character"
 
 # Shown on SSH (and as root); hostname only on SSH
 [username]
@@ -53,3 +53,7 @@ disabled = false
 [nodejs]
 style = "bold green"
 format = '[node:\(](bold blue)[$version]($style)[\)](bold blue) '
+
+[bun]
+style = "bold yellow"
+format = '[bun:\(](bold blue)[$version]($style)[\)](bold blue) '
