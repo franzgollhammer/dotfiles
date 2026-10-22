@@ -4,7 +4,7 @@
 # Over SSH, user@host leads the line:
 # fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0)          [14:03:22]
 # %
-format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$fill$time$character"
+format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$character$fill$time"
 
 # Shown on SSH (and as root); hostname only on SSH
 [username]
@@ -16,8 +16,8 @@ style = "bold yellow"
 format = "[$hostname]($style)"
 
 [character]
-success_symbol = "[%](bold green)"
-error_symbol = "[%](bold red)"
+success_symbol = "[% ](bold green)"
+error_symbol = "[% ](bold red)"
 
 [directory]
 style = "bold cyan"
