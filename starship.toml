@@ -14,7 +14,7 @@ style = "bold"
 format = "[$hostname]($style)"
 
 [character]
-success_symbol = "[%](bold green)"
+success_symbol = "[%](bold)"
 error_symbol = "[%](bold red)"
 
 [git_branch]
