@@ -18,6 +18,13 @@ format = "[$hostname]($style)"
 success_symbol = "[%](bold)"
 error_symbol = "[%](bold red)"
 
+[directory]
+style = "bold cyan"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 2
+truncation_symbol = '…/'
+truncate_to_repo = false
+
 [git_branch]
 only_attached = true
 format = '[git:\(](bold)[$branch](bold purple)[\)](bold)'
