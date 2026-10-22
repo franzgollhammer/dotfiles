@@ -2,9 +2,10 @@
 
 # oh-my-zsh robbyrussell look, plus node + bun version, 2-level directory truncation and time.
 # Over SSH, user@host leads the line:
-# fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0)          [14:03:22]
-# %
-format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$character$fill$time"
+# fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0) %                  [14:03:22]
+# Time is right_format (zsh RPROMPT) so the cursor stays right after the %.
+format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$character"
+right_format = "$time"
 
 # Shown on SSH (and as root); hostname only on SSH
 [username]
@@ -43,9 +44,6 @@ format = '([\[](bold blue)[$all_status$ahead_behind]($style)[\]](bold blue))'
 [git_metrics]
 disabled = false
 format = '([\[](bold blue)[+$added]($added_style)[\]](bold blue))([\[](bold blue)[-$deleted]($deleted_style)[\]](bold blue))'
-
-[fill]
-symbol = " "
 
 [time]
 disabled = false
