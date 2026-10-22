@@ -1,8 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0) %
-format = "($username([@](bold)$hostname):)$directory$character"
-right_format = "($git_branch$git_commit$git_status$git_metrics )$nodejs$bun"
+format = "($username([@](bold)$hostname):)$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$line_break$character"
 
 [username]
 show_always = true
