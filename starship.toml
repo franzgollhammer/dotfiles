@@ -20,7 +20,7 @@ error_symbol = "[%](bold red)"
 
 [git_branch]
 only_attached = true
-format = '[git:\(](bold blue)[$branch](bold red)[\)](bold blue)'
+format = '[git:\(](bold blue)[$branch](bold purple)[\)](bold blue)'
 
 # Detached HEAD: robbyrussell shows the short sha in place of the branch
 [git_commit]
@@ -34,7 +34,7 @@ format = '([\[](bold blue)[$all_status$ahead_behind]($style)[\]](bold blue))'
 
 [git_metrics]
 disabled = false
-format = '([\[](bold blue)[+$added]($added_style)[\]](bold blue))([\[](bold blue)[-$deleted]($deleted_style)[\]](bold blue))'
+format = '([\[](bold blue)[+$added]($added_style))([-$deleted]($deleted_style)[\]](bold blue))'
 
 [nodejs]
 style = "bold green"
