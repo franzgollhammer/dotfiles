@@ -50,7 +50,7 @@ symbol = " "
 [time]
 disabled = false
 time_format = "%T"
-format = '\[[$time]($style)\] '
+format = '[\[](bold blue)[$time]($style)[\]](bold blue) '
 
 [nodejs]
 style = "bold green"
