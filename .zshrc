@@ -97,7 +97,7 @@ alias t="tmux_session"
 alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
 
 # — git —
-alias s="git status"
+alias gs="git status"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit"
@@ -112,6 +112,7 @@ alias wta="git worktree add"
 alias gwr="git worktree remove"
 alias gundo="git reset --soft HEAD~1"
 alias grhu="git reset --hard @{u}"                 # reset hard to upstream branch
+alias gl="git log --graph"
 alias glf="git log -p -- "                         # log patch <filename>
 alias com="git commit -m \"\$(date '+%Y-%m-%d-%H:%M:%S')\" --allow-empty; git push"
 

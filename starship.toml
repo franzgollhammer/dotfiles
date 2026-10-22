@@ -17,15 +17,8 @@ style = "bold yellow"
 format = "[$hostname]($style)"
 
 [character]
-success_symbol = "[% ](bold green)"
-error_symbol = "[% ](bold red)"
-
-[directory]
-style = "bold cyan"
-format = "[$path]($style)[$read_only]($read_only_style) "
-truncation_length = 2
-truncation_symbol = '…/'
-truncate_to_repo = false
+success_symbol = "[%](bold green)"
+error_symbol = "[%](bold red)"
 
 [git_branch]
 only_attached = true
