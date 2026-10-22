@@ -34,7 +34,7 @@ format = '([\[](bold blue)[$all_status$ahead_behind]($style)[\]](bold blue))'
 
 [git_metrics]
 disabled = false
-format = '([\[](bold blue)[+$added]($added_style))([-$deleted]($deleted_style)[\]](bold blue))'
+format = '([\[](bold blue)([+$added]($added_style))([-$deleted]($deleted_style))[\]](bold blue))'
 
 [nodejs]
 style = "bold green"
