@@ -97,7 +97,6 @@ alias t="tmux_session"
 alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
 
 # — git —
-alias gs="git status"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit"

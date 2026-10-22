@@ -1,19 +1,16 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# oh-my-zsh robbyrussell look, plus node + bun version, 2-level directory truncation.
-# user@host always leads the line:
 # fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0) %
 format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$character"
 
-# Always shown, locally and over SSH
 [username]
-show_always = true
-style_user = "bold yellow"
+# show_always = true
+style_user = "bold green"
 format = "[$user]($style)"
 
 [hostname]
-ssh_only = false
-style = "bold yellow"
+# ssh_only = false
+style = "bold green"
 format = "[$hostname]($style)"
 
 [character]
