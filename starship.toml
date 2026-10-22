@@ -4,12 +4,12 @@
 format = "($username([@](bold green)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$character"
 
 [username]
-# show_always = true
+show_always = true
 style_user = "bold"
 format = "[$user]($style)"
 
 [hostname]
-# ssh_only = false
+ssh_only = false
 style = "bold"
 format = "[$hostname]($style)"
 
