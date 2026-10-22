@@ -2,9 +2,9 @@
 
 # oh-my-zsh robbyrussell look, plus node + bun version, 2-level directory truncation and time.
 # Over SSH, user@host leads the line:
-# fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0)          at 14:03:22
+# fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0)          [14:03:22]
 # %
-format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$fill$time$line_break$character"
+format = "($username([@](bold blue)$hostname) )$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$fill$time$character"
 
 # Shown on SSH (and as root); hostname only on SSH
 [username]
