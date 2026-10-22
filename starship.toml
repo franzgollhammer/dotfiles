@@ -49,6 +49,8 @@ symbol = " "
 
 [time]
 disabled = false
+time_format = "%T"
+format = '\[[$time]($style)\] '
 
 [nodejs]
 style = "bold green"
