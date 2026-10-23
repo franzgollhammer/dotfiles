@@ -39,7 +39,7 @@ prerequisites, link targets, or local customization.
 ## Validation and completion
 
 - Check modified shell syntax first with its declared interpreter. Use ShellCheck
-  for Bash/POSIX scripts; `.zshrc` and `scripts/list_branches` require zsh.
+  for Bash/POSIX scripts; `.zshrc` requires zsh.
 - Exercise symlink mutations only in temporary directories with `--home`. Check
   dry runs, reruns, existing files/directories, and dangling links when setup
   behavior changes. Do not repoint the live home directory during a review.

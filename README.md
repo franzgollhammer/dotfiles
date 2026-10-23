@@ -205,13 +205,11 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `setup_dotfiles` | Preview or create configuration links (`--profile full` adds graphical applications) |
 | `brew_update` | Update, upgrade and clean up Homebrew packages |
 | `brew_export` | Write installed casks and formulas to `brew/*.txt` |
-| `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
+| `b` | Pick/switch branches (fzf) with commit metadata |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
 | `tmux_pr_title` | Rename the tmux window to the worktree branch and PR number (requires gh) |
 | `scr` | Pick and execute a helper with fzf |
-| `goentr`, `goentrtest` | Rerun `go run .` or `go test .` using entr |
 | `term_colors` | Show the 16 ANSI colors with hex values from the terminal palette for color picking |
-| `ts`, `isosec` | Copy a date or compact UTC timestamp to the macOS clipboard |
 | `kill_node`, `kill_mongo`, `kill_all` | Stop the corresponding development processes |
 | `vm` | Control a VMware VM; requires vmrun and the `vmFile` environment variable |
 
