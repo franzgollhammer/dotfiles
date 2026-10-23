@@ -1,15 +1,8 @@
 #!/bin/bash
-# Usage: brew_update — update Homebrew and refresh this checkout's package lists.
+# Usage: brew_update — update, upgrade and clean up Homebrew.
 
 set -euo pipefail
-dotfiles_dir="${DOTFILES:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)}"
 
 brew update
 brew upgrade
 brew cleanup
-
-mkdir -p "$dotfiles_dir/brew"
-brew list --cask > "$dotfiles_dir/brew/cask.txt"
-brew list --formula > "$dotfiles_dir/brew/formula.txt"
-
-echo "Homebrew packages updated and lists saved to $dotfiles_dir/brew/"

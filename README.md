@@ -131,7 +131,7 @@ exists. `.vimrc` targets the Vim 9 that ships with macOS and uses no plugins;
 `brew/formula.txt` and `brew/cask.txt` are machine inventory snapshots, including
 transitive dependencies and potentially retired or renamed packages. Review
 those lists instead of treating them as a guaranteed fresh-machine install
-manifest. `brew_update` upgrades installed packages and refreshes both lists.
+manifest. `brew_update` upgrades and cleans up installed packages; `brew_export` refreshes both lists.
 
 ## Managed links
 
@@ -203,7 +203,8 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | Command | Purpose |
 | --- | --- |
 | `setup_dotfiles` | Preview or create configuration links (`--profile full` adds graphical applications) |
-| `brew_update` | Update Homebrew packages and export inventories |
+| `brew_update` | Update, upgrade and clean up Homebrew packages |
+| `brew_export` | Write installed casks and formulas to `brew/*.txt` |
 | `b`, `list_branches` | Pick/switch branches or list them with commit metadata |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
 | `tmux_pr_title` | Rename the tmux window to the worktree branch and PR number (requires gh) |

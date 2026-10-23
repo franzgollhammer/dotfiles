@@ -121,7 +121,8 @@ alias pr="gh pr view --web || gh pr create --web"
 
 # — system —
 alias ff="fastfetch"
-alias bbb="brew_update"
+alias bb="brew_update"
+alias bbb="brew_export"
 alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"

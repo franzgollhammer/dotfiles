@@ -1,0 +1,11 @@
+#!/bin/bash
+# Usage: brew_export — write installed Homebrew casks and formulas to this checkout's brew/*.txt lists.
+
+set -euo pipefail
+dotfiles_dir="${DOTFILES:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)}"
+
+mkdir -p "$dotfiles_dir/brew"
+brew list --cask > "$dotfiles_dir/brew/cask.txt"
+brew list --formula > "$dotfiles_dir/brew/formula.txt"
+
+echo "Homebrew package lists saved to $dotfiles_dir/brew/"
