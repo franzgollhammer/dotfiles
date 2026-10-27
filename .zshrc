@@ -19,9 +19,14 @@ export SCRIPTS="$DOTFILES/scripts"
 export WT="$DEV/worktrees"
 export LOCAL_BIN="$HOME/.local/bin"
 export BUN_INSTALL="$HOME/.bun"
-export PNPM_HOME="$HOME/Library/pnpm"
-export RUBY_DIR="/opt/homebrew/opt/ruby/bin"
 export NVM_DIR="$HOME/.nvm"
+# pnpm's default home differs per OS; Homebrew Ruby exists only on macOS.
+if [[ $OSTYPE == darwin* ]]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+  export RUBY_DIR="/opt/homebrew/opt/ruby/bin"
+else
+  export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
+fi
 
 # ═══ Path ════════════════════════════════════════════════════
 # `typeset -U` keeps entries unique, so re-sourcing never duplicates.
@@ -33,7 +38,7 @@ path=(
   "$PNPM_HOME"
   "$SCRIPTS"
   "$BUN_INSTALL/bin"
-  "$RUBY_DIR"
+  ${RUBY_DIR:+"$RUBY_DIR"}        # omitted when unset, never an empty entry
   "$LOCAL_BIN"
   $path
 )
@@ -94,7 +99,6 @@ alias p="pnpm"
 alias run="node --run"
 alias lg="lazygit"
 alias t="tmux_session"
-alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
 
 # — git —
 alias ga="git add"
@@ -121,13 +125,23 @@ alias pr="gh pr view --web || gh pr create --web"
 
 # — system —
 alias ff="fastfetch"
-alias bb="brew_update"
-alias bbb="brew_export"
 alias soz="source ~/.zshrc"
 alias sot="tmux source ~/.tmux.conf"
 alias zsh-startup="time zsh -i -c exit"
 alias killall="pkill -u \$(whoami) node npm mongod redis redis-server minio Cypress Runner.Listener"
 alias exif="exiftool -a -u -g1"
+
+# — macOS only —
+if [[ $OSTYPE == darwin* ]]; then
+  alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+  alias bb="brew_update"
+  alias bbb="brew_export"
+fi
+
+# — Debian / Ubuntu install fd as fdfind —
+if (( ! $+commands[fd] && $+commands[fdfind] )); then
+  alias fd="fdfind"
+fi
 
 # ═══ Functions ═══════════════════════════════════════════════
 

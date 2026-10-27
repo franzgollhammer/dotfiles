@@ -3,8 +3,4 @@
 main_window=$(tmux display-message -p '#{window_id}')
 tmux rename-window -t "$main_window" MAIN
 
-stats_window=$(tmux new-window -d -P -F '#{window_id}' -n STATS)
-tmux send-keys -t "$stats_window" fastfetch C-m
-
-tmux select-window -t "$main_window"
-cmatrix
+fastfetch
