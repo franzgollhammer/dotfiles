@@ -3,6 +3,8 @@
 
 # macOS
 font-thicken = true
+# Use left Option for terminal shortcuts and right Option for special characters.
+macos-option-as-alt = left
 # macos-icon = custom
 macos-icon = official
 # official
