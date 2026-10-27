@@ -172,9 +172,10 @@ fallback intact. Copy `example.tmux_init` into a project's `.tmux_init` (or
 ### Terminal keys
 
 Ghostty keeps both Option keys available for macOS character input, including
-Option+L for `@` on the Austrian layout. In tmux, press Ctrl+b then Shift+w to
-open the session, window, and pane tree fully expanded. After updating, reload
-tmux with Ctrl+b then r and Ghostty with Command+Shift+Comma.
+Option+L for `@` on the Austrian layout. In tmux, press Ctrl+b then w or click
+the session name to open the session, window, and pane tree fully expanded.
+After updating, reload tmux with Ctrl+b then r and Ghostty with
+Command+Shift+Comma.
 
 ### Agent notifications
 
