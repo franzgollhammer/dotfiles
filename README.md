@@ -1,8 +1,9 @@
 # Dotfiles
 
 Personal macOS development environment: zsh, Starship, tmux, Vim,
-terminal configurations, and helper scripts. Some paths and commands assume
-macOS; this is not a portable Linux workstation installer.
+terminal configurations, and helper scripts. The terminal set also runs on
+remote macOS and Linux machines used over SSH. Graphical application settings
+and some helpers assume macOS; this is not a general Linux workstation installer.
 
 ## Setup
 
@@ -77,13 +78,15 @@ patch application icons, or change system preferences.
 
 ## Remote machines over SSH
 
+### Remote Mac
+
 On a remote Mac (for example a Mac mini used only through `ssh` and tmux),
 install the terminal tools and the minimal profile. Nothing here needs a
 graphical session, and the linker leaves the machine's own application settings
 untouched:
 
 ```sh
-brew install starship fzf tmux ripgrep fd lazygit
+brew install starship fzf tmux ripgrep fd lazygit fastfetch
 
 # Oh My Zsh with the autosuggestions plugin; the prompt comes from Starship.
 git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
@@ -96,19 +99,50 @@ cd ~/dev/dotfiles
 ./scripts/setup_dotfiles --profile minimal
 ```
 
-`.zshrc` sets `EDITOR` and `VISUAL` to `vim` locally and over SSH, so
-`c`, `dot`, and `play` open a terminal editor. The `sim` alias for the local
-Xcode Simulator stays defined but has nothing to open there. `.env` is
-optional: create it only for credentials the remote machine actually uses. tmux
-copies with `pbcopy`, which reaches the clipboard of the remote machine, not the
-one in front of you; use your terminal's own copy mode for that.
+### Remote Linux (Ubuntu or Debian)
+
+The minimal profile also sets up a Linux machine used through `ssh` and tmux,
+for example a cloud server. Ubuntu 26.04 provides every tool through apt; older
+releases may lack `starship` or `lazygit`:
+
+```sh
+sudo apt update
+sudo apt install zsh tmux vim git fzf ripgrep fd-find starship lazygit fastfetch
+
+# Oh My Zsh with the autosuggestions plugin; the prompt comes from Starship.
+git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+git clone https://github.com/zsh-users/zsh-autosuggestions.git \
+  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+
+git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/dotfiles
+cd ~/dev/dotfiles
+./scripts/setup_dotfiles --profile minimal --dry-run
+./scripts/setup_dotfiles --profile minimal
+
+# The linker never changes the login shell.
+chsh -s "$(command -v zsh)"
+```
+
+Debian and Ubuntu install fd as `fdfind`; `.zshrc` aliases `fd` to it when no
+`fd` command exists. Outside macOS, `PNPM_HOME` is
+`${XDG_DATA_HOME:-~/.local/share}/pnpm`, the Homebrew Ruby path is skipped, and
+the `sim`, `bb`, and `bbb` aliases are not defined. `brew_update`,
+`brew_export`, and `vm` stay on `PATH` but need Homebrew or VMware.
+
+### On every remote machine
+
+`.zshrc` sets `EDITOR` and `VISUAL` to `vim` locally and over SSH, so `c`,
+`dot`, and `play` open a terminal editor. `.env` is optional: create it only for
+credentials the remote machine actually uses. tmux copy mode sends copied text
+to the terminal in front of you through OSC 52 (`set-clipboard on`), so it
+reaches the local clipboard over SSH when the terminal allows clipboard writes.
 
 ## Shell and application prerequisites
 
 Install the tools you use. A useful starting set for this configuration is:
 
 ```sh
-brew install starship fzf tmux ripgrep fd lazygit fastfetch cmatrix
+brew install starship fzf tmux ripgrep fd lazygit fastfetch
 brew install --cask font-fira-code-nerd-font font-jetbrains-mono-nerd-font font-hack-nerd-font
 ```
 
@@ -166,8 +200,9 @@ adds its `scripts/` directory to `PATH`.
 
 For tmux, `tmux_init` uses the first executable file in this order:
 `./.tmux_init`, `~/.tmux_init`, then `$DOTFILES/.tmux_init`. Keep the tracked
-fallback intact. Copy `example.tmux_init` into a project's `.tmux_init` (or
-`~/.tmux_init`), adapt the commands, and run `chmod +x` on the copy.
+fallback intact; it names the first window `MAIN` and runs `fastfetch`. Copy
+`example.tmux_init` into a project's `.tmux_init` (or `~/.tmux_init`), adapt the
+commands, and run `chmod +x` on the copy.
 
 ### Terminal keys
 

@@ -40,6 +40,8 @@ tmux new-session -ds "$SELECTED_NAME" -c "$SELECTED_DIR" || exit 1
 
 # The pane starts in $SELECTED_DIR, so tmux_init resolves the lookup order
 # itself: ./.tmux_init -> ~/.tmux_init -> $DOTFILES/.tmux_init.
-tmux send-keys -t "=$SELECTED_NAME" "tmux_init" C-m
+# send-keys needs a pane target; the trailing colon resolves the exact session
+# to its active pane (a bare "=name" fails with "can't find pane").
+tmux send-keys -t "=$SELECTED_NAME:" "tmux_init" C-m
 
 switch_to

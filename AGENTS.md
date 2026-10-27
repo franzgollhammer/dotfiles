@@ -1,6 +1,8 @@
 # Working on dotfiles
 
-This repository configures a personal macOS development machine. The checkout
+This repository configures a personal macOS development machine, and with the
+minimal profile the terminal of remote macOS and Linux machines used over SSH.
+Keep `.zshrc` and the minimal-profile files working on both. The checkout
 may be linked into a live home directory, so tracked configuration edits can
 immediately affect running applications. Read README.md when changing setup,
 prerequisites, link targets, or local customization.
