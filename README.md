@@ -169,6 +169,13 @@ For tmux, `tmux_init` uses the first executable file in this order:
 fallback intact. Copy `example.tmux_init` into a project's `.tmux_init` (or
 `~/.tmux_init`), adapt the commands, and run `chmod +x` on the copy.
 
+### Terminal keys
+
+Ghostty keeps both Option keys available for macOS character input, including
+Option+L for `@` on the Austrian layout. In tmux, press Ctrl+b then Shift+w to
+open the session, window, and pane tree fully expanded. After updating, reload
+tmux with Ctrl+b then r and Ghostty with Command+Shift+Comma.
+
 ### Agent notifications
 
 Use the agents' built-in terminal notifications. Claude Code uses its default
