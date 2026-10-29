@@ -209,6 +209,8 @@ commands, and run `chmod +x` on the copy.
 Ghostty keeps both Option keys available for macOS character input, including
 Option+L for `@` on the Austrian layout. In tmux, press Ctrl+b then w or click
 the session name to open the session, window, and pane tree fully expanded.
+Ctrl+Shift+Arrow resizes panes by five cells without the prefix. Shift+Arrow
+remains available to applications running inside tmux.
 After updating, reload tmux with Ctrl+b then r and Ghostty with
 Command+Shift+Comma.
 
