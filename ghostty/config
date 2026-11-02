@@ -19,20 +19,11 @@ macos-icon = official
 
 # theme
 theme = dark:macos-dark,light:macos-light
-window-padding-x = 8
-window-padding-y = 6
 window-save-state = always
 # background-opacity = 0.95
 
 # font
-font-size = 14
-# font-family = Lilex
-# font-family = SF Mono
-# adjust-cell-height = 10%
-
-# cursor
-cursor-style = block
-cursor-style-blink = false
+font-feature = -calt
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
