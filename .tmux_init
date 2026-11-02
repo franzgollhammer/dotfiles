@@ -3,4 +3,7 @@
 main_window=$(tmux display-message -p '#{window_id}')
 tmux rename-window -t "$main_window" MAIN
 
-fastfetch
+# Optional: older Ubuntu and Debian releases do not package fastfetch.
+if command -v fastfetch >/dev/null 2>&1; then
+  fastfetch
+fi

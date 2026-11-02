@@ -1,15 +1,48 @@
 # Dotfiles
 
-Personal macOS development environment: zsh, Starship, tmux, Vim,
-terminal configurations, and helper scripts. The terminal set also runs on
-remote macOS and Linux machines used over SSH. Graphical application settings
-and some helpers assume macOS; this is not a general Linux workstation installer.
+Personal development environment: zsh, Starship, tmux, Vim, terminal
+configurations, and helper scripts. The terminal setup supports macOS,
+Ubuntu 22.04/24.04/26.04, and Debian 12/13, both locally and over SSH.
+The full profile adds personal macOS Ghostty settings.
 
 ## Setup
 
+### macOS prerequisites
+
 Install Xcode Command Line Tools (`xcode-select --install`) and
 [Homebrew](https://docs.brew.sh/Installation), following its shell PATH instructions.
-Then clone into a permanent location:
+Install the terminal tools listed under [Shell and application prerequisites](#shell-and-application-prerequisites).
+
+### Ubuntu and Debian prerequisites
+
+Install the shared terminal tools from the distribution repositories:
+
+```sh
+sudo apt update
+sudo apt install ca-certificates zsh tmux vim git fzf ripgrep fd-find bsdextrautils procps psmisc ncurses-term
+```
+
+On Ubuntu, enable the `universe` repository if apt cannot find packages such as
+`fd-find` or `fzf`. `bsdextrautils` supplies `column` for the branch and worktree
+pickers; `procps` and `psmisc` supply the process helpers; `ncurses-term` supplies additional
+terminal descriptions. Install `vim`, rather than relying on a minimal image's
+`vim-tiny`.
+
+Starship, lazygit, fastfetch, Oh My Zsh, and autosuggestions are optional.
+Package availability varies by release, so install them separately from the
+baseline above. Check availability with `apt-cache policy starship lazygit fastfetch`.
+[Starship is packaged in Debian 13+ and Ubuntu 25.04+](https://starship.rs/guide/#step-1-install-starship);
+for older releases, use an upstream installation method if you want its prompt.
+See the upstream installation instructions for
+[lazygit](https://github.com/jesseduffield/lazygit#installation) and
+[fastfetch](https://github.com/fastfetch-cli/fastfetch#installation).
+Without them, zsh keeps its standard prompt and tmux initialization skips
+machine information. Install Oh My Zsh and autosuggestions using the optional
+commands under [Shell and application prerequisites](#shell-and-application-prerequisites).
+
+### Link configuration
+
+After installing your platform's prerequisites, clone into a permanent location:
 
 ```sh
 git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/dotfiles
@@ -25,6 +58,10 @@ cd ~/dev/dotfiles
 ./scripts/setup_dotfiles --profile full --dry-run
 ./scripts/setup_dotfiles --profile full
 ```
+
+Start `zsh` to use the linked configuration. To make it the login shell, run
+`chsh -s "$(command -v zsh)"`, then log out and back in. The linker never changes
+the login shell.
 
 Existing files, directories, or different symlinks cause the entire preflight to
 fail without changes. To preserve them as adjacent `.dotfiles-backup.*` files
@@ -101,33 +138,17 @@ cd ~/dev/dotfiles
 
 ### Remote Linux (Ubuntu or Debian)
 
-The minimal profile also sets up a Linux machine used through `ssh` and tmux,
-for example a cloud server. Ubuntu 26.04 provides every tool through apt; older
-releases may lack `starship` or `lazygit`:
-
-```sh
-sudo apt update
-sudo apt install zsh tmux vim git fzf ripgrep fd-find starship lazygit fastfetch
-
-# Oh My Zsh with the autosuggestions plugin; the prompt comes from Starship.
-git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
-git clone https://github.com/zsh-users/zsh-autosuggestions.git \
-  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-
-git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/dotfiles
-cd ~/dev/dotfiles
-./scripts/setup_dotfiles --profile minimal --dry-run
-./scripts/setup_dotfiles --profile minimal
-
-# The linker never changes the login shell.
-chsh -s "$(command -v zsh)"
-```
+Follow [Ubuntu and Debian prerequisites](#ubuntu-and-debian-prerequisites), then
+install the default minimal profile as described under [Link configuration](#link-configuration).
+The same setup works on a local terminal or a cloud server reached through SSH;
+neither needs Homebrew or a graphical session.
 
 Debian and Ubuntu install fd as `fdfind`; `.zshrc` aliases `fd` to it when no
 `fd` command exists. Outside macOS, `PNPM_HOME` is
 `${XDG_DATA_HOME:-~/.local/share}/pnpm`, the Homebrew Ruby path is skipped, and
-the `sim`, `bb`, and `bbb` aliases are not defined. `brew_update`,
-`brew_export`, and `vm` stay on `PATH` but need Homebrew or VMware.
+the `sim`, `bb`, and `bbb` aliases are not defined. `brew_update` and
+`brew_export` stay on `PATH` but need Homebrew. tmux 3.2a on Ubuntu 22.04 skips
+the newer `allow-passthrough` option; older tmux already permits passthrough.
 
 ### On every remote machine
 
@@ -159,7 +180,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git \
 
 Missing Oh My Zsh, autosuggestions, or Starship do not stop shell startup.
 Install Node.js separately if needed; `.zshrc` loads nvm when `~/.nvm/nvm.sh`
-exists. `.vimrc` targets the Vim 9 that ships with macOS and uses no plugins;
+exists. `.vimrc` uses no plugins and supports the distribution Vim packages;
 `:grep` uses ripgrep when it is installed.
 
 `brew/formula.txt` and `brew/cask.txt` are machine inventory snapshots, including
@@ -197,6 +218,29 @@ cp -n example.env .env
 than in tracked files. `.env`, `.env.*`, logs, and setup backups are ignored.
 Opening a new shell after setup sets `DOTFILES` to the symlinked checkout and
 adds its `scripts/` directory to `PATH`.
+
+### Environment variables
+
+The linked `.zshrc` initializes and exports these variables; no manual exports
+are required for the default layout. Running `setup_dotfiles` does not change
+the environment of the calling shell: start a new zsh session after linking.
+
+| Variable | Default |
+| --- | --- |
+| `DEV` | `$HOME/dev` |
+| `DOTFILES` | Checkout resolved through the `.zshrc` symlink |
+| `SCRIPTS` | `$DOTFILES/scripts`, also added to `PATH` |
+| `WT` | `$DEV/worktrees` |
+| `LOCAL_BIN` | `$HOME/.local/bin` |
+| `NVM_DIR`, `BUN_INSTALL` | `$HOME/.nvm`, `$HOME/.bun` |
+
+The installer does not create `DEV` or `WT`; navigation helpers need their target
+directories to exist. Keep `.env` for credentials: it loads after `WT` and `PATH`
+have been calculated, so changing path variables there does not update their
+dependent values. `XDG_CONFIG_HOME` can be exported before both setup and shell
+startup to select a different configuration directory.
+
+### tmux initialization
 
 For tmux, `tmux_init` uses the first executable file in this order:
 `./.tmux_init`, `~/.tmux_init`, then `$DOTFILES/.tmux_init`. Keep the tracked
@@ -256,7 +300,6 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `scr` | Pick and execute a helper with fzf |
 | `term_colors` | Show the 16 ANSI colors with hex values from the terminal palette for color picking |
 | `kill_node`, `kill_mongo`, `kill_all` | Stop the corresponding development processes |
-| `vm` | Control a VMware VM; requires vmrun and the `vmFile` environment variable |
 
 Worktree navigation lives in `.zshrc`: `wt` picks a worktree of the current
 repository; `wtr` picks worktrees to remove and offers branch deletion; `wta` is
@@ -267,7 +310,9 @@ environment variable points to `~/dev/worktrees`.
 
 The `Dotfiles checks` GitHub Actions workflow runs shell syntax checks,
 ShellCheck on the maintained setup/helpers, and the full automated safety suite
-on macOS and Linux. Run the full suite through GitHub Actions, not locally.
+on macOS and Linux, including Ubuntu 22.04/26.04 and Debian 12/13 containers
+with their distribution Vim and tmux packages. Run the full suite through GitHub
+Actions, not locally.
 For local edits, use narrow checks such as:
 
 ```sh
@@ -280,5 +325,7 @@ git diff --check
 ```
 
 The safety suite exercises temporary destinations, reruns, conflicts, backups,
-custom paths, and missing sources. It does not launch GUI applications, install
-plugins/packages, or exercise the live home directory.
+custom paths, and missing sources. Terminal checks load Vim and an isolated tmux
+server, check Linux paths and fd aliases, and exercise tmux initialization without
+optional tools. Tests do not launch GUI applications, install plugins/packages,
+or exercise the live home directory.

@@ -12,17 +12,17 @@ jobs:
   check:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-24.04, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
       - name: Install validation tools
         run: |
           if [[ "$RUNNER_OS" == macOS ]]; then
-            brew install shellcheck
+            brew install shellcheck tmux
           else
             sudo apt-get update
-            sudo apt-get install -y shellcheck zsh
+            sudo apt-get install -y shellcheck zsh tmux vim fzf ripgrep fd-find bsdextrautils procps psmisc ncurses-term
           fi
       - name: Check shell syntax
         run: |
@@ -36,8 +36,35 @@ jobs:
             esac
           done
       - name: Lint setup and maintained helpers
-        run: shellcheck scripts/setup_dotfiles scripts/brew_update scripts/brew_export scripts/term_colors scripts/tmux_session
+        run: shellcheck scripts/setup_dotfiles scripts/brew_update scripts/brew_export scripts/term_colors scripts/tmux_session .tmux_init example.tmux_init
       - name: Run safety tests
         run: python3 -m unittest discover -s tests -v
       - name: Check whitespace
         run: git diff --check
+
+  distro:
+    name: Terminal (${{ matrix.distro }})
+    runs-on: ubuntu-24.04
+    container: ${{ matrix.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - distro: Ubuntu 22.04
+            image: ubuntu:22.04@sha256:076e7bf82319619f28dd0aa9c02ab34b055ad37100395b4f49a2ffba04fb5e11
+          - distro: Ubuntu 26.04
+            image: ubuntu:26.04@sha256:6a06111c3b0a8600feadb270aec771dc239bf407b25625f93f44ab00e11f4d3c
+          - distro: Debian 12
+            image: debian:12-slim@sha256:99c0b25c46d0214d5a2091092e7908907dcaecd6a962cde0ac700acee222b6f3
+          - distro: Debian 13
+            image: debian:13-slim@sha256:f6b08b09a05725f9431502d3b5714f5c4576e82c1a84fa1debe0c24a7e0c3ec4
+    steps:
+      - name: Install distribution prerequisites and validation tools
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates zsh tmux vim git fzf ripgrep fd-find bsdextrautils procps psmisc ncurses-term python3 shellcheck
+      - uses: actions/checkout@v7
+      - name: Run safety and terminal portability tests
+        run: python3 -m unittest discover -s tests -v

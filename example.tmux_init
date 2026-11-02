@@ -16,4 +16,6 @@ tmux send-keys -t "db" "sleep 5 && $DEV/db/pf_mongo_local.sh" C-m
 
 clear
 
-fastfetch
+if command -v fastfetch >/dev/null 2>&1; then
+  fastfetch
+fi
