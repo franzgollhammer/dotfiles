@@ -8,6 +8,7 @@ balenaetcher
 brave-browser
 cleanshot
 codex
+codexbar
 cyberduck
 discord
 figma
@@ -41,6 +42,7 @@ mongodb-compass
 notion
 obsidian
 opera
+orbstack
 postman
 raspberry-pi-imager
 sequel-ace
@@ -51,7 +53,11 @@ stats
 studio-3t
 sublime-text
 transmit
+visual-studio-code
+visual-studio-code-insiders
+visual-studio-code@insiders
 vlc
+warp
 whatsapp
 wireshark
 wireshark-app

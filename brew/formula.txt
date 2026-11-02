@@ -1,5 +1,6 @@
 abseil
 ada-url
+ansible
 aom
 apr
 apr-util
@@ -14,10 +15,13 @@ c-ares
 ca-certificates
 cairo
 certifi
+cffi
 cmatrix
 cocoapods
+colima
 coreutils
 cowsay
+cryptography
 curl
 dav1d
 dprint
@@ -55,12 +59,12 @@ gpgme
 gpgmepp
 graphite2
 harfbuzz
+hcloud
 hdrhistogram_c
 helix
 highway
 htop
 httpie
-icu4c@77
 icu4c@78
 imath
 jbig2dec
@@ -96,6 +100,7 @@ libpq
 libpsl
 libsodium
 libspiro
+libssh
 libssh2
 libtasn1
 libthai
@@ -115,6 +120,7 @@ libxext
 libxrender
 libyaml
 libzip
+lima
 little-cms2
 llhttp
 lolcat
@@ -140,6 +146,7 @@ n
 nbytes
 ncurses
 neofetch
+neovim
 net-snmp
 nettle
 nmap
@@ -164,11 +171,12 @@ php
 pinentry
 pixman
 pkgconf
-pnpm
 poppler
+pycparser
 pyenv
 python-certifi
 python@3.14
+python@3.15
 readline
 redis
 ripgrep
