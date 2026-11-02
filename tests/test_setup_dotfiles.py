@@ -244,7 +244,10 @@ class SetupDotfilesTests(unittest.TestCase):
                 env = dict(self.env, SSH_CONNECTION=connection)
                 result = subprocess.run(
                     ["/bin/zsh", "-f", "-c",
-                     'source "$1"; printf "%s\\n" "$DOTFILES" "$XDG_CONFIG_HOME" "$EDITOR" "$VISUAL"',
+                     'source "$1"; '
+                     'printf "%s\\n" "$DOTFILES" "$XDG_CONFIG_HOME" "$EDITOR" "$VISUAL"; '
+                     '/bin/sh -c \'printf "%s\\n" "$DEV" "$SCRIPTS" "$WT"\'; '
+                     'command -v setup_dotfiles',
                      "zsh", str(self.target / ".zshrc")],
                     env=env, text=True, capture_output=True, check=False,
                 )
@@ -252,7 +255,9 @@ class SetupDotfilesTests(unittest.TestCase):
                 self.assertEqual(result.stderr, "")
                 self.assertEqual(
                     result.stdout.splitlines(),
-                    [str(REPO), self.env["XDG_CONFIG_HOME"], "vim", "vim"],
+                    [str(REPO), self.env["XDG_CONFIG_HOME"], "vim", "vim",
+                     str(self.target / "dev"), str(REPO / "scripts"),
+                     str(self.target / "dev/worktrees"), str(REPO / "scripts/setup_dotfiles")],
                 )
 
 
