@@ -34,7 +34,9 @@ clipboard-read = allow
 clipboard-write = allow
 
 # notifications (desktop notification on bell)
-bell-features = system,attention,title
+bell-features = audio,no-system,attention,title
+bell-audio-path = /System/Library/Sounds/Bottle.aiff
+bell-audio-volume = 0.6
 desktop-notifications = true
 
 # shell integration
