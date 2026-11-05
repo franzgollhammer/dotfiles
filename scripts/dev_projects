@@ -1,0 +1,24 @@
+#!/bin/bash
+# Usage: dev_projects — list projects relative to ${DEV:-$HOME/dev} for fzf.
+# Workspace repositories take precedence over their compatibility symlinks.
+
+dev_root=${DEV:-$HOME/dev}
+for entry in "$dev_root"/*; do
+  if [ ! -d "$entry" ] || [ -L "$entry" ]; then continue; fi
+  name=${entry##*/}
+  [ "$name" != worktrees ] || continue
+  if [ -d "$entry/.git" ] || [ -f "$entry/.git" ]; then
+    printf '%s\n' "$name"
+    continue
+  fi
+  found=0
+  for repo in "$entry"/*; do
+    if [ ! -d "$repo" ] || [ -L "$repo" ]; then continue; fi
+    if [ -d "$repo/.git" ] || [ -f "$repo/.git" ]; then
+      printf '%s/%s\n' "$name" "${repo##*/}"
+      found=1
+    fi
+  done
+  # Keep non-repository folders such as playground available too.
+  [ "$found" -eq 1 ] || printf '%s\n' "$name"
+done | LC_ALL=C sort
