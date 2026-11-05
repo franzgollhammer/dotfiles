@@ -1,6 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# fg@devbox …/dev/dotfiles git:(main)[!?] node:(v22.11.0) %
+# fg@devbox …/dev/franzgollhammer/dotfiles git:(main)[!?] node:(v22.11.0) %
 format = "($username([@](bold)$hostname):)$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$golang$lua$python$line_break$character"
 
 [username]

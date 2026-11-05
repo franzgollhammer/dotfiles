@@ -2,18 +2,17 @@
 
 # Enhanced tmux session management with better error handling
 
-SELECTED_DIR=$(find "${DEV:-$HOME/dev}" -mindepth 1 -maxdepth 1 -type d | sort | fzf --prompt="Select project: " --height=40% --border)
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+SELECTED_PROJECT=$("$script_dir/dev_projects" | fzf --prompt="Select project: " --height=40% --border)
 
-if [[ -z "$SELECTED_DIR" ]]; then
+if [[ -z "$SELECTED_PROJECT" ]]; then
   echo "No directory selected"
   exit 0
 fi
+SELECTED_DIR=${DEV:-$HOME/dev}/$SELECTED_PROJECT
 
-# Clean up session name and limit length
-SELECTED_NAME=$(basename "$SELECTED_DIR" | tr ":,. " "____")
-if [[ ${#SELECTED_NAME} -gt 20 ]]; then
-  SELECTED_NAME=${SELECTED_NAME:0:20}
-fi
+# Include the workspace so equal repo names in different workspaces stay distinct.
+SELECTED_NAME=$(printf '%s' "$SELECTED_PROJECT" | tr "/:,. " "_____")
 
 switch_to() {
   if [[ -z $TMUX ]]; then

@@ -45,8 +45,8 @@ commands under [Shell and application prerequisites](#shell-and-application-prer
 After installing your platform's prerequisites, clone into a permanent location:
 
 ```sh
-git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/dotfiles
-cd ~/dev/dotfiles
+git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/franzgollhammer/dotfiles
+cd ~/dev/franzgollhammer/dotfiles
 
 # Preview every link before changing your home directory.
 ./scripts/setup_dotfiles --dry-run
@@ -130,8 +130,8 @@ git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 git clone https://github.com/zsh-users/zsh-autosuggestions.git \
   "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 
-git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/dotfiles
-cd ~/dev/dotfiles
+git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/franzgollhammer/dotfiles
+cd ~/dev/franzgollhammer/dotfiles
 ./scripts/setup_dotfiles --profile minimal --dry-run
 ./scripts/setup_dotfiles --profile minimal
 ```
@@ -285,6 +285,25 @@ The existing Ghostty notification settings and tmux bell/passthrough settings
 support native notifications. Actual banners depend on terminal support, focus,
 and macOS notification permissions.
 
+## Repository layout
+
+Canonical checkouts live at `~/dev/<workspace>/<repository>`, using the owner and
+repository name from `origin`: for example `~/dev/planmanager/planfred` and
+`~/dev/franzgollhammer/ucsl-app`. Repositories without a remote use `~/dev/local/`.
+Worktrees remain under `~/dev/worktrees/<project>/<branch>/`.
+
+`d` and `c` without arguments and `tmux_session` list repositories inside workspace
+folders. Standalone repositories and ordinary folders such as `playground` remain
+available. Compatibility symlinks and the worktree storage directory are excluded.
+Use `d planmanager/planfred` to navigate directly. New tmux session names include
+the workspace and repository, with `/` replaced by `_`.
+
+When moving existing checkouts, preserve local files and leave compatibility links
+for running shells until their old paths are no longer needed. Repair registered
+worktrees with `git worktree repair` from the moved checkout, then rerun the setup
+script with `--dry-run` and `--backup` to refresh managed home links. Open a new shell
+to refresh `DOTFILES` and `SCRIPTS`. Do not remove old links while tools still use them.
+
 ## Helpers
 
 Commands in `scripts/` become available after loading `.zshrc`.
@@ -295,6 +314,7 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `brew_update` | Update, upgrade and clean up Homebrew packages |
 | `brew_export` | Write installed casks and formulas to `brew/*.txt` |
 | `b` | Pick/switch branches (fzf) with commit metadata |
+| `dev_projects` | List workspace repositories and standalone project folders for `d`, `c`, and tmux |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
 | `tmux_pr_title` | Rename the tmux window to the worktree branch and PR number (requires gh) |
 | `scr` | Pick and execute a helper with fzf |

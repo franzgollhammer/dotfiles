@@ -154,7 +154,7 @@ function dir() {
 function d() {
   if [[ -z "$1" ]]; then
     local selected
-    selected=$(ls "$DEV" | fzf) || return
+    selected=$("$SCRIPTS/dev_projects" | fzf) || return
     [[ -n "$selected" ]] && cd "$DEV/$selected"
   elif [[ "$1" == "." ]]; then
     cd "$DEV"
@@ -167,7 +167,7 @@ function d() {
 function c() {
   if [[ -z "$1" ]]; then
     local selected
-    selected=$(ls "$DEV" | fzf) || return
+    selected=$("$SCRIPTS/dev_projects" | fzf) || return
     [[ -n "$selected" ]] && $EDITOR "$DEV/$selected"
   else
     $EDITOR "$1"
