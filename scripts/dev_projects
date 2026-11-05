@@ -4,7 +4,7 @@
 
 dev_root=${DEV:-$HOME/dev}
 for entry in "$dev_root"/*; do
-  [ -d "$entry" ] && [ ! -L "$entry" ] || continue
+  if [ ! -d "$entry" ] || [ -L "$entry" ]; then continue; fi
   name=${entry##*/}
   [ "$name" != worktrees ] || continue
   if [ -d "$entry/.git" ] || [ -f "$entry/.git" ]; then
@@ -13,7 +13,7 @@ for entry in "$dev_root"/*; do
   fi
   found=0
   for repo in "$entry"/*; do
-    [ -d "$repo" ] && [ ! -L "$repo" ] || continue
+    if [ ! -d "$repo" ] || [ -L "$repo" ]; then continue; fi
     if [ -d "$repo/.git" ] || [ -f "$repo/.git" ]; then
       printf '%s/%s\n' "$name" "${repo##*/}"
       found=1
