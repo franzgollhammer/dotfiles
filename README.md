@@ -296,7 +296,9 @@ Worktrees remain under `~/dev/worktrees/<project>/<branch>/`.
 folders. Standalone repositories and ordinary folders such as `playground` remain
 available. Compatibility symlinks and the worktree storage directory are excluded.
 Use `d planmanager/planfred` to navigate directly. New tmux session names include
-the workspace and repository, with `/` replaced by `_`.
+the workspace and repository, with `/` replaced by `_`. Literal underscores,
+percent signs, and tmux-special characters are escaped, so `one/repo`, `one_repo`,
+`repo.name`, and `repo_name` cannot collide.
 
 When moving existing checkouts, preserve local files and leave compatibility links
 for running shells until their old paths are no longer needed. Repair registered

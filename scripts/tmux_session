@@ -11,8 +11,15 @@ if [[ -z "$SELECTED_PROJECT" ]]; then
 fi
 SELECTED_DIR=${DEV:-$HOME/dev}/$SELECTED_PROJECT
 
-# Include the workspace so equal repo names in different workspaces stay distinct.
-SELECTED_NAME=$(printf '%s' "$SELECTED_PROJECT" | tr "/:,. " "_____")
+# Escape literal underscores and percent signs before using _ for the separator.
+# This keeps a/b distinct from a_b and repo.name distinct from repo_name.
+SELECTED_NAME=${SELECTED_PROJECT//%/%25}
+SELECTED_NAME=${SELECTED_NAME//_/%5F}
+SELECTED_NAME=${SELECTED_NAME//\//_}
+SELECTED_NAME=${SELECTED_NAME//:/%3A}
+SELECTED_NAME=${SELECTED_NAME//./%2E}
+SELECTED_NAME=${SELECTED_NAME//,/%2C}
+SELECTED_NAME=${SELECTED_NAME// /%20}
 
 switch_to() {
   if [[ -z $TMUX ]]; then

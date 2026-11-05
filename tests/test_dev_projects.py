@@ -40,8 +40,16 @@ class DevProjectsTests(unittest.TestCase):
         ])
 
     def test_tmux_receives_canonical_directory_and_workspace_session_name(self):
-        self.repo("one/shared-repository-long-name")
-        self.repo("two/shared-repository-long-name")
+        projects = [
+            ("one/shared-repository-long-name", "one_shared-repository-long-name"),
+            ("two/shared-repository-long-name", "two_shared-repository-long-name"),
+            ("one_shared-repository-long-name", "one%5Fshared-repository-long-name"),
+            ("one/repo.name", "one_repo%2Ename"),
+            ("one/repo_name", "one_repo%5Fname"),
+            ("one/repo%2Ename", "one_repo%252Ename"),
+        ]
+        for choice, _ in projects:
+            self.repo(choice)
         bin_dir = self.root / "bin"
         bin_dir.mkdir()
         log = self.root / "tmux.log"
@@ -55,14 +63,13 @@ class DevProjectsTests(unittest.TestCase):
             script.chmod(0o755)
         self.env.update(PATH=str(bin_dir) + os.pathsep + os.environ["PATH"],
                         TMUX_LOG=str(log))
-        for owner in ("one", "two"):
-            choice = owner + "/shared-repository-long-name"
+        for choice, session in projects:
             self.env["CHOICE"] = choice
             subprocess.run([str(REPO / "scripts/tmux_session")], env=self.env,
                            capture_output=True, text=True, check=True)
             args = log.read_text().splitlines()
             self.assertIn(str(self.dev / choice), args)
-            self.assertIn(owner + "_shared-repository-long-name", args)
+            self.assertIn(session, args)
 
     def test_d_picker_enters_workspace_repository(self):
         target = self.repo("planmanager/planfred")
