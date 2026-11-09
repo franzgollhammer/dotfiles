@@ -2,8 +2,10 @@
 
 # Usage: tmux_pr_title [dir]
 # Rename the current tmux window to "<branch> #<pr-number>" for the PR of the
-# worktree's branch (default: current directory). Falls back to the branch name
-# when no PR exists. Requires tmux and an authenticated gh.
+# worktree's branch (default: current directory). Falls back to
+# "<repo> <branch>" when no PR exists. The repo name comes from origin, or from
+# the main checkout's directory without a remote, because linked worktree
+# directories are named after the branch. Requires tmux and an authenticated gh.
 
 set -euo pipefail
 
@@ -21,7 +23,14 @@ number=$(cd "$dir" && gh pr view --json number --jq .number 2>/dev/null || true)
 if [ -n "$number" ]; then
   title="$branch #$number"
 else
-  title="$branch"
+  repo=$(git -C "$dir" remote get-url origin 2>/dev/null) ||
+    repo=$(cd "$dir" && cd "$(git rev-parse --git-common-dir)" && pwd)
+  repo="${repo%/}"
+  repo="${repo%/.git}"
+  repo="${repo%.git}"
+  repo="${repo##*/}"
+  repo="${repo##*:}"
+  title="$repo $branch"
 fi
 
 tmux rename-window -t "${TMUX_PANE:-}" "$title"
