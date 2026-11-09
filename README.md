@@ -318,7 +318,7 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `b` | Pick/switch branches (fzf) with commit metadata |
 | `dev_projects` | List workspace repositories and standalone project folders for `d`, `c`, and tmux |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
-| `tmux_pr_title` | Rename the tmux window to the worktree branch and PR number (requires gh) |
+| `tmux_pr_title` | Rename the tmux window to the worktree branch and PR number, or repository and branch without a PR (requires gh) |
 | `scr` | Pick and execute a helper with fzf |
 | `term_colors` | Show the 16 ANSI colors with hex values from the terminal palette for color picking |
 | `kill_node`, `kill_mongo`, `kill_all` | Stop the corresponding development processes |
