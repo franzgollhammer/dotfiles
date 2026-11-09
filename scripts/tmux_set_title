@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: tmux_pr_title [dir]
+# Usage: tmux_set_title [dir]
 # Rename the current tmux window to "<branch> #<pr-number>" for the PR of the
 # worktree's branch (default: current directory). Falls back to
 # "<repo> <branch>" when no PR exists. The repo name comes from origin, or from
@@ -11,10 +11,10 @@ set -euo pipefail
 
 dir="${1:-.}"
 
-[ -n "${TMUX:-}" ] || { echo "tmux_pr_title: not inside tmux" >&2; exit 1; }
+[ -n "${TMUX:-}" ] || { echo "tmux_set_title: not inside tmux" >&2; exit 1; }
 
 branch=$(git -C "$dir" symbolic-ref --quiet --short HEAD) || {
-  echo "tmux_pr_title: not on a branch" >&2
+  echo "tmux_set_title: not on a branch" >&2
   exit 1
 }
 
