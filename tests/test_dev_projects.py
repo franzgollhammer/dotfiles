@@ -100,31 +100,37 @@ class DevProjectsTests(unittest.TestCase):
         home = self.root / "home"
         home.mkdir(exist_ok=True)
         env = dict(self.env, HOME=str(home), PATH="/usr/bin:/bin")
+        # Stand-in for fzf: record the arguments, pick the first line that
+        # contains the query, fail like fzf when nothing matches.
+        fzf = ("fzf() { print -r -- \"$*\" >&2; local q=${@[(r)--query=*]#--query=}; "
+               "awk -F'\\t' -v q=\"$q\" 'index($1, q) { print; found = 1; exit } "
+               "END { exit !found }'; }; ")
         return subprocess.run([
             "/bin/zsh", "-f", "-c",
-            'source "$1"; export DEV="$2"; '
-            "fzf() { awk -F'\\t' '$1 == \"github.com/planmanager/planfred\"'; }; "
-            + command + "; pwd -P",
+            'source "$1"; export DEV="$2"; ' + fzf + command + "; pwd -P",
             "zsh", str(REPO / ".zshrc"), str(self.dev),
         ], env=env, capture_output=True, text=True)
 
-    def test_d_enters_repository_by_picker_label_and_path(self):
+    def test_d_enters_the_project_picked_in_fzf(self):
         target = self.repo("src/github.com/planmanager/planfred")
-        self.repo("src/github.com/planmanager/planfred-eslint-config")
-        for command in ("d", "d github.com/planmanager/planfred",
-                        "d planmanager/planfred", "d planfred",
-                        "d src/github.com/planmanager/planfred"):
+        self.repo("src/github.com/franzgollhammer/dotfiles")
+        for command in ("d planfred", "d planmanager/planfred"):
             result = self.run_d(command)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(result.stdout.strip(), str(target.resolve()), command)
+            self.assertIn("--select-1 --query=" + command[2:], result.stderr)
+        first = self.run_d("d")
+        self.assertEqual(first.stdout.strip(),
+                         str((self.dev / "src/github.com/franzgollhammer/dotfiles").resolve()))
 
-    def test_d_rejects_unknown_or_ambiguous_project_without_moving(self):
-        self.repo("src/github.com/planmanager/ci-runner")
-        self.repo("src/github.com/franzgollhammer/ci-runner")
-        for name in ("planmanager/missing", "ci-runner", "runner"):
-            result = self.run_d("cd /; d " + name)
-            self.assertIn("d: no unique project " + name, result.stderr)
-            self.assertEqual(result.stdout.strip(), "/")
+    def test_d_stays_put_when_nothing_is_picked(self):
+        self.repo("src/github.com/planmanager/planfred")
+        result = self.run_d("cd /; d missing")
+        self.assertEqual(result.stdout.strip(), "/")
+
+    def test_d_dot_goes_to_the_dev_root(self):
+        result = self.run_d("d .")
+        self.assertEqual(result.stdout.strip(), str(self.dev.resolve()))
 
 
 if __name__ == "__main__":

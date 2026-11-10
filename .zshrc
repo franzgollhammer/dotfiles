@@ -151,33 +151,24 @@ function dir() {
   mkdir "$1" && cd "$1" || return
 }
 
-# pick a project via fzf — prints its path relative to $DEV
+# pick a project via fzf — prints its path relative to $DEV; an argument
+# pre-fills the search and a single match is taken without asking
 function _dev_pick() {
   local selected
-  selected=$("$SCRIPTS/dev_projects" | fzf --delimiter=$'\t' --with-nth=1) || return
+  selected=$("$SCRIPTS/dev_projects" \
+    | fzf --delimiter=$'\t' --with-nth=1 --select-1 --query="$1") || return
   [[ -n "$selected" ]] && print -r -- "${selected#*$'\t'}"
 }
 
-# cd into a project under $DEV — no arg picks one via fzf, `.` goes to $DEV,
-# an arg is a path below $DEV, a listed label, or the unique end of one
-# (`d planfred`, `d planmanager/planfred`)
+# cd into a project under $DEV picked via fzf — `d planfred` starts the
+# search with that text, `.` goes to $DEV
 function d() {
-  local target
-  if [[ -z "$1" ]]; then
-    target=$(_dev_pick) || return
-  elif [[ "$1" == "." ]]; then
+  if [[ "$1" == "." ]]; then
     cd "$DEV"
     return
-  elif [[ -d "$DEV/$1" ]]; then
-    target=$1
-  else
-    target=$("$SCRIPTS/dev_projects" | awk -F'\t' -v want="$1" '
-      $1 == want { exact = $2 }
-      { cut = length($1) - length(want) }
-      cut > 0 && substr($1, cut) == "/" want { tail = $2; tails++ }
-      END { if (exact != "") print exact; else if (tails == 1) print tail }')
-    [[ -n "$target" ]] || { print -u2 -r -- "d: no unique project $1"; return 1; }
   fi
+  local target
+  target=$(_dev_pick "$1") || return
   cd "$DEV/$target"
 }
 
