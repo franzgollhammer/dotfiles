@@ -1,7 +1,7 @@
 #!/bin/bash
 # Usage: dev_projects — list projects under ${DEV:-$HOME/dev} for fzf, one
 # "<label><TAB><path relative to DEV>" per line.
-#   src/<host>/<owner>/<repo>  ->  <owner>/<repo> (host shown unless github.com)
+#   src/<host>/<owner>/<repo>  ->  <host>/<owner>/<repo>
 #   local/<name>, scratch/<name>  ->  the path itself
 # Symlinks are skipped, so compatibility links never show up twice.
 
@@ -18,9 +18,7 @@ is_dir() {
       is_dir "$owner" || continue
       for repo in "$owner"/*; do
         is_dir "$repo" || continue
-        label=${owner##*/}/${repo##*/}
-        [ "${host##*/}" = github.com ] || label=${host##*/}/$label
-        printf '%s\t%s\n' "$label" "${repo#"$dev_root"/}"
+        printf '%s\t%s\n' "${repo#"$dev_root"/src/}" "${repo#"$dev_root"/}"
       done
     done
   done

@@ -44,10 +44,10 @@ class DevProjectsTests(unittest.TestCase):
         (self.dev / "src/github.com/planmanager/alias").symlink_to(
             target, target_is_directory=True)
         self.assertEqual(self.run_list(), [
-            "franzgollhammer/ucsl-app\tsrc/github.com/franzgollhammer/ucsl-app",
+            "github.com/franzgollhammer/ucsl-app\tsrc/github.com/franzgollhammer/ucsl-app",
+            "github.com/planmanager/planfred\tsrc/github.com/planmanager/planfred",
             "gitlab.com/group/tool\tsrc/gitlab.com/group/tool",
             "local/notes\tlocal/notes",
-            "planmanager/planfred\tsrc/github.com/planmanager/planfred",
             "scratch/try out\tscratch/try out",
         ])
 
@@ -56,14 +56,19 @@ class DevProjectsTests(unittest.TestCase):
 
     def test_tmux_receives_canonical_directory_and_workspace_session_name(self):
         projects = [
-            ("one/shared-repository-long-name", "src/github.com/one/shared-repository-long-name",
-             "one_shared-repository-long-name"),
-            ("two/shared-repository-long-name", "src/github.com/two/shared-repository-long-name",
-             "two_shared-repository-long-name"),
+            ("github.com/one/shared-repository-long-name",
+             "src/github.com/one/shared-repository-long-name",
+             "github%2Ecom_one_shared-repository-long-name"),
+            ("github.com/two/shared-repository-long-name",
+             "src/github.com/two/shared-repository-long-name",
+             "github%2Ecom_two_shared-repository-long-name"),
             ("local/one_shared", "local/one_shared", "local_one%5Fshared"),
-            ("one/repo.name", "src/github.com/one/repo.name", "one_repo%2Ename"),
-            ("one/repo_name", "src/github.com/one/repo_name", "one_repo%5Fname"),
-            ("one/repo%2Ename", "src/github.com/one/repo%2Ename", "one_repo%252Ename"),
+            ("github.com/one/repo.name", "src/github.com/one/repo.name",
+             "github%2Ecom_one_repo%2Ename"),
+            ("github.com/one/repo_name", "src/github.com/one/repo_name",
+             "github%2Ecom_one_repo%5Fname"),
+            ("github.com/one/repo%2Ename", "src/github.com/one/repo%2Ename",
+             "github%2Ecom_one_repo%252Ename"),
             ("gitlab.com/one/repo", "src/gitlab.com/one/repo", "gitlab%2Ecom_one_repo"),
         ]
         for _, path, _ in projects:
@@ -98,24 +103,28 @@ class DevProjectsTests(unittest.TestCase):
         return subprocess.run([
             "/bin/zsh", "-f", "-c",
             'source "$1"; export DEV="$2"; '
-            "fzf() { awk -F'\\t' '$1 == \"planmanager/planfred\"'; }; "
+            "fzf() { awk -F'\\t' '$1 == \"github.com/planmanager/planfred\"'; }; "
             + command + "; pwd -P",
             "zsh", str(REPO / ".zshrc"), str(self.dev),
         ], env=env, capture_output=True, text=True)
 
     def test_d_enters_repository_by_picker_label_and_path(self):
         target = self.repo("src/github.com/planmanager/planfred")
-        for command in ("d", "d planmanager/planfred",
+        self.repo("src/github.com/planmanager/planfred-eslint-config")
+        for command in ("d", "d github.com/planmanager/planfred",
+                        "d planmanager/planfred", "d planfred",
                         "d src/github.com/planmanager/planfred"):
             result = self.run_d(command)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(result.stdout.strip(), str(target.resolve()), command)
 
-    def test_d_rejects_unknown_project_without_moving(self):
-        self.repo("src/github.com/planmanager/planfred")
-        result = self.run_d("cd /; d planmanager/missing")
-        self.assertIn("d: no project planmanager/missing", result.stderr)
-        self.assertEqual(result.stdout.strip(), "/")
+    def test_d_rejects_unknown_or_ambiguous_project_without_moving(self):
+        self.repo("src/github.com/planmanager/ci-runner")
+        self.repo("src/github.com/franzgollhammer/ci-runner")
+        for name in ("planmanager/missing", "ci-runner", "runner"):
+            result = self.run_d("cd /; d " + name)
+            self.assertIn("d: no unique project " + name, result.stderr)
+            self.assertEqual(result.stdout.strip(), "/")
 
 
 if __name__ == "__main__":

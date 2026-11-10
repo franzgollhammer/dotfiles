@@ -92,7 +92,7 @@ alias vi="vim"
 
 # — navigation & listing —
 alias dot="(cd \$DOTFILES; \$EDITOR .)"
-alias play="(cd \$DEV/playground; \$EDITOR .)"
+alias play="(cd \$DEV/scratch/playground; \$EDITOR .)"
 
 # — dev —
 alias p="pnpm"
@@ -158,7 +158,8 @@ function _dev_pick() {
 }
 
 # cd into a project under $DEV — no arg picks one via fzf, `.` goes to $DEV,
-# an arg is a path below $DEV or a listed label such as <owner>/<repo>
+# an arg is a path below $DEV, a listed label, or the unique end of one
+# (`d planfred`, `d planmanager/planfred`)
 function d() {
   local target
   if [[ -z "$1" ]]; then
@@ -169,8 +170,12 @@ function d() {
   elif [[ -d "$DEV/$1" ]]; then
     target=$1
   else
-    target=$("$SCRIPTS/dev_projects" | awk -F'\t' -v label="$1" '$1 == label { print $2; exit }')
-    [[ -n "$target" ]] || { print -u2 -r -- "d: no project $1"; return 1; }
+    target=$("$SCRIPTS/dev_projects" | awk -F'\t' -v want="$1" '
+      $1 == want { exact = $2 }
+      { cut = length($1) - length(want) }
+      cut > 0 && substr($1, cut) == "/" want { tail = $2; tails++ }
+      END { if (exact != "") print exact; else if (tails == 1) print tail }')
+    [[ -n "$target" ]] || { print -u2 -r -- "d: no unique project $1"; return 1; }
   fi
   cd "$DEV/$target"
 }

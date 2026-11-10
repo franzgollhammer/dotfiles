@@ -297,11 +297,12 @@ and macOS notification permissions.
 | `scratch/<name>` | Experiments and throwaway tests |
 
 `d` and `c` without arguments and `tmux_session` list the projects below `src/`,
-`local/` and `scratch/`. The picker shows `<owner>/<repository>`; the host is added
-only when it is not `github.com`. Anything else directly below `~/dev`, the worktree
-storage directory and symbolic links are not listed. Use `d planmanager/planfred` or
-`d src/github.com/planmanager/planfred` to navigate directly. tmux session names are
-built from the shown label, with `/` replaced by `_`. Literal underscores, percent
+`local/` and `scratch/`. The picker shows `<host>/<owner>/<repository>` for
+repositories. Anything else directly below `~/dev`, the worktree storage directory
+and symbolic links are not listed. To navigate directly, pass `d` a shown label or
+the unique end of one: `d github.com/planmanager/planfred`, `d planmanager/planfred`
+or `d planfred`. An ambiguous or unknown name prints an error and stays put. tmux
+session names are built from the shown label, with `/` replaced by `_`. Literal underscores, percent
 signs, and tmux-special characters are escaped, so `one/repo`, `one_repo`,
 `repo.name`, and `repo_name` cannot collide.
 
