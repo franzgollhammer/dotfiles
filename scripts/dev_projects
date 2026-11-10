@@ -1,24 +1,32 @@
 #!/bin/bash
-# Usage: dev_projects — list projects relative to ${DEV:-$HOME/dev} for fzf.
-# Workspace repositories take precedence over their compatibility symlinks.
+# Usage: dev_projects — list projects under ${DEV:-$HOME/dev} for fzf, one
+# "<label><TAB><path relative to DEV>" per line.
+#   src/<host>/<owner>/<repo>  ->  <host>/<owner>/<repo>
+#   local/<name>, scratch/<name>  ->  the path itself
+# Symlinks are skipped, so compatibility links never show up twice.
 
 dev_root=${DEV:-$HOME/dev}
-for entry in "$dev_root"/*; do
-  if [ ! -d "$entry" ] || [ -L "$entry" ]; then continue; fi
-  name=${entry##*/}
-  [ "$name" != worktrees ] || continue
-  if [ -d "$entry/.git" ] || [ -f "$entry/.git" ]; then
-    printf '%s\n' "$name"
-    continue
-  fi
-  found=0
-  for repo in "$entry"/*; do
-    if [ ! -d "$repo" ] || [ -L "$repo" ]; then continue; fi
-    if [ -d "$repo/.git" ] || [ -f "$repo/.git" ]; then
-      printf '%s/%s\n' "$name" "${repo##*/}"
-      found=1
-    fi
+
+is_dir() {
+  [ -d "$1" ] && [ ! -L "$1" ]
+}
+
+{
+  for host in "$dev_root"/src/*; do
+    is_dir "$host" || continue
+    for owner in "$host"/*; do
+      is_dir "$owner" || continue
+      for repo in "$owner"/*; do
+        is_dir "$repo" || continue
+        printf '%s\t%s\n' "${repo#"$dev_root"/src/}" "${repo#"$dev_root"/}"
+      done
+    done
   done
-  # Keep non-repository folders such as playground available too.
-  [ "$found" -eq 1 ] || printf '%s\n' "$name"
-done | LC_ALL=C sort
+  for group in local scratch; do
+    is_dir "$dev_root/$group" || continue
+    for entry in "$dev_root/$group"/*; do
+      is_dir "$entry" || continue
+      printf '%s\t%s\n' "$group/${entry##*/}" "$group/${entry##*/}"
+    done
+  done
+} | LC_ALL=C sort

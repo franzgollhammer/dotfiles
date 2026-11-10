@@ -36,6 +36,7 @@ path=(
   "$HOME/.opencode/bin"           # opencode
   "$HOME/.codeium/windsurf/bin"   # devin / windsurf
   "$PNPM_HOME"
+  "$PNPM_HOME/bin"                # pnpm 10+ keeps its shims here
   "$SCRIPTS"
   "$BUN_INSTALL/bin"
   ${RUBY_DIR:+"$RUBY_DIR"}        # omitted when unset, never an empty entry
@@ -92,7 +93,7 @@ alias vi="vim"
 
 # — navigation & listing —
 alias dot="(cd \$DOTFILES; \$EDITOR .)"
-alias play="(cd \$DEV/playground; \$EDITOR .)"
+alias play="(cd \$DEV/scratch/playground; \$EDITOR .)"
 
 # — dev —
 alias p="pnpm"
@@ -150,25 +151,33 @@ function dir() {
   mkdir "$1" && cd "$1" || return
 }
 
-# cd into a project under $DEV — no arg picks one via fzf, `.` goes to $DEV
+# pick a project via fzf — prints its path relative to $DEV; an argument
+# pre-fills the search
+function _dev_pick() {
+  local selected
+  selected=$("$SCRIPTS/dev_projects" \
+    | fzf --delimiter=$'\t' --with-nth=1 --query="$1") || return
+  [[ -n "$selected" ]] && print -r -- "${selected#*$'\t'}"
+}
+
+# cd into a project under $DEV — always picked in fzf, `d planfred` only
+# pre-fills the search; `.` goes to $DEV
 function d() {
-  if [[ -z "$1" ]]; then
-    local selected
-    selected=$("$SCRIPTS/dev_projects" | fzf) || return
-    [[ -n "$selected" ]] && cd "$DEV/$selected"
-  elif [[ "$1" == "." ]]; then
+  if [[ "$1" == "." ]]; then
     cd "$DEV"
-  else
-    cd "$DEV/$1"
+    return
   fi
+  local target
+  target=$(_dev_pick "$1") || return
+  cd "$DEV/$target"
 }
 
 # open a project under $DEV in $EDITOR — no arg picks one via fzf
 function c() {
   if [[ -z "$1" ]]; then
-    local selected
-    selected=$("$SCRIPTS/dev_projects" | fzf) || return
-    [[ -n "$selected" ]] && $EDITOR "$DEV/$selected"
+    local target
+    target=$(_dev_pick) || return
+    $EDITOR "$DEV/$target"
   else
     $EDITOR "$1"
   fi

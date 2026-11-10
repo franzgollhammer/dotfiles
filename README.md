@@ -45,8 +45,8 @@ commands under [Shell and application prerequisites](#shell-and-application-prer
 After installing your platform's prerequisites, clone into a permanent location:
 
 ```sh
-git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/franzgollhammer/dotfiles
-cd ~/dev/franzgollhammer/dotfiles
+git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/src/github.com/franzgollhammer/dotfiles
+cd ~/dev/src/github.com/franzgollhammer/dotfiles
 
 # Preview every link before changing your home directory.
 ./scripts/setup_dotfiles --dry-run
@@ -130,8 +130,8 @@ git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 git clone https://github.com/zsh-users/zsh-autosuggestions.git \
   "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 
-git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/franzgollhammer/dotfiles
-cd ~/dev/franzgollhammer/dotfiles
+git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/src/github.com/franzgollhammer/dotfiles
+cd ~/dev/src/github.com/franzgollhammer/dotfiles
 ./scripts/setup_dotfiles --profile minimal --dry-run
 ./scripts/setup_dotfiles --profile minimal
 ```
@@ -287,17 +287,22 @@ and macOS notification permissions.
 
 ## Repository layout
 
-Canonical checkouts live at `~/dev/<workspace>/<repository>`, using the owner and
-repository name from `origin`: for example `~/dev/planmanager/planfred` and
-`~/dev/franzgollhammer/ucsl-app`. Repositories without a remote use `~/dev/local/`.
-Worktrees remain under `~/dev/worktrees/<project>/<branch>/`.
+`~/dev` is split by purpose and lifetime:
 
-`d` and `c` without arguments and `tmux_session` list repositories inside workspace
-folders. Standalone repositories and ordinary folders such as `playground` remain
-available. Compatibility symlinks and the worktree storage directory are excluded.
-Use `d planmanager/planfred` to navigate directly. New tmux session names include
-the workspace and repository, with `/` replaced by `_`. Literal underscores,
-percent signs, and tmux-special characters are escaped, so `one/repo`, `one_repo`,
+| Directory | Holds |
+| --- | --- |
+| `src/<host>/<owner>/<repository>` | Cloned repositories, path taken from `origin` (`~/dev/src/github.com/planmanager/planfred`) |
+| `worktrees/<host>/<owner>/<repository>/<task>` | Additional checkouts for features, pull requests and agents |
+| `local/<name>` | Lasting projects without a remote |
+| `scratch/<name>` | Experiments and throwaway tests |
+
+`d` and `c` without arguments and `tmux_session` list the projects below `src/`,
+`local/` and `scratch/`. The picker shows `<host>/<owner>/<repository>` for
+repositories. Anything else directly below `~/dev`, the worktree storage directory
+and symbolic links are not listed. `d` always opens the picker; `d planfred` only
+pre-fills the search, and `d .` goes to `~/dev`. tmux
+session names are built from the shown label, with `/` replaced by `_`. Literal underscores, percent
+signs, and tmux-special characters are escaped, so `one/repo`, `one_repo`,
 `repo.name`, and `repo_name` cannot collide.
 
 When moving existing checkouts, preserve local files and leave compatibility links
@@ -316,7 +321,7 @@ Commands in `scripts/` become available after loading `.zshrc`.
 | `brew_update` | Update, upgrade and clean up Homebrew packages |
 | `brew_export` | Write installed casks and formulas to `brew/*.txt` |
 | `b` | Pick/switch branches (fzf) with commit metadata |
-| `dev_projects` | List workspace repositories and standalone project folders for `d`, `c`, and tmux |
+| `dev_projects` | List projects below `src/`, `local/` and `scratch/` as label and path for `d`, `c`, and tmux |
 | `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
 | `tmux_set_title` | Rename the tmux window to the worktree branch and PR number, or repository and branch without a PR (requires gh) |
 | `scr` | Pick and execute a helper with fzf |
