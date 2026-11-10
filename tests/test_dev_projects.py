@@ -24,37 +24,56 @@ class DevProjectsTests(unittest.TestCase):
         (path / ".git").mkdir(parents=True)
         return path
 
-    def test_workspace_repos_without_compatibility_links_or_worktrees(self):
-        target = self.repo("planmanager/planfred")
-        self.repo("franzgollhammer/ucsl-app")
-        self.repo("local/scratch")
-        self.repo("legacy-repo")
-        self.repo("worktrees/project/feature")
-        (self.dev / "playground").mkdir()
-        (self.dev / "planfred-app").symlink_to(target, target_is_directory=True)
+    def run_list(self):
         result = subprocess.run([str(REPO / "scripts/dev_projects")],
                                 env=self.env, capture_output=True, text=True, check=True)
-        self.assertEqual(result.stdout.splitlines(), [
-            "franzgollhammer/ucsl-app", "legacy-repo", "local/scratch",
-            "planmanager/planfred", "playground",
+        return result.stdout.splitlines()
+
+    def test_lists_src_local_and_scratch_only(self):
+        target = self.repo("src/github.com/planmanager/planfred")
+        self.repo("src/github.com/franzgollhammer/ucsl-app")
+        self.repo("src/gitlab.com/group/tool")
+        self.repo("local/notes")
+        (self.dev / "scratch/try out").mkdir(parents=True)
+        # Old layout, loose folders, worktrees and links stay out of the list.
+        self.repo("planmanager/legacy")
+        self.repo("legacy-repo")
+        self.repo("worktrees/github.com/planmanager/planfred/feature")
+        (self.dev / "playground").mkdir()
+        (self.dev / "local/linked").symlink_to(target, target_is_directory=True)
+        (self.dev / "src/github.com/planmanager/alias").symlink_to(
+            target, target_is_directory=True)
+        self.assertEqual(self.run_list(), [
+            "franzgollhammer/ucsl-app\tsrc/github.com/franzgollhammer/ucsl-app",
+            "gitlab.com/group/tool\tsrc/gitlab.com/group/tool",
+            "local/notes\tlocal/notes",
+            "planmanager/planfred\tsrc/github.com/planmanager/planfred",
+            "scratch/try out\tscratch/try out",
         ])
+
+    def test_empty_dev_root_lists_nothing(self):
+        self.assertEqual(self.run_list(), [])
 
     def test_tmux_receives_canonical_directory_and_workspace_session_name(self):
         projects = [
-            ("one/shared-repository-long-name", "one_shared-repository-long-name"),
-            ("two/shared-repository-long-name", "two_shared-repository-long-name"),
-            ("one_shared-repository-long-name", "one%5Fshared-repository-long-name"),
-            ("one/repo.name", "one_repo%2Ename"),
-            ("one/repo_name", "one_repo%5Fname"),
-            ("one/repo%2Ename", "one_repo%252Ename"),
+            ("one/shared-repository-long-name", "src/github.com/one/shared-repository-long-name",
+             "one_shared-repository-long-name"),
+            ("two/shared-repository-long-name", "src/github.com/two/shared-repository-long-name",
+             "two_shared-repository-long-name"),
+            ("local/one_shared", "local/one_shared", "local_one%5Fshared"),
+            ("one/repo.name", "src/github.com/one/repo.name", "one_repo%2Ename"),
+            ("one/repo_name", "src/github.com/one/repo_name", "one_repo%5Fname"),
+            ("one/repo%2Ename", "src/github.com/one/repo%2Ename", "one_repo%252Ename"),
+            ("gitlab.com/one/repo", "src/gitlab.com/one/repo", "gitlab%2Ecom_one_repo"),
         ]
-        for choice, _ in projects:
-            self.repo(choice)
+        for _, path, _ in projects:
+            self.repo(path)
         bin_dir = self.root / "bin"
         bin_dir.mkdir()
         log = self.root / "tmux.log"
         for name, body in {
-            "fzf": 'cat >/dev/null; printf "%s\\n" "$CHOICE"',
+            # Pick the line whose label, the only column fzf would show, matches.
+            "fzf": "awk -F'\\t' -v choice=\"$CHOICE\" '$1 == choice'",
             "tmux": 'printf "%s\\n" "$@" >> "$TMUX_LOG"; '
                     '[ "$1" != has-session ]',
         }.items():
@@ -63,26 +82,40 @@ class DevProjectsTests(unittest.TestCase):
             script.chmod(0o755)
         self.env.update(PATH=str(bin_dir) + os.pathsep + os.environ["PATH"],
                         TMUX_LOG=str(log))
-        for choice, session in projects:
+        for choice, path, session in projects:
             self.env["CHOICE"] = choice
+            log.write_text("")
             subprocess.run([str(REPO / "scripts/tmux_session")], env=self.env,
                            capture_output=True, text=True, check=True)
             args = log.read_text().splitlines()
-            self.assertIn(str(self.dev / choice), args)
+            self.assertIn(str(self.dev / path), args)
             self.assertIn(session, args)
 
-    def test_d_picker_enters_workspace_repository(self):
-        target = self.repo("planmanager/planfred")
+    def run_d(self, command):
         home = self.root / "home"
-        home.mkdir()
+        home.mkdir(exist_ok=True)
         env = dict(self.env, HOME=str(home), PATH="/usr/bin:/bin")
-        result = subprocess.run([
+        return subprocess.run([
             "/bin/zsh", "-f", "-c",
             'source "$1"; export DEV="$2"; '
-            'fzf() { cat >/dev/null; print -r -- planmanager/planfred; }; d; pwd -P',
+            "fzf() { awk -F'\\t' '$1 == \"planmanager/planfred\"'; }; "
+            + command + "; pwd -P",
             "zsh", str(REPO / ".zshrc"), str(self.dev),
-        ], env=env, capture_output=True, text=True, check=True)
-        self.assertEqual(result.stdout.strip(), str(target.resolve()))
+        ], env=env, capture_output=True, text=True)
+
+    def test_d_enters_repository_by_picker_label_and_path(self):
+        target = self.repo("src/github.com/planmanager/planfred")
+        for command in ("d", "d planmanager/planfred",
+                        "d src/github.com/planmanager/planfred"):
+            result = self.run_d(command)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(result.stdout.strip(), str(target.resolve()), command)
+
+    def test_d_rejects_unknown_project_without_moving(self):
+        self.repo("src/github.com/planmanager/planfred")
+        result = self.run_d("cd /; d planmanager/missing")
+        self.assertIn("d: no project planmanager/missing", result.stderr)
+        self.assertEqual(result.stdout.strip(), "/")
 
 
 if __name__ == "__main__":

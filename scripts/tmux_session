@@ -3,13 +3,16 @@
 # Enhanced tmux session management with better error handling
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
-SELECTED_PROJECT=$("$script_dir/dev_projects" | fzf --prompt="Select project: " --height=40% --border)
+# dev_projects prints "<label><TAB><path>"; fzf shows the label only.
+SELECTED=$("$script_dir/dev_projects" \
+  | fzf --delimiter=$'\t' --with-nth=1 --prompt="Select project: " --height=40% --border)
 
-if [[ -z "$SELECTED_PROJECT" ]]; then
+if [[ -z "$SELECTED" ]]; then
   echo "No directory selected"
   exit 0
 fi
-SELECTED_DIR=${DEV:-$HOME/dev}/$SELECTED_PROJECT
+SELECTED_PROJECT=${SELECTED%%$'\t'*}
+SELECTED_DIR=${DEV:-$HOME/dev}/${SELECTED#*$'\t'}
 
 # Escape literal underscores and percent signs before using _ for the separator.
 # This keeps a/b distinct from a_b and repo.name distinct from repo_name.

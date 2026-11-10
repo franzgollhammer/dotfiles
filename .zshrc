@@ -150,25 +150,37 @@ function dir() {
   mkdir "$1" && cd "$1" || return
 }
 
-# cd into a project under $DEV — no arg picks one via fzf, `.` goes to $DEV
+# pick a project via fzf — prints its path relative to $DEV
+function _dev_pick() {
+  local selected
+  selected=$("$SCRIPTS/dev_projects" | fzf --delimiter=$'\t' --with-nth=1) || return
+  [[ -n "$selected" ]] && print -r -- "${selected#*$'\t'}"
+}
+
+# cd into a project under $DEV — no arg picks one via fzf, `.` goes to $DEV,
+# an arg is a path below $DEV or a listed label such as <owner>/<repo>
 function d() {
+  local target
   if [[ -z "$1" ]]; then
-    local selected
-    selected=$("$SCRIPTS/dev_projects" | fzf) || return
-    [[ -n "$selected" ]] && cd "$DEV/$selected"
+    target=$(_dev_pick) || return
   elif [[ "$1" == "." ]]; then
     cd "$DEV"
+    return
+  elif [[ -d "$DEV/$1" ]]; then
+    target=$1
   else
-    cd "$DEV/$1"
+    target=$("$SCRIPTS/dev_projects" | awk -F'\t' -v label="$1" '$1 == label { print $2; exit }')
+    [[ -n "$target" ]] || { print -u2 -r -- "d: no project $1"; return 1; }
   fi
+  cd "$DEV/$target"
 }
 
 # open a project under $DEV in $EDITOR — no arg picks one via fzf
 function c() {
   if [[ -z "$1" ]]; then
-    local selected
-    selected=$("$SCRIPTS/dev_projects" | fzf) || return
-    [[ -n "$selected" ]] && $EDITOR "$DEV/$selected"
+    local target
+    target=$(_dev_pick) || return
+    $EDITOR "$DEV/$target"
   else
     $EDITOR "$1"
   fi

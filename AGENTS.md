@@ -13,8 +13,8 @@ prerequisites, link targets, or local customization.
   inventories unless there is evidence they are obsolete. The Homebrew lists
   include dependencies; being unfamiliar is not grounds for removal.
 - Work on a dedicated branch in a new worktree under
-  `~/dev/worktrees/dotfiles/<branch>/`. Never commit, push, or merge to `main`.
-  Ask for permission before any merge.
+  `~/dev/worktrees/github.com/franzgollhammer/dotfiles/<branch>/`. Never commit,
+  push, or merge to `main`. Ask for permission before any merge.
 - Save plans in `.claude/plans/` with three options where practical, their tradeoffs,
   and unresolved questions. This directory is intentionally ignored.
 - Store local credentials in ignored `.env` files. Preserve local settings and
