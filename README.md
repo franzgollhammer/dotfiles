@@ -299,8 +299,8 @@ and macOS notification permissions.
 `d` and `c` without arguments and `tmux_session` list the projects below `src/`,
 `local/` and `scratch/`. The picker shows `<host>/<owner>/<repository>` for
 repositories. Anything else directly below `~/dev`, the worktree storage directory
-and symbolic links are not listed. `d planfred` opens the picker with that text as
-the search and jumps straight away when only one project matches. tmux
+and symbolic links are not listed. `d` always opens the picker; `d planfred` only
+pre-fills the search, and `d .` goes to `~/dev`. tmux
 session names are built from the shown label, with `/` replaced by `_`. Literal underscores, percent
 signs, and tmux-special characters are escaped, so `one/repo`, `one_repo`,
 `repo.name`, and `repo_name` cannot collide.

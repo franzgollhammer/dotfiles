@@ -118,7 +118,9 @@ class DevProjectsTests(unittest.TestCase):
             result = self.run_d(command)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(result.stdout.strip(), str(target.resolve()), command)
-            self.assertIn("--select-1 --query=" + command[2:], result.stderr)
+            self.assertIn("--query=" + command[2:], result.stderr)
+            # A single match must still be confirmed in the picker.
+            self.assertNotIn("--select-1", result.stderr)
         first = self.run_d("d")
         self.assertEqual(first.stdout.strip(),
                          str((self.dev / "src/github.com/franzgollhammer/dotfiles").resolve()))

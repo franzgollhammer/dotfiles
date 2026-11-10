@@ -152,16 +152,16 @@ function dir() {
 }
 
 # pick a project via fzf — prints its path relative to $DEV; an argument
-# pre-fills the search and a single match is taken without asking
+# pre-fills the search
 function _dev_pick() {
   local selected
   selected=$("$SCRIPTS/dev_projects" \
-    | fzf --delimiter=$'\t' --with-nth=1 --select-1 --query="$1") || return
+    | fzf --delimiter=$'\t' --with-nth=1 --query="$1") || return
   [[ -n "$selected" ]] && print -r -- "${selected#*$'\t'}"
 }
 
-# cd into a project under $DEV picked via fzf — `d planfred` starts the
-# search with that text, `.` goes to $DEV
+# cd into a project under $DEV — always picked in fzf, `d planfred` only
+# pre-fills the search; `.` goes to $DEV
 function d() {
   if [[ "$1" == "." ]]; then
     cd "$DEV"
