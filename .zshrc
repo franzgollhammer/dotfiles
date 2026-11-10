@@ -36,6 +36,7 @@ path=(
   "$HOME/.opencode/bin"           # opencode
   "$HOME/.codeium/windsurf/bin"   # devin / windsurf
   "$PNPM_HOME"
+  "$PNPM_HOME/bin"                # pnpm 10+ keeps its shims here
   "$SCRIPTS"
   "$BUN_INSTALL/bin"
   ${RUBY_DIR:+"$RUBY_DIR"}        # omitted when unset, never an empty entry
