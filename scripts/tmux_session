@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Enhanced tmux session management with better error handling
+# Usage: tmux_session — pick a project below ${DEV:-$HOME/dev} with fzf, then
+# attach or switch to its tmux session. A missing session is created in the
+# project directory and runs tmux_init. The session is named after the path
+# below DEV, e.g. src/github.com/<owner>/<repo> or local/<name>.
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 # dev_projects prints "<label><TAB><path>"; fzf shows the label only.
@@ -11,46 +14,50 @@ if [[ -z "$SELECTED" ]]; then
   echo "No directory selected"
   exit 0
 fi
-SELECTED_PROJECT=${SELECTED%%$'\t'*}
-SELECTED_DIR=${DEV:-$HOME/dev}/${SELECTED#*$'\t'}
+SELECTED_NAME=${SELECTED#*$'\t'}
+SELECTED_DIR=${DEV:-$HOME/dev}/$SELECTED_NAME
 
-# Escape literal underscores and percent signs before using _ for the separator.
-# This keeps a/b distinct from a_b and repo.name distinct from repo_name.
-SELECTED_NAME=${SELECTED_PROJECT//%/%25}
-SELECTED_NAME=${SELECTED_NAME//_/%5F}
-SELECTED_NAME=${SELECTED_NAME//\//_}
-SELECTED_NAME=${SELECTED_NAME//:/%3A}
-SELECTED_NAME=${SELECTED_NAME//./%2E}
-SELECTED_NAME=${SELECTED_NAME//,/%2C}
-SELECTED_NAME=${SELECTED_NAME// /%20}
+# tmux before 3.7 stores "." and ":" in session names as "_". That form can also
+# belong to a sibling (repo.name and repo_name), so it only counts when the
+# session was started in the same directory.
+legacy_name=${SELECTED_NAME//[.:]/_}
+
+# Sessions are targeted by id, because tmux splits a target at "." and ":"
+# into window and pane ("=src/github.com/x" fails with "can't find pane").
+SESSION_ID=
+while IFS=$'\t' read -r id path name; do
+  if [[ $name == "$SELECTED_NAME" ||
+        ( $name == "$legacy_name" && $path == "$SELECTED_DIR" ) ]]; then
+    SESSION_ID=$id
+    break
+  fi
+done < <(tmux list-sessions -F $'#{session_id}\t#{session_path}\t#{session_name}' 2> /dev/null)
 
 switch_to() {
   if [[ -z $TMUX ]]; then
     echo "Attaching to session: $SELECTED_NAME"
-    tmux attach-session -t "=$SELECTED_NAME"
+    tmux attach-session -t "$SESSION_ID"
   else
-    CURRENT=$(tmux display-message -p '#S')
-    if [[ "$CURRENT" == "$SELECTED_NAME" ]]; then
+    if [[ $(tmux display-message -p '#{session_id}') == "$SESSION_ID" ]]; then
       echo "Already in session: $SELECTED_NAME"
       return 0
     fi
     echo "Switching to session: $SELECTED_NAME"
-    tmux switch-client -t "=$SELECTED_NAME"
+    tmux switch-client -t "$SESSION_ID"
   fi
 }
 
-if tmux has-session -t "=$SELECTED_NAME" 2> /dev/null; then
+if [[ -n $SESSION_ID ]]; then
   switch_to
   exit 0
 fi
 
 echo "Creating new session: $SELECTED_NAME in $SELECTED_DIR"
-tmux new-session -ds "$SELECTED_NAME" -c "$SELECTED_DIR" || exit 1
+SESSION_ID=$(tmux new-session -dP -F '#{session_id}' -s "$SELECTED_NAME" -c "$SELECTED_DIR")
+[[ -n $SESSION_ID ]] || exit 1
 
 # The pane starts in $SELECTED_DIR, so tmux_init resolves the lookup order
 # itself: ./.tmux_init -> ~/.tmux_init -> $DOTFILES/.tmux_init.
-# send-keys needs a pane target; the trailing colon resolves the exact session
-# to its active pane (a bare "=name" fails with "can't find pane").
-tmux send-keys -t "=$SELECTED_NAME:" "tmux_init" C-m
+tmux send-keys -t "$SESSION_ID" "tmux_init" C-m
 
 switch_to

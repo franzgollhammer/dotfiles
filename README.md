@@ -300,10 +300,11 @@ and macOS notification permissions.
 `local/` and `scratch/`. The picker shows `<host>/<owner>/<repository>` for
 repositories. Anything else directly below `~/dev`, the worktree storage directory
 and symbolic links are not listed. `d` always opens the picker; `d planfred` only
-pre-fills the search, and `d .` goes to `~/dev`. tmux
-session names are built from the shown label, with `/` replaced by `_`. Literal underscores, percent
-signs, and tmux-special characters are escaped, so `one/repo`, `one_repo`,
-`repo.name`, and `repo_name` cannot collide.
+pre-fills the search, and `d .` goes to `~/dev`. A tmux
+session is named after the project's path below `~/dev`, for example
+`src/github.com/franzgollhammer/dotfiles` or `local/notes`. tmux before 3.7
+stores `.` and `:` in session names as `_`; `tmux_session` still finds such a
+session when it was started in the same directory.
 
 When moving existing checkouts, preserve local files and leave compatibility links
 for running shells until their old paths are no longer needed. Repair registered

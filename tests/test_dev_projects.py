@@ -54,47 +54,76 @@ class DevProjectsTests(unittest.TestCase):
     def test_empty_dev_root_lists_nothing(self):
         self.assertEqual(self.run_list(), [])
 
-    def test_tmux_receives_canonical_directory_and_workspace_session_name(self):
-        projects = [
-            ("github.com/one/shared-repository-long-name",
-             "src/github.com/one/shared-repository-long-name",
-             "github%2Ecom_one_shared-repository-long-name"),
-            ("github.com/two/shared-repository-long-name",
-             "src/github.com/two/shared-repository-long-name",
-             "github%2Ecom_two_shared-repository-long-name"),
-            ("local/one_shared", "local/one_shared", "local_one%5Fshared"),
-            ("github.com/one/repo.name", "src/github.com/one/repo.name",
-             "github%2Ecom_one_repo%2Ename"),
-            ("github.com/one/repo_name", "src/github.com/one/repo_name",
-             "github%2Ecom_one_repo%5Fname"),
-            ("github.com/one/repo%2Ename", "src/github.com/one/repo%2Ename",
-             "github%2Ecom_one_repo%252Ename"),
-            ("gitlab.com/one/repo", "src/gitlab.com/one/repo", "gitlab%2Ecom_one_repo"),
-        ]
-        for _, path, _ in projects:
-            self.repo(path)
+    def run_tmux_session(self, choice, sessions=""):
+        """Run tmux_session with stand-ins for fzf and tmux; return the tmux calls.
+
+        `sessions` is what `tmux list-sessions` prints. A new session gets id $9.
+        """
         bin_dir = self.root / "bin"
-        bin_dir.mkdir()
+        if not bin_dir.exists():
+            bin_dir.mkdir()
+            for name, body in {
+                # Pick the line whose label, the only column fzf would show, matches.
+                "fzf": "awk -F'\\t' -v choice=\"$CHOICE\" '$1 == choice'",
+                # One call per line, arguments separated by \037: formats hold tabs.
+                "tmux": "printf '%s\\037' \"$@\" >> \"$TMUX_LOG\"; echo >> \"$TMUX_LOG\"\n"
+                        "case $1 in\n"
+                        "  list-sessions) printf '%s' \"$TMUX_SESSIONS\" ;;\n"
+                        "  new-session) echo '$9' ;;\n"
+                        "esac",
+            }.items():
+                script = bin_dir / name
+                script.write_text("#!/bin/sh\n" + body + "\n")
+                script.chmod(0o755)
         log = self.root / "tmux.log"
-        for name, body in {
-            # Pick the line whose label, the only column fzf would show, matches.
-            "fzf": "awk -F'\\t' -v choice=\"$CHOICE\" '$1 == choice'",
-            "tmux": 'printf "%s\\n" "$@" >> "$TMUX_LOG"; '
-                    '[ "$1" != has-session ]',
-        }.items():
-            script = bin_dir / name
-            script.write_text("#!/bin/sh\n" + body + "\n")
-            script.chmod(0o755)
-        self.env.update(PATH=str(bin_dir) + os.pathsep + os.environ["PATH"],
-                        TMUX_LOG=str(log))
-        for choice, path, session in projects:
-            self.env["CHOICE"] = choice
-            log.write_text("")
-            subprocess.run([str(REPO / "scripts/tmux_session")], env=self.env,
-                           capture_output=True, text=True, check=True)
-            args = log.read_text().splitlines()
-            self.assertIn(str(self.dev / path), args)
-            self.assertIn(session, args)
+        log.write_text("")
+        env = dict(self.env, PATH=str(bin_dir) + os.pathsep + os.environ["PATH"],
+                   TMUX_LOG=str(log), CHOICE=choice, TMUX_SESSIONS=sessions)
+        subprocess.run([str(REPO / "scripts/tmux_session")], env=env,
+                       capture_output=True, text=True, check=True)
+        return [line.split("\037")[:-1] for line in log.read_text().splitlines()]
+
+    def test_tmux_session_is_named_after_the_path_below_dev(self):
+        projects = [
+            ("github.com/one/repo.name", "src/github.com/one/repo.name"),
+            ("github.com/one/repo_name", "src/github.com/one/repo_name"),
+            ("github.com/two/repo.name", "src/github.com/two/repo.name"),
+            ("github.com/one/repo%2Ename", "src/github.com/one/repo%2Ename"),
+            ("gitlab.com/one/repo", "src/gitlab.com/one/repo"),
+            ("local/one_shared", "local/one_shared"),
+            ("scratch/try out", "scratch/try out"),
+        ]
+        for _, path in projects:
+            self.repo(path)
+        for label, path in projects:
+            self.assertEqual(self.run_tmux_session(label), [
+                ["list-sessions", "-F", "#{session_id}\t#{session_path}\t#{session_name}"],
+                ["new-session", "-dP", "-F", "#{session_id}", "-s", path,
+                 "-c", str(self.dev / path)],
+                ["send-keys", "-t", "$9", "tmux_init", "C-m"],
+                ["attach-session", "-t", "$9"],
+            ], label)
+
+    def test_tmux_session_reuses_only_the_matching_session(self):
+        path, sibling = "src/github.com/one/repo.name", "src/github.com/one/repo_name"
+        here, there = str(self.dev / path), str(self.dev / sibling)
+        self.repo(path)
+        self.repo(sibling)
+        # tmux before 3.7 stored both names as src/github_com/one/repo_name.
+        legacy = "src/github_com/one/repo_name"
+        cases = [
+            ("$1\t%s\t%s\n" % (here, path), "$1"),
+            ("$1\t%s\t%s\n$3\t%s\t%s\n" % (there, sibling, here, legacy), "$3"),
+            ("$2\t%s\t%s\n" % (there, legacy), None),
+            ("$2\t%s\t%s\n" % (here, sibling), None),
+        ]
+        for sessions, expected in cases:
+            calls = self.run_tmux_session("github.com/one/repo.name", sessions)
+            if expected:
+                self.assertEqual(calls[1:], [["attach-session", "-t", expected]], sessions)
+            else:
+                self.assertEqual(calls[1][:6], ["new-session", "-dP", "-F",
+                                                "#{session_id}", "-s", path], sessions)
 
     def run_d(self, command):
         home = self.root / "home"
