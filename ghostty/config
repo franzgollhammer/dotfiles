@@ -20,10 +20,11 @@ macos-icon = official
 # theme
 theme = dark:macos-dark,light:macos-light
 window-save-state = always
-# background-opacity = 0.95
+background-opacity = 0.95
 
 # font
 font-feature = -calt
+font-family = Menlo
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
@@ -35,7 +36,7 @@ clipboard-write = allow
 
 # notifications (desktop notification on bell)
 bell-features = audio,no-system,attention,title
-bell-audio-path = /System/Library/Sounds/Bottle.aiff
+# bell-audio-path = /System/Library/Sounds/Bottle.aiff
 # alternative macOS sounds (preview: afplay /System/Library/Sounds/<name>.aiff)
 # bell-audio-path = /System/Library/Sounds/Basso.aiff
 # bell-audio-path = /System/Library/Sounds/Blow.aiff
@@ -44,7 +45,7 @@ bell-audio-path = /System/Library/Sounds/Bottle.aiff
 # bell-audio-path = /System/Library/Sounds/Glass.aiff
 # bell-audio-path = /System/Library/Sounds/Hero.aiff
 # bell-audio-path = /System/Library/Sounds/Morse.aiff
-# bell-audio-path = /System/Library/Sounds/Ping.aiff
+bell-audio-path = /System/Library/Sounds/Ping.aiff
 # bell-audio-path = /System/Library/Sounds/Pop.aiff
 # bell-audio-path = /System/Library/Sounds/Purr.aiff
 # bell-audio-path = /System/Library/Sounds/Sosumi.aiff
