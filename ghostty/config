@@ -36,6 +36,20 @@ clipboard-write = allow
 # notifications (desktop notification on bell)
 bell-features = audio,no-system,attention,title
 bell-audio-path = /System/Library/Sounds/Bottle.aiff
+# alternative macOS sounds (preview: afplay /System/Library/Sounds/<name>.aiff)
+# bell-audio-path = /System/Library/Sounds/Basso.aiff
+# bell-audio-path = /System/Library/Sounds/Blow.aiff
+# bell-audio-path = /System/Library/Sounds/Frog.aiff
+# bell-audio-path = /System/Library/Sounds/Funk.aiff
+# bell-audio-path = /System/Library/Sounds/Glass.aiff
+# bell-audio-path = /System/Library/Sounds/Hero.aiff
+# bell-audio-path = /System/Library/Sounds/Morse.aiff
+# bell-audio-path = /System/Library/Sounds/Ping.aiff
+# bell-audio-path = /System/Library/Sounds/Pop.aiff
+# bell-audio-path = /System/Library/Sounds/Purr.aiff
+# bell-audio-path = /System/Library/Sounds/Sosumi.aiff
+# bell-audio-path = /System/Library/Sounds/Submarine.aiff
+# bell-audio-path = /System/Library/Sounds/Tink.aiff
 bell-audio-volume = 1
 desktop-notifications = true
 
