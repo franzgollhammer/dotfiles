@@ -66,6 +66,7 @@ highway
 htop
 httpie
 icu4c@78
+icu4c@79
 imath
 jbig2dec
 jemalloc
@@ -175,7 +176,6 @@ poppler
 pycparser
 pyenv
 python-certifi
-python@3.14
 python@3.15
 readline
 redis
