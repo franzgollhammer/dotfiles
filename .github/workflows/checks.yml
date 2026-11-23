@@ -35,8 +35,8 @@ jobs:
               *) echo "Missing supported shebang: $script"; exit 1 ;;
             esac
           done
-      - name: Lint setup and maintained helpers
-        run: shellcheck scripts/setup_dotfiles scripts/brew_update scripts/brew_export scripts/term_colors scripts/dev_projects scripts/tmux_session .tmux_init example.tmux_init
+      - name: Lint shell helpers
+        run: shellcheck scripts/* .tmux_init example.tmux_init
       - name: Run safety tests
         run: python3 -m unittest discover -s tests -v
       - name: Check whitespace
