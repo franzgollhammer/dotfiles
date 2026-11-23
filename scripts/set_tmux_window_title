@@ -18,7 +18,7 @@ branch=$(git -C "$dir" symbolic-ref --quiet --short HEAD) || {
   exit 1
 }
 
-number=$(cd "$dir" && gh pr view --json number --jq .number 2>/dev/null || true)
+number=$(cd "$dir" && gh pr view --json number --jq .number 2>/dev/null) || true
 
 if [ -n "$number" ]; then
   title="$branch #$number"
