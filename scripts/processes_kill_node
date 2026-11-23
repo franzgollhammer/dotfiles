@@ -1,0 +1,4 @@
+#!/bin/bash
+# Usage: processes_kill_node — stop the current user's processes named node.
+printf "Cleanup node processes ...\n"
+killall -u "$(whoami)" node

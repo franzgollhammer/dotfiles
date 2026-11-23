@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage: list_dev_projects — list projects under ${DEV:-$HOME/dev} for fzf, one
+# Usage: dev_list_projects — list projects under ${DEV:-$HOME/dev} for fzf, one
 # "<label><TAB><path relative to DEV>" per line.
 #   src/<host>/<owner>/<repo>  ->  <host>/<owner>/<repo>
 #   local/<name>, scratch/<name>  ->  the path itself

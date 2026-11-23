@@ -104,12 +104,12 @@ alias play="(cd \$DEV/scratch/playground; \$EDITOR .)"
 alias p="pnpm"
 alias run="node --run"
 alias lg="lazygit"
-alias t="switch_tmux_session"
-alias s="run_script"
-alias scr="run_script"
+alias t="tmux_switch_session"
+alias s="scripts_run"
+alias scr="scripts_run"
 
 # — git —
-alias b="switch_git_branch"
+alias b="git_switch_branch"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit"
@@ -143,8 +143,8 @@ alias exif="exiftool -a -u -g1"
 # — macOS only —
 if [[ $OSTYPE == darwin* ]]; then
   alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
-  alias bb="update_brew_packages"
-  alias bbb="export_brew_packages"
+  alias bb="brew_update_packages"
+  alias bbb="brew_export_packages"
 fi
 
 # — Debian / Ubuntu install fd as fdfind —
@@ -163,7 +163,7 @@ function dir() {
 # pre-fills the search
 function _dev_pick() {
   local selected
-  selected=$("$SCRIPTS/list_dev_projects" \
+  selected=$("$SCRIPTS/dev_list_projects" \
     | fzf --delimiter=$'\t' --with-nth=1 --query="$1") || return
   [[ -n "$selected" ]] && print -r -- "${selected#*$'\t'}"
 }

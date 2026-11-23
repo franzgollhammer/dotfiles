@@ -1,12 +1,12 @@
 #!/bin/bash
-# Usage: setup_dotfiles [--dry-run] [--backup|--force] [--profile minimal|full] [--home /absolute/path]
+# Usage: dotfiles_setup [--dry-run] [--backup|--force] [--profile minimal|full] [--home /absolute/path]
 # Link this checkout's configuration; preserve existing files unless backed up or forced.
 
 set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: setup_dotfiles [--dry-run] [--backup|--force] [--profile minimal|full]
+Usage: dotfiles_setup [--dry-run] [--backup|--force] [--profile minimal|full]
                       [--home /absolute/path]
 
   --dry-run      Preview links and conflicts without changing anything.

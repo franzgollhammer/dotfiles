@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage: init_tmux_session — run the first executable project, home, or default .tmux_init.
+# Usage: tmux_init_session — run the first executable project, home, or default .tmux_init.
 
 INIT_FILE=".tmux_init"
 
