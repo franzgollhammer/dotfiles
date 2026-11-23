@@ -180,8 +180,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git \
 
 Missing Oh My Zsh, autosuggestions, or Starship do not stop shell startup.
 Install Node.js separately if needed; `.zshrc` loads nvm when `~/.nvm/nvm.sh`
-exists. `.vimrc` uses no plugins and supports the distribution Vim packages;
-`:grep` uses ripgrep when it is installed.
+exists, and otherwise from the Homebrew `nvm` formula, whose loader links nvm
+into `~/.nvm` on first use. `.vimrc` uses no plugins and supports the
+distribution Vim packages; `:grep` uses ripgrep when it is installed.
 
 `brew/formula.txt` and `brew/cask.txt` are machine inventory snapshots, including
 transitive dependencies and potentially retired or renamed packages. Review

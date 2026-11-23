@@ -83,7 +83,12 @@ fi
 
 # ═══ Tools ═══════════════════════════════════════════════════
 
-[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+# Homebrew keeps nvm outside NVM_DIR; its loader links it there on first use.
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  source "$NVM_DIR/nvm.sh"
+elif [[ -s "${HOMEBREW_PREFIX:-/opt/homebrew}/opt/nvm/nvm.sh" ]]; then
+  source "${HOMEBREW_PREFIX:-/opt/homebrew}/opt/nvm/nvm.sh"
+fi
 
 # ═══ Aliases ═════════════════════════════════════════════════
 

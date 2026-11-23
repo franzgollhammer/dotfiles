@@ -23,6 +23,8 @@ class TerminalConfigTests(unittest.TestCase):
         self.env = {
             "HOME": str(self.home), "PATH": "/usr/bin:/bin",
             "LANG": "C.UTF-8", "TERM": "xterm-256color",
+            # A prefix below the temp root keeps the host's Homebrew nvm out.
+            "HOMEBREW_PREFIX": str(self.root / "homebrew"),
         }
 
     def run_command(self, *command, expected=0):
@@ -45,6 +47,21 @@ class TerminalConfigTests(unittest.TestCase):
         script.write_text("#!/bin/sh\n" + body + "\n")
         script.chmod(0o755)
         return script
+
+    def nvm_loader(self, path, label):
+        path.parent.mkdir(parents=True)
+        path.write_text('nvm() { print -r -- "' + label + '"; }\n')
+
+    def test_nvm_falls_back_to_homebrew_loader(self):
+        self.nvm_loader(self.root / "homebrew/opt/nvm/nvm.sh", "homebrew")
+        result = self.shell("nvm")
+        self.assertEqual(result.stdout, "homebrew\n")
+
+    def test_nvm_dir_loader_takes_precedence(self):
+        self.nvm_loader(self.home / ".nvm/nvm.sh", "nvm-dir")
+        self.nvm_loader(self.root / "homebrew/opt/nvm/nvm.sh", "homebrew")
+        result = self.shell("nvm")
+        self.assertEqual(result.stdout, "nvm-dir\n")
 
     @unittest.skipUnless(os.uname().sysname == "Linux", "Linux environment")
     def test_linux_paths_and_aliases(self):
