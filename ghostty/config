@@ -20,11 +20,15 @@ macos-icon = official
 # theme
 theme = dark:macos-dark,light:macos-light
 window-save-state = always
-background-opacity = 0.95
+#background-opacity = 0.8
 
 # font
-font-feature = -calt
-font-family = Menlo
+font-family = CommitMono
+font-size = 15
+adjust-cell-height = 10%
+
+# Disable coding ligatures
+font-feature = -calt, -liga, -dlig
 
 # keybinds
 keybind = global:cmd+#=toggle_visibility
