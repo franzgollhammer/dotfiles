@@ -19,7 +19,7 @@ class SetupDotfilesTests(unittest.TestCase):
         self.env = {"HOME": str(self.target), "PATH": "/usr/bin:/bin", "LC_ALL": "C"}
 
     def setup_command(self, *args, expected=0, repo=REPO, home_option=True, script=None):
-        command = [str(script or repo / "scripts/setup_dotfiles")]
+        command = [str(script or repo / "scripts/dotfiles_setup")]
         if home_option:
             command += ["--home", str(self.target)]
         result = subprocess.run(
@@ -220,7 +220,7 @@ class SetupDotfilesTests(unittest.TestCase):
 
     def test_symlinked_entry_point(self):
         entry = self.root / "setup"
-        entry.symlink_to(REPO / "scripts/setup_dotfiles")
+        entry.symlink_to(REPO / "scripts/dotfiles_setup")
         self.setup_command("--profile", "full", script=entry)
         self.assert_links()
 
@@ -247,7 +247,7 @@ class SetupDotfilesTests(unittest.TestCase):
                      'source "$1"; '
                      'printf "%s\\n" "$DOTFILES" "$XDG_CONFIG_HOME" "$EDITOR" "$VISUAL"; '
                      '/bin/sh -c \'printf "%s\\n" "$DEV" "$SCRIPTS" "$WT"\'; '
-                     'command -v setup_dotfiles',
+                     'command -v dotfiles_setup',
                      "zsh", str(self.target / ".zshrc")],
                     env=env, text=True, capture_output=True, check=False,
                 )
@@ -257,7 +257,7 @@ class SetupDotfilesTests(unittest.TestCase):
                     result.stdout.splitlines(),
                     [str(REPO), self.env["XDG_CONFIG_HOME"], "vim", "vim",
                      str(self.target / "dev"), str(REPO / "scripts"),
-                     str(self.target / "dev/worktrees"), str(REPO / "scripts/setup_dotfiles")],
+                     str(self.target / "dev/worktrees"), str(REPO / "scripts/dotfiles_setup")],
                 )
 
 

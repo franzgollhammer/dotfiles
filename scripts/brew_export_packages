@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage: export_brew_packages — write installed Homebrew casks and formulas to this checkout's brew/*.txt lists.
+# Usage: brew_export_packages — write installed Homebrew casks and formulas to this checkout's brew/*.txt lists.
 
 set -euo pipefail
 dotfiles_dir="${DOTFILES:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)}"

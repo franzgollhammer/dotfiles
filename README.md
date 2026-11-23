@@ -49,14 +49,14 @@ git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/src/github.com/f
 cd ~/dev/src/github.com/franzgollhammer/dotfiles
 
 # Preview every link before changing your home directory.
-./scripts/setup_dotfiles --dry-run
+./scripts/dotfiles_setup --dry-run
 
 # Install when destinations are empty or already point to this checkout.
-./scripts/setup_dotfiles
+./scripts/dotfiles_setup
 
 # On the personal Mac, also link Ghostty.
-./scripts/setup_dotfiles --profile full --dry-run
-./scripts/setup_dotfiles --profile full
+./scripts/dotfiles_setup --profile full --dry-run
+./scripts/dotfiles_setup --profile full
 ```
 
 Start `zsh` to use the linked configuration. To make it the login shell, run
@@ -68,8 +68,8 @@ fail without changes. To preserve them as adjacent `.dotfiles-backup.*` files
 and install the links, run:
 
 ```sh
-./scripts/setup_dotfiles --dry-run --backup
-./scripts/setup_dotfiles --backup
+./scripts/dotfiles_setup --dry-run --backup
+./scripts/dotfiles_setup --backup
 ```
 
 To discard conflicting files and symlinks instead, without a backup, use
@@ -78,8 +78,8 @@ To discard conflicting files and symlinks instead, without a backup, use
 `--backup` cannot be combined.
 
 ```sh
-./scripts/setup_dotfiles --dry-run --force
-./scripts/setup_dotfiles --force
+./scripts/dotfiles_setup --dry-run --force
+./scripts/dotfiles_setup --force
 ```
 
 Two profiles select how much is linked. `--profile minimal` is the default and
@@ -98,15 +98,15 @@ during installation can leave earlier links installed; fix the cause and rerun.
 The script finds the checkout from its own location, so it works from any
 working directory and ignores a stale `DOTFILES` environment variable. Links
 point to that checkout: keep it in place, and avoid installing from a temporary
-worktree you intend to delete. After loading `.zshrc`, invoke `setup_dotfiles`
+worktree you intend to delete. After loading `.zshrc`, invoke `dotfiles_setup`
 from any directory; it is the single entry point for synchronizing these links.
 
 By default, config links use `XDG_CONFIG_HOME`, falling back to `~/.config`.
 To inspect or install into an isolated destination:
 
 ```sh
-./scripts/setup_dotfiles --home /tmp/dotfiles-demo --dry-run
-./scripts/setup_dotfiles --home /tmp/dotfiles-demo
+./scripts/dotfiles_setup --home /tmp/dotfiles-demo --dry-run
+./scripts/dotfiles_setup --home /tmp/dotfiles-demo
 ```
 
 `--home` must be absolute and uses `<home>/.config`, ignoring `XDG_CONFIG_HOME`.
@@ -132,8 +132,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git \
 
 git clone https://github.com/franzgollhammer/dotfiles.git ~/dev/src/github.com/franzgollhammer/dotfiles
 cd ~/dev/src/github.com/franzgollhammer/dotfiles
-./scripts/setup_dotfiles --profile minimal --dry-run
-./scripts/setup_dotfiles --profile minimal
+./scripts/dotfiles_setup --profile minimal --dry-run
+./scripts/dotfiles_setup --profile minimal
 ```
 
 ### Remote Linux (Ubuntu or Debian)
@@ -146,8 +146,8 @@ neither needs Homebrew or a graphical session.
 Debian and Ubuntu install fd as `fdfind`; `.zshrc` aliases `fd` to it when no
 `fd` command exists. Outside macOS, `PNPM_HOME` is
 `${XDG_DATA_HOME:-~/.local/share}/pnpm`, the Homebrew Ruby path is skipped, and
-the `sim`, `bb`, and `bbb` aliases are not defined. `update_brew_packages` and
-`export_brew_packages` stay on `PATH` but need Homebrew. tmux 3.2a on Ubuntu 22.04 skips
+the `sim`, `bb`, and `bbb` aliases are not defined. `brew_update_packages` and
+`brew_export_packages` stay on `PATH` but need Homebrew. tmux 3.2a on Ubuntu 22.04 skips
 the newer `allow-passthrough` option; older tmux already permits passthrough.
 
 ### On every remote machine
@@ -187,8 +187,8 @@ distribution Vim packages; `:grep` uses ripgrep when it is installed.
 `brew/formula.txt` and `brew/cask.txt` are machine inventory snapshots, including
 transitive dependencies and potentially retired or renamed packages. Review
 those lists instead of treating them as a guaranteed fresh-machine install
-manifest. `update_brew_packages` upgrades and cleans up installed packages;
-`export_brew_packages` refreshes both lists.
+manifest. `brew_update_packages` upgrades and cleans up installed packages;
+`brew_export_packages` refreshes both lists.
 
 ## Managed links
 
@@ -224,7 +224,7 @@ adds its `scripts/` directory to `PATH`.
 ### Environment variables
 
 The linked `.zshrc` initializes and exports these variables; no manual exports
-are required for the default layout. Running `setup_dotfiles` does not change
+are required for the default layout. Running `dotfiles_setup` does not change
 the environment of the calling shell: start a new zsh session after linking.
 
 | Variable | Default |
@@ -244,7 +244,7 @@ startup to select a different configuration directory.
 
 ### tmux initialization
 
-For tmux, `init_tmux_session` uses the first executable file in this order:
+For tmux, `tmux_init_session` uses the first executable file in this order:
 `./.tmux_init`, `~/.tmux_init`, then `$DOTFILES/.tmux_init`. Keep the tracked
 fallback intact; it names the first window `MAIN` and runs `fastfetch`. Copy
 `example.tmux_init` into a project's `.tmux_init` (or `~/.tmux_init`), adapt the
@@ -271,7 +271,7 @@ to follow each agent's defaults. See the
 and the [OpenAI Docs configuration reference](https://developers.openai.com/codex/config-reference/).
 
 Agent settings live outside this repository and are not managed by
-`setup_dotfiles`. If migrating from the retired `agent-notify` helper, remove
+`dotfiles_setup`. If migrating from the retired `agent-notify` helper, remove
 only its commands from `~/.claude/settings.json` hooks and
 `~/.codex/hooks.json`, and remove its callback from `notify` in
 `~/.codex/config.toml`. Preserve unrelated hooks and application integrations;
@@ -298,14 +298,14 @@ and macOS notification permissions.
 | `local/<name>` | Lasting projects without a remote |
 | `scratch/<name>` | Experiments and throwaway tests |
 
-`d` and `c` without arguments and `switch_tmux_session` list the projects below `src/`,
+`d` and `c` without arguments and `tmux_switch_session` list the projects below `src/`,
 `local/` and `scratch/`. The picker shows `<host>/<owner>/<repository>` for
 repositories. Anything else directly below `~/dev`, the worktree storage directory
 and symbolic links are not listed. `d` always opens the picker; `d planfred` only
 pre-fills the search, and `d .` goes to `~/dev`. A tmux
 session is named after the project's path below `~/dev`, for example
 `src/github.com/franzgollhammer/dotfiles` or `local/notes`. tmux before 3.7
-stores `.` and `:` in session names as `_`; `switch_tmux_session` still finds such a
+stores `.` and `:` in session names as `_`; `tmux_switch_session` still finds such a
 session when it was started in the same directory.
 
 When moving existing checkouts, preserve local files and leave compatibility links
@@ -317,51 +317,55 @@ to refresh `DOTFILES` and `SCRIPTS`. Do not remove old links while tools still u
 ## Helpers
 
 Commands in `scripts/` become available after loading `.zshrc`. Each executable
-uses an action-first `verb_object` name with lowercase words and underscores.
-Use a concrete verb such as `list`, `show`, `set`, `switch`, or `run`, followed
-by the affected tool or resource. Short interactive aliases belong in `.zshrc`.
+uses a topic-first `topic_action[_resource]` name with lowercase words and
+underscores. Start with the affected tool or area, such as `tmux` or `processes`,
+then a concrete action such as `list`, `show`, `set`, `switch`, or `run`. Related
+helpers stay together in completion and the script picker. Short interactive
+aliases belong in `.zshrc`.
 
 | Command | Purpose |
 | --- | --- |
-| `setup_dotfiles` | Preview or create configuration links (`--profile full` adds graphical applications) |
-| `update_brew_packages` | Update, upgrade and clean up Homebrew packages |
-| `export_brew_packages` | Write installed casks and formulas to `brew/*.txt` |
-| `switch_git_branch` | Pick/switch branches (fzf) with commit metadata |
-| `list_dev_projects` | List projects below `src/`, `local/` and `scratch/` as label and path for `d`, `c`, and tmux |
-| `switch_tmux_session` | Pick a project, attach/create its tmux session, and initialize new sessions |
-| `init_tmux_session` | Run the first executable project, home, or default `.tmux_init` |
-| `set_tmux_window_title` | Rename the tmux window to the worktree branch and PR number, or repository and branch without a PR (requires gh) |
-| `run_script` | Pick and execute a helper with fzf |
-| `show_terminal_colors` | Show the 16 ANSI colors with hex values from the terminal palette for color picking |
-| `kill_node_processes` | Stop the current user's processes named `node` |
-| `kill_mongo_processes` | Stop the current user's processes named `mongo` |
-| `kill_dev_processes` | Run both process helpers above |
+| `brew_export_packages` | Write installed casks and formulas to `brew/*.txt` |
+| `brew_update_packages` | Update, upgrade and clean up Homebrew packages |
+| `dev_list_projects` | List projects below `src/`, `local/` and `scratch/` as label and path for `d`, `c`, and tmux |
+| `dotfiles_setup` | Preview or create configuration links (`--profile full` adds graphical applications) |
+| `git_switch_branch` | Pick/switch branches (fzf) with commit metadata |
+| `processes_kill_dev` | Run both process helpers below |
+| `processes_kill_mongo` | Stop the current user's processes named `mongo` |
+| `processes_kill_node` | Stop the current user's processes named `node` |
+| `scripts_run` | Pick and execute a helper with fzf |
+| `terminal_show_colors` | Show the 16 ANSI colors with hex values from the terminal palette for color picking |
+| `tmux_init_session` | Run the first executable project, home, or default `.tmux_init` |
+| `tmux_set_window_title` | Rename the tmux window to the worktree branch and PR number, or repository and branch without a PR (requires gh) |
+| `tmux_switch_session` | Pick a project, attach/create its tmux session, and initialize new sessions |
 
-Interactive shortcuts remain: `b` → `switch_git_branch`, `s` and `scr` →
-`run_script`, and `t` → `switch_tmux_session`. On macOS, `bb` →
-`update_brew_packages` and `bbb` → `export_brew_packages`.
+Interactive shortcuts remain: `b` → `git_switch_branch`, `s` and `scr` →
+`scripts_run`, and `t` → `tmux_switch_session`. On macOS, `bb` →
+`brew_update_packages` and `bbb` → `brew_export_packages`.
 
 ### Renamed commands
 
-Update custom scripts and automation to use the new executable names below.
-The old files are removed; short aliases are available after starting a new zsh
-session or reloading `.zshrc`. The `setup_dotfiles` entry point and `.tmux_init`
-customization filenames are unchanged.
+Update custom scripts and automation to use the topic-first executable names
+below. The old files are removed; short aliases are available after starting a
+new zsh session or reloading `.zshrc`. The setup entry point is now
+`dotfiles_setup`; configuration link destinations and `.tmux_init` customization
+filenames are unchanged.
 
-| Previous executable | Current executable |
+| Previous executable names | Current executable |
 | --- | --- |
-| `b` | `switch_git_branch` |
-| `s` | `run_script` |
-| `brew_export` | `export_brew_packages` |
-| `brew_update` | `update_brew_packages` |
-| `dev_projects` | `list_dev_projects` |
-| `term_colors` | `show_terminal_colors` |
-| `tmux_init` | `init_tmux_session` |
-| `tmux_session` | `switch_tmux_session` |
-| `tmux_set_title` | `set_tmux_window_title` |
-| `kill_all` | `kill_dev_processes` |
-| `kill_mongo` | `kill_mongo_processes` |
-| `kill_node` | `kill_node_processes` |
+| `brew_export`, `export_brew_packages` | `brew_export_packages` |
+| `brew_update`, `update_brew_packages` | `brew_update_packages` |
+| `dev_projects`, `list_dev_projects` | `dev_list_projects` |
+| `setup_dotfiles` | `dotfiles_setup` |
+| `b`, `switch_git_branch` | `git_switch_branch` |
+| `kill_all`, `kill_dev_processes` | `processes_kill_dev` |
+| `kill_mongo`, `kill_mongo_processes` | `processes_kill_mongo` |
+| `kill_node`, `kill_node_processes` | `processes_kill_node` |
+| `s`, `run_script` | `scripts_run` |
+| `term_colors`, `show_terminal_colors` | `terminal_show_colors` |
+| `tmux_init`, `init_tmux_session` | `tmux_init_session` |
+| `tmux_set_title`, `set_tmux_window_title` | `tmux_set_window_title` |
+| `tmux_session`, `switch_tmux_session` | `tmux_switch_session` |
 
 ### Worktree navigation
 
@@ -380,11 +384,11 @@ Actions, not locally.
 For local edits, use narrow checks such as:
 
 ```sh
-bash -n scripts/setup_dotfiles
-shellcheck scripts/setup_dotfiles
+bash -n scripts/dotfiles_setup
+shellcheck scripts/dotfiles_setup
 zsh -n .zshrc
-./scripts/setup_dotfiles --home /tmp/dotfiles-preview --dry-run
-./scripts/setup_dotfiles --home /tmp/dotfiles-preview --profile full --dry-run
+./scripts/dotfiles_setup --home /tmp/dotfiles-preview --dry-run
+./scripts/dotfiles_setup --home /tmp/dotfiles-preview --profile full --dry-run
 git diff --check
 ```
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+# Usage: brew_update_packages — update, upgrade and clean up Homebrew.
+
+set -euo pipefail
+
+brew update
+brew upgrade
+brew cleanup

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage: run_script — pick and run an executable helper from scripts/ with fzf.
+# Usage: scripts_run — pick and run an executable helper from scripts/ with fzf.
 
 scripts_dir="${SCRIPTS:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)}"
 selected=$(find "$scripts_dir" -maxdepth 1 -type f -perm -111 -exec basename {} \; | sort | fzf)

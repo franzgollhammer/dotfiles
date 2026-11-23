@@ -22,7 +22,7 @@ prerequisites, link targets, or local customization.
 
 ## Setup and shell changes
 
-- `scripts/setup_dotfiles` is the sole setup entry point and owns the symlink
+- `scripts/dotfiles_setup` is the sole setup entry point and owns the symlink
   mapping. Update the README mapping when changing targets.
 - Keep setup compatible with macOS `/bin/bash` 3.2. Quote paths, resolve sources
   from the running checkout, and preserve idempotence and dry-run behavior.
@@ -36,7 +36,9 @@ prerequisites, link targets, or local customization.
 - Preserve source comments that identify theme provenance and cross-terminal
   palette relationships. Avoid vendoring plugins already installed externally.
 - Add a shebang and short usage comment to new scripts, and mark runnable scripts
-  executable. Document macOS-only dependencies in README.md.
+  executable. Name helpers `topic_action[_resource]`, for example
+  `tmux_switch_session` or `processes_kill_node`. Document macOS-only dependencies
+  in README.md.
 
 ## Validation and completion
 
