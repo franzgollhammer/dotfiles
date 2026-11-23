@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Usage: tmux_session — pick a project below ${DEV:-$HOME/dev} with fzf, then
+# Usage: switch_tmux_session — pick a project below ${DEV:-$HOME/dev} with fzf, then
 # attach or switch to its tmux session. A missing session is created in the
-# project directory and runs tmux_init. The session is named after the path
+# project directory and runs init_tmux_session. The session is named after the path
 # below DEV, e.g. src/github.com/<owner>/<repo> or local/<name>.
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
-# dev_projects prints "<label><TAB><path>"; fzf shows the label only.
-SELECTED=$("$script_dir/dev_projects" \
+# list_dev_projects prints "<label><TAB><path>"; fzf shows the label only.
+SELECTED=$("$script_dir/list_dev_projects" \
   | fzf --delimiter=$'\t' --with-nth=1 --prompt="Select project: " --height=40% --border)
 
 if [[ -z "$SELECTED" ]]; then
@@ -56,8 +56,8 @@ echo "Creating new session: $SELECTED_NAME in $SELECTED_DIR"
 SESSION_ID=$(tmux new-session -dP -F '#{session_id}' -s "$SELECTED_NAME" -c "$SELECTED_DIR")
 [[ -n $SESSION_ID ]] || exit 1
 
-# The pane starts in $SELECTED_DIR, so tmux_init resolves the lookup order
+# The pane starts in $SELECTED_DIR, so init_tmux_session resolves the lookup order
 # itself: ./.tmux_init -> ~/.tmux_init -> $DOTFILES/.tmux_init.
-tmux send-keys -t "$SESSION_ID" "tmux_init" C-m
+tmux send-keys -t "$SESSION_ID" "init_tmux_session" C-m
 
 switch_to

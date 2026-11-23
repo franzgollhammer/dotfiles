@@ -1,4 +1,5 @@
 #!/bin/bash
+# Usage: switch_git_branch [branch] — switch to a branch, or pick one with fzf.
 
 if [ -z "$1" ]; then
   {

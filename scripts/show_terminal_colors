@@ -3,7 +3,7 @@
 # Show the 16 ANSI terminal colors with their hex values for color picking.
 # The hex values come from the terminal's own palette (OSC 4 query), so they
 # follow the active theme; tmux forwards the query to the host terminal.
-# Usage: term_colors
+# Usage: show_terminal_colors
 
 blocks='██████████'
 names=(Black Red Green Yellow Blue Magenta Cyan White)

@@ -1,0 +1,4 @@
+#!/bin/bash
+# Usage: kill_dev_processes — stop the current user's mongo and Node.js processes.
+kill_mongo_processes
+kill_node_processes

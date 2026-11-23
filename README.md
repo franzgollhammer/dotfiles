@@ -146,8 +146,8 @@ neither needs Homebrew or a graphical session.
 Debian and Ubuntu install fd as `fdfind`; `.zshrc` aliases `fd` to it when no
 `fd` command exists. Outside macOS, `PNPM_HOME` is
 `${XDG_DATA_HOME:-~/.local/share}/pnpm`, the Homebrew Ruby path is skipped, and
-the `sim`, `bb`, and `bbb` aliases are not defined. `brew_update` and
-`brew_export` stay on `PATH` but need Homebrew. tmux 3.2a on Ubuntu 22.04 skips
+the `sim`, `bb`, and `bbb` aliases are not defined. `update_brew_packages` and
+`export_brew_packages` stay on `PATH` but need Homebrew. tmux 3.2a on Ubuntu 22.04 skips
 the newer `allow-passthrough` option; older tmux already permits passthrough.
 
 ### On every remote machine
@@ -186,7 +186,8 @@ exists. `.vimrc` uses no plugins and supports the distribution Vim packages;
 `brew/formula.txt` and `brew/cask.txt` are machine inventory snapshots, including
 transitive dependencies and potentially retired or renamed packages. Review
 those lists instead of treating them as a guaranteed fresh-machine install
-manifest. `brew_update` upgrades and cleans up installed packages; `brew_export` refreshes both lists.
+manifest. `update_brew_packages` upgrades and cleans up installed packages;
+`export_brew_packages` refreshes both lists.
 
 ## Managed links
 
@@ -242,7 +243,7 @@ startup to select a different configuration directory.
 
 ### tmux initialization
 
-For tmux, `tmux_init` uses the first executable file in this order:
+For tmux, `init_tmux_session` uses the first executable file in this order:
 `./.tmux_init`, `~/.tmux_init`, then `$DOTFILES/.tmux_init`. Keep the tracked
 fallback intact; it names the first window `MAIN` and runs `fastfetch`. Copy
 `example.tmux_init` into a project's `.tmux_init` (or `~/.tmux_init`), adapt the
@@ -296,14 +297,14 @@ and macOS notification permissions.
 | `local/<name>` | Lasting projects without a remote |
 | `scratch/<name>` | Experiments and throwaway tests |
 
-`d` and `c` without arguments and `tmux_session` list the projects below `src/`,
+`d` and `c` without arguments and `switch_tmux_session` list the projects below `src/`,
 `local/` and `scratch/`. The picker shows `<host>/<owner>/<repository>` for
 repositories. Anything else directly below `~/dev`, the worktree storage directory
 and symbolic links are not listed. `d` always opens the picker; `d planfred` only
 pre-fills the search, and `d .` goes to `~/dev`. A tmux
 session is named after the project's path below `~/dev`, for example
 `src/github.com/franzgollhammer/dotfiles` or `local/notes`. tmux before 3.7
-stores `.` and `:` in session names as `_`; `tmux_session` still finds such a
+stores `.` and `:` in session names as `_`; `switch_tmux_session` still finds such a
 session when it was started in the same directory.
 
 When moving existing checkouts, preserve local files and leave compatibility links
@@ -314,20 +315,54 @@ to refresh `DOTFILES` and `SCRIPTS`. Do not remove old links while tools still u
 
 ## Helpers
 
-Commands in `scripts/` become available after loading `.zshrc`.
+Commands in `scripts/` become available after loading `.zshrc`. Each executable
+uses an action-first `verb_object` name with lowercase words and underscores.
+Use a concrete verb such as `list`, `show`, `set`, `switch`, or `run`, followed
+by the affected tool or resource. Short interactive aliases belong in `.zshrc`.
 
 | Command | Purpose |
 | --- | --- |
 | `setup_dotfiles` | Preview or create configuration links (`--profile full` adds graphical applications) |
-| `brew_update` | Update, upgrade and clean up Homebrew packages |
-| `brew_export` | Write installed casks and formulas to `brew/*.txt` |
-| `b` | Pick/switch branches (fzf) with commit metadata |
-| `dev_projects` | List projects below `src/`, `local/` and `scratch/` as label and path for `d`, `c`, and tmux |
-| `tmux_session`, `tmux_init` | Pick a project, attach/create a session, run its init file |
-| `tmux_set_title` | Rename the tmux window to the worktree branch and PR number, or repository and branch without a PR (requires gh) |
-| `scr` | Pick and execute a helper with fzf |
-| `term_colors` | Show the 16 ANSI colors with hex values from the terminal palette for color picking |
-| `kill_node`, `kill_mongo`, `kill_all` | Stop the corresponding development processes |
+| `update_brew_packages` | Update, upgrade and clean up Homebrew packages |
+| `export_brew_packages` | Write installed casks and formulas to `brew/*.txt` |
+| `switch_git_branch` | Pick/switch branches (fzf) with commit metadata |
+| `list_dev_projects` | List projects below `src/`, `local/` and `scratch/` as label and path for `d`, `c`, and tmux |
+| `switch_tmux_session` | Pick a project, attach/create its tmux session, and initialize new sessions |
+| `init_tmux_session` | Run the first executable project, home, or default `.tmux_init` |
+| `set_tmux_window_title` | Rename the tmux window to the worktree branch and PR number, or repository and branch without a PR (requires gh) |
+| `run_script` | Pick and execute a helper with fzf |
+| `show_terminal_colors` | Show the 16 ANSI colors with hex values from the terminal palette for color picking |
+| `kill_node_processes` | Stop the current user's processes named `node` |
+| `kill_mongo_processes` | Stop the current user's processes named `mongo` |
+| `kill_dev_processes` | Run both process helpers above |
+
+Interactive shortcuts remain: `b` → `switch_git_branch`, `s` and `scr` →
+`run_script`, and `t` → `switch_tmux_session`. On macOS, `bb` →
+`update_brew_packages` and `bbb` → `export_brew_packages`.
+
+### Renamed commands
+
+Update custom scripts and automation to use the new executable names below.
+The old files are removed; short aliases are available after starting a new zsh
+session or reloading `.zshrc`. The `setup_dotfiles` entry point and `.tmux_init`
+customization filenames are unchanged.
+
+| Previous executable | Current executable |
+| --- | --- |
+| `b` | `switch_git_branch` |
+| `s` | `run_script` |
+| `brew_export` | `export_brew_packages` |
+| `brew_update` | `update_brew_packages` |
+| `dev_projects` | `list_dev_projects` |
+| `term_colors` | `show_terminal_colors` |
+| `tmux_init` | `init_tmux_session` |
+| `tmux_session` | `switch_tmux_session` |
+| `tmux_set_title` | `set_tmux_window_title` |
+| `kill_all` | `kill_dev_processes` |
+| `kill_mongo` | `kill_mongo_processes` |
+| `kill_node` | `kill_node_processes` |
+
+### Worktree navigation
 
 Worktree navigation lives in `.zshrc`: `wt` picks a worktree of the current
 repository; `wtr` picks worktrees to remove and offers branch deletion; `wta` is
@@ -337,7 +372,7 @@ environment variable points to `~/dev/worktrees`.
 ## Validation
 
 The `Dotfiles checks` GitHub Actions workflow runs shell syntax checks,
-ShellCheck on the maintained setup/helpers, and the full automated safety suite
+ShellCheck on all shell helpers, and the full automated safety suite
 on macOS and Linux, including Ubuntu 22.04/26.04 and Debian 12/13 containers
 with their distribution Vim and tmux packages. Run the full suite through GitHub
 Actions, not locally.

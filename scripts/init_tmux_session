@@ -1,4 +1,5 @@
 #!/bin/bash
+# Usage: init_tmux_session — run the first executable project, home, or default .tmux_init.
 
 INIT_FILE=".tmux_init"
 
@@ -9,4 +10,3 @@ elif [[ -x "$HOME/$INIT_FILE" ]]; then
 elif [[ -n "$DOTFILES" && -x "$DOTFILES/$INIT_FILE" ]]; then
   zsh "$DOTFILES/$INIT_FILE"
 fi
-

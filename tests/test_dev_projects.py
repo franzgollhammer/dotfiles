@@ -25,7 +25,7 @@ class DevProjectsTests(unittest.TestCase):
         return path
 
     def run_list(self):
-        result = subprocess.run([str(REPO / "scripts/dev_projects")],
+        result = subprocess.run([str(REPO / "scripts/list_dev_projects")],
                                 env=self.env, capture_output=True, text=True, check=True)
         return result.stdout.splitlines()
 
@@ -55,7 +55,7 @@ class DevProjectsTests(unittest.TestCase):
         self.assertEqual(self.run_list(), [])
 
     def run_tmux_session(self, choice, sessions=""):
-        """Run tmux_session with stand-ins for fzf and tmux; return the tmux calls.
+        """Run switch_tmux_session with stand-ins for fzf and tmux; return the tmux calls.
 
         `sessions` is what `tmux list-sessions` prints. A new session gets id $9.
         """
@@ -79,7 +79,7 @@ class DevProjectsTests(unittest.TestCase):
         log.write_text("")
         env = dict(self.env, PATH=str(bin_dir) + os.pathsep + os.environ["PATH"],
                    TMUX_LOG=str(log), CHOICE=choice, TMUX_SESSIONS=sessions)
-        subprocess.run([str(REPO / "scripts/tmux_session")], env=env,
+        subprocess.run([str(REPO / "scripts/switch_tmux_session")], env=env,
                        capture_output=True, text=True, check=True)
         return [line.split("\037")[:-1] for line in log.read_text().splitlines()]
 
@@ -100,7 +100,7 @@ class DevProjectsTests(unittest.TestCase):
                 ["list-sessions", "-F", "#{session_id}\t#{session_path}\t#{session_name}"],
                 ["new-session", "-dP", "-F", "#{session_id}", "-s", path,
                  "-c", str(self.dev / path)],
-                ["send-keys", "-t", "$9", "tmux_init", "C-m"],
+                ["send-keys", "-t", "$9", "init_tmux_session", "C-m"],
                 ["attach-session", "-t", "$9"],
             ], label)
 

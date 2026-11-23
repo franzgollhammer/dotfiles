@@ -1,3 +1,4 @@
 #!/bin/bash
+# Usage: kill_mongo_processes — stop the current user's processes named mongo.
 printf "Cleanup mongodb processes ...\n"
 killall -u "$(whoami)" mongo
