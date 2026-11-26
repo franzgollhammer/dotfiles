@@ -8,7 +8,12 @@ export TERM="xterm-256color"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 export EDITOR="vim"
-export VISUAL="vim"
+# Over SSH stay in the terminal; locally open VS Code.
+if [[ -n $SSH_CONNECTION ]]; then
+  export VISUAL="vim"
+else
+  export VISUAL="code"
+fi
 
 # ═══ Directories ═════════════════════════════════════════════
 
