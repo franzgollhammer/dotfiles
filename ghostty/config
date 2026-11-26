@@ -30,7 +30,7 @@ macos-titlebar-style = native
 
 # font
 font-family = Ubuntu Sans Mono
-font-size = 14
+font-size = 15
 adjust-cell-height = 10%
 
 # Disable coding ligatures
