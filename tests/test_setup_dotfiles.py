@@ -255,7 +255,8 @@ class SetupDotfilesTests(unittest.TestCase):
                 self.assertEqual(result.stderr, "")
                 self.assertEqual(
                     result.stdout.splitlines(),
-                    [str(REPO), self.env["XDG_CONFIG_HOME"], "vim", "vim",
+                    [str(REPO), self.env["XDG_CONFIG_HOME"], "vim",
+                     "vim" if connection else "code",
                      str(self.target / "dev"), str(REPO / "scripts"),
                      str(self.target / "dev/worktrees"), str(REPO / "scripts/dotfiles_setup")],
                 )

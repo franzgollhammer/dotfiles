@@ -152,8 +152,9 @@ the newer `allow-passthrough` option; older tmux already permits passthrough.
 
 ### On every remote machine
 
-`.zshrc` sets `EDITOR` and `VISUAL` to `vim` locally and over SSH, so `c`,
-`dot`, and `play` open a terminal editor. `.env` is optional: create it only for
+`.zshrc` sets `EDITOR` to `vim` everywhere, so `c`, `dot`, and `play` open a
+terminal editor. `VISUAL` is `vim` over SSH (`SSH_CONNECTION` set) and `code`
+otherwise. `.env` is optional: create it only for
 credentials the remote machine actually uses. tmux copy mode sends copied text
 to the terminal in front of you through OSC 52 (`set-clipboard on`), so it
 reaches the local clipboard over SSH when the terminal allows clipboard writes.
