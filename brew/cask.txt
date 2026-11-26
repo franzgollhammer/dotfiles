@@ -16,10 +16,12 @@ firefox
 firefox@developer-edition
 firefox@nightly
 font-0xproto-nerd-font
+font-atkinson-hyperlegible-mono
 font-caskaydia-cove-nerd-font
 font-commit-mono
 font-fira-code-nerd-font
 font-fira-mono-nerd-font
+font-geist-mono
 font-hack-nerd-font
 font-jetbrains-mono-nerd-font
 font-juliamono
@@ -27,7 +29,9 @@ font-lilex-nerd-font
 font-meslo-lg-nerd-font
 font-roboto-mono-nerd-font
 font-sf-mono-nerd-font
+font-ubuntu-mono
 font-ubuntu-mono-nerd-font
+font-ubuntu-sans-mono
 font-zed-mono-nerd-font
 ghostty
 gimp
