@@ -1,7 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # fg@devbox …/dev/franzgollhammer/dotfiles git:(main)[!?] node:(v22.11.0) %
-format = "($username([@](bold green)$hostname):)$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$golang$lua$python$line_break$character"
+format = "($username([@](bold green)$hostname):)$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$golang$lua$python$line_break$status$shell"
 
 # Colors follow Ubuntu's default PS1: user@host bold green, path bold blue
 [username]
@@ -14,9 +14,27 @@ ssh_only = false
 style = "bold green"
 format = "[$hostname]($style)"
 
-[character]
-success_symbol = "[%](bold)"
-error_symbol = "[%](bold red)"
+# The prompt symbol follows the running shell, as its own default prompt
+# would: zsh %, bash $ (bash itself turns \$ into # for root), fish >.
+# The character module cannot vary per shell, so the shell module takes its
+# place and a failed command shows its exit code in red before the symbol.
+[shell]
+disabled = false
+zsh_indicator = "%"
+bash_indicator = '\$'
+fish_indicator = ">"
+tcsh_indicator = "%"
+nu_indicator = ">"
+powershell_indicator = "PS>"
+cmd_indicator = ">"
+unknown_indicator = ">"
+style = "bold"
+format = "[$indicator]($style) "
+
+[status]
+disabled = false
+style = "bold red"
+format = "[$status]($style) "
 
 [directory]
 style = "bold blue"
