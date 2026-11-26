@@ -1,16 +1,17 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # fg@devbox …/dev/franzgollhammer/dotfiles git:(main)[!?] node:(v22.11.0) %
-format = "($username([@](bold)$hostname):)$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$golang$lua$python$line_break$character"
+format = "($username([@](bold green)$hostname):)$directory($git_branch$git_commit$git_status$git_metrics )$nodejs$bun$golang$lua$python$line_break$character"
 
+# Colors follow Ubuntu's default PS1: user@host bold green, path bold blue
 [username]
 show_always = true
-style_user = "bold"
+style_user = "bold green"
 format = "[$user]($style)"
 
 [hostname]
 ssh_only = false
-style = "bold"
+style = "bold green"
 format = "[$hostname]($style)"
 
 [character]
@@ -18,7 +19,7 @@ success_symbol = "[%](bold)"
 error_symbol = "[%](bold red)"
 
 [directory]
-style = "bold cyan"
+style = "bold blue"
 format = "[$path]($style)[$read_only]($read_only_style) "
 truncation_length = 2
 truncation_symbol = '…/'
